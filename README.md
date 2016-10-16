@@ -1,6 +1,6 @@
-# gp8
+# How to clone a Github repository to your machine 
 
-**Instructions for beginners - How to clone the repository to your machine - by Soumya Singh.**
+By Soumya Singh
 
 **Acknowledgements: Alistair Madden, the Compsoc President, for this detailed explanation**
 
