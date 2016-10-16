@@ -1,9 +1,8 @@
 # gp8
-**Group Project by Team 8**
 
 **Instructions for beginners - How to clone the repository to your machine - by Soumya Singh.**
 
-**Acknowledgements: Alistair Madden, the Compsoc President.**
+**Acknowledgements: Alistair Madden, the Compsoc President, for this detailed explanation**
 
 An application to alleviate food wastage by allowing people to 'donate' unwanted food to the needy.
 
