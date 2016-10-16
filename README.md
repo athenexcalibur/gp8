@@ -7,11 +7,11 @@
 
 An application to alleviate food wastage by allowing people to 'donate' unwanted food to the needy.
 
-1. The first step is to clone the repository:
+1. The first step is to make a folder to clone the repository:
 
- ** mkdir directory_name** 
+ **mkdir directory_name** 
  
- ** cd directory_name**
+ **cd directory_name**
 
 2. Then clone the repository:
 
