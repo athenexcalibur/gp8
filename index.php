@@ -46,9 +46,9 @@
 
     <!-- JQuery Script to toggle menu -->
     <script>
-        $("menu-toggle").click(function (e) {
+        $("#menu-toggle").click(function (e) {
           e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
+            $("#wrapper").toggleClass("drawerOpen");
         });
     </script>
 </body>
