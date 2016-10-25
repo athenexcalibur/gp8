@@ -1,0 +1,50 @@
+/* Sidebar */
+#sidebar-wrapper{
+    z-index: 1;
+    position: absolute;
+    width:0;
+    height: 100%;
+    overflow-y: hidden;
+    background: #2C3E50;
+    opacity: 0.9;
+}
+
+/* Main Page */
+#page-content-wrapper{
+    width:100%;
+    position: absolute;
+    padding: 15px;
+}
+
+/* Make Sidebar Visible */
+#wrapper.drawer-open #sidebar-wrapper{
+    width:250px;
+}
+
+
+#wrapper.drawer-open #page-content-wrapper{
+    /* Match padding with width of sidebar */
+    padding-left: 250px;
+}
+
+
+/* Sidebar Styling */
+.sidebar-nav{
+    padding:0;
+    list-style: none;
+}
+
+.sidebar-nav li{
+    text-indent:20px;
+    line-height:40px;
+}
+
+.sidebar-nav li a{
+    display: block;
+    text-decoration: none;
+    color: #ddd;
+}
+
+.sidebar-nav li a:hover{
+    background: #16A085;
+}
