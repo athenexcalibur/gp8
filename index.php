@@ -20,6 +20,21 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <nav class="nav navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="nav navbar-nav">
+                <li><a href="#" id="menu-toggle">Menu</a></li>
+            </div>
+
+            <div class="navbar-header">
+                <a href="index.php" class="navbar-brand">LOGO</a>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+                <li><a href="#">Cart</a></li>
+                <li><a href="#">Login</a></li>
+            </div>
+        </div>
+    </nav>
 
     <div id="wrapper">
 
@@ -36,7 +51,6 @@
             <div class="container-fluid">
                 <div class="row">
                    <div class="col-lg-12">
-                       <a href="#" class="btn btn-success" id="menu-toggle">Menu</a>
                        <h1>Main Content here</h1>
                    </div>
                 </div>
