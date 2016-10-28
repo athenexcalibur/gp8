@@ -21,7 +21,7 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <nav class="nav navbar-inverse navbar-fixed-top">
+    <nav id="navbar" class="nav navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="nav navbar-nav">
                 <li><a href="#" id="menu-toggle">Menu</a></li>
@@ -31,7 +31,7 @@
                 <a href="index.php" class="navbar-brand">LOGO</a>
             </div>
             <div class="nav navbar-nav navbar-right">
-                <li><a href="#">Cart</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                 <li><a href="#">Login</a></li>
             </div>
         </div>
@@ -52,7 +52,61 @@
             <div class="container-fluid">
                 <div class="row">
                    <div class="col-lg-12">
-                       <h1>Main Content here</h1>
+
+                       <!--Main Content here-->
+
+                       <!--Item Containers-->
+                       <div class="container">
+                           <div class="row">
+                               <div class="col-sm-4">
+                                   <div class="panel panel-primary">
+                                       <div class="panel-heading">FOOD</div>
+                                       <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                                       <div class="panel-footer">4 miles away</div>
+                                   </div>
+                               </div>
+                               <div class="col-sm-4">
+                                   <div class="panel panel-danger">
+                                       <div class="panel-heading">Food</div>
+                                       <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                                       <div class="panel-footer">4 miles away</div>
+                                   </div>
+                               </div>
+                               <div class="col-sm-4">
+                                   <div class="panel panel-success">
+                                       <div class="panel-heading">Food</div>
+                                       <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                                       <div class="panel-footer">4 miles away</div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div><br>
+
+                       <div class="container">
+                           <div class="row">
+                               <div class="col-sm-4">
+                                   <div class="panel panel-primary">
+                                       <div class="panel-heading">Food</div>
+                                       <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                                       <div class="panel-footer">4 miles away</div>
+                                   </div>
+                               </div>
+                               <div class="col-sm-4">
+                                   <div class="panel panel-primary">
+                                       <div class="panel-heading">Food</div>
+                                       <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                                       <div class="panel-footer">4 miles away</div>
+                                   </div>
+                               </div>
+                               <div class="col-sm-4">
+                                   <div class="panel panel-primary">
+                                       <div class="panel-heading">Food</div>
+                                       <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                                       <div class="panel-footer">4 miles away</div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div><br><br>
                    </div>
                 </div>
             </div>
