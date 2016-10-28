@@ -1,5 +1,5 @@
-#sidebar-wrapper, #page-content-wrapper{
+ #page-content-wrapper{
     /* prevent overlap with navbar */
-    padding-top: 50px;
+    padding-top: 60px;
 }
 

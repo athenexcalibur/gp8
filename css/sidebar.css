@@ -4,6 +4,7 @@
     position: absolute;
     width:0;
     height: 100%;
+    padding-top: 50px;
     overflow-y: hidden;
     background: #2C3E50;
     opacity: 0.9;
