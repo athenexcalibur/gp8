@@ -1,0 +1,5 @@
+ #page-content-wrapper{
+    /* prevent overlap with navbar */
+    padding-top: 60px;
+}
+
