@@ -34,10 +34,23 @@
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                    <li><a href="#">Login</a></li>
+                    <li><a
+                        href="#" title="Login popover"
+                        data-toggle="popover" data-trigger="focus"
+                        data-placement="bottom"
+                        data-content='Login details here'>
+                        Login
+                    </a></li>
                 </div>
             </div>
         </nav>
+
+
+   <script>
+       $(document).ready(function(){
+           $('[data-toggle="popover"]').popover();
+       });
+   </script>
 
         <div id="sidebar-wrapper">
            <ul class="sidebar-nav">
