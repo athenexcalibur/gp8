@@ -21,6 +21,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/popover.js"></script>
+    <script src="js/navbar.js"></script>
 </head>
 <body>
 
@@ -204,13 +205,6 @@
         </div>
     </div>
 
-    <!-- JQuery Script to toggle menu -->
-    <script>
-        $("#menu-toggle").click(function (e) {
-          e.preventDefault();
-            $("#wrapper").toggleClass("drawer-open");
-        });
-    </script>
 </body>
 </html>
 
