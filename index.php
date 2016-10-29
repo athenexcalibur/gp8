@@ -120,7 +120,7 @@
             <div class="container-fluid">
                 <div class="row">
                    <div class="col-lg-12">
-                       <!--Main Content goesit  here-->
+                       <!--Main Content goes in here-->
 
                        <!-- SearchBar -->
                        <div class="container">
