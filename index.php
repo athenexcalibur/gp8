@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/homepage-content.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -71,6 +72,11 @@
 
                        <!--Item Containers-->
                        <div>
+                           <div class="container" id="itemheader">
+                               <div class="jumbotron">
+                                   <h2>Items near you</h2>
+                               </div>
+                           </div>
                            <div class="container">
                                <div class="row">
                                    <div class="col-sm-4">
