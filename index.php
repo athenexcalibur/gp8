@@ -37,8 +37,24 @@
                     <li><a
                         href="#" title="Login popover"
                         data-toggle="popover" data-trigger="focus"
-                        data-placement="bottom"
-                        data-content='Login details here'>
+                        data-placement="bottom" data-html="true"
+                        data-content='
+                            <form>
+                              <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email...">
+                              </div>
+                              <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Password...">
+                              </div>
+                              <div class="checkbox">
+                                <label><input type="checkbox"> Remember me</label>
+                              </div>
+                              <button type="submit" class="btn btn-default">Submit</button>
+                              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#popUpWindow">
+                              Create Account
+                              </button>
+                            </form>
+                            '>
                         Login
                     </a></li>
                 </div>
