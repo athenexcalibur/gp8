@@ -24,6 +24,8 @@
 <body>
 
     <div id="wrapper">
+
+        <!--Navigation bar on top of Screen-->
         <nav id="navbar" class="nav navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="nav navbar-nav">
@@ -70,6 +72,40 @@
            $('[data-toggle="popover"]').popover();
        });
    </script>
+        <!-- Modal for creating new account-->
+        <div class="modal fade" id="popUpWindow">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Create Acoount</h3>
+                    </div>
+
+                    <!-- body (form) -->
+                    <div class="modal-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Confirm Password">
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- button -->
+                    <div class="modal-footer">
+                        <button class="btn btn-primary btn-block">Submit</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         <div id="sidebar-wrapper">
            <ul class="sidebar-nav">
@@ -84,7 +120,7 @@
             <div class="container-fluid">
                 <div class="row">
                    <div class="col-lg-12">
-                       <!--Main Content here-->
+                       <!--Main Content goesit  here-->
 
                        <!-- SearchBar -->
                        <div class="container">
