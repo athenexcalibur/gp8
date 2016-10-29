@@ -54,6 +54,20 @@
                    <div class="col-lg-12">
 
                        <!--Main Content here-->
+                       <div class="container">
+                           <div class="row">
+                               <div class="col-sm-3"></div>
+                               <div class="col-lg-6">
+                                   <form>
+                                       <div class="form-group">
+                                           <input type="search" class="form-control" placeholder="Search...">
+                                           <span class="btn glyphicon glyphicon-search"></span>
+                                       </div
+                                   </form>
+                               </div>
+                               <div class="col-sm-3"></div>
+                               </div>
+                       </div>
 
                        <!--Item Containers-->
                        <div class="container">
