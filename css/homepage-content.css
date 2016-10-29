@@ -7,4 +7,6 @@
     margin-bottom: 0;
 }
 
-
+.popover-content div{
+    width: 200px;
+}

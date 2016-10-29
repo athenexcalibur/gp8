@@ -36,7 +36,7 @@
                     <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                     <li><a
                         href="#" title="Login popover"
-                        data-toggle="popover" data-trigger="focus"
+                        data-toggle="popover"
                         data-placement="bottom" data-html="true"
                         data-content='
                             <form>
@@ -49,10 +49,13 @@
                               <div class="checkbox">
                                 <label><input type="checkbox"> Remember me</label>
                               </div>
-                              <button type="submit" class="btn btn-default">Submit</button>
-                              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#popUpWindow">
-                              Create Account
-                              </button>
+                              <div class="form-inline">
+                                <button type="submit" class="btn btn-default btn-sm">Login</button>
+                                <br>
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#popUpWindow">
+                                    Create Account
+                                </button>
+                              </div>
                             </form>
                             '>
                         Login
