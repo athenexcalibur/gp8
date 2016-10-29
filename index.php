@@ -71,17 +71,22 @@
                        <div class="container">
                            <div class="row">
                                <div class="col-sm-3"></div>
-                               <div class="col-lg-6">
+                               <div class="col-sm-6 ">
                                    <form>
-                                       <div class="form-group">
-                                           <input type="search" class="form-control" placeholder="Search...">
-                                           <span class="btn glyphicon glyphicon-search"></span>
-                                       </div
+                                       <div class="form-group input-group">
+                                           <input type="text" class="form-control" placeholder="Search..">
+                                           <span class="input-group-btn">
+                                               <button class="btn btn-default" type="button">
+                                                   <span class="glyphicon glyphicon-search"></span>
+                                               </button>
+                                           </span>
+                                       </div>
                                    </form>
                                </div>
                                <div class="col-sm-3"></div>
                            </div>
                        </div>
+
 
                        <!--Item Containers-->
                        <div>
