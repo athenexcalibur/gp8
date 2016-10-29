@@ -21,23 +21,22 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <nav id="navbar" class="nav navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="nav navbar-nav">
-                <li><a href="#" id="menu-toggle">Menu</a></li>
-            </div>
-
-            <div class="navbar-header">
-                <a href="index.php" class="navbar-brand">LOGO</a>
-            </div>
-            <div class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                <li><a href="#">Login</a></li>
-            </div>
-        </div>
-    </nav>
 
     <div id="wrapper">
+        <nav id="navbar" class="nav navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="nav navbar-nav">
+                    <li><a href="#" id="menu-toggle">Menu</a></li>
+                </div>
+                <div class="navbar-header">
+                    <a href="index.php" class="navbar-brand">LOGO</a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                    <li><a href="#">Login</a></li>
+                </div>
+            </div>
+        </nav>
 
         <div id="sidebar-wrapper">
            <ul class="sidebar-nav">
@@ -66,7 +65,7 @@
                                    </form>
                                </div>
                                <div class="col-sm-3"></div>
-                               </div>
+                           </div>
                        </div>
 
                        <!--Item Containers-->
