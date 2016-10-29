@@ -20,6 +20,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/popover.js"></script>
 </head>
 <body>
 
@@ -66,12 +67,6 @@
             </div>
         </nav>
 
-
-   <script>
-       $(document).ready(function(){
-           $('[data-toggle="popover"]').popover();
-       });
-   </script>
         <!-- Modal for creating new account-->
         <div class="modal fade" id="popUpWindow">
             <div class="modal-dialog">
@@ -80,7 +75,7 @@
                     <!-- header -->
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h3 class="modal-title">Create Acoount</h3>
+                        <h3 class="modal-title">Create Account</h3>
                     </div>
 
                     <!-- body (form) -->
