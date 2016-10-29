@@ -51,8 +51,9 @@
             <div class="container-fluid">
                 <div class="row">
                    <div class="col-lg-12">
-
                        <!--Main Content here-->
+
+                       <!-- SearchBar -->
                        <div class="container">
                            <div class="row">
                                <div class="col-sm-3"></div>
@@ -69,57 +70,59 @@
                        </div>
 
                        <!--Item Containers-->
-                       <div class="container">
-                           <div class="row">
-                               <div class="col-sm-4">
-                                   <div class="panel panel-primary">
-                                       <div class="panel-heading">FOOD</div>
-                                       <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                                       <div class="panel-footer">4 miles away</div>
+                       <div>
+                           <div class="container">
+                               <div class="row">
+                                   <div class="col-sm-4">
+                                       <div class="panel panel-primary">
+                                           <div class="panel-heading">FOOD</div>
+                                           <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                                           <div class="panel-footer">4 miles away</div>
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-4">
+                                       <div class="panel panel-danger">
+                                           <div class="panel-heading">Food</div>
+                                           <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                                           <div class="panel-footer">4 miles away</div>
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-4">
+                                       <div class="panel panel-success">
+                                           <div class="panel-heading">Food</div>
+                                           <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                                           <div class="panel-footer">4 miles away</div>
+                                       </div>
                                    </div>
                                </div>
-                               <div class="col-sm-4">
-                                   <div class="panel panel-danger">
-                                       <div class="panel-heading">Food</div>
-                                       <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                                       <div class="panel-footer">4 miles away</div>
-                                   </div>
-                               </div>
-                               <div class="col-sm-4">
-                                   <div class="panel panel-success">
-                                       <div class="panel-heading">Food</div>
-                                       <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                                       <div class="panel-footer">4 miles away</div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div><br>
+                           </div><br>
 
-                       <div class="container">
-                           <div class="row">
-                               <div class="col-sm-4">
-                                   <div class="panel panel-primary">
-                                       <div class="panel-heading">Food</div>
-                                       <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                                       <div class="panel-footer">4 miles away</div>
+                           <div class="container">
+                               <div class="row">
+                                   <div class="col-sm-4">
+                                       <div class="panel panel-primary">
+                                           <div class="panel-heading">Food</div>
+                                           <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                                           <div class="panel-footer">4 miles away</div>
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-4">
+                                       <div class="panel panel-primary">
+                                           <div class="panel-heading">Food</div>
+                                           <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                                           <div class="panel-footer">4 miles away</div>
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-4">
+                                       <div class="panel panel-primary">
+                                           <div class="panel-heading">Food</div>
+                                           <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                                           <div class="panel-footer">4 miles away</div>
+                                       </div>
                                    </div>
                                </div>
-                               <div class="col-sm-4">
-                                   <div class="panel panel-primary">
-                                       <div class="panel-heading">Food</div>
-                                       <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                                       <div class="panel-footer">4 miles away</div>
-                                   </div>
-                               </div>
-                               <div class="col-sm-4">
-                                   <div class="panel panel-primary">
-                                       <div class="panel-heading">Food</div>
-                                       <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                                       <div class="panel-footer">4 miles away</div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div><br><br>
+                           </div><br><br>
+                       </div>
                    </div>
                 </div>
             </div>
