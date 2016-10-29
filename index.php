@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/homepage-content.css">
+    <link rel="stylesheet" href="css/popover.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -38,30 +39,7 @@
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                    <li><a
-                        href="#" title="Login popover"
-                        data-toggle="popover"
-                        data-placement="bottom" data-html="true"
-                        data-content='
-                            <form>
-                              <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email...">
-                              </div>
-                              <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password...">
-                              </div>
-                              <div class="checkbox">
-                                <label><input type="checkbox"> Remember me</label>
-                              </div>
-                              <div class="form-inline">
-                                <button type="submit" class="btn btn-default btn-sm">Login</button>
-                                <br>
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#popUpWindow">
-                                    Create Account
-                                </button>
-                              </div>
-                            </form>
-                            '>
+                    <li><a href="#" rel="details" class="btn btn-small pull-left" data-toggle="popover" title="Login popover" data-content="">
                         Login
                     </a></li>
                 </div>
