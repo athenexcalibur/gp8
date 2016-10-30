@@ -24,45 +24,101 @@ consider any "better" alternatives**
 
 ##Task List 
 
-* Improve mobile support compatibility:
-    * stop sidebar from distorting web content (probably by 
-    floating over it rather than shifting all the content to the
-    side)
-    * keep sidebar fixed when you scroll through main-page content
-    (this is also an issue on desktops)
+
 
 * Refactoring the code:
-    * find a way to reduce code duplication (e.g. common items
+    * [ ] find a way to **reduce code duplication** (e.g. common items
     such as the navbar and sidebar will be used on several pages).
     I've read briefly about this and php's include function seems
     like the way to go but feel free to come up with better 
     suggestions
     
 * 'Backend' features:
-    * Link Login form to database to validate users
-    * Link Create account form to database to add users
-    * Add email verification Functionality
-    * Setup common access to database (We discussed putting it
+    * [ ] Link Login form to database to validate users
+    * [ ] Link Create account form to database to add users
+    * [ ] Add email verification Functionality
+    * [ ] Setup common access to database (We discussed putting it
     on AWS).
-    * Build Database (Duh!)
-    * Link Search bar to database
-    * get relevant listings from database based on user location
+    * [ ] Build Database (Duh!)
+    * [ ] Link Search bar to database
+    * [ ] get relevant listings from database based on user location
+    * [ ] Design user ranking system (Not particularly urgent 
+    since its not a basic deliverable)
 
 * Dynamic/'Frontend' features:
-    * Changing navbar when user logs in (i.e Change login icon to
+    * [ ] Changing navbar when user logs in (i.e Change login icon to
     profile icon and dropdown list with links to profile page,
     add listing e.t.c)
-    * Getting user location information so 'items near you feature'
+    * [ ] Set up form validation for user input 
+    (see http://www.w3schools.com/php/php_form_validation.asp)
+    * [ ] Getting user location information so 'items near you feature'
     is relevant
+    * [ ] Redirecting users to login/create a new account if they try
+    to make a listing while not logged in/registered
+    * [ ] Allow Social Sign-in : i.e link to Facebook/Google account
     
 * Website Design:
-
+    * [ ] Design a color scheme/font scheme for the website (consistency in
+    styling between pages)
+    * [ ] Design the logo for the website (Probably need to decide on a name
+    first)
+    
+* Improve mobile support compatibility:
+    * [ ] stop sidebar from distorting web content (probably by 
+    floating over it rather than shifting all the content to the
+    side)
+    * [ ] keep sidebar fixed when you scroll through main-page content
+    (this is also an issue on desktops)
+    
 * Making Additional Pages/features (Will inevitably lead to 
 adding more tasks to the list once identified):
     * Messaging functionality
+    * User Profile page:
+        * User can manage their personal info and listings
+        * Users should be able to view their past listings
+        (As described in the minimum deliverables)
+    * Search Results Page:
+        * Search result filters (i.e. by Location, Food Category)
+        * Sorting of search results (i.e. by distance, quantity 
+        of food, expiry dates)
+        * Live google maps showing location of listings (Advanced 
+        Deliverable)
+    * Checkout Page:
+        * Users can edit their baskets
+        * Contact sellers regarding items?
+    * About/Contact us Page:
+        * A system for managing user feedback?
+        * Share our site on social networks i.e. twitter/facebook
 
 ##Repository management
+I thought it might be best if each person pushes their feature
+onto a new "feature" branch, then one person is responsible
+for merging these features onto the **develop** branch.
 
+1. to create a new branch:
+    `git branch <branch-name>`
 
+>N.B You should run this command while on the branch you 
+>to "branch off" from
+
+2. to switch to that branch: `git checkout <branch-name>`
+
+3. To push the branch to the online repo:
+   `git push origin <branch-name>`
+
+>N.B. if you rename your remote then its 
+>`git push <remote-name> <branch-name>`
+
+Also, if you'd like to update your local repository with changes 
+from the remote, type
+
+ `git fetch origin`
  
-
+ to fetch the updates, then
+ 
+ `git merge origin/<branch-name>`
+ 
+ to merge the remote repository changes into local branch
+ 
+>Alternatively you could type `git pull origin <branch-name>`
+>to automatically fetch and merge the remote
