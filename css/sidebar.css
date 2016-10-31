@@ -1,6 +1,6 @@
 /* Sidebar */
 #sidebar-wrapper{
-    z-index: 1;
+    z-index: 1000;
     position: absolute;
     width:0;
     height: 100%;
@@ -25,7 +25,7 @@
 
 #wrapper.drawer-open #page-content-wrapper{
     /* Match padding with width of sidebar */
-    padding-left: 250px;
+    /* padding-left: 250px; */
 }
 
 
