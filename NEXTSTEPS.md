@@ -64,7 +64,7 @@ consider any "better" alternatives**
     first)
     
 * Improve mobile support compatibility:
-    * [ ] stop sidebar from distorting web content (probably by 
+    * [x] stop sidebar from distorting web content (probably by 
     floating over it rather than shifting all the content to the
     side)
     * [ ] keep sidebar fixed when you scroll through main-page content
