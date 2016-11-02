@@ -34,23 +34,26 @@ consider any "better" alternatives**
     suggestions
     
 * 'Backend' features:
-    * [ ] Link Login form to database to validate users
-    * [ ] Link Create account form to database to add users
-    * [ ] Add email verification Functionality
+    * [x] Create account
+    * [x] Log in to account
+    * [ ] 'Advanced account creation' (location, allergies etc.)
+    * [ ] Add email verification functionality
     * [ ] Setup common access to database (We discussed putting it
     on AWS).
-    * [ ] Build Database (Duh!)
+    * [x] Build Database (Duh!)
     * [ ] Link Search bar to database
     * [ ] get relevant listings from database based on user location
     * [ ] Design user ranking system (Not particularly urgent 
     since its not a basic deliverable)
 
 * Dynamic/'Frontend' features:
+    * [ ] Changing navbar when user logs in (right now it just says hi and logs them out onclick)
+    * [ ] Set up form validation for user input
     * [ ] Changing navbar when user logs in (i.e Change login icon to
-    profile icon and dropdown list with links to profile page,
-    add listing e.t.c)
-    * [ ] Set up form validation for user input 
+        profile icon and dropdown list with links to profile page,
+        add listing e.t.c)
     (see http://www.w3schools.com/php/php_form_validation.asp)
+    * [ ] Displaying login errors somewhere (login errors are returned to index.php through the 'error' GET value)
     * [ ] Getting user location information so 'items near you feature'
     is relevant
     * [ ] Redirecting users to login/create a new account if they try
@@ -64,7 +67,7 @@ consider any "better" alternatives**
     first)
     
 * Improve mobile support compatibility:
-    * [ ] stop sidebar from distorting web content (probably by 
+    * [x] stop sidebar from distorting web content (probably by 
     floating over it rather than shifting all the content to the
     side)
     * [ ] keep sidebar fixed when you scroll through main-page content

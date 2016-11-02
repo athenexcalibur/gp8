@@ -1,12 +1,4 @@
 <!DOCTYPE html>
-<?php
-/**
- * Created by PhpStorm.
- * User: Ucizi
- * Date: 25/10/16
- * Time: 20:53
- */
-?>
 <html>
 <head>
     <title>Home Page</title>
@@ -39,9 +31,25 @@
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                    <li><a href="#" rel="details" class="btn btn-small pull-left" data-toggle="popover" title="Login popover" data-content="">
-                        Login
-                    </a></li>
+
+                    <?php
+                    require_once("php/membership/userfunctions.php");
+                    cSessionStart();
+
+                    if (!loginCheck() || !isset($_SESSION["username"]))
+                    {
+                        echo '
+                        <li><a href="#" rel="details" class="btn btn-small pull-left" data-toggle="popover" title="Login popover" data-content="">
+                            Login
+                        </a></li>';
+                    }
+                    else
+                    {
+                        echo '<li><a href="php/membership/logout.php" class="btn btn-small pull-left">'.
+                            'Hello, ' . htmlspecialchars($_SESSION["username"]) .
+                        '</a></li>';
+                    }
+                    ?>
                 </div>
             </div>
         </nav>
@@ -59,24 +67,22 @@
 
                     <!-- body (form) -->
                     <div class="modal-body">
-                        <form role="form">
+                        <form role="form" action="php/membership/register.php" method="post">
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email">
+                                <input name = "email" type="email" class="form-control" placeholder="Email..." required>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password">
+                                <input name = "username" type="text" class="form-control" placeholder="Username..." required>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Confirm Password">
+                                <input name = "password" type="password" class="form-control" placeholder="Password..." required>
                             </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Confirm Password...">
+                            </div>
+                            <button class="btn btn-primary btn-block">Submit</button>
                         </form>
                     </div>
-
-                    <!-- button -->
-                    <div class="modal-footer">
-                        <button class="btn btn-primary btn-block">Submit</button>
-                    </div>
-
                 </div>
             </div>
         </div>

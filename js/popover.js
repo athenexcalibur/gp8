@@ -13,12 +13,12 @@ $(document).ready(function () {
         placement: 'bottom',
         html: 'true',
         content: '' +
-        '<form>' +
+        '<form action="php/membership/login.php" method="post">' +
             '<div class="form-group">' +
-                '<input type="email" class="form-control" placeholder="Email...">' +
+                '<input type="email" class="form-control" name="email" placeholder="Email...">' +
             '</div>' +
             '<div class="form-group">' +
-                '<input type="password" class="form-control" placeholder="Password...">' +
+                '<input type="password" class="form-control" name="password" placeholder="Password...">' +
             '</div>' +
             '<div class="checkbox">' +
                 '<label><input type="checkbox"> Remember me</label>' +
