@@ -70,7 +70,7 @@ class Database
         if (!$createDBConnection->query($query)) die("Failed to create posts table");
 
         $query ="
-        CREATE TABLE IF NOT EXISTS PostsTable
+        CREATE TABLE IF NOT EXISTS MessagesTable
         (
           id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
           fromid INT NOT NULL,
@@ -78,7 +78,18 @@ class Database
           text VARCHAR(256) NOT NULL,
           time DATETIME DEFAULT NOW()
         )";
-        if (!$createDBConnection->query($query)) die("Failed to create posts table");
+        if (!$createDBConnection->query($query)) die("Failed to create messages table");
+        
+        $query ="
+        CREATE TABLE IF NOT EXISTS CommentsTable
+        (
+         comment_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+         postid INT UNSIGNED NOT NULL,
+         userid INT UNSIGNED NOT NULL,
+         text VARCHAR(256) NOT NULL,
+         time DATETIME DEFAULT NOW()
+        )";
+        if (!$createDBConnection->query($query)) die("Failed to create comments table");
 
         $this->dbconnection = $createDBConnection;
     }
