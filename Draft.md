@@ -9,6 +9,11 @@ Cupboard will facilitate the sharing of food between users. It will do so in a m
 There will be a simple points-based system and a ranking system in order to encourage sharing of food and reassure other users that the quality of food is likely to be good. When some food has been ‘successfully exchanged’ both parties will get points and will be able to rate each other. If users wish to participate, there will be a simple public leaderboard.
 Users can set their dietary requirements (allergies, religious etc.) and have results automatically filtered. 
 There will be a messaging system (in order to arrange collection) and a comments system (in order to view interest in the item and ask questions).
+##Domain Analysis
+
+##Proposed Deliverables
+
+##Identified risks, assumptions, dependencies and constraints
 
 ##Functional requirements
 ###FR1:  User sign up
@@ -25,3 +30,9 @@ Searching will be implemented in a dynamic fashion using AJAX. By default, items
 
 ###FR5: Points and ratings
 A simple points/ratings system will be implemented. When some food has been shared, the donor receives three points and the collector gets a single point. Each party can then rate their experience with the other out of 5. If the user wishes, they may be displayed on a public leaderboard.
+
+##Non-functional requirements
+
+##Development Approach
+
+##Definition of terms and references
