@@ -2,7 +2,7 @@
 
 define("DBSERVER", "localhost");
 define("DBUSERNAME", "root");
-define("DBPASSWORD", "root");
+define("DBPASSWORD", "");
 
 class Database
 {
