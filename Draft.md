@@ -22,7 +22,7 @@ An interesting feature shared by all three apps is that their search functions a
 ##Proposed Deliverables
 
 ##Identified risks, assumptions, dependencies and constraints
-
+* User Location: How much information about the user's location can we make publicly available without putting their security ar risk?
 ##Functional requirements
 ###FR1:  User sign up
 Users can sign up via email and eventually via social media. As a minimum they will first enter a username, email and password – then be taken to a page where they can optionally set a profile picture, location,  and any dietary requirements.
