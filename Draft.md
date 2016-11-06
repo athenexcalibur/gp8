@@ -18,6 +18,7 @@ There are also a couple of mobile-only food sharing platforms:
 
 An interesting feature shared by all three apps is that their search functions and catalogs are strongly based on location. Our current design includes search filters for types of food, Allergy Information e.t.c., yet these three apps/sites seem to have none of those. Instead, they all place a lot of emphasis on the Interactive Map, making it the easiest to find feature.This may indicate that users may be more concerned about how far away the food is rather than what is actually on offer.
 
+Additionally, all three sites seem to have a private messaging functionality: a feature we thought was unnecessary. Therefore we may have to reassess the need for a privaate messaging feature.
 
 ##Proposed Deliverables
 
