@@ -10,6 +10,14 @@ There will be a simple points-based system and a ranking system in order to enco
 Users can set their dietary requirements (allergies, religious etc.) and have results automatically filtered. 
 There will be a messaging system (in order to arrange collection) and a comments system (in order to view interest in the item and ask questions).
 ##Domain Analysis
+There are currently no food sharing sites based in the UK. However there is one site based in [Germany](https://foodsharing.de/). As such most of the users are within Germany, since the site itself is in German.
+There are also a couple of mobile-only food sharing platforms:
+
+* [Olio](https://olioex.com/): Mobile app with strong UK prescence. A key distinguishing feature is "Drop Boxes". These are local stores/cafes where users can drop off food they'd like to be shared
+* [SharingFood](https://itunes.apple.com/us/app/sharing-food/id992111062?mt=8): Mobile app based in Italy. Seems to be fairly new and so has a very small user base.
+
+An interesting feature shared by all three apps is that their search functions and catalogs are strongly based on location. Our current design includes search filters for types of food, Allergy Information e.t.c., yet these three apps/sites seem to have none of those. Instead, they all place a lot of emphasis on the Interactive Map, making it the easiest to find feature.This may indicate that users may be more concerned about how far away the food is rather than what is actually on offer.
+
 
 ##Proposed Deliverables
 
