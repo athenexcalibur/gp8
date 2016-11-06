@@ -42,5 +42,17 @@ A simple points/ratings system will be implemented. When some food has been shar
 ##Non-functional requirements
 
 ##Development Approach
+####Key Summary
+We've decided to use PHPStorm as the main IDE. Ultimately we hope to host the Database (and possibly website) on AWS. We will mainly collaborate using Github and Slack (and occasionally email).
 
+Though we'll all inevitably contribute to both sides of the site, we've decided to split the work as follows:
+* __Design and Frontend:__ Clare, Ucizi and Luke
+* __Database and Backend:__ Soumya and Abdul
+####Development  Stack
+* PHP (Database and other backend features)
+* HTML/CSS 
+* SQL
+* Javascript (Client-side features)
+* Bootstrap (Simplifies mobile compatibility)
+* Git
 ##Definition of terms and references
