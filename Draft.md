@@ -43,11 +43,10 @@ Searching will be implemented in a dynamic fashion using AJAX. By default, items
 A simple points/ratings system will be implemented. When some food has been shared, the donor receives three points and the collector gets a single point. Each party can then rate their experience with the other out of 5. If the user wishes, they may be displayed on a public leaderboard.
 
 ##Non-functional requirements
-*Items will be stored in only one location and so will be consistent.
 
-*Animations and transitions will be simple and fluent in order to keep the interface responsive.
-
-*No functionalities will be exclusive to the desktop interface and vice versa.
+* Items will be stored in only one location and so will be consistent.
+* Animations and transitions will be simple and fluent in order to keep the interface responsive.
+* No functionalities will be exclusive to the desktop interface and vice versa.
 
 ##Development Approach
 ####Key Summary
