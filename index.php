@@ -138,6 +138,11 @@
                                <div class="col-sm-6 ">
                                    <form>
                                        <div class="form-group input-group">
+                                           <span class="input-group-btn">
+                                               <button class="btn btn-default" type="button">
+                                                   <span class="glyphicon glyphicon-menu-hamburger"></span>
+                                               </button>
+                                           </span>
                                            <input type="text" class="form-control" placeholder="Search..">
                                            <span class="input-group-btn">
                                                <button class="btn btn-default" type="button">
