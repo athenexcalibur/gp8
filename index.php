@@ -23,9 +23,6 @@
         <!--Navigation bar on top of Screen-->
         <nav id="navbar" class="nav navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
-                <div class="nav navbar-nav">
-                    <li><a href="#" id="menu-toggle">Menu</a></li>
-                </div>
                 <div class="navbar-header">
                     <a href="index.php" class="navbar-brand">LOGO</a>
                 </div>
@@ -45,7 +42,7 @@
                     }
                     else
                     {
-                        echo '<li><a href="php/membership/logout.php" class="btn btn-small pull-left">'.
+                        echo '<li><a href="php/membership/logout.php" id="menu-toggle" class="btn btn-small pull-left">'.
                             'Hello, ' . htmlspecialchars($_SESSION["username"]) .
                         '</a></li>';
                     }
