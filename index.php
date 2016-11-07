@@ -122,11 +122,6 @@
 
                        <!--Item Containers-->
                        <div>
-                           <div class="container" id="itemheader">
-                               <div class="jumbotron">
-                                   <h2>Items near you</h2>
-                               </div>
-                           </div>
                            <div class="container">
                                <div class="row">
                                    <div class="col-sm-4">
