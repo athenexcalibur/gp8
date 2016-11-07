@@ -3,6 +3,7 @@
     z-index: 1000;
     position: absolute;
     width:0;
+    right: 0;
     height: 100%;
     padding-top: 50px;
     overflow-y: hidden;
