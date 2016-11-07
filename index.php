@@ -74,7 +74,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success btn-block" data-toggle="modal" data-target="#create-ac-modal">
+                        <button class="btn btn-success btn-block" data-toggle="modal"
+                                data-target="#create-ac-modal" data-dismiss="modal">
                             Create Account
                         </button>
                     </div>
