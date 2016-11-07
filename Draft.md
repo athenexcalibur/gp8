@@ -65,4 +65,4 @@ Though we'll all inevitably contribute to both sides of the site, we've decided 
 * Javascript (Client-side features)
 * Bootstrap (Simplifies mobile compatibility)
 * Git
-##
+
