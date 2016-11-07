@@ -21,9 +21,11 @@ An interesting feature shared by all three apps is that their search functions a
 Additionally, all three sites seem to have a private messaging functionality: a feature we thought was unnecessary. Therefore we may have to reassess the need for a privaate messaging feature.
 
 ##Proposed Deliverables
+* Get the sign-up/login/listing working by December end.
 
 ##Identified risks, assumptions, dependencies and constraints
 * User Location: How much information about the user's location can we make publicly available without putting their security ar risk?
+* Assuming google maps should be able to find the addresses entered by the user.The location functionality is completely dependent on the Google Maps API.
 
 ##Functional requirements
 
@@ -46,7 +48,7 @@ A simple points/ratings system will be implemented. When some food has been shar
 
 * Items will be stored in only one location and so will be consistent.
 * Animations and transitions will be simple and fluent in order to keep the interface responsive.
-* No functionalities will be exclusive to the desktop interface and vice versa.
+* All functionalities will be supported on all devices, apart from wearables.
 
 ##Development Approach
 ####Key Summary
@@ -63,4 +65,4 @@ Though we'll all inevitably contribute to both sides of the site, we've decided 
 * Javascript (Client-side features)
 * Bootstrap (Simplifies mobile compatibility)
 * Git
-##Definition of terms and references
+##
