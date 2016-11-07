@@ -24,7 +24,9 @@ Additionally, all three sites seem to have a private messaging functionality: a 
 
 ##Identified risks, assumptions, dependencies and constraints
 * User Location: How much information about the user's location can we make publicly available without putting their security ar risk?
+
 ##Functional requirements
+
 ###FR1:  User sign up
 Users can sign up via email and eventually via social media. As a minimum they will first enter a username, email and password – then be taken to a page where they can optionally set a profile picture, location,  and any dietary requirements.
 
@@ -41,6 +43,9 @@ Searching will be implemented in a dynamic fashion using AJAX. By default, items
 A simple points/ratings system will be implemented. When some food has been shared, the donor receives three points and the collector gets a single point. Each party can then rate their experience with the other out of 5. If the user wishes, they may be displayed on a public leaderboard.
 
 ##Non-functional requirements
+*Items will be stored in only one location and so will be consistent.
+*Animations and transitions will be simple and fluent in order to keep the interface responsive.
+*No functionalities will be exclusive to the desktop interface and vice versa.
 
 ##Development Approach
 ####Key Summary
@@ -49,6 +54,7 @@ We've decided to use PHPStorm as the main IDE. Ultimately we hope to host the Da
 Though we'll all inevitably contribute to both sides of the site, we've decided to split the work as follows:
 * __Design and Frontend:__ Clare, Ucizi and Luke
 * __Database and Backend:__ Soumya and Abdul
+
 ####Development  Stack
 * PHP (Database and other backend features)
 * HTML/CSS 
