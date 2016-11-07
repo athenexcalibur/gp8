@@ -27,7 +27,6 @@
                     <a href="index.php" class="navbar-brand">LOGO</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
 
                     <?php
                     require_once("php/membership/userfunctions.php");
@@ -88,6 +87,7 @@
            <ul class="sidebar-nav">
               <li><a href="#">Home</a> </li>
                <li><a href="#">Account</a> </li>
+               <li><a href="#">Cart</a></li>
                <li><a href="#">New Listing</a> </li>
                <li><a href="#">About/Contact</a> </li>
            </ul>

@@ -24,9 +24,9 @@
 }
 
 
-#wrapper.drawer-open #page-content-wrapper{
-    /* Match padding with width of sidebar */
-    /* padding-left: 250px; */
+#wrapper.drawer-open .navbar-right {
+    box-sizing: border-box;
+    width: 250px;
 }
 
 
