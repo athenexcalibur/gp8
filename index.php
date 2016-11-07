@@ -23,14 +23,10 @@
         <!--Navigation bar on top of Screen-->
         <nav id="navbar" class="nav navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
-                <div class="nav navbar-nav">
-                    <li><a href="#" id="menu-toggle">Menu</a></li>
-                </div>
                 <div class="navbar-header">
                     <a href="index.php" class="navbar-brand">LOGO</a>
                 </div>
                 <div class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
 
                     <?php
                     require_once("php/membership/userfunctions.php");
@@ -39,13 +35,13 @@
                     if (!loginCheck() || !isset($_SESSION["username"]))
                     {
                         echo '
-                        <li><a href="#" rel="details" class="btn btn-small pull-left" data-toggle="popover" title="Login popover" data-content="">
+                        <li><a href="#" class="btn btn-small pull-left" data-toggle="modal" data-target="#login-modal">
                             Login
                         </a></li>';
                     }
                     else
                     {
-                        echo '<li><a href="php/membership/logout.php" class="btn btn-small pull-left">'.
+                        echo '<li><a href="#" id="menu-toggle" class="btn btn-small pull-left">'.
                             'Hello, ' . htmlspecialchars($_SESSION["username"]) .
                         '</a></li>';
                     }
@@ -54,8 +50,40 @@
             </div>
         </nav>
 
+        <!-- Login Modal -->
+        <div class="modal fade" id="login-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Login</h3>
+                    </div>
+
+                    <!-- body (form) -->
+                    <div class="modal-body">
+                        <form role="form" action="php/membership/login.php" method="post">
+                            <div class="form-group">
+                                <input name = "email" type="email" class="form-control" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input name = "password" type="password" class="form-control" placeholder="Password" required>
+                            </div>
+                            <button class="btn btn-primary btn-block">Login</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success btn-block" data-toggle="modal"
+                                data-target="#create-ac-modal" data-dismiss="modal">
+                            Create Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Modal for creating new account-->
-        <div class="modal fade" id="popUpWindow">
+        <div class="modal fade" id="create-ac-modal">
             <div class="modal-dialog">
                 <div class="modal-content">
 
@@ -91,8 +119,9 @@
            <ul class="sidebar-nav">
               <li><a href="#">Home</a> </li>
                <li><a href="#">Account</a> </li>
+               <li><a href="#">Cart</a></li>
                <li><a href="#">New Listing</a> </li>
-               <li><a href="#">About/Contact</a> </li>
+               <li><a href="php/membership/logout.php">Logout</a> </li>
            </ul>
         </div>
 
@@ -109,6 +138,11 @@
                                <div class="col-sm-6 ">
                                    <form>
                                        <div class="form-group input-group">
+                                           <span class="input-group-btn">
+                                               <button class="btn btn-default" type="button">
+                                                   <span class="glyphicon glyphicon-menu-hamburger"></span>
+                                               </button>
+                                           </span>
                                            <input type="text" class="form-control" placeholder="Search..">
                                            <span class="input-group-btn">
                                                <button class="btn btn-default" type="button">
@@ -125,11 +159,6 @@
 
                        <!--Item Containers-->
                        <div>
-                           <div class="container" id="itemheader">
-                               <div class="jumbotron">
-                                   <h2>Items near you</h2>
-                               </div>
-                           </div>
                            <div class="container">
                                <div class="row">
                                    <div class="col-sm-4">
