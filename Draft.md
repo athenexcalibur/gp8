@@ -44,7 +44,9 @@ A simple points/ratings system will be implemented. When some food has been shar
 
 ##Non-functional requirements
 *Items will be stored in only one location and so will be consistent.
+
 *Animations and transitions will be simple and fluent in order to keep the interface responsive.
+
 *No functionalities will be exclusive to the desktop interface and vice versa.
 
 ##Development Approach
