@@ -12,7 +12,7 @@ if (isset($_POST["title"], $_POST["location"], $_POST["flags"], $_POST["descript
   $title = $_POST["title"];
   $location = $_POST["location"];
   $flags = $_POST["flags"];
-  $description = $_POST["dscription"];
+  $description = $_POST["description"];
 
   $title = mysqli_real_escape_string($dbconnection, $title);
   $location = mysqli_real_escape_string($dbconnection, $location);
