@@ -1,5 +1,5 @@
 <?php
-include_once "userfunctions.php";
+include_once "../user.php";
 cSessionStart();
  
 $_SESSION = array();

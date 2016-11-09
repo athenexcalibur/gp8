@@ -13,7 +13,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/popover.js"></script>
+    <script src="js/mainpage.js"></script>
     <script src="js/navbar.js"></script>
 </head>
 <body>
@@ -29,10 +29,13 @@
                 <div class="nav navbar-nav navbar-right">
 
                     <?php
-                    require_once("php/membership/userfunctions.php");
+                    ini_set('display_errors', 1);
+                    error_reporting(E_ALL ^ E_NOTICE);
+
+                    require_once "php/user.php";
                     cSessionStart();
 
-                    if (!loginCheck() || !isset($_SESSION["username"]))
+                    if (!loginCheck())
                     {
                         echo '
                         <li><a href="#" class="btn btn-small pull-left" data-toggle="modal" data-target="#login-modal">
@@ -42,7 +45,7 @@
                     else
                     {
                         echo '<li><a href="#" id="menu-toggle" class="btn btn-small pull-left">'.
-                            'Hello, ' . htmlspecialchars($_SESSION["username"]) .
+                            'Hello, ' . $_SESSION["user"]->getUserName() .
                         '</a></li>';
                     }
                     ?>
@@ -95,20 +98,20 @@
 
                     <!-- body (form) -->
                     <div class="modal-body">
-                        <form role="form" action="php/membership/register.php" method="post">
+                        <form id="regform" role="form" action="php/membership/register.php" method="post">
                             <div class="form-group">
-                                <input name = "email" type="email" class="form-control" placeholder="Email..." required>
+                                <input id="remail" name="email" type="email" class="form-control" placeholder="Email..." required>
                             </div>
                             <div class="form-group">
-                                <input name = "username" type="text" class="form-control" placeholder="Username..." required>
+                                <input id="rusername" name="username" type="text" class="form-control" placeholder="Username..." required>
                             </div>
                             <div class="form-group">
-                                <input name = "password" type="password" class="form-control" placeholder="Password..." required>
+                                <input id="rpassword" name="password" type="password" class="form-control" placeholder="Password..." required>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Confirm Password...">
+                                <input id="rcheckpass" type="password" class="form-control" placeholder="Confirm Password...">
                             </div>
-                            <button class="btn btn-primary btn-block">Submit</button>
+                            <button class="btn btn-primary btn-block" id="registerbutton">Submit</button>
                         </form>
                     </div>
                 </div>

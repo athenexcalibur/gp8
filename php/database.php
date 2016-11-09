@@ -2,7 +2,7 @@
 
 define("DBSERVER", "localhost");
 define("DBUSERNAME", "root");
-define("DBPASSWORD", "Buzzkill709");
+define("DBPASSWORD", "root");
 
 class Database
 {
@@ -51,7 +51,7 @@ class Database
             flags TINYINT default 0,
             location VARCHAR(52),
             rating FLOAT default 3,
-            soldcount INT default 0
+            score INT default 0
          )";
         if (!$createDBConnection->query($query)) die("Failed to create user table");
 
@@ -64,7 +64,7 @@ class Database
             location VARCHAR(52),
             flags TINYINT default 0,
             userid INT NOT NULL,
-            time DATETIME DEFAULT NOW(),
+            posttime DATETIME DEFAULT NOW(),
             expiry DATE
         )";
         if (!$createDBConnection->query($query)) die("Failed to create posts table");
@@ -76,7 +76,7 @@ class Database
           fromid INT NOT NULL,
           toid INT NOT NULL,
           text VARCHAR(256) NOT NULL,
-          time DATETIME DEFAULT NOW()
+          messagetime DATETIME DEFAULT NOW()
         )";
         if (!$createDBConnection->query($query)) die("Failed to create messages table");
         
@@ -87,7 +87,7 @@ class Database
          postid INT UNSIGNED NOT NULL,
          userid INT UNSIGNED NOT NULL,
          text VARCHAR(256) NOT NULL,
-         time DATETIME DEFAULT NOW()
+         commenttime DATETIME DEFAULT NOW()
         )";
         if (!$createDBConnection->query($query)) die("Failed to create comments table");
 
