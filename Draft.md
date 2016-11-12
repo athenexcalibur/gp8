@@ -21,7 +21,8 @@ An interesting feature shared by all three apps is that their search functions a
 Additionally, all three sites seem to have a private messaging functionality: a feature we thought was unnecessary. Therefore we may have to reassess the need for a privaate messaging feature.
 
 ##Proposed Deliverables
-* Get the sign-up/login/listing working by December end.
+* Basic functionalities implemented by the end of December (login, messages, comments, posts, etc)
+* Additional: Scoreboard, barcode scanner, Maps integration.
 
 ##Identified risks, assumptions, dependencies and constraints
 * User Location: How much information about the user's location can we make publicly available without putting their security ar risk?
