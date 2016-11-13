@@ -7,3 +7,7 @@ have it set up with AWS.
 Just using session_start() doesn't protect against session hijacking. I've written a function called cSessionStart() in
 php/membership/userfunctions.php which you should use instead. loginCheck() should be called every now and then to check 
 the users session id.
+
+##User class
+The user class is stored in $_SESSION["user"] (call cSessionStart() and loginCheck() before trying to access this).
+It's constructed on login.

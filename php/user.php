@@ -1,14 +1,14 @@
 <?php
 require_once "database.php";
 
-define('VEGAN', 1);
-define('VEGETATIAN', 2);
-define('PEANUT', 4);
-define('SOY', 8);
-define('GLUTEN', 16);
-define('LACTOSE', 32);
-define('HALAL', 64);
-define('KOSHER', 128);
+define("VEGAN", 1);
+define("VEGETATIAN", 2);
+define("PEANUT", 4);
+define("SOY", 8);
+define("GLUTEN", 16);
+define("LACTOSE", 32);
+define("HALAL", 64);
+define("KOSHER", 128);
 
 function cSessionStart()
 {
@@ -72,10 +72,14 @@ class User
     public function __construct($email, $password)
     {
         $dbconnection = Database::getConnection();
-        if ($stmt = $dbconnection->prepare("SELECT id, username, password, flags, location, rating, score
-        FROM UsersTable
-        WHERE email = ?
-        LIMIT 1"))
+        if ($stmt = $dbconnection->prepare
+        (
+            "SELECT id, username, password, 
+             CAST(flags as unsigned integer),
+             location, rating, score
+             FROM UsersTable
+             WHERE email = ?
+             LIMIT 1"))
         {
             $stmt->bind_param("s", $email);
             $stmt->execute();
@@ -133,13 +137,23 @@ class User
         if (preg_match("/-?[0-9]{2}.[0-9]{7},-?[0-9]{2}.[0-9]{7}/i", $newLoc)) $this->location = $newLoc;
     }
 
-    public function checkAllergy($flag)
+    public function checkFlag($flag)
     {
         return $this->flags & $flag;
     }
 
-    public function setAllergy($flag)
+    public function setFlag($flag)
     {
-        $this->flags = $this->flags & ~ $flag;
+        $this->flags = $this->flags | $flag;
+    }
+
+    public function clearFlags()
+    {
+        $this->flags = 0;
+    }
+
+    public function getFlags()
+    {
+        return $this->flags;
     }
 }

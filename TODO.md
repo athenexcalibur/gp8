@@ -34,31 +34,32 @@ consider any "better" alternatives**
     suggestions
     
 * 'Backend' features:
-    * [x] Create account
-    * [x] Log in to account
-    * [ ] 'Advanced account creation' (location, allergies etc.)
+
+    * [ ] Location
     * [ ] Add email verification functionality
-    * [ ] Setup common access to database (We discussed putting it
-    on AWS).
-    * [x] Build Database (Duh!)
+    * [ ] Setup common access to database (We discussed putting it on AWS).
     * [ ] Link Search bar to database
     * [ ] get relevant listings from database based on user location
-    * [ ] Design user ranking system (Not particularly urgent 
-    since its not a basic deliverable)
+    * [ ] Design user ranking system (Not particularly urgent since its not a basic deliverable)
+    * [x] Create account
+    * [x] Log in to account
+    * [x] Editing username, allergies etc
+    * [x] Build Database (Duh!)
 
 * Dynamic/'Frontend' features:
-    * [ ] Changing navbar when user logs in (right now it just says hi and logs them out onclick)
-    * [ ] Set up form validation for user input
+    * [ ] Displaying login errors somewhere (login errors are returned to index.php through the 'error' GET value)
+    * [ ] Styling for changeDetails.php
     * [ ] Changing navbar when user logs in (i.e Change login icon to
         profile icon and dropdown list with links to profile page,
         add listing e.t.c)
     (see http://www.w3schools.com/php/php_form_validation.asp)
-    * [ ] Displaying login errors somewhere (login errors are returned to index.php through the 'error' GET value)
     * [ ] Getting user location information so 'items near you feature'
     is relevant
     * [ ] Redirecting users to login/create a new account if they try
     to make a listing while not logged in/registered
     * [ ] Allow Social Sign-in : i.e link to Facebook/Google account
+    * [x] Changing navbar when user logs in (right now it just says hi and logs them out onclick)
+    * [x] Set up form validation for user input
     
 * Website Design:
     * [ ] Design a color scheme/font scheme for the website (consistency in

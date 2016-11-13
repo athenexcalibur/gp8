@@ -30,7 +30,8 @@
 
                     <?php
                     ini_set('display_errors', 1);
-                    error_reporting(E_ALL ^ E_NOTICE);
+                    ini_set('display_startup_errors', 1);
+                    error_reporting(E_ALL);
 
                     require_once "php/user.php";
                     cSessionStart();
@@ -121,7 +122,7 @@
         <div id="sidebar-wrapper">
            <ul class="sidebar-nav">
               <li><a href="#">Home</a> </li>
-               <li><a href="#">Account</a> </li>
+               <li><a href="changeDetails.php">Account</a> </li>
                <li><a href="#">Cart</a></li>
                <li><a href="#">New Listing</a> </li>
                <li><a href="php/membership/logout.php">Logout</a> </li>
