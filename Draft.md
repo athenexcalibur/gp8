@@ -5,7 +5,7 @@
 * Group Number: 8
 * Members: Clare Doran, Abdul Ghani, Ucizi Mafeni, Luke Needham and Soumya Singh
 ##Introduction
-7 million tonnes of food goes to waste in the UK, mo re than half of which is edible (https://www.lovefoodhatewaste.com/node/2472). Meanwhile,  many people throughout the country struggle to put together enough money for food, with food banks becoming busier every year (https://www.trusselltrust.org/2015/11/18/uk-foodbank-use-still-at-record-levels-as-hunger-remains-major-concern-for-low-income-families/)
+7 million tonnes of food goes to waste in the UK, more than half of which is edible (https://www.lovefoodhatewaste.com/node/2472). Meanwhile,  many people throughout the country struggle to put together enough money for food, with food banks becoming busier every year (https://www.trusselltrust.org/2015/11/18/uk-foodbank-use-still-at-record-levels-as-hunger-remains-major-concern-for-low-income-families/)
 
 Cupboard aims to be a system that allows users to painlessly find and share food that would otherwise go to waste. It should be quick and easy to use as it is too easy to just throw away food. 
 It will also allow users to arrange collection in a manner that does not force them to disclose their house address or any other details they wish to keep private.
@@ -16,7 +16,6 @@ There will be a simple points-based system and a ranking system in order to enco
 Users can set their dietary requirements (allergies, religious etc.) and have results automatically filtered. 
 There will be a messaging system (in order to arrange collection) and a comments system (in order to view interest in the item and ask questions).
 ##Domain Analysis
-There are currently no food sharing sites based in the UK. However there is one site based in [Germany](https://foodsharing.de/). As such most of the users are within Germany, since the site itself is in German.
 There are a couple of examples of food sharing sites/apps such as:
 
 * [foodsharing.de](https://foodsharing.de/): A German food sharing site that allows users (just like our site) to trade food that is going out of date with other users to reduce food waste. However it is only available in Germany  
