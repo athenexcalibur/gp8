@@ -1,5 +1,11 @@
+#Requirements Document (Draft)
+
+##Important Information
+* Project Name: Cupboard
+* Group Number: 8
+* Members: Clare Doran, Abdul Ghani, Ucizi Mafeni, Luke Needham and Soumya Singh
 ##Introduction
-7 million tonnes of food goes to waste in the UK, more than half of which is edible (https://www.lovefoodhatewaste.com/node/2472). Meanwhile,  many people throughout the country struggle to put together enough money for food, with food banks becoming busier every year (https://www.trusselltrust.org/2015/11/18/uk-foodbank-use-still-at-record-levels-as-hunger-remains-major-concern-for-low-income-families/)
+7 million tonnes of food goes to waste in the UK, mo re than half of which is edible (https://www.lovefoodhatewaste.com/node/2472). Meanwhile,  many people throughout the country struggle to put together enough money for food, with food banks becoming busier every year (https://www.trusselltrust.org/2015/11/18/uk-foodbank-use-still-at-record-levels-as-hunger-remains-major-concern-for-low-income-families/)
 
 Cupboard aims to be a system that allows users to painlessly find and share food that would otherwise go to waste. It should be quick and easy to use as it is too easy to just throw away food. 
 It will also allow users to arrange collection in a manner that does not force them to disclose their house address or any other details they wish to keep private.
@@ -17,15 +23,16 @@ There are a couple of examples of food sharing sites/apps such as:
 * [Olio](https://olioex.com/): Mobile app with strong UK presence. A key distinguishing feature is "Drop Boxes". These are local stores/cafes where users can drop off food they'd like to be shared
 * [SharingFood](https://itunes.apple.com/us/app/sharing-food/id992111062?mt=8): Mobile app based in Italy. Seems to be fairly new and so has a very small user base.
 
-Similar examples such as book sharing sites or even eBay have a similar system, whilst they aren't food they have very similar  properties. As the user can search for items that they want to purchase or exchange. They also have review based systems which we feel is incredibly important to allow users to get the best experience from a product. 
+Similar examples such as book sharing sites or even eBay have a similar system, whilst they aren't food they have very similar  properties, as the user can search for items that they want to purchase or exchange. They also have review based systems which we feel is incredibly important to allow users to get the best experience from a product. 
 
 An interesting feature shared by all three apps is that their search functions and catalogs are strongly based on location. Our current design includes search filters for types of food, Allergy Information e.t.c., yet these three apps/sites seem to have none of those. Instead, they all place a lot of emphasis on the Interactive Map, making it the easiest to find feature.This may indicate that users may be more concerned about how far away the food is rather than what is actually on offer.
 
-Additionally, all three sites seem to have a private messaging functionality: a feature we thought was unnecessary. Therefore we may have to reassess the need for a private messaging feature.
 
 ##Proposed Deliverables
 * Basic functionalities implemented by the end of December (login, messages, comments, posts, etc)
 * Additional: Scoreboard, barcode scanner, Maps integration.
+
+(Gantt Chart Goes here)
 
 ##Identified risks, assumptions, dependencies and constraints
 * User Location: How much information about the user's location can we make publicly available without putting their security ar risk?
