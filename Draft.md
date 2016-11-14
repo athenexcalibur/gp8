@@ -11,14 +11,17 @@ Users can set their dietary requirements (allergies, religious etc.) and have re
 There will be a messaging system (in order to arrange collection) and a comments system (in order to view interest in the item and ask questions).
 ##Domain Analysis
 There are currently no food sharing sites based in the UK. However there is one site based in [Germany](https://foodsharing.de/). As such most of the users are within Germany, since the site itself is in German.
-There are also a couple of mobile-only food sharing platforms:
+There are a couple of examples of food sharing sites/apps such as:
 
-* [Olio](https://olioex.com/): Mobile app with strong UK prescence. A key distinguishing feature is "Drop Boxes". These are local stores/cafes where users can drop off food they'd like to be shared
+* [foodsharing.de](https://foodsharing.de/): A German food sharing site that allows users (just like our site) to trade food that is going out of date with other users to reduce food waste. However it is only available in Germany  
+* [Olio](https://olioex.com/): Mobile app with strong UK presence. A key distinguishing feature is "Drop Boxes". These are local stores/cafes where users can drop off food they'd like to be shared
 * [SharingFood](https://itunes.apple.com/us/app/sharing-food/id992111062?mt=8): Mobile app based in Italy. Seems to be fairly new and so has a very small user base.
+
+Similar examples such as book sharing sites or even eBay have a similar system, whilst they aren't food they have very similar  properties. As the user can search for items that they want to purchase or exchange. They also have review based systems which we feel is incredibly important to allow users to get the best experience from a product. 
 
 An interesting feature shared by all three apps is that their search functions and catalogs are strongly based on location. Our current design includes search filters for types of food, Allergy Information e.t.c., yet these three apps/sites seem to have none of those. Instead, they all place a lot of emphasis on the Interactive Map, making it the easiest to find feature.This may indicate that users may be more concerned about how far away the food is rather than what is actually on offer.
 
-Additionally, all three sites seem to have a private messaging functionality: a feature we thought was unnecessary. Therefore we may have to reassess the need for a privaate messaging feature.
+Additionally, all three sites seem to have a private messaging functionality: a feature we thought was unnecessary. Therefore we may have to reassess the need for a private messaging feature.
 
 ##Proposed Deliverables
 * Basic functionalities implemented by the end of December (login, messages, comments, posts, etc)
@@ -31,19 +34,19 @@ Additionally, all three sites seem to have a private messaging functionality: a 
 ##Functional requirements
 
 ###FR1:  User sign up
-Users can sign up via email and eventually via social media. As a minimum they will first enter a username, email and password – then be taken to a page where they can optionally set a profile picture, location,  and any dietary requirements.
+Users can sign up via email and eventually via social media. As a minimum, they will first enter a username, email and password – then be taken to a page where they can optionally set a profile picture, location, and any dietary requirements. 
 
 ###FR2:  Listing of items
-Users will be able to list an item of food. The minimum amount of information will be a title. Optionally, they may add a picture, location, description, expiry date, and set the dietary requirement flags.  If the user has set their location, it will be automatically added. 
+Users will be able to list an item of food. The minimum amount of information will be a title. Optionally, they may add a picture, location, description, expiry date, and set the dietary requirement flags. If the user has set their location, it will be automatically added
 
 ###FR3: Messaging, comments, and collection of food
-Messaging (private communication, to exchange exact addresses etc.) and comments (questions that others may be interested in, expressing interest) will be implemented. After food is collected, both parties will have their scores and ratings affected appropriately and the item will be moved to a separate ‘history’ database. (Items can also be deleted, and not moved to a users history)
+Messaging (private communication, to exchange exact addresses etc.) and comments (questions that others may be interested in, expressing interest) will be implemented. After food is collected, both parties will have their scores and ratings affected appropriately and the item will be moved to a separate ‘history’ database. (Items can also be deleted, and not moved to a users history) 
 
 ###FR4: Search
-Searching will be implemented in a dynamic fashion using AJAX. By default, items will be listed by location.
+Searching will be implemented in a dynamic fashion using AJAX. By default, items will be listed by location 
 
 ###FR5: Points and ratings
-A simple points/ratings system will be implemented. When some food has been shared, the donor receives three points and the collector gets a single point. Each party can then rate their experience with the other out of 5. If the user wishes, they may be displayed on a public leaderboard.
+A simple points/ratings system will be implemented. When some food has been shared, the donor receives three points and the collector gets a single point. Each party can then rate their experience with the other out of 5. If the user wishes, they may be displayed on a public leaderboard. 
 
 ##Non-functional requirements
 
