@@ -96,7 +96,7 @@ class User
                 if(!is_null($this->location)) $this->location = htmlspecialchars($this->location);
             }
             else throw new Exception("Invalid email or password, please try again.");
-        }
+        } else throw new Exception("There was an error preparing a statement.");
     }
 
     public function getUserName()
