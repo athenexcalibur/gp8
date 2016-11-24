@@ -99,6 +99,26 @@ class User
         } else throw new Exception("There was an error preparing a statement.");
     }
 
+    public function idToName($userid)
+    {
+        if ($userid === $this->userid) return $this->username;
+
+        $stmt = Database::getConnection()->prepare("SELECT username FROM UsersTable WHERE id = ?");
+        $stmt->bind_param("i", $userid);
+
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows == 1)
+        {
+            $stmt->bind_result($name);
+            $stmt->fetch();
+            return $name;
+        }
+
+        return null;
+    }
+
     public function getUserName()
     {
         return $this->username;
