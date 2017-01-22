@@ -28,8 +28,10 @@ An interesting feature shared by all three apps is that their search functions a
 
 
 ##Proposed Deliverables
-* Basic functionalities implemented by the end of December (login, messages, comments, posts, etc)
-* Additional: Scoreboard, barcode scanner, Maps integration.
+![one](http://i.imgur.com/auDe2O0.jpg)
+![two](http://i.imgur.com/aMaHbFM.jpg)
+![three](http://i.imgur.com/vu2jLrN.jpg)
+![four](http://i.imgur.com/TFuYRWT.jpg)
 
 (Gantt Chart Goes here)
 
