@@ -3,6 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{xcolor}
+\usepackage{hyperref}
 
 \input{_defs}
 \input{_mydefs}
@@ -25,34 +26,47 @@ A web app built with the intention of helping reduce food waste
 \tableofcontents
 \clearpage
 
-\section{Introduction}
-7 million tonnes of food goes to waste in the UK, more than half of which is 
-edible (https://www.lovefoodhatewaste.com/node/2472).
-Meanwhile,  many people throughout the country struggle to put together enough 
-money for food, with food banks becoming busier every year
-(https://www.trusselltrust.org/2015/11/18/uk-foodbank-use-still-at-record-levels-as-hunger-remains-major-concern-for-low-income-families/)
 
+\section{Introduction}
+
+7.5 million tonnes of food goes to waste in 2015, 4.4 million tonnes of which is edible.
+This has a retail value of around £13 billion. This is associated with 19 million tonnes of carbon dioxide.
+emmisions, which is around a quarter of that emitted by road traffic in the UK\cite{wrap}.
+Meanwhile,  many people throughout the country struggle to put together enough 
+money for food, with food banks becoming busier every year \cite{trussel}.\\
+From an environmental, economical, and ethical point of view this is a travesty.\\
 Cupboard aims to be a system that allows users to painlessly find and share food
-that would otherwise go to waste. It should be quick and easy to use as it is
+that would otherwise go to waste. A priority is speed and ease of use, as it is
 too easy to just throw away food. 
 It will also allow users to arrange collection in a manner that does not force
 them to disclose their house address or any other details they wish to keep
 private.
 
+The main sections of this document are:
+\begin{itemize}
+	\item \textbf{Project Scope:} Here we give an overview about what our system will (and won't) do.
+	\item \textbf{Domain analysis:} An analysis of similar products already in place.
+	\item \textbf{Proposed Deliverables:} How we plan to undergo the project.
+	\item \textbf{Identified, Risks, Assumptions, Dependencies and Constraints:} A discussion of things we must consider and keep in mind as we move forward.
+	\item \textbf{Solution Requirements:} Planned functional and non-functional requirements.
+	\item \textbf{Development Approach:} A brief overview of the technologies we plan to use in order to develop the product.
+\end{itemize}
+
 
 \section{Project Scope}
-Cupboard will facilitate the sharing of food between users. It will do so in a
-manner that is as simple as possible, as we want to discourage people from
-taking the easy route of simply binning food they wont eat.
+The aim is to become a go-to everyday service that people will use `by default' without even thinking about wasting food. This means users will be able to easilly list items with a minimal amount of effort.\\
 There will be a simple points-based system and a ranking system in order to
-encourage sharing of food and reassure other users that the quality of food is
-likely to be good. When some food has been ‘successfully exchanged’ both
+encourage sharing of food and to reassure other users that the quality of food is
+likely to be good. When some food has been successfully exchanged both
 parties will get points and will be able to rate each other. If users wish to
-participate, there will be a simple public leaderboard.
+participate, there will be a simple public leaderboard.\\
 Users can set their dietary requirements (allergies, religious etc.) and have
-results automatically filtered. 
+results automatically filtered. \\
 There will be a messaging system (in order to arrange collection) and a comments
-system (in order to view interest in the item and ask questions).
+system (in order to view interest in the item and ask questions).\\
+The aforementioned rankings, messaging, and comments systems are purely to facilitate the sharing of food.
+We wish to avoid any sort of `social media' elements
+(such as friend requests, status updates etc.) in order to not lose sight of our main goal - the prevention of food waste.
 
 
 \section{Domain Analysis}
@@ -153,6 +167,11 @@ decided to split the work as follows:
     \item Git
 \end{itemize}
 
+\begin{thebibliography}{1}
 
-\section{References}
+  \bibitem{wrap} WRAP UP  \href{http://www.wrap.org.uk/sites/files/wrap/Household_food_waste_in_the_UK_2015_Report.pdf}{http://www.wrap.org.uk}
+
+  \bibitem{trussel} Trussell Trust \href{https://www.trusselltrust.org/2015/11/18/uk-foodbank-use-still-at-record-levels-as-hunger-remains-major-concern-for-low-income-families/}{https://www.trusselltrust.org}
+\end{thebibliography}
 \end{document}
+
