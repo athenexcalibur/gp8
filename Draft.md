@@ -4,6 +4,7 @@
 * Project Name: Cupboard
 * Group Number: 8
 * Members: Clare Doran, Abdul Ghani, Ucizi Mafeni, Luke Needham and Soumya Singh
+
 ##Introduction
 7 million tonnes of food goes to waste in the UK, more than half of which is edible (https://www.lovefoodhatewaste.com/node/2472). Meanwhile,  many people throughout the country struggle to put together enough money for food, with food banks becoming busier every year (https://www.trusselltrust.org/2015/11/18/uk-foodbank-use-still-at-record-levels-as-hunger-remains-major-concern-for-low-income-families/)
 
