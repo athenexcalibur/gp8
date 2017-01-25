@@ -24,7 +24,8 @@ A web app built with the intention of helping reduce food waste
 
 \tableofcontents
 \clearpage
-
+%glossary
+%define "active" listing
 \section{Introduction}
 7 million tonnes of food goes to waste in the UK, more than half of which is 
 edible (https://www.lovefoodhatewaste.com/node/2472).
@@ -87,15 +88,168 @@ There are a couple of examples of food sharing sites/apps such as:
 
 \section{Solution Requirements}
 \subsection{Functional Requirements}
+N.B. Due to the highly time-sensitive nature of the project, any low priority
+requirements (and thier linked dependencies) may not be implemented.
+As such, all low priority requirements are inherently unessential to the
+system, and it will remain fully operational with or without them.
 
 \requirement{User sign up}
 
 \begin{reqtable}
-    Description        & \\
+    Description        & The User should be able to create an account by 
+                        following the registration process.\\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       &  Get User Registration Details\\
+    \hline
+    Expected results   & Following account creation, the user will be able to 
+                        login using their provided username and password\\
+    \hline
+    Exception Handling & \\
+    \hline
+\end{reqtable}
+
+\requirement{Get User Registration Details}
+
+\begin{reqtable}
+    Description        & During sign-up, the user should provide the following
+                        details in order to successfully complete the sign-up
+                        process:
+
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item username (must be unique)
+                            \item email address
+                            \item password
+                            \item physical address
+                            \item post code (must be valid)
+                        \end{itemize}
+                        
+                        
+
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & Validate User Details\\
+    \hline
+    Expected results   & User inputs all valid fields and proceeds to complete
+                        registration\\
+    \hline
+    Exception Handling & Refer to val\\
+    \hline
+\end{reqtable}
+
+\requirement{Validate Registration Details}
+
+\begin{reqtable}
+    Description        & Information in the registration form should be
+                        validated as follows:
+                        
+                        username: checked against database to see if its unique
+
+                        email-address: adheres to general email structure 
+                        (<someuser>@<somehost>.<com/net\ldots>)
+
+                        password: minimum length of 7 characters, alphanumeric,
+                        contains one symbol from valid symbol list
+                        (refer to glossary)
+
+                        postcode: is actual valid postcode 
+                        (check in UK postcode directory)
+
+                        If there exists an invalid input on submission,
+                        the form must be rejected and the user must be
+                        notified of their error
+                        (i.e highlight incorrect field and place error message
+                        next to it)
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & User Reg\\
+    \hline
+    Expected results   & Validation system correctly highlights any invalid
+                        fields\\
+    \hline
+    Exception Handling & N.A.\\
+    \hline
+\end{reqtable}
+
+\requirement{Account Activation}
+
+\begin{reqtable}
+    Description        & 
+                        Once the user has provided the registration details,
+                        an email with an account activation link
+                        will be sent to the provided email address. The user
+                        should then be able to follow the activation link in
+                        order to activate their account.\\
+    \hline
+    Priority           & Low \\
+    \hline
+    Dependencies       & User Reg\\
+    \hline
+    Expected results   & After the user follows the activation link,
+                        they should be able to login to their account using
+                        the login details they provided during registration\\
+    \hline
+    Exception Handling & Activation link doesn't work: the user should have the
+                        option to request another activation link.
+
+                        Incorrect email address provided: the user will have the
+                        option to correct the provided email address.\\
+    \hline
+\end{reqtable}
+
+\requirement{User Dashboard}
+
+\begin{reqtable}
+    Description        & Following login, all registered users should have
+                        access to a personal
+                        dashboard where they can do the following:
+                        
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item edit their personal details (username, email,
+                                password, address)
+                            \item edit their privacy settings
+                            \item edit their current dietary requirements
+                        \end{itemize}
+
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & Edit Profile, Privacy Settings,
+                        Edit Dietary Requirements\\
+    \hline
+    Expected results   & User is able to access and edit all personal
+                        information from the dashboard\\
+    \hline
+    Exception Handling & Registered and logged-in user can't access dashboard:
+                        notify webmaster of error
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{Edit Profile}
+
+\begin{reqtable}
+    Description        & A user should be able to change their personal details
+                        this includes:
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item 
+                        \end{itemize}<++>
+                        
+                        \\
     \hline
     Priority           & \\
     \hline
-    dependencies       & \\
+    Dependencies       & \\
     \hline
     Expected results   & \\
     \hline
@@ -103,23 +257,25 @@ There are a couple of examples of food sharing sites/apps such as:
     \hline
 \end{reqtable}
 
-\requirement{User Login}
-
-\requirement{User Dashboard}
-
-\requirement{Edit Profile}
 
 \requirement{Privacy Settings}
 
-\requirement{Add Listing}
 
-\requirement{Edit Listing}
+\requirement{Listings Page}
 
-\requirement{Remove Listing}
+\requirement{Listing Status}
 
 \requirement{View Listing}
 
-\requirement{Listing Status}
+\requirement{Edit Listing}
+
+\requirement{Add Listing}
+
+\requirement{Remove Listing}
+
+
+\requirement{Orders Page}
+
 
 \requirement{Comments Board}
 
@@ -136,6 +292,8 @@ There are a couple of examples of food sharing sites/apps such as:
 \requirement{Checkout}
 
 \requirement{Private Messaging}
+
+\requirement{Error Reporting}
 
 \requirement{User sign up}
 Users will be able to list an item of food. The minimum amount of information
