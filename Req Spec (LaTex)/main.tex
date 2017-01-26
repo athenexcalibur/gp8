@@ -126,13 +126,17 @@ system, and it will remain fully operational with or without them.
                             \item post code (must be valid)
                         \end{itemize}
                         
-                        
+                        In addition, the user should also be given the option
+                        to fill in their Dietary Requirements and Allergy 
+                        Information. However, it is not mandatory to fill in 
+                        these details in order to complete registration.
 
                         \\
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & Validate User Details\\
+    Dependencies       & Validate User Details, Dietary Requirements, 
+                        Allergy Information\\
     \hline
     Expected results   & User inputs all valid fields and proceeds to complete
                         registration\\
@@ -212,9 +216,7 @@ system, and it will remain fully operational with or without them.
                         
                         \begin{itemize}
                             \itemsep-1em
-                            \item edit their personal details (username, email,
-                                password, address)
-                            \item edit their privacy settings
+                            \item edit their personal details
                             \item edit their current dietary requirements
                         \end{itemize}
 
@@ -240,14 +242,61 @@ system, and it will remain fully operational with or without them.
 \begin{reqtable}
     Description        & A user should be able to change their personal details
                         this includes:
+
                         \begin{itemize}
                             \itemsep-1em
-                            \item 
-                        \end{itemize}<++>
-                        
+                            \item their username
+                            \item their email address
+                            \item their password
+                            \item their dietary requirements
+                            \item their allergy information
+                        \end{itemize}
+
+                        All changes to personal details will be validated under
+                        the standards mentioned in
+                        (Validate Registration Details).
+
+                        With regards to dietary requirements and allergy
+                        information, users will be able to select whichever
+                        catergories listed in (Dietary Requirements) and
+                        (Allergy Information) that personally apply to them.
                         \\
     \hline
-    Priority           & \\
+    Priority           & High\\
+    \hline
+    Dependencies       & Validate Registration Details, Dietary Requirements,
+                        Allergy Information\\
+    \hline
+    Expected results   & User able to successfully change personal details.\\
+    \hline
+    Exception Handling & New details don't satisfy validation standards:
+                        Invalid fields must be highlighted with hint
+                        (as to why field is Invalid) shown
+                        
+                        User unable to save changes: Report error to webmaster\\
+    \hline
+\end{reqtable}
+
+
+\requirement{Dietary Requirements}
+
+\begin{reqtable}
+    Description        & By default, dietary requirements will be split into
+                        the following categories:
+
+                        \begin{itemize}
+                            \item Halaal
+                            \item Kosher
+                            \item Vegan
+                            \item Vegeterian
+                        \end{itemize}
+
+                        There will be an additional category group called 
+                        "other" where users can specify a dietary requirement
+                        not listed in the default categories.
+                        \\
+    \hline
+    Priority           & High\\
     \hline
     Dependencies       & \\
     \hline
@@ -258,7 +307,32 @@ system, and it will remain fully operational with or without them.
 \end{reqtable}
 
 
-\requirement{Privacy Settings}
+\requirement{Allergy Information}
+
+\begin{reqtable}
+    Description        & By default, allergies will be split into
+                        the following categories:
+
+                        \begin{itemize}
+                            \item Peanuts
+                            \item Gluten
+                            \item Lactose
+                            \item Soy
+                        \end{itemize}
+
+                        There will be an additional category group called 
+                        "other" where users can specify any allergies not listed
+                        in the default categories.
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \\
+    \hline
+    Expected results   & \\
+    \hline
+    Exception Handling & \\
+    \hline
+\end{reqtable}
 
 
 \requirement{Listings Page}
