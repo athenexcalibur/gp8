@@ -428,7 +428,7 @@ system, and it will remain fully operational with or without them.
     \autoref{fr:dietary-requirements},
     \autoref{fr:allergy-information},
     \autoref{fr:user-score} (User Score),
-    \autoref{fr:user-rating} (User Rating)
+    \autoref{fr:user-ratings} (User Rating)
     \\
     \hline
     Expected results   & User is able to access and edit all personal
@@ -594,6 +594,49 @@ system, and it will remain fully operational with or without them.
                         \\
     \hline
 \end{reqtable}
+
+\requirement{Score Leaderboard}
+
+\begin{reqtable}
+    Description        & The User Score Leaderboard should display the scores
+                        of all users in descending order
+                        (i.e highest score first).
+                        
+                        The Leaderboard should be visible to all users.
+
+                        When a registered user views the Leaderboard, their
+                        position on the Leaderboard should be clearly highlighted
+                        so its easy to find.
+
+                        There should also be a shortcut that allows that 
+                        allows the user to instantly view their position on 
+                        the Leaderboard.
+                        \\
+    \hline
+    Priority           & Low\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:user-score}\\
+    \hline
+    Expected results   & Leaderboard displays all user scores.
+    
+                        All user scores displayed in descending order\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [Multiple users are tied with the same points:]
+                                They all get the same position number, and the
+                                next lowest ranked user is given a position equal
+                                to the number of users with a higher score,
+                                plus one.
+                                e.g. if there are 4 users tied at 3rd, the next
+                                user will 8th.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
 
 
 \requirement{User Ratings}
@@ -844,21 +887,164 @@ system, and it will remain fully operational with or without them.
     \hline
     Exception Handling & \\
     \hline
-    \ref{}
 \end{reqtable}
 
 
 \requirement{Item Catalogue}
 \label{fr:item-catalogue}
 
+\begin{reqtable}
+    Description        & The item catalogue is an index of all active listings.
+                        Any user should be able to explore the item catalogue.
+                        They should also be able to to apply all of the search
+                        filters and sorting options mentioned in 
+                        \autoref{fr:filters} and \autoref{fr:sorting}\\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting}
+    \autoref{fr:filters} (Search Filters),
+    \autoref{fr:sorting} (Sorting Search Results)
+    \\
+    \hline
+    Expected results   & Item Catalogue available to all users.
+    
+                        Users able to implement filters and sorting as
+                        described.\\
+    \hline
+    Exception Handling & \\
+    \hline
+\end{reqtable}
+
+
 \requirement{Search}
 \label{fr:search}
+
+\begin{reqtable}
+    Description        & Users will be able to search for items in the complete
+                        catalogue of items, based on the item’s name.
+
+                        Sorting and filtering of search results will be done as
+                        described in
+                        \autoref{fr:filters} and \autoref{fr:sorting}.
+
+                       After performing a search, the user will be shown a page
+                       containing all the Active item listings matching the
+                       search. Each item displayed will show a preview of the
+                       full listing, with the item’s primary photo, name and
+                       description, as well as the distance the item is from
+                       the user. Upon selecting a result, the user will be
+                       taken to the listing’s specific page.\\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting}
+    \autoref{fr:filters},
+    \autoref{fr:sorting},
+    \\
+    \hline
+    Expected results   & User can perform search.
+
+                        All filters and sorting options function as specified.
+                        
+                        All results displayed as specified.\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [User provides empty search query:] return 
+                                entire item catalogue.
+                            \item [Search query returns no results:] notify 
+                                user that no results were found.
+                        \end{description}
+    \\
+    \hline
+\end{reqtable}
+
 
 \requirement{Sorting Search Results}
 \label{fr:sorting}
 
+\begin{reqtable}
+    Description        & 
+                        By default, all search results will be sorted by
+                        distance from the Source (location of the listing),
+                        to the Destination (location of the user performing the
+                        search) of the listed item where:
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item The source location is always the collection
+                                postcode stated on the item's Listing page.
+                            \item The destination is, by default, the postcode
+                                provided during registration.
+                        \end{itemize}
+                        
+                        The user will be given option to change the destination
+                        to the current GPS location of their device.
+
+                        Alternatively, users can sort search results by Expiry
+                        date. This can be in either ascending  order
+                        (i.e. soonest date first), or descending
+                        order (i.e. furthest date first).
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+                        \autoref{fr:item-catalogue}\\
+    \hline
+    Expected results   & 
+                        User can sort results by criteria mentioned above.
+
+                        All results are correctly sorted.
+                        \\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [User unable to sort results:] report error to webmaster
+                            \item [Results not sorted as expected:] report error to webmaster
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
 \requirement{Search Filters}
 \label{fr:filters}
+
+\begin{reqtable}
+    Description        & 
+                        Users should be able to filter results by:
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item Dietary Requirements
+                            \item Allergen
+                        \end{itemize}
+                        
+                        Additionally the user should have the option to filter
+                        out “Active” but committed items
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:dietary-requirements},
+    \autoref{fr:allergy-information}
+    \autoref{fr:item-catalogue}\\
+    \hline
+    Expected results   & User able to filter results by criteria mentioned above\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [User unable to filter results:] report error
+                                to webmaster.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
 
 \requirement{User’s Past \& Current Listings Page}
 \label{fr:user-listing-page}
@@ -869,19 +1055,29 @@ system, and it will remain fully operational with or without them.
                         
                         \begin{itemize}
                             \itemsep-1em
-                            \item view thei1
-                            \item 
-                            \item 
+                            \item view their current listings (all active listings)
+                            \item view their listing history (all inactive listings)
+                            \item add new listings
+                            \item edit current listings
                         \end{itemize}
                         \\
     \hline
-    Priority           & \\
+    Priority           & High\\
     \hline
-    Dependencies       & \\
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:listing},
+    \autoref{fr:add-listing} (Add Listing),
+    \autoref{fr:edit-listing} (Edit Listing)\\
     \hline
-    Expected results   & \\
+    Expected results   & User can perform all actions listed above.\\
     \hline
-    Exception Handling & \\
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [User unable to perform any of the actions:]
+                                report error to webmaster.
+                        \end{description}
+                        \\
     \hline
 \end{reqtable}
 
@@ -889,20 +1085,236 @@ system, and it will remain fully operational with or without them.
 \requirement{Add Listing}
 \label{fr:add-listing}
 
+\begin{reqtable}
+    Description        & Any logged in user should be able to add a new
+                        listing to the item catalogue. For a listing to
+                        be successfully added to the catalogue, It must conform
+                        to the specification of a valid listing item
+                        (see \autoref{fr:listing} ).
+
+                        All newly added listings will be given an “Active” status.\\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:listing}
+    \autoref{fr:item-catalogue}\\
+    \hline
+    Expected results   & User able to add listing.
+    
+                        Listing has “Active” status \\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [User unable to add listing:] Report error to webmaster.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
 \requirement{Edit Listing}
 \label{fr:edit-listing}
+
+\begin{reqtable}
+    Description        & 
+                        All registered users should be able to edit any of their
+                        active listings.
+                        Users should be able to modify the following attributes:
+
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item Listing Title
+                            \item Listing Description
+                            \item Expiry Date
+                            \item Dietary Requirements and Allergy Information
+                            \item Collection Postcode
+                            \item Listing photo(s)
+                        \end{itemize}
+
+                        Additionally the user should be able to set the listing
+                        to “Inactive”. As described by
+                        \autoref{fr:inactive-listing}, once
+                        set to “Inactive”, the user cannot revert the status to
+                        “Active”, and will be unable to perform any of the
+                        modifications listed above.\\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:listing}
+    \\
+    \hline
+    Expected results   & User able to edit listing.
+
+                        Changes successfully saved after edit complete.\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [Edited field(s) don't meet specifiation standards:]
+                                prevent the edit, notify user of invalid fields.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
 
 \requirement{Commit to collect}
 \label{fr:commit}
 
+\begin{reqtable}
+    Description        & 
+                        A user should be able commit to collecting an item that
+                        has an “Active” status (given that no other has
+                        committed to that item).
+                        
+                        Once that user has committed
+                        to collecting the item it will be added to their orders
+                        page (see \autoref{fr:orders}), and a line of communication
+                        should be opened between the user and publisher via the
+                        messaging facility (see \autoref{fr:messaging})
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:listing},
+    \autoref{fr:messaging} (Messaging),
+    \autoref{fr:orders}\\
+    \hline
+    Expected results   & User able to commit to active item.
+
+                        User cannot commit inactive item.\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [Another user has already committed to the item:]
+                                 Any users who subsequently view the shouldn’t
+                                 should not have the option to commit to the
+                                 same item.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
 \requirement{Messaging}
 \label{fr:messaging}
+
+\begin{reqtable}
+    Description        & 
+                        All registered users should have access to a messaging
+                        inbox, which will display all their existing messaging
+                        threads. All message threads will be sorted by the time
+                        of the last recieved/sent message of that particular thread.
+
+                        Each thread should be unique to a listing item and will
+                        be initiated whenever a user commits to collect an item.
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:listing},
+    \autoref{fr:commit}\\
+    \hline
+    Expected results   & Messaging facility operates as specified in the
+                        description above.\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [Messaging facility fails to meet specification criteria:]
+                                report error to webmaster.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
 
 \requirement{Orders Page}
 \label{fr:orders}
 
+\begin{reqtable}
+    Description        & 
+                        All registered users should have access to an orders
+                        page. This will contain:
+
+                        \begin{description}
+                            \itemsep0em
+                            \item [Current orders:] Listings which the user has committed
+                                to buying and currently have an “Active” status.
+                                A listing should be added to the user’s current orders
+                                once he commits to collecting the item.
+                            \item [Order history:] Listings which the user once committed
+                                to buying, and now have an “Inactive” status. The user
+                                should be able to rate the publisher once the listing is
+                                made inactive.
+                        \end{description}
+
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:listing}\\
+    \hline
+    Expected results   & User can access orders page.
+
+                        Orders correctly categorised in "Current" and "History".
+                        \\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [User has no orders:] Orders Page will be empty.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
 \requirement{Watch-list}
 \label{fr:watchlist}
+
+\begin{reqtable}
+    Description        & All users should have a watch-list, to which they can
+                        add any item from the catalogue
+                        which they are interested in but do not yet wish to
+                        commit to receive.
+
+                        Any item added to the watchlist should be removed if:
+
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item The user commits to the item.
+                            \item The item becomes inactive
+                        \end{itemize}
+                        
+                        The user should also have the option to manually remove
+                        an item from the watchlist.
+                        \\
+    \hline
+    Priority           & Low\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting}
+                        \autoref{fr:item-catalogue}\\
+    \hline
+    Expected results   & Users can add and remove items from watch-list\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [Watch-list not functioning as specified:]
+                                report errot to webmaster.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
 
 \subsection{Non-Functional Requirements}
 \begin{itemize}
