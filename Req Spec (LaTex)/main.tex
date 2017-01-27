@@ -53,14 +53,17 @@ The main sections of this document are:
 	\item \textbf{Project Scope:} Here we give an overview about what our system will (and won't) do.
 	\item \textbf{Domain analysis:} An analysis of similar products already in place.
 	\item \textbf{Proposed Deliverables:} How we plan to undergo the project.
-	\item \textbf{Identified, Risks, Assumptions, Dependencies and Constraints:} A discussion of things we must consider and keep in mind as we move forward.
+	\item \textbf{Identified, Risks, Assumptions, Dependencies and Constraints:}
+        A discussion of things we must consider and keep in mind as we move forward.
 	\item \textbf{Solution Requirements:} Planned functional and non-functional requirements.
 	\item \textbf{Development Approach:} A brief overview of the technologies we plan to use in order to develop the product.
 \end{itemize}
 
 
 \section{Project Scope}
-The aim is to become a go-to everyday service that people will use `by default' without even thinking about wasting food. This means users will be able to easilly list items with a minimal amount of effort.\\
+The aim is to become a go-to everyday service that people will use `by default'
+without even thinking about wasting food. This means users will be able to
+easily list items with a minimal amount of effort.\\
 There will be a simple points-based system and a ranking system in order to
 encourage sharing of food and to reassure other users that the quality of food is
 likely to be good. When some food has been successfully exchanged both
@@ -78,22 +81,69 @@ We wish to avoid any sort of `social media' elements
 \section{Domain Analysis}
 
 The domain of our project encompasses online marketplaces and sites for purchasing food.
-There are a number of sites which already occupy these domains, the design of which we will draw from in designing our own site.
+There are a number of sites which already occupy these domains,
+the design of which we will draw from in designing our own site.
 
 \begin{itemize}
 
-    \item eBay: An online marketplace through which users can both list and purchase almost anything. When listing an item, users must provide at least one photo and information such as title, condition and type, as well as an optional description and additional photos. I think is important as it forces users to provide enough information for buyers, and discourages fake listings. Users search for items by name, and can sort results in a number of ways, which is very useful, however it lacks more options for filtering results. Perhaps the best feature of the site is that every listing displays the seller’s username, along with a score and the percentage of all the feedback the user has received which is positive. This allows buyers to gauge how trustworthy the seller is, and is a feature which we feel will work well in our system also.
+    \item eBay: An online marketplace through which users can both list and
+        purchase almost anything. When listing an item, users must provide at
+        least one photo and information such as title, condition and type, as
+        well as an optional description and additional photos.
+
+        This is important as it forces users to provide enough information
+        for buyers, and discourages fake listings.
+        Users search for items by name, and can sort results in a number of
+        ways, which is very useful, however it lacks more options for filtering
+        results.
+        
+        Perhaps the best feature of the site is that every listing displays
+        the seller’s username, along with a score and the percentage of all
+        the feedback the user has received which is positive.
+        This allows buyers to gauge how trustworthy the seller is, and is a
+        feature which we feel will work well in our system also.
 
 
-    \item foodsharing.de: A food sharing sharing site, currently only available in Germany. It reduces food waste by allowing users to list food they wish to give away, and then arrange a time and place for the volunteer “Lebensmittelretter Innen” to collect the food and deliver it to whoever wanted it. This method removes the risk of potentially dangerous or illegal substances being exchanged, as all items are checked by the trusted volunteers. However it introduces the problem of having to have a large number of volunteers willing to give up their time. The site itself is quite well designed, but navigation is sometimes difficult. Every item of food listed has its own page, but I found these pages to be lacking, listing only a very brief description most of the time. The listings are also all anonymous and there is no system of rating users, as in eBay for example, which would allow users to check how trustworthy the user providing the food is.
+    \item foodsharing.de: A food sharing sharing site, currently only available
+        in Germany.
+        It reduces food waste by allowing users to list food they wish to give
+        away, and then arrange a time and place for the volunteer
+        “Lebensmittelretter Innen” to collect the food and deliver it to
+        whoever wanted it.
+        This method removes the risk of potentially dangerous or illegal
+        substances being exchanged, as all items are checked by the trusted
+        volunteers.
+        
+        However it introduces the problem of having to have a large number of
+        volunteers willing to give up their time. The site itself is quite well
+        designed, but navigation is sometimes difficult.
+
+        Every item of food listed has its own page, but we found these pages to
+        be lacking, listing only a very brief description most of the time.
+        The listings are also all anonymous and there is no system of rating
+        users, as in eBay for example, which would allow users to check how
+        trustworthy the user providing the food is.
     
-    \item Olio: A mobile app with a strong UK presence. Users can share food by manually collecting/delivering it, or through "Drop Boxes" - local stores or cafés where users can drop off food they'd like to be shared. However the app has received many negative reviews from users frustrated that there is no food they can get near them, which is an issue our system is also likely to face, particularly soon after launch.
+    \item Olio: A mobile app with a strong UK presence.
+        Users can share food by manually collecting/delivering it, or through
+        "Drop Boxes" - local stores or cafés where users can drop off food
+        they'd like to be shared.
+        
+        However the app has received many negative reviews from users frustrated
+        that there is no food they can get near them, which is an issue our
+        system is also likely to face, particularly soon after launch.
 
 \end{itemize}
 
-An interesting feature of the 2 existing food sharing apps listed above is that their search functions and catalogs are strongly based on location. They place a lot of emphasis on an interactive map to find items, contrary to eBay’s method of having the user search for items by name, and then allowing the user to filter results, indicating perhaps that users are more concerned about how far they have to travel for food, rather than what that food is.
+An interesting feature of the 2 existing food sharing apps listed above is that
+their search functions and catalogs are strongly based on location.
+They place a lot of emphasis on an interactive map to find items, contrary to
+eBay’s method of having the user search for items by name, and then allowing
+the user to filter results, indicating perhaps that users are more concerned
+about how far they have to travel for food, rather than what that food is.
 
-We feel our system should combine both of these functions, with a search bar and filtering methods like eBay, but with results sorted by distance from the user.
+We feel our system should combine both of these functions, with a search bar
+and filtering methods like eBay, but with results sorted by distance from the user.
 
 \pagebreak
 
@@ -103,78 +153,149 @@ We feel our system should combine both of these functions, with a search bar and
 Though all members shall inevitably contribute to both sides of the task,
 the major components of the project have been split as follows:
 
-\begin{table}
+\begin{table}[ht!]
     \centering
     \begin{tabular}{|l|l|l|}
         \hline
-        \textbf{Task} & \textbf{Subtask} & \textbf{Team Member}\\
+        \textbf{Task}                 & \textbf{Subtask}                         & \textbf{Team Member} \\
         \hline
-        \multirow{4}{3.5cm}{Frontend} & Website Layout Wireframe & Luke\\
+        \multirow{4}{3.5cm}{Frontend} & Website Layout Wireframe                 & Luke                 \\
         \cline{2-3}
-        & Logo and Branding Design & Clare\\
+                                      & Logo and Branding Design                 & Clare                \\
         \cline{2-3}
-        & HTML/CSS/Bootstrap & Ucizi\\
+                                      & HTML/CSS/Bootstrap                       & Ucizi                \\
         \cline{2-3}
-        & Dynamic Features (Javascript and JQuery) & Ucizi\\
+                                      & Dynamic Features (Javascript and JQuery) & Ucizi                \\
         \hline
-        \multirow{7}{3.5cm}{Backend} &  User Account --- Registration and Login & Abdul\\
+        \multirow{7}{3.5cm}{Backend}  & User Account --- Registration and Login  & Abdul                \\
         \cline{2-3}
-        & Search & Soumya\\
+                                      & Search                                   & Soumya               \\
         \cline{2-3}
-        & Listings/Posts & Soumya\\
+                                      & Listings/Posts                           & Soumya               \\
         \cline{2-3}
-        & Messaging & Abdul\\
+                                      & Messaging                                & Abdul                \\
         \cline{2-3}
-        & Comments & Soumya\\
+                                      & Comments                                 & Soumya               \\
         \cline{2-3}
-        & User Ratings and Scores & Abdul\\
+                                      & User Ratings and Scores                  & Abdul                \\
         \cline{2-3}
-        & Database Design and Implementation & Abdul \& Soumya\\
+                                      & Database Design and Implementation       & Abdul \& Soumya      \\
         \hline
     \end{tabular}
-    \label{tab:<+label+>}
-\end{table}<++>
-\subsection{Milestones and Deadlines}
-\includegraphics[width=0.7\textwidth]{images/plan.png}
+    \label{tab:tasks}
+\end{table}
 \pagebreak
+\subsection{Milestones and Deadlines}
 
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/plan.png}
+    \caption{Project Gantt Chart}
+    \label{fig:gantt-chart}
+\end{figure}
+
+\pagebreak
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        Date & Task\\
+        \hline
+        \multirow{2}{2cm}{30/10/16} & Database Design\\
+        & Initial UI Mockups\\
+        \hline
+        \multirow{2}{2cm}{15/11/16} & User Account Management\\
+        & Website Template\\
+        \hline
+        \multirow{4}{2cm}{16/12/16} & Search Functions\\
+        & Final Mockups\\
+        & Full Database Implementation\\
+        & Main and auxiliary pages\\
+        \hline
+        \multirow{2}{2cm}{31/01/17} & Post Submission\\
+        & Search Page\\
+        \hline
+        \multirow{2}{2cm}{24/02/17} & Messaging\\
+        & Listing Pages\\
+        \hline
+        \multirow{2}{2cm}{16/03/17} & Comments\\
+        & User Pages\\
+        \hline
+        \multirow{2}{2cm}{31/03/17} & User Ratings\\
+        & JS Effects\\
+        \hline
+
+    \end{tabular}
+    \caption{Hard Deadlines}
+    \label{tab:deadlines}
+\end{table}
+\pagebreak
 \section{Identified Risks, Assumptions, Dependencies and Constraints}
 \subsection{Risks}
 \begin{itemize}
 
-    \item It is possible that users may exploit the rating system, through the use of fake reviews and ratings, to boost their score and rating, and therefore trick other users into believing they are trustworthy when this is not the case.
+    \item It is possible that users may exploit the rating system,
+        through the use of fake reviews and ratings,
+        to boost their score and rating, and therefore trick
+        other users into believing they are trustworthy when this is not the case.
 
-    \item Users may exploit the system to list and distribute non-food items, and particularly nefarious users may even use it to distribute illegal substances.
+    \item Users may exploit the system to list and distribute non-food items,
+        and particularly nefarious users may even use it to distribute illegal substances.
     
-    \item Users may (knowingly or otherwise) distribute food which is dangerous to consume, such as if it has gone off.
+    \item Users may (knowingly or otherwise) distribute food which is dangerous
+        to consume, such as if it has gone off.
     
-    \item Users may lure others, under the guise of giving them food, into potentially perilous predicaments.
+    \item Users may lure others, under the guise of giving them food, into
+        potentially perilous predicaments.
     
-    \item If the system’s sole database goes down the whole site will be useless, since all the data is stored in a single place.
+    \item If the system’s sole database goes down the whole site will be
+        useless, since all the data is stored in a single place.
     
-    \item It is possible that the system, particularly its databases, could be hacked. This could lead to user’s private data, particularly sensitive information such as address and email address, being leaked and abused.
+    \item It is possible that the system, particularly its databases, could be hacked.
+        This could lead to user’s private data, particularly sensitive
+        information such as address and email address, being leaked and abused.
     
     \end{itemize}
 
-Should any of these risks occur, or should anything else unfortunate occur to anyone, but particularly minors, through use of the system, we may be held accountable. This in itself is also a risk. To mitigate this, we will ensure that we mitigate all other risks as much as possible, and force users to sign agreements waiving all responsibility from us. The ways we mitigate these risks are detailed in Functional Requirements.
+Should any of these risks occur, or should anything else unfortunate occur
+to anyone, but particularly minors, through use of the system,
+we may be held accountable.
+This in itself is also a risk.
+To mitigate this, we will ensure that we mitigate all other risks as much
+as possible, and force users to sign agreements waiving all responsibility from us.
+The ways we mitigate these risks are detailed in Functional Requirements.
 
 \subsection{Assumptions \& Dependencies}
 \begin{itemize}
 
-    \item We assume Google maps will be able to find the vast majority of addresses entered by the user. This location functionality is thus completely dependent on the Google Maps API.
+    \item We assume Google maps will be able to find the vast majority of
+        addresses entered by the user.
+        This location functionality is thus completely dependent on the Google Maps API.
 
-    \item We assume that when a user searches for something they will find a decent number of results. This is dependent on enough users listing items on the system, otherwise, the system will be useless to people wanting to receive food.
+    \item We assume that when a user searches for something they will find a
+        decent number of results.
+        This is dependent on enough users listing items on the system,
+        otherwise, the system will be useless to people wanting to receive food.
 
 \end{itemize}
 
 \subsection{Constraints}
 \begin{itemize}
 
-\item We need to ensure that no user’s private information, including address and email address, is unnecessarily stored or made public, in order to avoid putting their security at risk. In particular, we need ensure the privacy of children under 18.
+\item We need to ensure that no user’s private information, including address
+    and email address, is unnecessarily stored or made public, in order to
+    avoid putting their security at risk.
+    %In particular, we need ensure the privacy of children under 18.
 
-\item In order to allow it to run quickly even on devices with poor internet, the system will be limited in the number of performance-detrimental luxuries it can have.
+\item Due to the risk involved in regarding strangers meeting to collect items,
+    we will restrict our app to users who are 18 years and older
 
-\item Due to a lack of time and relative lack of experience, the system will likely not be as attractive or efficient as it would be ideally.
+\item In order to allow it to run quickly even on devices with poor internet,
+    the system will be limited in the
+    number of performance-detrimental luxuries it can have.
+
+\item Due to a lack of time and relative lack of experience,
+    the system will likely not be as attractive or efficient as it would be ideally.
 
 \end{itemize}
 
