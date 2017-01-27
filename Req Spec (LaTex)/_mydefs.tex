@@ -1,30 +1,35 @@
 %custom Requirements titles
 \usepackage{titlesec}
-%\usepackage{hyperref}
-%Funtional
+\usepackage{hyperref}
+%declare title class
 \titleclass{\requirement}{straight}[\subsubsection]
+
+%setup title counter
 \newcounter{requirement}
+\setcounter{secnumdepth}{4}
+
+%define title format
 \titleformat{\requirement}
   {\color{color1}\sffamily\bfseries}{}{0em}
-  {\refstepcounter{requirement}FR \therequirement:~}
+  {FR \therequirement:~}
 \titlespacing*{\requirement}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
-\setcounter{tocdepth}{4}
+%define autoref format
+\newcommand{\requirementautorefname}{FR}
+
+%make so requirements don't appear in toc
 \makeatletter
   \def\toclevel@requirement{5}
   \def\l@requirement{\@dottedtocline{5}{3.8em}{3.2em}}
 \makeatother
-%Non-Functional
-\titleclass{\qrequirement}{straight}[\subsubsection]
-\newcounter{qrequirement}
-\titleformat{\qrequirement}
-  {\color{color1}\sffamily\bfseries}{}{0em}
-  {\refstepcounter{qrequirement}QR \theqrequirement:~}
-\titlespacing*{\qrequirement}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-
-\setcounter{tocdepth}{4}
-\makeatletter
-  \def\toclevel@qrequirement{5}
-  \def\l@qrequirement{\@dottedtocline{5}{3.8em}{3.2em}}
-\makeatother
 %%%
+
+
+%requirements table enviromnent
+\newenvironment{reqtable}
+{
+    \medskip
+    \begin{tabular}{|p{3.5cm}|p{11cm}|}
+    \hline
+}
+{\end{tabular}}
