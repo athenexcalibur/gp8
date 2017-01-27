@@ -1,0 +1,1007 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\input{_defs}
+\input{_mydefs}
+
+\usepackage{lipsum}
+
+%%%%%%%%%%%%%%%
+% Title Page
+\title{Cupboard:\\Requirements Specification}
+\author{Team 8:\\Clare Doran, Abdul Ghani, Ucizi Mafeni, Luke Needham, Soumya Singh}
+\date{\today}
+\summary{
+A web app built with the intention of helping reduce food waste
+}
+%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\clearpage
+%glossary
+%define "active" listing
+%define listing
+%define immutable
+%define trade
+\section{Introduction}
+7 million tonnes of food goes to waste in the UK, more than half of which is 
+edible (https://www.lovefoodhatewaste.com/node/2472).
+Meanwhile,  many people throughout the country struggle to put together enough 
+money for food, with food banks becoming busier every year
+(https://www.trusselltrust.org/2015/11/18/uk-foodbank-use-still-at-record-levels-as-hunger-remains-major-concern-for-low-income-families/)
+
+Cupboard aims to be a system that allows users to painlessly find and share food
+that would otherwise go to waste. It should be quick and easy to use as it is
+too easy to just throw away food. 
+It will also allow users to arrange collection in a manner that does not force
+them to disclose their house address or any other details they wish to keep
+private.
+
+
+\section{Project Scope}
+Cupboard will facilitate the sharing of food between users. It will do so in a
+manner that is as simple as possible, as we want to discourage people from
+taking the easy route of simply binning food they wont eat.
+There will be a simple points-based system and a ranking system in order to
+encourage sharing of food and reassure other users that the quality of food is
+likely to be good. When some food has been ‘successfully exchanged’ both
+parties will get points and will be able to rate each other. If users wish to
+participate, there will be a simple public leaderboard.
+Users can set their dietary requirements (allergies, religious etc.) and have
+results automatically filtered. 
+There will be a messaging system (in order to arrange collection) and a comments
+system (in order to view interest in the item and ask questions).
+
+
+\section{Domain Analysis}
+
+The domain of our project encompasses online marketplaces and sites for purchasing food.
+There are a number of sites which already occupy these domains, the design of which we will draw from in designing our own site.
+
+\begin{itemize}
+
+    \item eBay: An online marketplace through which users can both list and purchase almost anything. When listing an item, users must provide at least one photo and information such as title, condition and type, as well as an optional description and additional photos. I think is important as it forces users to provide enough information for buyers, and discourages fake listings. Users search for items by name, and can sort results in a number of ways, which is very useful, however it lacks more options for filtering results. Perhaps the best feature of the site is that every listing displays the seller’s username, along with a score and the percentage of all the feedback the user has received which is positive. This allows buyers to gauge how trustworthy the seller is, and is a feature which we feel will work well in our system also.
+
+
+    \item foodsharing.de: A food sharing sharing site, currently only available in Germany. It reduces food waste by allowing users to list food they wish to give away, and then arrange a time and place for the volunteer “Lebensmittelretter Innen” to collect the food and deliver it to whoever wanted it. This method removes the risk of potentially dangerous or illegal substances being exchanged, as all items are checked by the trusted volunteers. However it introduces the problem of having to have a large number of volunteers willing to give up their time. The site itself is quite well designed, but navigation is sometimes difficult. Every item of food listed has its own page, but I found these pages to be lacking, listing only a very brief description most of the time. The listings are also all anonymous and there is no system of rating users, as in eBay for example, which would allow users to check how trustworthy the user providing the food is.
+    
+    \item Olio: A mobile app with a strong UK presence. Users can share food by manually collecting/delivering it, or through "Drop Boxes" - local stores or cafés where users can drop off food they'd like to be shared. However the app has received many negative reviews from users frustrated that there is no food they can get near them, which is an issue our system is also likely to face, particularly soon after launch.
+
+\end{itemize}
+
+An interesting feature of the 2 existing food sharing apps listed above is that their search functions and catalogs are strongly based on location. They place a lot of emphasis on an interactive map to find items, contrary to eBay’s method of having the user search for items by name, and then allowing the user to filter results, indicating perhaps that users are more concerned about how far they have to travel for food, rather than what that food is.
+
+We feel our system should combine both of these functions, with a search bar and filtering methods like eBay, but with results sorted by distance from the user.
+
+\section{Proposed Deliverables}
+(Gantt Chart Goes here)
+
+\section{Identified Risks, Assumptions, Dependencies and Constraints}
+\subsection{Risks}
+\begin{itemize}
+
+    \item It is possible that users may exploit the rating system, through the use of fake reviews and ratings, to boost their score and rating, and therefore trick other users into believing they are trustworthy when this is not the case.
+
+    \item Users may exploit the system to list and distribute non-food items, and particularly nefarious users may even use it to distribute illegal substances.
+    
+    \item Users may (knowingly or otherwise) distribute food which is dangerous to consume, such as if it has gone off.
+    
+    \item Users may lure others, under the guise of giving them food, into potentially perilous predicaments.
+    
+    \item If the system’s sole database goes down the whole site will be useless, since all the data is stored in a single place.
+    
+    \item It is possible that the system, particularly its databases, could be hacked. This could lead to user’s private data, particularly sensitive information such as address and email address, being leaked and abused.
+    
+    \end{itemize}
+
+Should any of these risks occur, or should anything else unfortunate occur to anyone, but particularly minors, through use of the system, we may be held accountable. This in itself is also a risk. To mitigate this, we will ensure that we mitigate all other risks as much as possible, and force users to sign agreements waiving all responsibility from us. The ways we mitigate these risks are detailed in Functional Requirements.
+
+\subsection{Assumptions \& Dependencies}
+\begin{itemize}
+
+    \item We assume Google maps will be able to find the vast majority of addresses entered by the user. This location functionality is thus completely dependent on the Google Maps API.
+
+    \item We assume that when a user searches for something they will find a decent number of results. This is dependent on enough users listing items on the system, otherwise, the system will be useless to people wanting to receive food.
+
+\end{itemize}
+
+\subsection{Constraints}
+\begin{itemize}
+
+\item We need to ensure that no user’s private information, including address and email address, is unnecessarily stored or made public, in order to avoid putting their security at risk. In particular, we need ensure the privacy of children under 18.
+
+\item In order to allow it to run quickly even on devices with poor internet, the system will be limited in the number of performance-detrimental luxuries it can have.
+
+\item Due to a lack of time and relative lack of experience, the system will likely not be as attractive or efficient as it would be ideally.
+
+\end{itemize}
+
+\section{Solution Requirements}
+\subsection{Functional Requirements}
+%move section of speech to development approach
+N.B. Due to the highly time-sensitive nature of the project, any low priority
+requirements (and thier linked dependencies) may not be implemented.
+As such, all low priority requirements are inherently unessential to the
+system, and it will remain fully operational with or without them.
+
+\requirement{"About Us" page}
+\label{fr:about-us}
+
+\begin{reqtable}
+    Description        & All users should have access to a page that contains 
+                        information about the web app. This includes:
+                        
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item A short description about the purpose of the
+                                app
+                            \item Contact information
+                            \item Terms and Conditions of use
+                            \end{itemize}
+                        \\
+    \hline
+    Priority           & Medium\\
+    \hline
+    Dependencies       & None\\
+    \hline
+    Expected results   & User able to access the page.
+                        
+                        Page contains all the information stated in the
+                        description.\\
+    \hline
+    Exception Handling & \\
+    \hline
+\end{reqtable}
+
+
+\requirement{Error-Reporting System}
+\label{fr:error-reporting}
+
+\begin{reqtable}
+    Description        & Users should be able to report any errors they notice
+                        to the webmaster.
+                        Each error report should have:
+
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item A title, which is a brief description of the
+                                error (max. 50 chars)
+                            \item A more detailed description of the error
+                                (max. 500 chars)
+                        \end{itemize}
+                        \\
+    \hline
+    Priority           & Medium\\
+    \hline
+    Dependencies       & \autoref{fr:about-us}\\
+    \hline
+    Expected results   & User can successfully send error report\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [User cannot send error report:] use email on
+                                "About us" page to contact webmaster
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{User Feedback System}
+\label{fr:user-feedback}
+
+\begin{reqtable}
+    Description        & Users should be able to provide feedback regarding
+                        their experience using the web app to the webmaster.
+                        This should be done in the form of a feedback form,
+                        which should have the following fields:
+
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item A title, which is a brief description of the
+                                feedback report(max. 50 chars)
+                            \item The main feedback report (max. 1000 chars)
+                        \end{itemize}
+                        \\
+
+
+    \hline
+    Priority           & Low\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting} (Error Reporting)\\
+    \hline
+    Expected results   & User's can successfully send feedback report\\
+    \hline
+    Exception Handling & 
+                        
+                        \begin{description}
+                            \itemsep0em
+                            \item [User unable to send feedback form]: report 
+                                error to webmaster
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{User sign up}
+\label{fr:user-sign-up}
+
+\begin{reqtable}
+    Description        & The User should be able to create an account by 
+                        following the registration process.
+
+                        Registration will involve:
+
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item Getting the user registration details
+                                (see \autoref{fr:registration-details}).
+                            \item Getting the user to accept that they are at 
+                                least 18 years old.
+                            \item Getting the user to agree to the Terms and
+                                Conditions of use (see \autoref{fr:about-us}).
+                        \end{itemize}
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:registration-details} (Get user registration details),
+    \autoref{fr:about-us} (About us page)
+                        \\
+    \hline
+    Expected results   & Following account creation, the user will be able to 
+                        login using their provided username and password\\
+    \hline
+    Exception Handling & 
+                        
+                        \begin{description}
+                            \itemsep0em
+                            \item [User unable to create account:] report error
+                                to webmaster
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+\requirement{Get User Registration Details}
+\label{fr:registration-details}
+
+\begin{reqtable}
+    Description        & During sign-up, the user should provide the following
+                        details in order to successfully complete the sign-up
+                        process:
+
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item username (must be unique)
+                            \item email address
+                            \item password
+                            \item physical address
+                            \item post code (must be valid)
+                        \end{itemize}
+                        
+                        In addition, the user should also be given the option
+                        to fill in their Dietary Requirements and Allergy 
+                        Information. However, it is not mandatory to fill in 
+                        these details in order to complete registration.
+
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:validation} (Validate User Details), 
+    \autoref{fr:dietary-requirements} (Dietary Requirements), 
+    \autoref{fr:allergy-information} (Allergy Information)\\
+    \hline
+    Expected results   & User inputs all valid fields and proceeds to complete
+                        registration\\
+    \hline
+    Exception Handling & 
+                        
+                        \begin{description}
+                            \itemsep0em
+                            \item [User unable to fill in registration details:]
+                                report error to webmaster
+                            \item [User inputs invalid details:] should be
+                                validated as described in \autoref{fr:validation}
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+\requirement{Validate Registration Details}
+\label{fr:validation}
+
+\begin{reqtable}
+    Description        & Information in the registration form should be
+                        validated as follows:
+                        
+                        username: checked against database to see if its unique
+
+                        email-address: adheres to general email structure 
+                        (<someuser>@<somehost>.<com/net\ldots>)
+
+                        password: minimum length of 7 characters, alphanumeric,
+                        contains one symbol from valid symbol list
+                        (refer to glossary)
+
+                        postcode: is actual valid postcode 
+                        (check in UK postcode directory)
+
+                        If there exists an invalid input on submission,
+                        the form must be rejected and the user must be
+                        notified of their error
+                        (i.e highlight incorrect field and place error message
+                        next to it)
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting}\\
+    \hline
+    Expected results   & Validation system correctly highlights any invalid
+                        fields\\
+    \hline
+    Exception Handling & 
+                        
+                        \begin{description}
+                            \itemsep0em
+                            \item [Validation system doesn't meet specified 
+                                requirements:]
+                                report error to webmaster
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+\requirement{Account Activation}
+\label{fr:activation}
+
+\begin{reqtable}
+    Description        & 
+                        Once the user has provided the registration details,
+                        an email with an account activation link
+                        should be sent to the provided email address. The user
+                        should then be able to follow the activation link in
+                        order to activate their account.\\
+    \hline
+    Priority           & Low \\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting}\\
+    \hline
+    Expected results   & After the user follows the activation link,
+                        they should be able to login to their account using
+                        the login details they provided during registration\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [Incorrect email address provided:]
+                                the user should have the
+                                option to correct the provided email address.
+                            \item [Activation link doesn't work:] the user
+                                should have the option to request another
+                                activation link.
+                            \item [Activation system doesn't work:] report
+                                error to webmaster
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+\requirement{Password Reset Facility}
+\label{fr:password-reset}
+
+\begin{reqtable}
+    Description        & If a registered user forgets their password, they
+                        should be able to request a password reset link.
+                        
+                        They should provide a valid email address within
+                        the request. If the provided email address is linked
+                        to an account on the system, a password reset link
+                        should be sent to that email.
+
+                        Upon following the password reset link, the user should
+                        be able to set a new password.
+                        \\
+    \hline
+    Priority           & Low\\
+    \hline
+    Dependencies       & \autoref{fr:validation}\\
+    \hline
+    Expected results   & User able to successfully reset password\\
+    \hline
+    Exception Handling & 
+                        
+                        \begin{description}
+                            \itemsep0em
+                            \item [User unable to reset password:] report error
+                                to webmaster.
+                            \item [Email doesn't meet validation
+                                standards set in \autoref{fr:validation}:]
+                                Prevent submission of password reset request.
+                                Notify user that invalid email was entered.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{User Dashboard}
+\label{fr:user-dashboard}
+
+\begin{reqtable}
+    Description        & Following login, all registered users should have
+                        access to a personal
+                        dashboard where they can do the following:
+                        
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item edit their personal details
+                            \item edit their current dietary requirements
+                            \item edit their allergy information
+                            \item view their user score and rating
+                        \end{itemize}
+
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:edit-profile} (Edit Profile),
+    \autoref{fr:dietary-requirements},
+    \autoref{fr:allergy-information},
+    \autoref{fr:user-score} (User Score),
+    \autoref{fr:user-rating} (User Rating)
+    \\
+    \hline
+    Expected results   & User is able to access and edit all personal
+                        information from the dashboard\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [Registered and logged-in user can't access
+                                dashboard:] notify webmaster of error
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{Edit Profile}
+\label{fr:edit-profile}
+
+\begin{reqtable}
+    Description        & A user should be able to change their personal details
+                        this includes:
+
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item their username
+                            \item their email address
+                            \item their password
+                            \item their dietary requirements
+                            \item their allergy information
+                        \end{itemize}
+
+                        All changes to personal details will be validated under
+                        the standards mentioned in
+                        \autoref{fr:validation}.
+
+                        With regards to dietary requirements and allergy
+                        information, users will be able to select whichever
+                        categories listed in \autoref{fr:dietary-requirements}
+                        and \autoref{fr:allergy-information} that personally
+                        apply to them.
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:validation},
+                        \autoref{fr:dietary-requirements},
+                        \autoref{fr:allergy-information}
+                        \\
+    \hline
+    Expected results   & User able to successfully change personal details.\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [User unable to save changes:]
+                                Report error to webmaster
+                            \item [New details don't satisfy validation standards:]
+                                Invalid fields must be highlighted with hint
+                                (as to why field is Invalid) shown
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{Dietary Requirements}
+\label{fr:dietary-requirements}
+
+\begin{reqtable}
+    Description        & Dietary requirements should be split into
+                        the following categories:
+
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item Halal
+                            \item Kosher
+                            \item Vegan
+                            \item Vegetarian
+                        \end{itemize}
+
+                        There should be an additional category group called 
+                        "other" where users can specify a dietary requirement
+                        not listed in the default categories.
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting}\\
+    \hline
+    Expected results   & Dietary requirements meet specified requirements.\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [Dietary requirements don't meet specification:]
+                                report error to webmaster.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{Allergy Information}
+\label{fr:allergy-information}
+
+\begin{reqtable}
+    Description        & Allergies should be split into
+                        the following categories:
+
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item Peanuts
+                            \item Gluten
+                            \item Lactose
+                            \item Soy
+                        \end{itemize}
+
+                        There should be an additional category group called 
+                        "other" where users can specify any allergies not listed
+                        in the default categories.\\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting}\\
+    \hline
+    Expected results   & Allergy information meets specified requirements.\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [Allergy information doesn't meet specification:]
+                                report error to webmaster.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{User Score}
+\label{fr:user-score}
+
+\begin{reqtable}
+    Description        & All Users will have a personal score, starting from 0,
+                        which will increase as the User gains ‘points’. Points
+                        will be earned for every trade, with 10 points being
+                        given to the provider, and 1 point being given to the
+                        receiver.
+                        \\
+    \hline
+    Priority           & Low\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting}\\
+    \hline
+    Expected results   & User is awarded points as specified above.\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [User notices error in current score:]
+                                Report error to webmaster
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{User Ratings}
+\label{fr:user-ratings}
+
+\begin{reqtable}
+    Description        & All Users will have a personal rating from 0 to 5,
+                        calculated as the average of all the ratings received
+                        from other users. Whenever a user either provides or
+                        collects an item, the other user involved in the trade
+                        will rate them out of 5, and this will change their
+                        average rating accordingly.
+
+                        The publisher of the listing will be able to rate the
+                        collector and vice versa once the item is “inactive”. 
+                        For the publisher this should be done from the listing
+                        history page (see \autoref{fr:user-listing-page}).
+                        For the collector, this should be done from the order
+                        history page (see \autoref{fr:orders})\\
+    \hline
+    Priority           & Low\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:user-listing-page} (User Listing Page),
+    \autoref{fr:orders} (Orders Page)\\
+    \hline
+    Expected results   & User has personal rating and it is correct.
+                        
+                        User able to rate other user involved in any trade.\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [User unable to give rating:]
+                                Report error to webmaster
+                            \item [User notices irregularity in current rating:]
+                                Report possible error to webmaster
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{Listing}
+\label{fr:listing}
+
+\begin{reqtable}
+    Description        &
+                        A listing is the core element of the web catalogue.
+                        All listings should contain the following attributes:
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item The name of seller, along with their score
+                                and rating (immutable).
+                            \item A main title describing the item (max. 50 chars)
+                            \item A longer description of the item
+                                (optional; max. 200 chars).
+                            \item The date the listing was added (immutable)
+                            \item An expiry date for the food item.
+                            \item A list of Allergen and Dietary Requirements
+                                the item conforms to
+                                (at least one must be selected).
+                            \item The postcode from which the item can be collected
+                            \item A listing status (i.e. Active/Inactive)
+                            \item 1 primary photo
+                                (Will be displayed with listing in
+                                public catalogue [\autoref{fr:item-catalogue}])
+                            \item Up to 3 secondary photos
+                                (Will displayed within listing page [\autoref{fr:listings-page}])
+                        \end{itemize}
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting}, 
+    \autoref{fr:item-catalogue} (Item Catalogue),
+    \autoref{fr:listing-status} (Listing Status),
+    \autoref{fr:active-listing}(Active Listing),
+    \autoref{fr:inactive-listing} (Inactive Listing),
+    \autoref{fr:listings-page}\\
+    \hline
+    Expected results   & All listing items conform to the structure mentioned
+                        in the description\\
+    \hline
+    Exception Handling & \\
+    \hline
+\end{reqtable}
+
+
+\requirement{Listing Status}
+\label{fr:listing-status}
+
+\begin{reqtable}
+    Description        &
+                        At any particular moment in time, all listings should
+                        have one (and only one) of the following statuses:
+
+                        \begin{description}
+                            \itemsep0em
+                            \item [Active:] The listing item is available for
+                                collection. (see \autoref{fr:active-listing}
+                                For more details)
+                            \item [Inactive:] The listing item is no longer
+                                available for collection
+                                (see \autoref{fr:inactive-listing} for more details.)
+                        \end{description}
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:active-listing},
+    \autoref{fr:inactive-listing}\\
+    \hline
+    Expected results   & All listings are either Active or Inactive\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [Listings don't meet status specification:]
+                                report error to webmaster
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{Active Listing}
+\label{fr:active-listing}
+
+\begin{reqtable}
+    Description        & All active listings are visible on the public catalogue.
+
+                        Any registered user (except the publisher) should be
+                        able to make an offer to commit to collecting a listed
+                        item. Any item should have a maximum of one offer.
+
+                        If another user has already offered to receive an item,
+                        it will remain Active, but will become unavailable, so
+                        no other user will be able to place another offer.
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting}, 
+    \autoref{fr:item-catalogue},
+    \autoref{fr:commit} (Commit to collect)\\
+    \hline
+    Expected results   & All active listings meet the specifications in the
+                        description above.\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [Active Listing doesn't meet specification standards:]
+                                report error to webmaster.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{Inactive Listing}
+\label{fr:inactive-listing}
+
+\begin{reqtable}
+    Description        & 
+                        Inactive Listings are not visible on the public
+                        catalogue. A listing item can only be made inactive by
+                        a by the publisher manually setting it to inactive.
+
+                        Once an listing item is made inactive, It will no
+                        longer be visible on the public catalogue.
+
+                        It will also remain permanently inactive
+                        (i.e. the user cannot reset it to active).
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:item-catalogue}\\
+    \hline
+    Expected results   & All inactive listings meet the specifications in the
+                        description above.\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [Active Listing doesn't meet specification standards:]
+                                report error to webmaster.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{Listings Page}
+\label{fr:listings-page}
+
+\begin{reqtable}
+    Description        & All listings will have a specific page, which will
+                        contain all the listing information (see \autoref{fr:listing}).
+                        When on this page users shall have the option to commit
+                        to collecting the item, or to add it to their watchlist.
+                        \\
+    \hline
+    Priority           & High\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:listing}\\
+    \hline
+    Expected results   & All listings have a listing page.
+                        All listing information present on page as described above.\\
+    \hline
+    Exception Handling & 
+                        \begin{description}
+                            \itemsep0em
+                            \item [Listing page doesn't meet specification standards:]
+                                report error to webmaster.
+                        \end{description}
+                        \\
+    \hline
+\end{reqtable}
+
+
+\requirement{Comments Board}
+\label{fr:comments}
+
+\begin{reqtable}
+    Description        & All listing pages should have a comments board,
+                        where any registered user can post a comment related to
+                        the listing.
+                        
+                        All comments will be visibile to all users.
+                        
+                        All comments will be sorted by time of posting
+                        (ascending order i.e. most recent comment first)\\
+    \hline
+    Priority           & Low\\
+    \hline
+    Dependencies       & \autoref{fr:error-reporting},
+    \autoref{fr:listings-page}\\
+    \hline
+    Expected results   & Registered users able to comment on listing page.
+                        
+                        All comments correctly sorted by time\\
+    \hline
+    Exception Handling & \\
+    \hline
+    \ref{}
+\end{reqtable}
+
+
+\requirement{Item Catalogue}
+\label{fr:item-catalogue}
+
+\requirement{Search}
+\label{fr:search}
+
+\requirement{Sorting Search Results}
+\label{fr:sorting}
+
+\requirement{Search Filters}
+\label{fr:filters}
+
+\requirement{User’s Past \& Current Listings Page}
+\label{fr:user-listing-page}
+
+\begin{reqtable}
+    Description        & Any Logged-in user should have access to a personal 
+                        listings page, from where they can do the following:
+                        
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item view thei1
+                            \item 
+                            \item 
+                        \end{itemize}
+                        \\
+    \hline
+    Priority           & \\
+    \hline
+    Dependencies       & \\
+    \hline
+    Expected results   & \\
+    \hline
+    Exception Handling & \\
+    \hline
+\end{reqtable}
+
+
+\requirement{Add Listing}
+\label{fr:add-listing}
+
+\requirement{Edit Listing}
+\label{fr:edit-listing}
+
+\requirement{Commit to collect}
+\label{fr:commit}
+
+\requirement{Messaging}
+\label{fr:messaging}
+
+\requirement{Orders Page}
+\label{fr:orders}
+
+\requirement{Watch-list}
+\label{fr:watchlist}
+
+\subsection{Non-Functional Requirements}
+\begin{itemize}
+    \item Items will be stored in only one location and so will be consistent.
+    \item Animations and transitions will be simple and fluent in order to keep
+        the interface responsive.
+    \item All functionalities will be supported on all devices, apart from
+        wearables.
+\end{itemize}
+
+
+\section{Development Approach}
+
+\subsection{Development Strategy}
+
+We plan to execute the project using the agile method of development.
+
+We first design the entire project, which includes wireframes, layouts, color schemes, database structure, soft and hard deadlines, milestones etc. We then implement our plan on the frontend and backend simultaneously, with each task being completed as sprints and tested as it is completed. The frontend and the backend are then combined and tested as a whole, which has been elaborated later under Testing Strategy.
+
+\subsection{Development Stack}
+
+
+This lists all kinds of tools, programming languages, frameworks, technologies etc. that will be used in the development of the project:
+
+
+\begin{itemize}
+    
+    \item \textbf{PHP} - Database and other Backend Features
+
+    \item \textbf{MySQL} - Data Storage
+    
+    \item \textbf{HTML/CSS}- Frontend
+    
+    \item \textbf{Bootstrap} - Responsive Design
+    
+    \item \textbf{Javascript/JQuery} - Dynamic Client-Side Features
+    
+    \item \textbf{AJAX} - Communication between components
+    
+    \item \textbf{Integrated Development Environment (IDE)} - PHP Storm
+    
+    \item \textbf{Amazon Web Services (AWS)} - Web hosting - AWS offers a suite of cloud-computing services.
+
+\end{itemize}
+
+\subsection{Testing Strategy}
+
+The individual components are tested by the developer as soon as they are developed, along with some external testing by another team member. Once all components are integrated and the project is ready, it is tested rigorously as a whole for all possible combinations of inputs, security breach attempts, display issues, compatibility, faults and loopholes.
+
+\subsection{Collaboration}
+
+This lists all media used by the team members for collaboration and discussion:
+
+\begin{itemize}
+
+\item \textbf{Github} - Version Control 
+
+
+\item \textbf{Slack} - Messaging app and website for teams
+
+
+\item \textbf{Email} - Mailing list provided by university
+
+
+\item \textbf{Group Practical} - The weekly group practical gives times for short meetings.
+
+\end{itemize}
+
+\end{document}
