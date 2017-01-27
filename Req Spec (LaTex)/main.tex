@@ -11,7 +11,7 @@
 
 %%%%%%%%%%%%%%%
 % Title Page
-\title{Cupboard:\\Requirements Specfication}
+\title{Cupboard:\\Requirements Specification}
 \author{Team 8:\\Clare Doran, Abdul Ghani, Ucizi Mafeni, Luke Needham, Soumya Singh}
 \date{\today}
 \summary{
@@ -60,33 +60,66 @@ system (in order to view interest in the item and ask questions).
 
 
 \section{Domain Analysis}
-There are a couple of examples of food sharing sites/apps such as:
+
+The domain of our project encompasses online marketplaces and sites for purchasing food.
+There are a number of sites which already occupy these domains, the design of which we will draw from in designing our own site.
+
 \begin{itemize}
-    \item foodsharing.de(https://foodsharing.de/): A German food sharing site
-        that allows users (just like our site) to trade food that is going out
-        of date with other users to reduce food waste.
-        However it is only available in Germany.
-    \item Olio (https://olioex.com/): Mobile app with strong UK presence.
-        A key distinguishing feature is "Drop Boxes".
-        These are local stores/cafes where users can drop off food they'd like
-        to be shared.
-    \item SharingFood
-        (https://itunes.apple.com/us/app/sharing-food/id992111062?mt=8):
-        Mobile app based in Italy.
-        Seems to be fairly new and so has a very small user base.
+
+    \item eBay: An online marketplace through which users can both list and purchase almost anything. When listing an item, users must provide at least one photo and information such as title, condition and type, as well as an optional description and additional photos. I think is important as it forces users to provide enough information for buyers, and discourages fake listings. Users search for items by name, and can sort results in a number of ways, which is very useful, however it lacks more options for filtering results. Perhaps the best feature of the site is that every listing displays the seller’s username, along with a score and the percentage of all the feedback the user has received which is positive. This allows buyers to gauge how trustworthy the seller is, and is a feature which we feel will work well in our system also.
+
+
+    \item foodsharing.de: A food sharing sharing site, currently only available in Germany. It reduces food waste by allowing users to list food they wish to give away, and then arrange a time and place for the volunteer “Lebensmittelretter Innen” to collect the food and deliver it to whoever wanted it. This method removes the risk of potentially dangerous or illegal substances being exchanged, as all items are checked by the trusted volunteers. However it introduces the problem of having to have a large number of volunteers willing to give up their time. The site itself is quite well designed, but navigation is sometimes difficult. Every item of food listed has its own page, but I found these pages to be lacking, listing only a very brief description most of the time. The listings are also all anonymous and there is no system of rating users, as in eBay for example, which would allow users to check how trustworthy the user providing the food is.
+    
+    \item Olio: A mobile app with a strong UK presence. Users can share food by manually collecting/delivering it, or through "Drop Boxes" - local stores or cafés where users can drop off food they'd like to be shared. However the app has received many negative reviews from users frustrated that there is no food they can get near them, which is an issue our system is also likely to face, particularly soon after launch.
+
 \end{itemize}
 
+An interesting feature of the 2 existing food sharing apps listed above is that their search functions and catalogs are strongly based on location. They place a lot of emphasis on an interactive map to find items, contrary to eBay’s method of having the user search for items by name, and then allowing the user to filter results, indicating perhaps that users are more concerned about how far they have to travel for food, rather than what that food is.
+
+We feel our system should combine both of these functions, with a search bar and filtering methods like eBay, but with results sorted by distance from the user.
 
 \section{Proposed Deliverables}
 (Gantt Chart Goes here)
 
-\section{Identified, Risks, Assumptions, Dependencies and Constraints}
+\section{Identified Risks, Assumptions, Dependencies and Constraints}
+\subsection{Risks}
 \begin{itemize}
-    \item User Location: How much information about the user's location can we
-        make publicly available without putting their security ar risk?
-    \item Assuming google maps should be able to find the addresses entered by
-        the user.The location functionality is completely dependent on the
-        Google Maps API.
+
+    \item It is possible that users may exploit the rating system, through the use of fake reviews and ratings, to boost their score and rating, and therefore trick other users into believing they are trustworthy when this is not the case.
+
+    \item Users may exploit the system to list and distribute non-food items, and particularly nefarious users may even use it to distribute illegal substances.
+    
+    \item Users may (knowingly or otherwise) distribute food which is dangerous to consume, such as if it has gone off.
+    
+    \item Users may lure others, under the guise of giving them food, into potentially perilous predicaments.
+    
+    \item If the system’s sole database goes down the whole site will be useless, since all the data is stored in a single place.
+    
+    \item It is possible that the system, particularly its databases, could be hacked. This could lead to user’s private data, particularly sensitive information such as address and email address, being leaked and abused.
+    
+    \end{itemize}
+
+Should any of these risks occur, or should anything else unfortunate occur to anyone, but particularly minors, through use of the system, we may be held accountable. This in itself is also a risk. To mitigate this, we will ensure that we mitigate all other risks as much as possible, and force users to sign agreements waiving all responsibility from us. The ways we mitigate these risks are detailed in Functional Requirements.
+
+\subsection{Assumptions \& Dependencies}
+\begin{itemize}
+
+    \item We assume Google maps will be able to find the vast majority of addresses entered by the user. This location functionality is thus completely dependent on the Google Maps API.
+
+    \item We assume that when a user searches for something they will find a decent number of results. This is dependent on enough users listing items on the system, otherwise, the system will be useless to people wanting to receive food.
+
+\end{itemize}
+
+\subsection{Constraints}
+\begin{itemize}
+
+\item We need to ensure that no user’s private information, including address and email address, is unnecessarily stored or made public, in order to avoid putting their security at risk. In particular, we need ensure the privacy of children under 18.
+
+\item In order to allow it to run quickly even on devices with poor internet, the system will be limited in the number of performance-detrimental luxuries it can have.
+
+\item Due to a lack of time and relative lack of experience, the system will likely not be as attractive or efficient as it would be ideally.
+
 \end{itemize}
 
 \section{Solution Requirements}
@@ -107,7 +140,7 @@ system, and it will remain fully operational with or without them.
                         \begin{itemize}
                             \itemsep-1em
                             \item A short description about the purpose of the
-                                app.
+                                app
                             \item Contact information
                             \item Terms and Conditions of use
                             \end{itemize}
@@ -1328,28 +1361,63 @@ system, and it will remain fully operational with or without them.
 
 \section{Development Approach}
 
-\subsection{Key Summary}
-We've decided to use PHPStorm as the main IDE. Ultimately we hope to host the
-Database (and possibly website) on AWS. We will mainly collaborate using
-Github and Slack (and occasionally email).
+\subsection{Development Strategy}
 
-Though we'll all inevitably contribute to both sides of the site, we've
-decided to split the work as follows:
-\begin{itemize}
-    \item \textbf{Design and Frontend:} Clare, Ucizi and Luke
-    \item \textbf{Database and Backend:} Soumya and Abdul
-\end{itemize}
+We plan to execute the project using the agile method of development.
+
+We first design the entire project, which includes wireframes, layouts, color schemes, database structure, soft and hard deadlines, milestones etc. We then implement our plan on the frontend and backend simultaneously, with each task being completed as sprints and tested as it is completed. The frontend and the backend are then combined and tested as a whole, which has been elaborated later under Testing Strategy.
 
 \subsection{Development Stack}
+
+
+This lists all kinds of tools, programming languages, frameworks, technologies etc. that will be used in the development of the project:
+
+
 \begin{itemize}
-    \item PHP (Database and other backend features)
-    \item HTML/CSS
-    \item SQL
-    \item Javascript (Client-side features)
-    \item Bootstrap (Simplifies mobile compatibility)
-    \item Git
+    
+    \item \textbf{PHP} - Database and other Backend Features
+
+    \item \textbf{MySQL} - Data Storage
+    
+    \item \textbf{HTML/CSS}- Frontend
+    
+    \item \textbf{Material Bootstrap} - Responsive and attractive design using Google's Material guidelines
+    
+    \item \textbf{Javascript/JQuery} - Dynamic Client-Side Features
+    
+    \item \textbf{AJAX} - Communication between components
+    
+    \item \textbf{Integrated Development Environment (IDE)} - PHP Storm
+    
+    \item \textbf{Amazon Web Services (AWS)} - Web hosting - AWS offers a suite of cloud-computing services.
+
 \end{itemize}
 
+\subsection{Testing Strategy}
 
-\section{References}
+The individual components are tested by the developer as soon as they are developed, along with some external testing by another team member. Once all components are integrated and the project is ready, it is tested rigorously as a whole for all possible combinations of inputs, security breach attempts, display issues, compatibility, faults and loopholes.
+
+\subsection{Collaboration}
+
+This lists all media used by the team members for collaboration and discussion:
+
+\begin{itemize}
+
+\item \textbf{Github} - Version Control 
+
+
+\item \textbf{Slack} - Messaging app and website for teams
+
+
+\item \textbf{Email} - Mailing list provided by university
+
+
+\item \textbf{Group Practical} - The weekly group practical gives times for short meetings.
+
+\end{itemize}
+
+\section{Summary}
+
+Our system will be reliable, attractive and above all easy to use. This will ensure that, instead of simply throwing away excess food, people will be more inclined to use our system with little extra effort and reduce food waste, while at the same time helping others. 
+
 \end{document}
