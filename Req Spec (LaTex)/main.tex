@@ -26,6 +26,9 @@ A web app built with the intention of helping reduce food waste
 \clearpage
 %glossary
 %define "active" listing
+%define listing
+%define immutable
+%define trade
 \section{Introduction}
 7 million tonnes of food goes to waste in the UK, more than half of which is 
 edible (https://www.lovefoodhatewaste.com/node/2472).
@@ -88,10 +91,15 @@ There are a couple of examples of food sharing sites/apps such as:
 
 \section{Solution Requirements}
 \subsection{Functional Requirements}
+%move section of speech to development approach
 N.B. Due to the highly time-sensitive nature of the project, any low priority
 requirements (and thier linked dependencies) may not be implemented.
 As such, all low priority requirements are inherently unessential to the
 system, and it will remain fully operational with or without them.
+
+\requirement{Error-Reporting System}
+
+\requirement{User Feedback System}
 
 \requirement{User sign up}
 
@@ -336,65 +344,66 @@ system, and it will remain fully operational with or without them.
     \hline
 \end{reqtable}
 
-
-\requirement{Listings Page}
+\requirement{Listing}
 
 \requirement{Listing Status}
 
-\requirement{View Listing}
+\requirement{Active Listing}
 
-\requirement{Edit Listing}
-
-\requirement{Add Listing}
-
-\requirement{Remove Listing}
+\requirement{Inactive Listing}
 
 
-\requirement{Orders Page}
+\requirement{Listings Page}
 
+\begin{reqtable}
+    Description        & Any Logged-in user should have access to a personal 
+                        listings page, from where they can do the following:
+                        
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item view thei1
+                            \item 
+                            \item 
+                        \end{itemize}
+                        \\
+    \hline
+    Priority           & \\
+    \hline
+    Dependencies       & \\
+    \hline
+    Expected results   & \\
+    \hline
+    Exception Handling & \\
+    \hline
+\end{reqtable}
 
 \requirement{Comments Board}
 
-\requirement{Items Near You}
-
-\requirement{Interactive Map}
-
-\requirement{Search Listings}
-
-\requirement{Results Filter}
-
-\requirement{Shopping Basket}
-
-\requirement{Checkout}
-
-\requirement{Private Messaging}
-
-\requirement{Error Reporting}
-
-\requirement{User sign up}
-Users will be able to list an item of food. The minimum amount of information
-will be a title. Optionally, they may add a picture, location, description,
-expiry date, and set the dietary requirement flags. If the user has set their
-location, it will be automatically added.
-
-\requirement{Messaging, comments, and collection of food}
-Messaging (private communication, to exchange exact addresses etc.) and
-comments (questions that others may be interested in, expressing interest)
-will be implemented.
-After food is collected, both parties will have their
-scores and ratings affected appropriately and the item will be moved to a
-separate ‘history’ database.
-(Items can also be deleted, and not moved to a users history).
+\requirement{Item Catalogue}
 
 \requirement{Search}
-Searching will be implemented in a dynamic fashion using AJAX. By default,
-items will be listed by location.
 
-\requirement{Points and ratings}
-A simple points/ratings system will be implemented. When some food has been
-shared, the donor receives three points and the collector gets a single point.
-Each party can then rate their experience with the other out of 5.
-If the user wishes, they may be displayed on a public leaderboard.
+\requirement{Sorting Search Results}
+
+\requirement{Search Filters}
+
+\requirement{User’s Past & Current Listings Page}
+
+\requirement{Add Listing}
+
+\requirement{Edit Listing}
+
+\requirement{Commit to collect}
+
+\requirement{Messaging}
+
+\requirement{Orders Page}
+
+\requirement{Watch-list}
+
+\requirement{User Score}
+
+\requirement{User Ratings}
 
 
 \subsection{Non-Functional Requirements}
