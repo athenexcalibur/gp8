@@ -3,6 +3,7 @@
 \usepackage{hyperref}
 %declare title class
 \titleclass{\requirement}{straight}[\subsubsection]
+
 %setup title counter
 \newcounter{requirement}
 \setcounter{secnumdepth}{4}
@@ -12,6 +13,9 @@
   {\color{color1}\sffamily\bfseries}{}{0em}
   {FR \therequirement:~}
 \titlespacing*{\requirement}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+%define autoref format
+\newcommand{\requirementautorefname}{FR}
 
 %make so requirements don't appear in toc
 \makeatletter
