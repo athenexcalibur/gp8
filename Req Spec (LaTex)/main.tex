@@ -35,12 +35,12 @@ A web app built with the intention of helping reduce food waste.
 %define trade
 \section{Introduction}
 
-7.5 million tonnes of food goes to waste in 2015, 4.4 million tonnes of which is edible.
-This has a retail value of around £13 billion. This is associated with 19 million tonnes of carbon dioxide.
-emmisions, which is around a quarter of that emitted by road traffic in the UK\cite{wrap}.
-Meanwhile,  many people throughout the country struggle to put together enough 
-money for food, with food banks becoming busier every year \cite{trussel}.\\
-From an environmental, economical, and ethical point of view this is a travesty.\\
+7.5 million tonnes of food went to waste in 2015, 4.4 million tonnes of which was edible.
+This has a retail value of around £13 billion, and is associated with 19 million tonnes of carbon dioxide emmisions
+(which is around a quarter of that emitted by road traffic in the UK)\cite{wrap}.
+Meanwhile food banks are becoming busier every year \cite{trussel} and 8.4 million people in the UK alone struggling to pay for food \cite{voth}.\\
+Much of this is simply because the expiry date has passed. However, `dates are not an indicator of the product’s safety' \cite{USDA} and food can remain perfectly edible after the expiry date.
+From an environmental, economical, and ethical point of view this is a completely needless travesty.\\
 Cupboard aims to be a system that allows users to painlessly find and share food
 that would otherwise go to waste. A priority is speed and ease of use, as it is
 too easy to just throw away food. 
@@ -50,7 +50,7 @@ private.
 
 The main sections of this document are:
 \begin{itemize}
-	\item \textbf{Project Scope:} Here we give an overview about what our system will (and won't) do.
+	\item \textbf{Project Scope:} Here we give an overview about what our system will (and won't) do. Identification of the target audience and possible future features.
 	\item \textbf{Domain analysis:} An analysis of similar products already in place.
 	\item \textbf{Proposed Deliverables:} How we plan to undergo the project.
 	\item \textbf{Identified, Risks, Assumptions, Dependencies and Constraints:}
@@ -61,21 +61,41 @@ The main sections of this document are:
 
 
 \section{Project Scope}
+\subsection{What Cupboard will do}
 The aim is to become a go-to everyday service that people will use `by default'
 without even thinking about wasting food. This means users will be able to
 easily list items with a minimal amount of effort.\\
 There will be a simple points-based system and a ranking system in order to
 encourage sharing of food and to reassure other users that the quality of food is
 likely to be good. When some food has been successfully exchanged both
-parties will get points and will be able to rate each other. If users wish to
+parties will get points and will be able to rate the other based on their experience. If users wish to
 participate, there will be a simple public leaderboard.\\
 Users can set their dietary requirements (allergies, religious etc.) and have
-results automatically filtered. \\
+results automatically filtered. This will allow users to find food even more quickly, as they do not need to manually filter out innapropriate foods.\\
 There will be a messaging system (in order to arrange collection) and a comments
 system (in order to view interest in the item and ask questions).\\
-The aforementioned rankings, messaging, and comments systems are purely to facilitate the sharing of food.
-We wish to avoid any sort of `social media' elements
-(such as friend requests, status updates etc.) in order to not lose sight of our main goal - the prevention of food waste.
+\subsection{What Cupboard won't do}
+We wish to follow the UNIX philosophy of `doing one thing and doing it well'. As mentioned above,
+our `one thing' is the prevention of food waste by donating food to people who want it.
+We have user accounts, a messaging system, comments, and a leaderboard only to facilitate the sharing of food.
+Social media features (such as friend requests, status updates, etc) will not feature in our product.
+
+\subsection{Target audience}
+Our plans are to keep the interface incredibly simple and as accessible as possible. 
+Ideally, anyone who can browse the internet will be able to find and share food via our platform.\\
+That said, we have identified four main user groups which we think will benefit most from our service:
+
+\begin{itemize}
+	\item \textbf{Families:} When cooking for a group it can be hard to know in advance how much you should prepare.
+			It is common to prepare more than you need and throw away what remains.
+			Our service must therefore be family friendly, which means no explicit language, advertisements etc.
+	\item \textbf{Stores and resturants:} Stores are reluctant so sell food after the `best-before' date, despite it being perfectly legal \cite{govuk}.
+			Resturants commonly throw away completley edible trimmings in order to make meals more aesthetic. Our service will allow them to advertise food,
+			similarly to the `FoodCloud' service mentioned below in the Domain Analysis.
+	\item \textbf{Students:} Preparing single meals can be tough and wasteful. Our service will allow students to find dinner if they can't cook, or share food
+			with other students if they do cook and find they've prepared too much.
+	\item \textbf{The needy:} Most importantly, our service will allow those who do not have the means to afford food to feed themselves whilst preventing food waste.
+\end{itemize}
 
 
 \section{Domain Analysis}
@@ -132,7 +152,15 @@ the design of which we will draw from in designing our own site.
         However the app has received many negative reviews from users frustrated
         that there is no food they can get near them, which is an issue our
         system is also likely to face, particularly soon after launch.
-
+        
+    \item FareShare \cite{fareshare}:
+		FareShare is a London-based charity that redistributes food from restaurants
+		and grocery stores to other local charities and community-groups. They are similar
+		to our proposed platform, and even have a `FoodCloud' service in which large stores
+		can alert local charities that they have food available for colllection.\\
+		One issue with FareShare is that not anyone can quickly share or find food. There is no available listing of locally available leftovers.
+		Local resturants and stores can sign up to donate food, and local charities can sign up to recieve food, however
+		if (say) a family of 4 want to donate some leftovers they cannot do so with this service.
 \end{itemize}
 
 An interesting feature of the 2 existing food sharing apps listed above is that
@@ -659,8 +687,8 @@ system, and it will remain fully operational with or without them.
 \label{fr:edit-profile}
 
 \begin{reqtable}
-    Description        & A user should be able to change their personal details
-                        this includes:
+    Description        & A user should be able to change their personal details.
+                        This includes:
 
                         \begin{itemize}
                             \itemsep-1em
@@ -716,13 +744,9 @@ system, and it will remain fully operational with or without them.
                             \itemsep-1em
                             \item Halal
                             \item Kosher
-                            \item Vegan
                             \item Vegetarian
+                            \item Other
                         \end{itemize}
-
-                        There should be an additional category group called 
-                        "other" where users can specify a dietary requirement
-                        not listed in the default categories.
                         \\
     \hline
     Priority           & High\\
@@ -734,7 +758,7 @@ system, and it will remain fully operational with or without them.
     Exception Handling & 
                         \begin{description}
                             \itemsep0em
-                            \item [Dietary requirements don't meet specification:]
+                            \item [Dietary requirements doesn't meet specification:]
                                 report error to webmaster.
                         \end{description}
                         \\
@@ -751,15 +775,11 @@ system, and it will remain fully operational with or without them.
 
                         \begin{itemize}
                             \itemsep-1em
-                            \item Peanuts
+                            \item Nuts
                             \item Gluten
-                            \item Lactose
                             \item Soy
-                        \end{itemize}
-
-                        There should be an additional category group called 
-                        "other" where users can specify any allergies not listed
-                        in the default categories.\\
+                            \item Other
+                        \end{itemize}\\
     \hline
     Priority           & High\\
     \hline
@@ -783,7 +803,7 @@ system, and it will remain fully operational with or without them.
 
 \begin{reqtable}
     Description        & All Users will have a personal score, starting from 0,
-                        which will increase as the User gains ‘points’. Points
+                        which will increase as the user gains ‘points’. Points
                         will be earned for every trade, with 10 points being
                         given to the provider, and 1 point being given to the
                         receiver.
@@ -906,9 +926,7 @@ system, and it will remain fully operational with or without them.
                                 (optional; max. 200 chars).
                             \item The date the listing was added (immutable)
                             \item An expiry date for the food item.
-                            \item A list of Allergen and Dietary Requirements
-                                the item conforms to
-                                (at least one must be selected).
+                            \item Checkboxes for which dietary groups this food is not appropriate for.
                             \item The postcode from which the item can be collected
                             \item A listing status (i.e. Active/Inactive)
                             \item 1 primary photo
@@ -929,7 +947,7 @@ system, and it will remain fully operational with or without them.
     \autoref{fr:listings-page}\\
     \hline
     Expected results   & All listing items conform to the structure mentioned
-                        in the description\\
+                        in the description.\\
     \hline
     Exception Handling & \\
     \hline
@@ -961,7 +979,7 @@ system, and it will remain fully operational with or without them.
     \autoref{fr:active-listing},
     \autoref{fr:inactive-listing}\\
     \hline
-    Expected results   & All listings are either Active or Inactive\\
+    Expected results   & All listings are either active or inactive\\
     \hline
     Exception Handling & 
                         \begin{description}
@@ -985,7 +1003,7 @@ system, and it will remain fully operational with or without them.
                         item. Any item should have a maximum of one offer.
 
                         If another user has already offered to receive an item,
-                        it will remain Active, but will become unavailable, so
+                        it will remain active, but will become unavailable, so
                         no other user will be able to place another offer.
                         \\
     \hline
@@ -1001,7 +1019,7 @@ system, and it will remain fully operational with or without them.
     Exception Handling & 
                         \begin{description}
                             \itemsep0em
-                            \item [Active Listing doesn't meet specification standards:]
+                            \item [Active listing doesn't meet specification standards:]
                                 report error to webmaster.
                         \end{description}
                         \\
@@ -1014,7 +1032,7 @@ system, and it will remain fully operational with or without them.
 
 \begin{reqtable}
     Description        & 
-                        Inactive Listings are not visible on the public
+                        Inactive listings are not visible on the public
                         catalogue. A listing item can only be made inactive by
                         a by the publisher manually setting it to inactive.
 
@@ -1084,7 +1102,7 @@ system, and it will remain fully operational with or without them.
                         All comments will be visibile to all users.
                         
                         All comments will be sorted by time of posting
-                        (ascending order i.e. most recent comment first)\\
+                        (ascending order i.e. most recent comment first).\\
     \hline
     Priority           & Low\\
     \hline
@@ -1093,7 +1111,7 @@ system, and it will remain fully operational with or without them.
     \hline
     Expected results   & Registered users able to comment on listing page.
                         
-                        All comments correctly sorted by time\\
+                        All comments correctly sorted by time.\\
     \hline
     Exception Handling & \\
     \hline
@@ -1108,7 +1126,7 @@ system, and it will remain fully operational with or without them.
                         Any user should be able to explore the item catalogue.
                         They should also be able to to apply all of the search
                         filters and sorting options mentioned in 
-                        \autoref{fr:filters} and \autoref{fr:sorting}\\
+                        \autoref{fr:filters} and \autoref{fr:sorting}.\\
     \hline
     Priority           & High\\
     \hline
@@ -1139,7 +1157,7 @@ system, and it will remain fully operational with or without them.
                         \autoref{fr:filters} and \autoref{fr:sorting}.
 
                        After performing a search, the user will be shown a page
-                       containing all the Active item listings matching the
+                       containing all the active item listings matching the
                        search. Each item displayed will show a preview of the
                        full listing, with the item’s primary photo, name and
                        description, as well as the distance the item is from
@@ -1153,7 +1171,7 @@ system, and it will remain fully operational with or without them.
     \autoref{fr:sorting},
     \\
     \hline
-    Expected results   & User can perform search.
+    Expected results   & User can perform a search.
 
                         All filters and sorting options function as specified.
                         
@@ -1178,13 +1196,13 @@ system, and it will remain fully operational with or without them.
 \begin{reqtable}
     Description        & 
                         By default, all search results will be sorted by
-                        distance from the Source (location of the listing),
-                        to the Destination (location of the user performing the
+                        distance from the source (location of the listing),
+                        to the destination (location of the user performing the
                         search) of the listed item where:
                         \begin{itemize}
                             \itemsep-1em
                             \item The source location is always the collection
-                                postcode stated on the item's Listing page.
+                                postcode stated on the item's listing page.
                             \item The destination is, by default, the postcode
                                 provided during registration.
                         \end{itemize}
@@ -1192,7 +1210,7 @@ system, and it will remain fully operational with or without them.
                         The user will be given option to change the destination
                         to the current GPS location of their device.
 
-                        Alternatively, users can sort search results by Expiry
+                        Alternatively, users can sort search results by expiry
                         date. This can be in either ascending  order
                         (i.e. soonest date first), or descending
                         order (i.e. furthest date first).
@@ -1212,8 +1230,8 @@ system, and it will remain fully operational with or without them.
     Exception Handling & 
                         \begin{description}
                             \itemsep0em
-                            \item [User unable to sort results:] report error to webmaster
-                            \item [Results not sorted as expected:] report error to webmaster
+                            \item [User unable to sort results:] Report error to webmaster.
+                            \item [Results not sorted as expected:] Report error to webmaste.r
                         \end{description}
                         \\
     \hline
@@ -1229,11 +1247,11 @@ system, and it will remain fully operational with or without them.
                         \begin{itemize}
                             \itemsep-1em
                             \item Dietary Requirements
-                            \item Allergen
+                            \item Allergens
                         \end{itemize}
                         
                         Additionally the user should have the option to filter
-                        out “Active” but committed items
+                        out “active” but committed items
                         \\
     \hline
     Priority           & High\\
@@ -1248,7 +1266,7 @@ system, and it will remain fully operational with or without them.
     Exception Handling & 
                         \begin{description}
                             \itemsep0em
-                            \item [User unable to filter results:] report error
+                            \item [User unable to filter results:] Report error
                                 to webmaster.
                         \end{description}
                         \\
@@ -1260,7 +1278,7 @@ system, and it will remain fully operational with or without them.
 \label{fr:user-listing-page}
 
 \begin{reqtable}
-    Description        & Any Logged-in user should have access to a personal 
+    Description        & Any logged-in user should have access to a personal 
                         listings page, from where they can do the following:
                         
                         \begin{itemize}
@@ -1302,7 +1320,7 @@ system, and it will remain fully operational with or without them.
                         to the specification of a valid listing item
                         (see \autoref{fr:listing} ).
 
-                        All newly added listings will be given an “Active” status.\\
+                        All newly added listings will be given an “active” status.\\
     \hline
     Priority           & High\\
     \hline
@@ -1312,7 +1330,7 @@ system, and it will remain fully operational with or without them.
     \hline
     Expected results   & User able to add listing.
     
-                        Listing has “Active” status \\
+                        Listing has “active” status \\
     \hline
     Exception Handling & 
                         \begin{description}
@@ -1344,10 +1362,10 @@ system, and it will remain fully operational with or without them.
                         \end{itemize}
 
                         Additionally the user should be able to set the listing
-                        to “Inactive”. As described by
+                        to “inactive”. As described by
                         \autoref{fr:inactive-listing}, once
-                        set to “Inactive”, the user cannot revert the status to
-                        “Active”, and will be unable to perform any of the
+                        set to “inactive”, the user cannot revert the status to
+                        “active”, and will be unable to perform any of the
                         modifications listed above.\\
     \hline
     Priority           & High\\
@@ -1377,7 +1395,7 @@ system, and it will remain fully operational with or without them.
 \begin{reqtable}
     Description        & 
                         A user should be able commit to collecting an item that
-                        has an “Active” status (given that no other has
+                        has an “active” status (given that no other has
                         committed to that item).
                         
                         Once that user has committed
@@ -1438,7 +1456,7 @@ system, and it will remain fully operational with or without them.
                         \begin{description}
                             \itemsep0em
                             \item [Messaging facility fails to meet specification criteria:]
-                                report error to webmaster.
+                                Report error to webmaster.
                         \end{description}
                         \\
     \hline
@@ -1456,11 +1474,11 @@ system, and it will remain fully operational with or without them.
                         \begin{description}
                             \itemsep0em
                             \item [Current orders:] Listings which the user has committed
-                                to buying and currently have an “Active” status.
+                                to buying and currently have an “active” status.
                                 A listing should be added to the user’s current orders
                                 once he commits to collecting the item.
                             \item [Order history:] Listings which the user once committed
-                                to buying, and now have an “Inactive” status. The user
+                                to buying, and now have an “inactive” status. The user
                                 should be able to rate the publisher once the listing is
                                 made inactive.
                         \end{description}
@@ -1519,7 +1537,7 @@ system, and it will remain fully operational with or without them.
                         \begin{description}
                             \itemsep0em
                             \item [Watch-list not functioning as specified:]
-                                report errot to webmaster.
+                                Report errot to webmaster.
                         \end{description}
                         \\
     \hline
@@ -1564,9 +1582,7 @@ This lists all kinds of tools, programming languages, frameworks, technologies e
     
     \item \textbf{AJAX} - Communication between components
     
-    \item \textbf{Integrated Development Environment (IDE)} - PHP Storm
-    
-    \item \textbf{Amazon Web Services (AWS)} - Web hosting - AWS offers a suite of cloud-computing services.
+    \item \textbf{Integrated Development Environment (IDE)} - PHPStorm
 
 \end{itemize}
 
@@ -1603,11 +1619,19 @@ Our system will be reliable, attractive and above all easy to use. This will ens
 
   \bibitem{trussel} Trussell Trust \href{https://www.trusselltrust.org/2015/11/18/uk-foodbank-use-still-at-record-levels-as-hunger-remains-major-concern-for-low-income-families/}{https://www.trusselltrust.org}
 
+  \bibitem{voth} Voices Of The Hungry \href{http://www.fao.org/in-action/voices-of-the-hungry/en/}{http://www.fao.org/in-action/voices-of-the-hungry/en/}
+  
+  \bibitem{USDA} USDA \href{https://www.fsis.usda.gov/wps/portal/fsis/topics/food-safety-education/get-answers/food-safety-fact-sheets/food-labeling/food-product-dating/food-product-dating/!ut/p/a1/jVJdT8IwFP01PJYWhzB8W5YYQBkSooy9mLvtbmvStUtbmPjrLaCJGqa0T_fccz_OaWlCY5pI2PMSLFcSxDFORq9sxUaDScjmy8ngns2il9XyIQyZv751hO0fhMi7sr7jBOy_-vkVA270IlyUNGnAVoTLQtG4REtAmha1oXGhVE4MFGgPpIDMElMh2q-EgBQFl-Vn2GiV7xwndxZ1gRua_FyLDdydRd56OJ1HHlsOfxMu-HYmdBvjlJdCpadH2gYy9XwnUWOBGnV_px1cWdvc9ViPtW3brzHnGYgcuDj0M1X32HfZ-NagtkTjHkEY0lZgjxjXp49w1IXGZUGIA6kRJIG94jk5tfAm4_HQv7RFpYyl8aXptKmf4_fHYMr4U73xTfAB8mN6gw!!/#3}{usda.gov}
+  
+  \bibitem{govuk} DEFR \href{https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/69316/pb132629-food-date-labelling-110915.pdf}{gov.uk} (page 8)
+  
   \bibitem{ebay} eBay \href{http://ebay.co.uk}{http://ebay.co.uk}
 
   \bibitem{foodsharing} Foodsharing \href{https://foodsharing.de/}{https://foodsharing.de/}
 
   \bibitem{olio} Olio \href{https://olioex.com/}{https://olioex.com/}
+  
+  \bibitem{fareshare} FareShare \href{http://www.fareshare.org.uk/}{http://www.fareshare.org.uk/}
 \end{thebibliography}
 \end{document}
 
