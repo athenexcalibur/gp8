@@ -355,6 +355,38 @@ requirements (and thier linked dependencies) may not be implemented.
 As such, all low priority requirements are inherently unessential to the
 system, and it will remain fully operational with or without them.
 
+
+
+\requirement{Contacting Us}
+\label{fr:user-feedback}
+
+\begin{reqtable}
+    Description        & Users should be able to contact us, providing feedback regarding
+                        their experience, or to report any errors.
+                        This should be done in the form of a feedback form,
+                        which should have the following fields:
+
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item A title, which is a brief description of the
+                                feedback report(max. 50 chars)
+                            \item The main feedback report (max. 1000 chars)
+                        \end{itemize}
+                        \\
+
+
+    \hline
+    Priority           & Low\\
+    \hline
+    Dependencies       & None\\
+    \hline
+    Expected results   & User's can successfully send feedback report\\
+    \hline
+    Exception Handling & If the user enters data which is invalid according to the rules above, they will be notified
+                        \\
+    \hline
+\end{reqtable}
+
 \requirement{"About Us" page}
 \label{fr:about-us}
 
@@ -375,99 +407,21 @@ system, and it will remain fully operational with or without them.
     \hline
     Dependencies       & None\\
     \hline
-    Expected results   & User able to access the page.
-                        
-                        Page contains all the information stated in the
+    Expected results   & User able to view all the information stated in the
                         description.\\
     \hline
-    Exception Handling & 
-    			\begin{description}
-                            \itemsep0em
-                            \item [Page not found:] refresh page, check URL
-			    \item [Cannot find after refresh:] report error
-                                to webmaster
-                        \end{description}
+    Exception Handling & Inform the user of the problem, i.e. 404 if page not found
                         \\
     \hline
 \end{reqtable}
 
 
-\requirement{Error-Reporting System}
-\label{fr:error-reporting}
 
-\begin{reqtable}
-    Description        & Users should be able to report any errors they notice
-                        to the webmaster.
-                        Each error report should have:
-
-                        \begin{itemize}
-                            \itemsep-1em
-                            \item A title, which is a brief description of the
-                                error (max. 50 chars)
-                            \item A more detailed description of the error
-                                (max. 500 chars)
-                        \end{itemize}
-                        \\
-    \hline
-    Priority           & Medium\\
-    \hline
-    Dependencies       & \autoref{fr:about-us}\\
-    \hline
-    Expected results   & User can successfully send error report\\
-    \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [User cannot send error report:] use email on
-                                "About us" page to contact webmaster
-                        \end{description}
-                        \\
-    \hline
-\end{reqtable}
-
-
-\requirement{User Feedback System}
-\label{fr:user-feedback}
-
-\begin{reqtable}
-    Description        & Users should be able to provide feedback regarding
-                        their experience using the web app to the webmaster.
-                        This should be done in the form of a feedback form,
-                        which should have the following fields:
-
-                        \begin{itemize}
-                            \itemsep-1em
-                            \item A title, which is a brief description of the
-                                feedback report(max. 50 chars)
-                            \item The main feedback report (max. 1000 chars)
-                        \end{itemize}
-                        \\
-
-
-    \hline
-    Priority           & Low\\
-    \hline
-    Dependencies       & \autoref{fr:error-reporting} (Error Reporting)\\
-    \hline
-    Expected results   & User's can successfully send feedback report\\
-    \hline
-    Exception Handling & 
-                        
-                        \begin{description}
-                            \itemsep0em
-                            \item [User unable to send feedback form]: report 
-                                error to webmaster
-                        \end{description}
-                        \\
-    \hline
-\end{reqtable}
-
-
-\requirement{User sign up}
+\requirement{Signing up}
 \label{fr:user-sign-up}
 
 \begin{reqtable}
-    Description        & The User should be able to create an account by 
+    Description        & The user should be able to create an account by 
                         following the registration process.
 
                         Registration will involve:
@@ -485,21 +439,14 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting},
-    \autoref{fr:registration-details} (Get user registration details),
-    \autoref{fr:about-us} (About us page)
+    Dependencies       &
+    \autoref{fr:registration-details}
                         \\
     \hline
     Expected results   & Following account creation, the user will be able to 
                         login using their provided username and password\\
     \hline
-    Exception Handling & 
-                        
-                        \begin{description}
-                            \itemsep0em
-                            \item [User unable to create account:] report error
-                                to webmaster
-                        \end{description}
+    Exception Handling & The user will be notified of any invalid data they have provided, as described in \autoref{fr:validation}
                         \\
     \hline
 \end{reqtable}
@@ -530,23 +477,15 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting},
-    \autoref{fr:validation} (Validate User Details), 
-    \autoref{fr:dietary-requirements} (Dietary Requirements), 
-    \autoref{fr:allergy-information} (Allergy Information)\\
+    Dependencies       &
+    \autoref{fr:validation}, 
+    \autoref{fr:dietary-requirements},
+    \autoref{fr:allergy-information}\\
     \hline
     Expected results   & User inputs all valid fields and proceeds to complete
                         registration\\
     \hline
-    Exception Handling & 
-                        
-                        \begin{description}
-                            \itemsep0em
-                            \item [User unable to fill in registration details:]
-                                report error to webmaster
-                            \item [User inputs invalid details:] should be
-                                validated as described in \autoref{fr:validation}
-                        \end{description}
+    Exception Handling & The user will be notified of any invalid data they have provided, as described in \autoref{fr:validation}
                         \\
     \hline
 \end{reqtable}
@@ -579,19 +518,12 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting}\\
+    Dependencies       & None \\
     \hline
     Expected results   & Validation system correctly highlights any invalid
                         fields\\
     \hline
-    Exception Handling & 
-                        
-                        \begin{description}
-                            \itemsep0em
-                            \item [Validation system doesn't meet specified 
-                                requirements:]
-                                report error to webmaster
-                        \end{description}
+    Exception Handling & If the validation fails and an invalid input is entered into the database, this may lead to unexpected behaviour, which the user is likely to report, so we can fix the issue.
                         \\
     \hline
 \end{reqtable}
@@ -609,29 +541,22 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & Low \\
     \hline
-    Dependencies       & \autoref{fr:error-reporting}\\
+    Dependencies       & None\\
     \hline
     Expected results   & After the user follows the activation link,
                         they should be able to login to their account using
                         the login details they provided during registration\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [Incorrect email address provided:]
-                                the user should have the
-                                option to correct the provided email address.
-                            \item [Activation link doesn't work:] the user
-                                should have the option to request another
-                                activation link.
-                            \item [Activation system doesn't work:] report
-                                error to webmaster
-                        \end{description}
+    Exception Handling & The user should have the
+                                option to correct an incorrect provided email address.
+                            The user
+                        should have the option to request another
+                                activation link if the first doesn't work.
                         \\
     \hline
 \end{reqtable}
 
-\requirement{Password Reset Facility}
+\requirement{Resetting Password}
 \label{fr:password-reset}
 
 \begin{reqtable}
@@ -653,17 +578,7 @@ system, and it will remain fully operational with or without them.
     \hline
     Expected results   & User able to successfully reset password\\
     \hline
-    Exception Handling & 
-                        
-                        \begin{description}
-                            \itemsep0em
-                            \item [User unable to reset password:] report error
-                                to webmaster.
-                            \item [Email doesn't meet validation
-                                standards set in \autoref{fr:validation}:]
-                                Prevent submission of password reset request.
-                                Notify user that invalid email was entered.
-                        \end{description}
+    Exception Handling & No reset link will be sent if the input email is not registered to any account on the system, or if the email is invalid by \autoref{fr:validation}. The user will be notified of this.
                         \\
     \hline
 \end{reqtable}
@@ -689,22 +604,17 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:edit-profile} (Edit Profile),
+    Dependencies       & \autoref{fr:edit-profile},
     \autoref{fr:dietary-requirements},
     \autoref{fr:allergy-information},
-    \autoref{fr:user-score} (User Score),
-    \autoref{fr:user-ratings} (User Rating)
+    \autoref{fr:user-score},
+    \autoref{fr:user-ratings}
     \\
     \hline
     Expected results   & User is able to access and edit all personal
                         information from the dashboard\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [Registered and logged-in user can't access
-                                dashboard:] notify webmaster of error
-                        \end{description}
+    Exception Handling & Users who are not currently logged in will not be able to access to User Dashboard - any attempt to do so will re-direct them to the log-in page
                         \\
     \hline
 \end{reqtable}
@@ -746,15 +656,7 @@ system, and it will remain fully operational with or without them.
     \hline
     Expected results   & User able to successfully change personal details.\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [User unable to save changes:]
-                                Report error to webmaster
-                            \item [New details don't satisfy validation standards:]
-                                Invalid fields must be highlighted with hint
-                                (as to why field is Invalid) shown
-                        \end{description}
+    Exception Handling & The user will be alerted to any changed data which is invalid according to \autoref{fr:validation} and \autoref{fr:registration-details}
                         \\
     \hline
 \end{reqtable}
@@ -774,20 +676,17 @@ system, and it will remain fully operational with or without them.
                             \item Vegetarian
                             \item Other
                         \end{itemize}
+                        
+                        The user should be able to manually type a dietary requirement when Other is selected.
                         \\
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting}\\
+    Dependencies       & None\\
     \hline
     Expected results   & Dietary requirements meet specified requirements.\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [Dietary requirements doesn't meet specification:]
-                                report error to webmaster.
-                        \end{description}
+    Exception Handling & If any items fail to show, the user will also be able to manually type in their requirements, in the same way as selecting Other.
                         \\
     \hline
 \end{reqtable}
@@ -806,26 +705,23 @@ system, and it will remain fully operational with or without them.
                             \item Gluten
                             \item Soy
                             \item Other
-                        \end{itemize}\\
+                        \end{itemize}
+                        The user should be able to manually type a dietary requirement when Other is selected.
+                        \\
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting}\\
+    Dependencies       & None\\
     \hline
     Expected results   & Allergy information meets specified requirements.\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [Allergy information doesn't meet specification:]
-                                report error to webmaster.
-                        \end{description}
+    Exception Handling & If any items fail to show, the user will also be able to manually type in their allergies, in the same way as selecting Other.
                         \\
     \hline
 \end{reqtable}
 
 
-\requirement{User Score}
+\requirement{Scoring Users}
 \label{fr:user-score}
 
 \begin{reqtable}
@@ -838,16 +734,11 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & Low\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting}\\
+    Dependencies       & None\\
     \hline
     Expected results   & User is awarded points as specified above.\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [User notices error in current score:]
-                                Report error to webmaster
-                        \end{description}
+    Exception Handling & If the user notices any discrepancies in their score, they should report it to us
                         \\
     \hline
 \end{reqtable}
@@ -872,31 +763,19 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & Low\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting},
-    \autoref{fr:user-score}\\
+    Dependencies       & \autoref{fr:user-score}\\
     \hline
-    Expected results   & Leaderboard displays all user scores.
-    
-                        All user scores displayed in descending order\\
+    Expected results   & Leaderboard displays all user scores in descending order\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [Multiple users are tied with the same points:]
-                                They all get the same position number, and the
-                                next lowest ranked user is given a position equal
-                                to the number of users with a higher score,
-                                plus one.
-                                e.g. if there are 4 users tied at 3rd, the next
-                                user will 8th.
-                        \end{description}
+    Exception Handling & Multiple users with the same number of points
+                                will be ordered alphabetically.
                         \\
     \hline
 \end{reqtable}
 
 
 
-\requirement{User Ratings}
+\requirement{Rating Users}
 \label{fr:user-ratings}
 
 \begin{reqtable}
@@ -916,32 +795,26 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & Low\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting},
-    \autoref{fr:user-listing-page} (User Listing Page),
-    \autoref{fr:orders} (Orders Page)\\
+    Dependencies       & 
+    \autoref{fr:user-listing-page},
+    \autoref{fr:orders}\\
     \hline
     Expected results   & User has personal rating and it is correct.
                         
                         User able to rate other user involved in any trade.\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [User unable to give rating:]
-                                Report error to webmaster
-                            \item [User notices irregularity in current rating:]
-                                Report possible error to webmaster
-                        \end{description}
+    Exception Handling & If the user notices any discrepancies in their rating, or is unable to send a rating, they should report it to us
                         \\
     \hline
 \end{reqtable}
 
 
-\requirement{Listing}
+\requirement{Adding a Listing}
 \label{fr:listing}
 
 \begin{reqtable}
     Description        &
+    Any logged in user should be able to add a new listing to the item catalogue.
                         A listing is the core element of the web catalogue.
                         All listings should contain the following attributes:
                         \begin{itemize}
@@ -957,73 +830,12 @@ system, and it will remain fully operational with or without them.
                             \item The postcode from which the item can be collected
                             \item A listing status (i.e. Active/Inactive)
                             \item 1 primary photo
-                                (Will be displayed with listing in
-                                public catalogue [\autoref{fr:item-catalogue}])
+                                (Will be displayed with)
                             \item Up to 3 secondary photos
                                 (Will displayed within listing page [\autoref{fr:listings-page}])
                         \end{itemize}
-                        \\
-    \hline
-    Priority           & High\\
-    \hline
-    Dependencies       & \autoref{fr:error-reporting}, 
-    \autoref{fr:item-catalogue} (Item Catalogue),
-    \autoref{fr:listing-status} (Listing Status),
-    \autoref{fr:active-listing}(Active Listing),
-    \autoref{fr:inactive-listing} (Inactive Listing),
-    \autoref{fr:listings-page}\\
-    \hline
-    Expected results   & All listing items conform to the structure mentioned
-                        in the description.\\
-    \hline
-    Exception Handling & \\
-    \hline
-\end{reqtable}
-
-
-\requirement{Listing Status}
-\label{fr:listing-status}
-
-\begin{reqtable}
-    Description        &
-                        At any particular moment in time, all listings should
-                        have one (and only one) of the following statuses:
-
-                        \begin{description}
-                            \itemsep0em
-                            \item [Active:] The listing item is available for
-                                collection. (see \autoref{fr:active-listing}
-                                For more details)
-                            \item [Inactive:] The listing item is no longer
-                                available for collection
-                                (see \autoref{fr:inactive-listing} for more details.)
-                        \end{description}
-                        \\
-    \hline
-    Priority           & High\\
-    \hline
-    Dependencies       & \autoref{fr:error-reporting},
-    \autoref{fr:active-listing},
-    \autoref{fr:inactive-listing}\\
-    \hline
-    Expected results   & All listings are either active or inactive\\
-    \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [Listings don't meet status specification:]
-                                report error to webmaster
-                        \end{description}
-                        \\
-    \hline
-\end{reqtable}
-
-
-\requirement{Active Listing}
-\label{fr:active-listing}
-
-\begin{reqtable}
-    Description        & All active listings are visible on the public catalogue.
+                        At any particular moment in time, all listings should either be "active" or "inactive". This new listing will be "active".
+                        All active listings are visible on the public catalogue.
 
                         Any registered user (except the publisher) should be
                         able to make an offer to commit to collecting a listed
@@ -1032,68 +844,76 @@ system, and it will remain fully operational with or without them.
                         If another user has already offered to receive an item,
                         it will remain active, but will become unavailable, so
                         no other user will be able to place another offer.
+                        
                         \\
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting}, 
-    \autoref{fr:item-catalogue},
-    \autoref{fr:commit} (Commit to collect)\\
+    Dependencies       & None \\
     \hline
-    Expected results   & All active listings meet the specifications in the
-                        description above.\\
+    Expected results   & User able to add listing with all listing items conforming to the structure mentioned
+                        in the description.\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [Active listing doesn't meet specification standards:]
-                                report error to webmaster.
-                        \end{description}
-                        \\
+    Exception Handling & If the user enters invalid data when creating a listing, the system will not accept these inputs and will notify the user\\
     \hline
 \end{reqtable}
 
-
-\requirement{Inactive Listing}
-\label{fr:inactive-listing}
+\requirement{Edit Listing}
+\label{fr:edit-listing}
 
 \begin{reqtable}
     Description        & 
+                        All registered users should be able to edit any of their
+                        active listings.
+                        Users should be able to modify the following attributes:
+
+                        \begin{itemize}
+                            \itemsep-1em
+                            \item Listing Title
+                            \item Listing Description
+                            \item Expiry Date
+                            \item Dietary Requirements and Allergy Information
+                            \item Collection Postcode
+                            \item Listing photo(s)
+                        \end{itemize}
+
+                        Additionally the user should be able to set the listing
+                        to “inactive”.
+                        
                         Inactive listings are not visible on the public
                         catalogue. A listing item can only be made inactive by
                         a by the publisher manually setting it to inactive.
 
                         Once an listing item is made inactive, It will no
-                        longer be visible on the public catalogue.
-
-                        It will also remain permanently inactive
-                        (i.e. the user cannot reset it to active).
+                        longer be visible on the public catalogue. Once
+                        set to “inactive”, the user cannot revert the status to
+                        “active”, and will be unable to perform any of the
+                        modifications listed above.
                         \\
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting},
-    \autoref{fr:item-catalogue}\\
+    Dependencies       &
+    \autoref{fr:listing}
+    \\
     \hline
-    Expected results   & All inactive listings meet the specifications in the
-                        description above.\\
+    Expected results   & User able to edit listing.
+
+                        Changes successfully saved after edit complete.\\
     \hline
     Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [Active Listing doesn't meet specification standards:]
-                                report error to webmaster.
-                        \end{description}
+                        If the user enters invalid data when editing a listing, the system will not accept these inputs and will notify the user
                         \\
     \hline
 \end{reqtable}
 
 
-\requirement{Listings Page}
+
+\requirement{Viewing Listings Page}
 \label{fr:listings-page}
 
 \begin{reqtable}
-    Description        & All listings will have a specific page, which will
+    Description        & All listings will have a specific page, which users can view. This page will
                         contain all the listing information (see \autoref{fr:listing}).
                         When on this page users shall have the option to commit
                         to collecting the item, or to add it to their watchlist.
@@ -1101,24 +921,19 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting},
+    Dependencies       &
     \autoref{fr:listing}\\
     \hline
     Expected results   & All listings have a listing page.
                         All listing information present on page as described above.\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [Listing page doesn't meet specification standards:]
-                                report error to webmaster.
-                        \end{description}
+    Exception Handling & The user will be shown a 404 error if the listing page for a listing cannot be found.
                         \\
     \hline
 \end{reqtable}
 
 
-\requirement{Comments Board}
+\requirement{Commenting on a listing}
 \label{fr:comments}
 
 \begin{reqtable}
@@ -1126,58 +941,30 @@ system, and it will remain fully operational with or without them.
                         where any registered user can post a comment related to
                         the listing.
                         
-                        All comments will be visibile to all users.
+                        All comments will be visible to all users.
                         
                         All comments will be sorted by time of posting
                         (ascending order i.e. most recent comment first).\\
     \hline
     Priority           & Low\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting},
+    Dependencies       &
     \autoref{fr:listings-page}\\
     \hline
     Expected results   & Registered users able to comment on listing page.
                         
                         All comments correctly sorted by time.\\
     \hline
-    Exception Handling & \\
+    Exception Handling & If a comment cannot be posted, the user will be notified of the reason why.\\
     \hline
 \end{reqtable}
 
 
-\requirement{Item Catalogue}
-\label{fr:item-catalogue}
-
-\begin{reqtable}
-    Description        & The item catalogue is an index of all active listings.
-                        Any user should be able to explore the item catalogue.
-                        They should also be able to to apply all of the search
-                        filters and sorting options mentioned in 
-                        \autoref{fr:filters} and \autoref{fr:sorting}.\\
-    \hline
-    Priority           & High\\
-    \hline
-    Dependencies       & \autoref{fr:error-reporting}
-    \autoref{fr:filters} (Search Filters),
-    \autoref{fr:sorting} (Sorting Search Results)
-    \\
-    \hline
-    Expected results   & Item Catalogue available to all users.
-    
-                        Users able to implement filters and sorting as
-                        described.\\
-    \hline
-    Exception Handling & \\
-    \hline
-\end{reqtable}
-
-
-\requirement{Search}
+\requirement{Searching}
 \label{fr:search}
 
 \begin{reqtable}
-    Description        & Users will be able to search for items in the complete
-                        catalogue of items, based on the item’s name.
+    Description        & Users will be able to search for items out of all the items stored in the system, based on the item’s name.
 
                         Sorting and filtering of search results will be done as
                         described in
@@ -1193,7 +980,7 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting}
+    Dependencies       &
     \autoref{fr:filters},
     \autoref{fr:sorting},
     \\
@@ -1204,14 +991,7 @@ system, and it will remain fully operational with or without them.
                         
                         All results displayed as specified.\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [User provides empty search query:] return 
-                                entire item catalogue.
-                            \item [Search query returns no results:] notify 
-                                user that no results were found.
-                        \end{description}
+    Exception Handling & All items will be returned if the user provides an empty search term. If no results for a query are found, the user will be notified.
     \\
     \hline
 \end{reqtable}
@@ -1245,8 +1025,7 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting},
-                        \autoref{fr:item-catalogue}\\
+    Dependencies       & None \\
     \hline
     Expected results   & 
                         User can sort results by criteria mentioned above.
@@ -1254,18 +1033,13 @@ system, and it will remain fully operational with or without them.
                         All results are correctly sorted.
                         \\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [User unable to sort results:] Report error to webmaster.
-                            \item [Results not sorted as expected:] Report error to webmaste.r
-                        \end{description}
+    Exception Handling & If items are being sorted incorrectly, the user should report the issue to us.
                         \\
     \hline
 \end{reqtable}
 
 
-\requirement{Search Filters}
+\requirement{Filtering Search Results}
 \label{fr:filters}
 
 \begin{reqtable}
@@ -1278,30 +1052,24 @@ system, and it will remain fully operational with or without them.
                         \end{itemize}
                         
                         Additionally the user should have the option to filter
-                        out “active” but committed items
+                        out “active” but unavailable items
                         \\
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting},
+    Dependencies       &
     \autoref{fr:dietary-requirements},
-    \autoref{fr:allergy-information}
-    \autoref{fr:item-catalogue}\\
+    \autoref{fr:allergy-information} \\
     \hline
     Expected results   & User able to filter results by criteria mentioned above\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [User unable to filter results:] Report error
-                                to webmaster.
-                        \end{description}
+    Exception Handling & If items are being filtered incorrectly, the user should report the issue to us.
                         \\
     \hline
 \end{reqtable}
 
 
-\requirement{User’s Past \& Current Listings Page}
+\requirement{Viewing the User’s Past \& Current Listings Page}
 \label{fr:user-listing-page}
 
 \begin{reqtable}
@@ -1319,104 +1087,20 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting},
+    Dependencies       &
     \autoref{fr:listing},
-    \autoref{fr:add-listing} (Add Listing),
-    \autoref{fr:edit-listing} (Edit Listing)\\
+    \autoref{fr:edit-listing}\\
     \hline
     Expected results   & User can perform all actions listed above.\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [User unable to perform any of the actions:]
-                                report error to webmaster.
-                        \end{description}
+    Exception Handling & If no data on the user's listings can be found, the user will be notified of this
                         \\
     \hline
 \end{reqtable}
 
 
-\requirement{Add Listing}
-\label{fr:add-listing}
 
-\begin{reqtable}
-    Description        & Any logged in user should be able to add a new
-                        listing to the item catalogue. For a listing to
-                        be successfully added to the catalogue, It must conform
-                        to the specification of a valid listing item
-                        (see \autoref{fr:listing} ).
-
-                        All newly added listings will be given an “active” status.\\
-    \hline
-    Priority           & High\\
-    \hline
-    Dependencies       & \autoref{fr:error-reporting},
-    \autoref{fr:listing}
-    \autoref{fr:item-catalogue}\\
-    \hline
-    Expected results   & User able to add listing.
-    
-                        Listing has “active” status \\
-    \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [User unable to add listing:] Report error to webmaster.
-                        \end{description}
-                        \\
-    \hline
-\end{reqtable}
-
-
-\requirement{Edit Listing}
-\label{fr:edit-listing}
-
-\begin{reqtable}
-    Description        & 
-                        All registered users should be able to edit any of their
-                        active listings.
-                        Users should be able to modify the following attributes:
-
-                        \begin{itemize}
-                            \itemsep-1em
-                            \item Listing Title
-                            \item Listing Description
-                            \item Expiry Date
-                            \item Dietary Requirements and Allergy Information
-                            \item Collection Postcode
-                            \item Listing photo(s)
-                        \end{itemize}
-
-                        Additionally the user should be able to set the listing
-                        to “inactive”. As described by
-                        \autoref{fr:inactive-listing}, once
-                        set to “inactive”, the user cannot revert the status to
-                        “active”, and will be unable to perform any of the
-                        modifications listed above.\\
-    \hline
-    Priority           & High\\
-    \hline
-    Dependencies       & \autoref{fr:error-reporting},
-    \autoref{fr:listing}
-    \\
-    \hline
-    Expected results   & User able to edit listing.
-
-                        Changes successfully saved after edit complete.\\
-    \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [Edited field(s) don't meet specifiation standards:]
-                                prevent the edit, notify user of invalid fields.
-                        \end{description}
-                        \\
-    \hline
-\end{reqtable}
-
-
-\requirement{Commit to collect}
+\requirement{Committing to collect}
 \label{fr:commit}
 
 \begin{reqtable}
@@ -1434,23 +1118,16 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting},
+    Dependencies       &
     \autoref{fr:listing},
-    \autoref{fr:messaging} (Messaging),
+    \autoref{fr:messaging},
     \autoref{fr:orders}\\
     \hline
     Expected results   & User able to commit to active item.
 
                         User cannot commit inactive item.\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [Another user has already committed to the item:]
-                                 Any users who subsequently view the shouldn’t
-                                 should not have the option to commit to the
-                                 same item.
-                        \end{description}
+    Exception Handling & Users who view an unavailable item will not have the option to commit to it. If an error occurs and more than 1 user is able to commit to the same item, it will be down to the provider of the item to choose how to proceed.
                         \\
     \hline
 \end{reqtable}
@@ -1472,25 +1149,18 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting},
-    \autoref{fr:listing},
-    \autoref{fr:commit}\\
+    Dependencies       & None\\
     \hline
     Expected results   & Messaging facility operates as specified in the
                         description above.\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [Messaging facility fails to meet specification criteria:]
-                                Report error to webmaster.
-                        \end{description}
+    Exception Handling & If messages cannot be found or sent, the user will be notified why.
                         \\
     \hline
 \end{reqtable}
 
 
-\requirement{Orders Page}
+\requirement{Viewing Orders}
 \label{fr:orders}
 
 \begin{reqtable}
@@ -1514,7 +1184,7 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & High\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting},
+    Dependencies       &
     \autoref{fr:listing}\\
     \hline
     Expected results   & User can access orders page.
@@ -1522,23 +1192,19 @@ system, and it will remain fully operational with or without them.
                         Orders correctly categorised in "Current" and "History".
                         \\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [User has no orders:] Orders Page will be empty.
-                        \end{description}
+    Exception Handling & If the user has no orders, they will be told this
                         \\
     \hline
 \end{reqtable}
 
 
-\requirement{Watch-list}
+\requirement{Saving items for later}
 \label{fr:watchlist}
 
 \begin{reqtable}
     Description        & All users should have a watch-list, to which they can
-                        add any item from the catalogue
-                        which they are interested in but do not yet wish to
+                        add any item
+                        they are interested in but do not yet wish to
                         commit to receive.
 
                         Any item added to the watchlist should be removed if:
@@ -1555,17 +1221,11 @@ system, and it will remain fully operational with or without them.
     \hline
     Priority           & Low\\
     \hline
-    Dependencies       & \autoref{fr:error-reporting}
-                        \autoref{fr:item-catalogue}\\
+    Dependencies       & \autoref{fr:listing} \\
     \hline
-    Expected results   & Users can add and remove items from watch-list\\
+    Expected results   & Users can add and remove items from watch-list, and items are automatically removed as described\\
     \hline
-    Exception Handling & 
-                        \begin{description}
-                            \itemsep0em
-                            \item [Watch-list not functioning as specified:]
-                                Report errot to webmaster.
-                        \end{description}
+    Exception Handling & If the user is unable to edit their watchlist they will be alerted why.
                         \\
     \hline
 \end{reqtable}
