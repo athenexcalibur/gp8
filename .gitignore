@@ -1,2 +1,4 @@
 #ignore all files in .idea/ directory
 .idea/
+*.swp
+*.swo
