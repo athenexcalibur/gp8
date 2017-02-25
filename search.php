@@ -29,7 +29,7 @@
 </body>
 
 <?php
-require_once(__DIR__. "/../database.php"); //Copies all data stored in the database
+require_once(__DIR__. "php/database.php"); //Copies all data stored in the database
 $POST = array();
 parse_str(file_get_contents('php.input'),$_POST); //parses string into variables
 

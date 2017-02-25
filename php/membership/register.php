@@ -72,7 +72,7 @@ if (isset($_POST["email"], $_POST["username"], $_POST["password"]))
  
     if (empty($errorMessage)) 
     {
-        $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
+        $password = hash("sha256", $_POST["password"]);
         if ($insertstmt = $dbconnection->prepare("INSERT INTO UsersTable (username, email, password) VALUES (?, ?, ?)"))
         {
             $insertstmt->bind_param("sss", $username, $email, $password);

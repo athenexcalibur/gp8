@@ -87,7 +87,9 @@ class User
             $stmt->bind_result($userID, $username, $dbPassword, $this->flags, $this->location, $this->rating, $this->score);
             $stmt->fetch();
 
-            if ($stmt->num_rows == 1 && password_verify($password, $dbPassword))
+            $hash = hash("sha256", $password);
+
+            if ($stmt->num_rows == 1 && $hash === $dbPassword)
             {
                 $this->userid = preg_replace("/[^0-9]+/", "", $userID);
                 $this->username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
