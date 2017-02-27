@@ -1,12 +1,3 @@
-<?php
-require_once "php/user.php";
-
-cSessionStart();
-if (!loginCheck())
-{
-    header("Location: index.php");
-    exit;
-}?>
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" action="post.php" id="newpost">
 <h3>Post a new item</h3>
@@ -33,13 +24,17 @@ Upload Image: <input type="image" name="food_image" id="upload_image"><br><br>
 </form>
 
 <?php
-require_once "php/database.php";
+require_once(__DIR__ . "/php/database.php");
 $_POST = array();
 parse_str(file_get_contents('php://input'), $_POST);
+
+$errorMessage = "";
+$dbconnection = Database::getConnection();
+
 if (isset($_POST["newpost"]))
 {
     $dbconnection = Database::getConnection();
-    $stmt = $dbconnection->prepare("INSERT INTO PostsTable (id, title, description,location,flags,time,userid) VALUES (?, (SELECT id FROM PostsTableTable WHERE userid = ?), ?)");
+    $stmt = $dbconnection->prepare("INSERT INTO PostsTable (id, title, description,location,flags,userid,posttime,expiry) VALUES (?, (SELECT id FROM PostsTableTable WHERE userid = ?), ?)");
     $stmt->bind_param("iss", $_SESSION["user"]->getUserID(), $_POST[""], $_POST["newpost"]);
     if ($stmt->execute())
     {
@@ -48,3 +43,4 @@ if (isset($_POST["newpost"]))
     }
     else echo("Post failed");
 }
+?>

@@ -1,8 +1,8 @@
 <?php
 
-define("DBSERVER", "localhost");
-define("DBUSERNAME", "root");
-define("DBPASSWORD", "root");
+define("DBSERVER", "mysql.dur.ac.uk");
+define("DBUSERNAME", "dcs8s08");
+define("DBPASSWORD", "swansea2");
 
 class Database
 {
@@ -14,7 +14,7 @@ class Database
         $this->dbconnection = new mysqli(DBSERVER, DBUSERNAME, DBPASSWORD);
         if ($this->dbconnection->connect_error) die("Couldn't connect to database: " . $this->dbconnection->connect_error);
 
-        if (!$this->dbconnection->select_db("CupboardDB")) $this->createDB();
+        if (!$this->dbconnection->select_db("Pdcs8s08_CupboardDB")) $this->createDB();
     }
 
     function __destruct()
@@ -33,13 +33,13 @@ class Database
         $createDBConnection = new mysqli(DBSERVER, DBUSERNAME, DBPASSWORD);
         if ($createDBConnection->connect_error) die("Couldn't connect to database: " . $createDBConnection->connect_error);
 
-        if ($createDBConnection->query("CREATE DATABASE IF NOT EXISTS CupboardDB"))
+        if ($createDBConnection->query("CREATE DATABASE IF NOT EXISTS Pdcs8s08_CupboardDB"))
         {
             echo "Database created successfully";
         }
         else die("Error creating database: " . $createDBConnection->error);
 
-        $createDBConnection->select_db("CupboardDB");
+        $createDBConnection->select_db("Pdcs8s08_CupboardDB");
 
         $query ="
         CREATE TABLE IF NOT EXISTS UsersTable
@@ -67,7 +67,7 @@ class Database
             posttime DATETIME DEFAULT NOW(),
             expiry DATE
         )";
-        if (!$createDBConnection->query($query)) die("Failed to create posts table");
+        if (!$createDBConnection->query($query)) die("Failed to create posts table: " . $dbconnection->mysql_error);
 
         $query ="
         CREATE TABLE IF NOT EXISTS MessagesTable

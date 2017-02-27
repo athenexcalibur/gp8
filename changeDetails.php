@@ -44,7 +44,7 @@ if(isset($_POST["email"]) && isset($_POST["username"]))
         {
             echo("Details updated successfully!");
         }
-        else echo ("No changes made!");
+        else echo ("No changes made! " . $stmt->error );
     }
     else echo("Couldn't prepare the update query!");
 }

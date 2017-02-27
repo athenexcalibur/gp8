@@ -51,7 +51,7 @@ function loginCheck()
                 $stmt->fetch();
                 $loginCheck = hash("sha512", $password . $userBrowser);
 
-                if (hash_equals($loginCheck, $loginString)) return true;
+                if ($loginCheck === $loginString) return true;
             }
         }
     }

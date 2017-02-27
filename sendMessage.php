@@ -6,12 +6,24 @@ if (!loginCheck())
 {
     header("Location: index.php");
     exit;
-}?>
+}
 
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" id="messageform">
+$user = $_SESSION["user"];
+echo "<div id='messages'>";
+$dbConnection = Database::getConnection();
+$result = $dbConnection->query("SELECT * FROM MessagesTable WHERE toid = " . $user->getUserID());
+
+
+
+
+?>
+
+
+
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" id="sendMessageForm">
     Username: <input type="text" name="usersearch" id="usersearch" required/><br/>
     Message:<br/>
-    <textarea name="message" min="5" max="256"></textarea><br/>
+    <textarea name="message" min="5" max="256" id="messageBox"></textarea><br/>
     <button type="submit">Send</button>
 </form>
 
@@ -45,4 +57,4 @@ if (isset($_POST["usersearch"]))
         else echo("No message sent!");
     }
     else echo("Could not execute statement!");
-}
+}?>
