@@ -1,8 +1,12 @@
 <?php
-
 define("DBSERVER", "mysql.dur.ac.uk");
 define("DBUSERNAME", "dcs8s08");
 define("DBPASSWORD", "swansea2");
+
+/*define("DBSERVER", "localhost");
+define("DBUSERNAME", "root");
+define("DBPASSWORD", "root");*/
+
 
 class Database
 {
@@ -79,17 +83,6 @@ class Database
           messagetime DATETIME DEFAULT NOW()
         )";
         if (!$createDBConnection->query($query)) die("Failed to create messages table");
-        
-        $query ="
-        CREATE TABLE IF NOT EXISTS CommentsTable
-        (
-         comment_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-         postid INT UNSIGNED NOT NULL,
-         userid INT UNSIGNED NOT NULL,
-         text VARCHAR(256) NOT NULL,
-         commenttime DATETIME DEFAULT NOW()
-        )";
-        if (!$createDBConnection->query($query)) die("Failed to create comments table");
 
         $this->dbconnection = $createDBConnection;
     }
