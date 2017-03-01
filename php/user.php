@@ -103,9 +103,12 @@ class User
 
     public function idToName($userid)
     {
+        $userid = intval($userid);
         if ($userid === $this->userid) return $this->username;
 
-        $stmt = Database::getConnection()->prepare("SELECT username FROM UsersTable WHERE id = ?");
+        $dbconnection = Database::getConnection();
+
+        $stmt = $dbconnection->prepare("SELECT username FROM UsersTable WHERE id = ?");
         $stmt->bind_param("i", $userid);
 
         $stmt->execute();

@@ -5,7 +5,7 @@ require_once "database.php";
 cSessionStart();
 if (!loginCheck())
 {
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit;
 }
 
@@ -14,11 +14,12 @@ $dbConnection = Database::getConnection();
 $_POST = array(); //workaround for broken PHPstorm
 parse_str(file_get_contents('php://input'), $_POST);
 
-if (isset($_POST["usersearch"]))
+if (isset($_POST["toUser"]))
 {
     $dbconnection = Database::getConnection();
+    $userid = $_SESSION["user"]->getUserID();
     $stmt = $dbconnection->prepare("INSERT INTO MessagesTable (fromid, toid, text) VALUES (?, (SELECT id FROM UsersTable WHERE username = ?), ?)");
-    $stmt->bind_param("iss", $_SESSION["user"]->getUserID(), $_POST["usersearch"], $_POST["message"]);
+    $stmt->bind_param("iss", $userid, $_POST["toUser"], $_POST["message"]);
     if ($stmt->execute())
     {
         if ($stmt->affected_rows === 1) echo("Message sent!");
@@ -27,12 +28,13 @@ if (isset($_POST["usersearch"]))
     else echo("Could not execute statement!");
 }
 
-else if(isset($_GET["otherid"])) //get list of messages with one person
+else if(isset($_GET["othername"])) //get list of messages with one person
 {
+    $otherid = $dbConnection->query("SELECT userid FROM UsersTable WHERE username = " . mysqli_real_escape_string($_GET["othername"]));
     $stmt = $dbConnection->prepare("SELECT fromid, toid, text, messagetime FROM MessagesTable 
                                   WHERE fromid = ? AND toid = ? OR fromid = ? AND toid = ?
                                   ORDER BY messageTime ORDER DESC");
-    $stmt->bind_param("iiii", $_GET["otherid"],$_SESSION["user"]->getUserId(),$_SESSION["user"]->getUserId(),$_GET["otherid"]);
+    $stmt->bind_param("iiii", $_GET["otherid"],$_SESSION["user"]->getUserID(),$_SESSION["user"]->getUserID(),$_GET["otherid"]);
 
     if ($stmt->execute())
     {
@@ -60,20 +62,26 @@ else //no other user specified, return all users and the first message
                                   WHERE fromid = ? OR toid = ?
                                   GROUP BY least(fromid, toid), greatest(fromid, toid)
                                   ORDER BY messageTime DESC");
-    $stmt->bind_param("ii", $_SESSION["user"]->getUserId(),$_SESSION["user"]->getUserId());
+
+    $userid = $_SESSION["user"]->getUserID();
+    $stmt->bind_param("ii", $userid,$userid);
 
     if ($stmt->execute())
     {
-        $stmt->bind_result($fromid, $toid);
+        $result = $stmt->get_result();
+        //$stmt->bind_result($fromid, $toid);
         $messages = array();
-        while ($stmt->fetch())
+        while ($data = $result->fetch_assoc())
         {
-            $row = array();
-            $row["fromname"] = $fromid === $_SESSION["user"]->getUserID() ? $_SESSION["user"]->idToName($toid) : $_SESSION["user"]->idToName($fromid);
+            $fromid = $data["fromid"];
+            $toid = $data["toid"];
 
-            $stmt2 = $dbConnection->prepare("SELECT text, time FROM MessagesTable 
-                                  WHERE fromid = ? AND toid = ? OR toid = ? AND fromid = ? 
-                                  ORDER BY messageTime ORDER DESC LIMIT 1");
+            $row = array();
+            $row["fromname"] = $fromid === $userid ? $_SESSION["user"]->idToName($toid) : $_SESSION["user"]->idToName($fromid);
+
+            $stmt2 = $dbConnection->prepare("SELECT text, UNIX_TIMESTAMP(messagetime) AS time FROM MessagesTable 
+                                  WHERE fromid = ? AND toid = ? OR toid = ? AND fromid = ?
+                                  ORDER BY time DESC LIMIT 1");
             $stmt2->bind_param("iiii", $fromid, $toid, $fromid, $toid);
             $stmt2->bind_result($text, $time);
             $stmt2->execute();

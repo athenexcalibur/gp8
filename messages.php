@@ -3,7 +3,7 @@ require_once "php/user.php";
 cSessionStart();
 if (!loginCheck())
 {
-    header("Location: index.php");
+    header("Location: ./index.php");
     exit;
 }
 ?>
@@ -15,12 +15,10 @@ if (!loginCheck())
 </head>
 
 <body>
-<formid="sendMessageForm">
-    Username: <input type="text" name="usersearch" id="usersearch" required/><br/>
-    Message:<br/>
-    <textarea name="message" min="5" max="256" id="messageBox"></textarea><br/>
-    <button type="submit">Send</button>
-</form>
+Username: <input type="text" name="usersearch" id="usersearch" required/><br/>
+Message:<br/>
+<textarea name="message" min="5" max="256" id="messageBox"></textarea><br/>
+<button id="sendMessage">Send</button>
 </body>
 </html>
 
