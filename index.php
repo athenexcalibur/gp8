@@ -1,3 +1,13 @@
+<?php
+include_once "php/user.php";
+cSessionStart();
+
+if (isset($_GET["error"]))
+{
+    //todo error modal
+}
+?>
+
 <!DOCTYPE html>
 <head>
 
@@ -50,9 +60,20 @@
           <!--<li class="nav-item">-->
           <!--<a class="nav-link">Login</a>-->
           <!--</li>-->
-          <li class="nav-item">
-            <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i></a>
-          </li>
+
+            <?php
+                if (loginCheck())
+                {
+                    echo '
+                    <li class="nav-item">
+                        <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i></a>
+                    </li>';
+                }
+                else
+                {
+                    //todo login/registration modal
+                }
+            ?>
         </ul>
       </nav>
       <!--/.navbar -->
