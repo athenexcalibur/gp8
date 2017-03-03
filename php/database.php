@@ -55,7 +55,8 @@ class Database
             flags TINYINT default 0,
             location VARCHAR(52),
             rating FLOAT default 3,
-            score INT default 0
+            score INT default 0,
+			number INT default 0
          )";
         if (!$createDBConnection->query($query)) die("Failed to create user table");
 
@@ -71,7 +72,20 @@ class Database
             posttime DATETIME DEFAULT NOW(),
             expiry DATE
         )";
-        if (!$createDBConnection->query($query)) die("Failed to create posts table: " . $dbconnection->mysql_error);
+        if (!$createDBConnection->query($query)) die("Failed to create posts table");
+		
+		$query =
+        "CREATE TABLE IF NOT EXISTS FinishedPostsTable
+        (
+            id INT UNSIGNED PRIMARY KEY,
+            title VARCHAR(32)  NOT NULL,
+            posterID INT NOT NULL,
+			recepientID INT NOT NULL,
+			recipientDone BOOL DEFAULT 0,
+            fintime DATETIME DEFAULT NOW(),
+            expiry DATE
+        )";
+        if (!$createDBConnection->query($query)) die("Failed to create posts table");
 
         $query ="
         CREATE TABLE IF NOT EXISTS MessagesTable
