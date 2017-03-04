@@ -85,7 +85,7 @@ class Database
             fintime DATETIME DEFAULT NOW(),
             expiry DATE
         )";
-        if (!$createDBConnection->query($query)) die("Failed to create posts table");
+        if (!$createDBConnection->query($query)) die("Failed to create finished posts table");
 
         $query ="
         CREATE TABLE IF NOT EXISTS MessagesTable

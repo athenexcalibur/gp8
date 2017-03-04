@@ -69,7 +69,6 @@ else //no other user specified, return all users and the first message
     if ($stmt->execute())
     {
         $result = $stmt->get_result();
-        //$stmt->bind_result($fromid, $toid);
         $messages = array();
         while ($data = $result->fetch_assoc())
         {
