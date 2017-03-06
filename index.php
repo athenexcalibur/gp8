@@ -38,64 +38,142 @@ if (isset($_GET["error"]))
 </head>
 
 <body>
-  <div class="snap-drawers">
-    <div class="snap-drawer snap-drawer-right">
-      <div>
-        <ul>
-          <li>Orders</li>
-          <li>Listings</li>
-          <li>Messages</li>
-          <li>Notifications</li>
-          <li>Account</li>
-        </ul>
-      </div>
+<div class="snap-drawers">
+  <div class="snap-drawer snap-drawer-right">
+    <div>
+      <ul>
+        <li>Orders</li>
+        <li>Listings</li>
+        <li>Messages</li>
+        <li>Notifications</li>
+        <li>Account</li>
+      </ul>
     </div>
   </div>
-  <div id="content" class="snap-content">
-    <header>
-      <!-- navbar -->
-      <nav class="navbar navbar-dark navbar-fixed-top elegant-color-dark">
-        <a href="#" id="open-left" class="navbar-brand">LOGO</a>
-        <ul class="nav navbar-nav pull-right">
-          <!--<li class="nav-item">-->
-          <!--<a class="nav-link">Login</a>-->
-          <!--</li>-->
+</div>
 
-            <?php
-                if (loginCheck())
-                {
-                    echo '
+<!--login modal-->
+<div class="modal fade" id="loginModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Login</h4>
+      </div>
+      <!--Body-->
+      <div class="modal-body">
+        <div class="md-form">
+          <i class="fa fa-envelope prefix"></i>
+          <input type="text" id="form2" class="form-control">
+          <label for="form2">Your email</label>
+        </div>
+
+        <div class="md-form">
+          <i class="fa fa-lock prefix"></i>
+          <input type="password" id="form4" class="form-control">
+          <label for="form4">Your password</label>
+        </div>
+      </div>
+      <!--Footer-->
+      <div class="modal-footer">
+        <button type="button" id="registrationBtn" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#registrationModal">Register</button>
+        <button type="button" class="btn btn-primary">Login</button>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--/.login modal-->
+<!--registration modal-->
+<div class="modal fade" id="registrationModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Registration</h4>
+      </div>
+      <!--Body-->
+      <div class="modal-body">
+	<div class="form-group">
+	  <label for="dietSelect">Dietary Preferences</label>
+	  <select class="form-control" id="dietSelect" multiple>
+	    <option class="checkbox" value="halal">Halal</option>
+	    <option value="kosher">Kosher</option>
+	    <option value="vegeterian">Vegeterian</option>
+	    <option value="other">Other</option>
+	  </select>
+	</div>
+      </div>
+      <!--Footer-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" id="nextBtn" class="btn btn-primary">Next</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--/.login modal-->
+
+<div id="content" class="snap-content">
+  <header>
+    <!-- navbar -->
+    <nav class="navbar navbar-dark navbar-fixed-top elegant-color-dark">
+      <a href="#" id="open-left" class="navbar-brand">LOGO</a>
+      <ul class="nav navbar-nav pull-right">
+        <!--<li class="nav-item">-->
+        <!--<a class="nav-link">Login</a>-->
+        <!--</li>-->
+
+          <?php
+          if (loginCheck())
+          {
+              echo '
                     <li class="nav-item">
                         <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i></a>
                     </li>';
-                }
-                else
-                {
-                    //todo login/registration modal
-                }
-            ?>
-        </ul>
-      </nav>
-      <!--/.navbar -->
-    </header>
+          }
+          else
+          {
+              echo '
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-toggle="modal"
+			data-target="#loginModal"><i class="material-icons">lock</i></a>
+                    </li>';
+          }
+          ?>
+      </ul>
+    </nav>
+    <!--/.navbar -->
+  </header>
 
-    <!-- background image -->
-    <div class="view hm-black-strong search-jumbotron">
-      <div class="full-bg-img flex-center">
-        <!--Search Bar-->
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-          <form>
-            <input class="form-control" type="text" placeholder="Search">
-          </form>
-        </div>
-        <div class="col-md-2"></div>
-        <!--/.Search Bar-->
+
+  <!-- background image -->
+  <div class="view hm-black-strong search-jumbotron">
+    <div class="full-bg-img flex-center">
+      <!--Search Bar-->
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <form>
+          <input class="form-control" type="text" placeholder="Search">
+        </form>
       </div>
+      <div class="col-md-2"></div>
+      <!--/.Search Bar-->
     </div>
-    <!--/.background image -->
+  </div>
+  <!--/.background image -->
 
-    <main>
+  <main>
     <!--Item-Carousel-->
     <div class="container">
       <div class="row">
@@ -141,25 +219,26 @@ if (isset($_GET["error"]))
       </div>
     </div>
     <!--/.Item-Carousel-->
-    </main>
+  </main>
 
-    <footer>
+  <footer>
 
-    </footer>
-  </div>
+  </footer>
+</div>
 
-  <!--Scripts-->
-  <script src="bootstrap-material-design/js/jquery-3.1.1.min.js"></script>
-  <script src="bootstrap-material-design/js/tether.min.js"></script>
-  <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
-  <script src="bootstrap-material-design/js/mdb.min.js"></script>
-  <script src="js/cards.js"></script>
+<!--Scripts-->
+<script src="bootstrap-material-design/js/jquery-3.1.1.min.js"></script>
+<script src="bootstrap-material-design/js/tether.min.js"></script>
+<script src="bootstrap-material-design/js/bootstrap.min.js"></script>
+<script src="bootstrap-material-design/js/mdb.min.js"></script>
+<script src="js/cards.js"></script>
+<script src="ajax/registration.js"></script>
 
-  <script type="text/javascript" src="snap/snap.min.js"></script>
-  <script type="text/javascript">
-var snapper = new Snap({
-  element: document.getElementById('content')
-});
-  </script>
-  <!--/.Scripts-->
+<script type="text/javascript" src="snap/snap.min.js"></script>
+<script type="text/javascript">
+    var snapper = new Snap({
+        element: document.getElementById('content')
+    });
+</script>
+<!--/.Scripts-->
 </body>
