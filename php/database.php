@@ -37,9 +37,9 @@ class Database
         $createDBConnection = new mysqli(DBSERVER, DBUSERNAME, DBPASSWORD);
         if ($createDBConnection->connect_error) die("Couldn't connect to database: " . $createDBConnection->connect_error);
 
-        if ($createDBConnection->query("CREATE DATABASE IF NOT EXISTS Pdcs8s08_CupboardDB"))
+        if (!$createDBConnection->query("CREATE DATABASE IF NOT EXISTS Pdcs8s08_CupboardDB"))
         {
-            echo "Database created successfully";
+            die("Failed to create DB!");
         }
         else die("Error creating database: " . $createDBConnection->error);
 
@@ -58,34 +58,34 @@ class Database
             score INT default 0,
 			number INT default 0
          )";
-        if (!$createDBConnection->query($query)) die("Failed to create user table");
+        if (!$createDBConnection->query($query)) die("Failed to create user table:" . $createDBConnection->error);
 
         $query =
         "CREATE TABLE IF NOT EXISTS PostsTable
         (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            title VARCHAR(32)  NOT NULL,
+            title VARCHAR(32) NOT NULL,
             description VARCHAR(256),
             location VARCHAR(52),
             flags TINYINT default 0,
             userid INT NOT NULL,
-            posttime DATETIME DEFAULT NOW(),
+            posttime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             expiry DATE
         )";
-        if (!$createDBConnection->query($query)) die("Failed to create posts table");
+        if (!$createDBConnection->query($query)) die("Failed to create posts table:" . $createDBConnection->error);
 		
 		$query =
         "CREATE TABLE IF NOT EXISTS FinishedPostsTable
         (
             id INT UNSIGNED PRIMARY KEY,
-            title VARCHAR(32)  NOT NULL,
+            title VARCHAR(32) NOT NULL,
             posterID INT NOT NULL,
 			recepientID INT NOT NULL,
 			recipientDone BOOL DEFAULT 0,
-            fintime DATETIME DEFAULT NOW(),
+            fintime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             expiry DATE
         )";
-        if (!$createDBConnection->query($query)) die("Failed to create finished posts table");
+        if (!$createDBConnection->query($query)) die("Failed to create finished posts table:" . $createDBConnection->error);
 
         $query ="
         CREATE TABLE IF NOT EXISTS MessagesTable
@@ -94,9 +94,9 @@ class Database
           fromid INT NOT NULL,
           toid INT NOT NULL,
           text VARCHAR(256) NOT NULL,
-          messagetime DATETIME DEFAULT NOW()
+          messagetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )";
-        if (!$createDBConnection->query($query)) die("Failed to create messages table");
+        if (!$createDBConnection->query($query)) die("Failed to create messages table:" . $createDBConnection->error);
 
         $this->dbconnection = $createDBConnection;
     }

@@ -65,15 +65,14 @@ else //no other user specified, return all users and the first message
 
     $userid = $_SESSION["user"]->getUserID();
     $stmt->bind_param("ii", $userid,$userid);
-
+	$stmt->bind_result($first, $second);
     if ($stmt->execute())
     {
-        $result = $stmt->get_result();
         $messages = array();
-        while ($data = $result->fetch_assoc())
+        while ($stmt->fetch())
         {
-            $fromid = $data["fromid"];
-            $toid = $data["toid"];
+            $fromid = $first;
+            $toid = $second;
 
             $row = array();
             $row["fromname"] = $fromid === $userid ? $_SESSION["user"]->idToName($toid) : $_SESSION["user"]->idToName($fromid);

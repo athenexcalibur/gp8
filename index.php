@@ -68,20 +68,20 @@ if (isset($_GET["error"]))
       <div class="modal-body">
         <div class="md-form">
           <i class="fa fa-envelope prefix"></i>
-          <input type="text" id="form2" class="form-control">
-          <label for="form2">Your email</label>
+          <input type="text" id="uemail" class="form-control">
+          <label for="uemail">Your email</label>
         </div>
 
         <div class="md-form">
           <i class="fa fa-lock prefix"></i>
-          <input type="password" id="form4" class="form-control">
-          <label for="form4">Your password</label>
+          <input type="password" id="upass" class="form-control">
+          <label for="upass">Your password</label>
         </div>
       </div>
       <!--Footer-->
       <div class="modal-footer">
         <button type="button" id="registrationBtn" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#registrationModal">Register</button>
-        <button type="button" class="btn btn-primary">Login</button>
+        <button type="button" class="btn btn-primary" id="loginBtn">Login</button>
       </div>
     </div>
     <!--/.Content-->
@@ -102,21 +102,31 @@ if (isset($_GET["error"]))
       </div>
       <!--Body-->
       <div class="modal-body">
-	<div class="form-group">
-	  <label for="dietSelect">Dietary Preferences</label>
-	  <select class="form-control" id="dietSelect" multiple>
-	    <option class="checkbox" value="halal">Halal</option>
-	    <option value="kosher">Kosher</option>
-	    <option value="vegeterian">Vegeterian</option>
-	    <option value="other">Other</option>
-	  </select>
-	</div>
+		<div class="md-form">
+          <input type="text" id="username" class="form-control">
+          <label for="form2">Username</label>
+        </div>
+
+        <div class="md-form">
+          <input type="email" id="email" class="form-control">
+          <label for="form4">Email</label>
+        </div>
+
+        <div class="md-form">
+          <input type="password" id="password" class="form-control">
+          <label for="form4">Password</label>
+        </div>
+
+        <div class="md-form">
+          <input type="password" id="passwordConfirm" class="form-control">
+          <label for="form4">Confirm Password</label>
+        </div>
       </div>
       <!--Footer-->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         <button type="button" id="nextBtn" class="btn btn-primary">Next</button>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" id="registerBtn">Submit</button>
       </div>
     </div>
     <!--/.Content-->
@@ -232,7 +242,7 @@ if (isset($_GET["error"]))
 <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
 <script src="bootstrap-material-design/js/mdb.min.js"></script>
 <script src="js/cards.js"></script>
-<script src="ajax/registration.js"></script>
+<script src="js/registration.js"></script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript">
