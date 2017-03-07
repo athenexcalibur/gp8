@@ -26,15 +26,12 @@ function getMessagesFrom(fromname)
 $("#sendMessage").on("click", function()
 {
     $.post("php/messages.php",
-        {
-            toUser: $("#usersearch").val(),
-            message: $("#messageBox").val()
-        }, function(data)
-        {
-            console.log(data); //todo delete this
-            $("#messageBox").clear();
-        });
+    {
+        toUser: $("#usersearch").val(),
+        message: $("#messageBox").val()
+    }, function(data)
+    {
+        console.log(data); //todo delete this
+        $("#messageBox").clear();
+    });
 });
-
-getMessages();
-getMessagesFrom("passpass");

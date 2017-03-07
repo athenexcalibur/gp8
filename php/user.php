@@ -58,6 +58,11 @@ function loginCheck()
     return false;
 }
 
+function areCompatible($fromFlags, $toFlags)
+{
+    return $fromFlags & $toFlags == $fromFlags;
+}
+
 class User
 {
     private $username;

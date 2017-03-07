@@ -1,9 +1,11 @@
 <?php
+
 define("DBSERVER", "mysql.dur.ac.uk");
 define("DBUSERNAME", "dcs8s08");
 define("DBPASSWORD", "swansea2");
 
-/*define("DBSERVER", "localhost");
+/*
+define("DBSERVER", "localhost");
 define("DBUSERNAME", "root");
 define("DBPASSWORD", "root");*/
 
@@ -37,11 +39,7 @@ class Database
         $createDBConnection = new mysqli(DBSERVER, DBUSERNAME, DBPASSWORD);
         if ($createDBConnection->connect_error) die("Couldn't connect to database: " . $createDBConnection->connect_error);
 
-        if (!$createDBConnection->query("CREATE DATABASE IF NOT EXISTS Pdcs8s08_CupboardDB"))
-        {
-            die("Failed to create DB!");
-        }
-        else die("Error creating database: " . $createDBConnection->error);
+        if (!$createDBConnection->query("CREATE DATABASE IF NOT EXISTS Pdcs8s08_CupboardDB")) die("Failed to create DB!");
 
         $createDBConnection->select_db("Pdcs8s08_CupboardDB");
 

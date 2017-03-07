@@ -242,7 +242,7 @@ if (isset($_GET["error"]))
 <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
 <script src="bootstrap-material-design/js/mdb.min.js"></script>
 <script src="js/cards.js"></script>
-<script src="js/registration.js"></script>
+<script src="js/login.js"></script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript">
