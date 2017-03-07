@@ -38,7 +38,7 @@ else if(isset($_GET["othername"])) //get list of messages with one person
 
     if ($stmt->execute())
     {
-        $stmt->bind_result($fromid, $toid, $text. $time);
+        $stmt->bind_result($fromid, $toid, $text, $time);
         $messages = array();
         while ($stmt->fetch())
         {
@@ -64,7 +64,7 @@ else //no other user specified, return all users and the first message
                                   ORDER BY messageTime DESC");
 
     $userid = $_SESSION["user"]->getUserID();
-    $stmt->bind_param("ii", $userid,$userid);
+    $stmt->bind_param("ii", $userid, $userid);
 	$stmt->bind_result($first, $second);
     if ($stmt->execute())
     {
