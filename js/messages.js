@@ -32,6 +32,6 @@ $("#sendMessage").on("click", function()
     }, function(data)
     {
         console.log(data); //todo delete this
-        $("#messageBox").clear();
+        $("#messageBox").val("");
     });
 });

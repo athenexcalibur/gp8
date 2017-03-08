@@ -1,6 +1,5 @@
 <?php
 require_once "php/user.php";
-cSessionStart();
 if (!loginCheck())
 {
     header("Location: ./index.php");

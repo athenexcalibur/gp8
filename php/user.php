@@ -12,11 +12,8 @@ define("KOSHER", 128);
 
 function cSessionStart()
 {
-    if (ini_set("session.use_only_cookies", 1) === FALSE)
-    {
-        die("Error starting session");
-    }
-
+    if(session_id() !== '') return true;
+    if (ini_set("session.use_only_cookies", 1) === FALSE) return false;
     $cookieParams = session_get_cookie_params();
     session_set_cookie_params($cookieParams["lifetime"],
         $cookieParams["path"],
@@ -25,10 +22,13 @@ function cSessionStart()
 
     session_start();
     session_regenerate_id(true);
+    return true;
 }
 
 function loginCheck()
 {
+    if (!(isset($_SESSION) && isset($_SESSION["user"])) && cSessionStart() !== true) return false;
+
     $dbconnection = Database::getConnection();
     if (isset($_SESSION["user"]))
     {
@@ -96,7 +96,7 @@ class User
 
             if ($stmt->num_rows == 1 && $hash === $dbPassword)
             {
-                $this->userid = preg_replace("/[^0-9]+/", "", $userID);
+                $this->userid = intval(preg_replace("/[^0-9]+/", "", $userID));
                 $this->username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
                 $this->loginstring = hash("sha512", $dbPassword . $_SERVER["HTTP_USER_AGENT"]);
                 $this->email = $email;

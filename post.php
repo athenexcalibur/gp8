@@ -1,9 +1,17 @@
+<?php
+require_once(__DIR__ . "/php/database.php");
+require_once(__DIR__ . "/php/user.php");
+if (!loginCheck())
+{
+    header("Location: index.php");
+    exit;
+}?>
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" action="post.php" id="newpost">
 <h3>Post a new item</h3>
 <p>
 <p>
-Title: <input type="text" name="itemname"><br><br>
+Title: <input type="text" name="title"><br><br>
 Description: <input type="text" name="description"><br><br>
 Flags (Check all that apply):
 <br>
@@ -24,7 +32,7 @@ Upload Image: <input type="image" name="food_image" id="upload_image"><br><br>
 </form>
 
 <?php
-require_once(__DIR__ . "/php/database.php");
+
 $_POST = array();
 parse_str(file_get_contents('php://input'), $_POST);
 

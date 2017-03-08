@@ -2,7 +2,6 @@
 require_once "user.php";
 require_once "database.php";
 
-cSessionStart();
 if (!loginCheck())
 {
     header("Location: ../index.php");
@@ -30,15 +29,24 @@ if (isset($_POST["toUser"]))
 
 else if(isset($_GET["othername"])) //get list of messages with one person
 {
-    $otherid = $dbConnection->query("SELECT userid FROM UsersTable WHERE username = " . mysqli_real_escape_string($_GET["othername"]));
+    $userid = intval($_SESSION["user"]->getUserID());
+    $stmt = $dbConnection->prepare("SELECT id FROM UsersTable WHERE username=?");
+    $stmt->bind_param("s", $_GET["othername"]);
+    $stmt->bind_result($otherid);
+    $stmt->execute();
+    $stmt->fetch();
+    $stmt->close();
     $stmt = $dbConnection->prepare("SELECT fromid, toid, text, messagetime FROM MessagesTable 
                                   WHERE fromid = ? AND toid = ? OR fromid = ? AND toid = ?
-                                  ORDER BY messageTime ORDER DESC");
-    $stmt->bind_param("iiii", $_GET["otherid"],$_SESSION["user"]->getUserID(),$_SESSION["user"]->getUserID(),$_GET["otherid"]);
+                                  ORDER BY messageTime DESC");
+    $error = $stmt->error;
+    $othererror = $dbConnection->error;
+    $stmt->bind_param("iiii", $otherid, $userid, $userid, $otherid);
+    $stmt->bind_result($fromid, $toid, $text, $time);
 
     if ($stmt->execute())
     {
-        $stmt->bind_result($fromid, $toid, $text, $time);
+        $stmt->store_result();
         $messages = array();
         while ($stmt->fetch())
         {
@@ -47,6 +55,7 @@ else if(isset($_GET["othername"])) //get list of messages with one person
             $row["toname"] = $_SESSION["user"]->idToName($toid);
             $row["text"] = $text;
             $row["time"] = $time;
+            $messages[] = $row;
         }
 
         header("Content-Type: application/json");
@@ -68,7 +77,9 @@ else //no other user specified, return all users and the first message
 	$stmt->bind_result($first, $second);
     if ($stmt->execute())
     {
+        $stmt->store_result();
         $messages = array();
+        $stmt->store_result();
         while ($stmt->fetch())
         {
             $fromid = $first;
@@ -92,6 +103,7 @@ else //no other user specified, return all users and the first message
 
         header("Content-Type: application/json");
         echo json_encode($messages);
+        exit;
     }
 
     else header("Location: ../index.php?error=" . urlencode("Error preparing message list statement!"));

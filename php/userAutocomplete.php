@@ -2,13 +2,6 @@
 require_once "database.php";
 require_once "user.php";
 
-cSessionStart();
-if (!loginCheck())
-{
-    header("Location: index.php");
-    exit;
-}
-
 if(isset($_GET["term"]))
 {
     $dbconnection = Database::getConnection();
@@ -25,6 +18,4 @@ if(isset($_GET["term"]))
 
     echo json_encode($usernames);
 }
-
-
 ?>
