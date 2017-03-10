@@ -33,8 +33,7 @@ if (isset($_GET["error"]))
   <link rel="stylesheet" href="bootstrap-material-design/css/mdb.min.css">
 
   <!-- My Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
