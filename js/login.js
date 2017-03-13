@@ -10,6 +10,7 @@ $("#registerBtn").on("click", function()
     }, function(data)
     {
         console.log(data);
+		location.reload(true);
     }).fail(function(response)
     {
         alert('Error: ' + response.responseText);
@@ -18,18 +19,32 @@ $("#registerBtn").on("click", function()
 });
 
 $("#nextBtn").click(function(){
-    $.get("ajax/userAddress.html", function(data) {
-        $("#registrationModal .modal-body").html(data);
-        initMap();
-        google.maps.event.trigger(map, "resize");
-    });
-    $(this).click(function(){
-        $.get("ajax/userAllergens.html", function(data) {
-            $("#registrationModal .modal-body").html(data);
-            console.log(data)
-        });
-        this.id = "nextBtn";
-    });
+    if ($("#regDiv1").css("display") !== "none")
+	{
+        $("#regDiv1").fadeOut(function()
+		{
+			$("#regModalLabel").html("Location");
+			$("#regDiv2").fadeIn(initMap());
+		});
+	}
+	else
+	{
+		$("#regDiv2").fadeOut(function()
+		{
+			$("#regModalLabel").html("Allergens");
+			$("#nextBtn").hide();
+			$("#regDiv3").fadeIn();
+		});
+	}
+});
+
+$("#regCancel").on("click", function()
+{
+	$(".regDivs").hide();
+	$("#regModalLabel").html("User Details");
+	$("#regDiv1").show();
+	$("#nextBtn").show();
+	//todo fix map falling over when cancelling and restarting
 });
 
 $("#loginBtn").on("click", function()
