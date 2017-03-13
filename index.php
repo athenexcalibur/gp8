@@ -89,7 +89,7 @@ if (isset($_GET["error"]))
 <!--/.login modal-->
 <!--registration modal-->
 <div class="modal fade" id="registrationModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog" id="regDialog" role="document">
     <!--Content-->
     <div class="modal-content">
       <!--Header-->
@@ -100,7 +100,7 @@ if (isset($_GET["error"]))
         <h4 class="modal-title w-100" id="myModalLabel">Registration</h4>
       </div>
       <!--Body-->
-      <div class="modal-body">
+      <div class="modal-body" id="regBody">
 		<div class="md-form">
           <input type="text" id="username" class="form-control">
           <label for="form2">Username</label>
@@ -242,6 +242,9 @@ if (isset($_GET["error"]))
 <script src="bootstrap-material-design/js/mdb.min.js"></script>
 <script src="js/cards.js"></script>
 <script src="js/login.js"></script>
+
+<script src="js/enterLocation.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIMtO0_uKM_0og7IjdV7nBDjH4dtUmVoY&libraries=places" async defer></script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript">

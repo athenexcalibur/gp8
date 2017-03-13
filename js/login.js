@@ -17,6 +17,21 @@ $("#registerBtn").on("click", function()
     //todo switch to login modal
 });
 
+$("#nextBtn").click(function(){
+    $.get("ajax/userAddress.html", function(data) {
+        $("#registrationModal .modal-body").html(data);
+        initMap();
+        google.maps.event.trigger(map, "resize");
+    });
+    $(this).click(function(){
+        $.get("ajax/userAllergens.html", function(data) {
+            $("#registrationModal .modal-body").html(data);
+            console.log(data)
+        });
+        this.id = "nextBtn";
+    });
+});
+
 $("#loginBtn").on("click", function()
 {
     $.post("php/membership/login.php",

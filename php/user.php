@@ -141,17 +141,15 @@ class User
              WHERE id = ?
              LIMIT 1"))
         {
-            $stmt->bind_param("i", getUserID());
+            $stmt->bind_param("i", $this->userid);
             $stmt->execute();
             $stmt->store_result();
             $stmt->bind_result($username, $dbPassword, $this->flags, $this->location, $this->rating, $this->score, $this->email);
             $stmt->fetch();
 
-            $this->userid = intval(preg_replace("/[^0-9]+/", "", $userID));
+            $this->userid = intval(preg_replace("/[^0-9]+/", "", $this->userid));
             $this->username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
             $this->loginstring = hash("sha512", $dbPassword . $_SERVER["HTTP_USER_AGENT"]);
-             $this->email = $email;
-             if(!is_null($this->location)) $this->location = htmlspecialchars($this->location);
 		}
         else throw new Exception("There was an error preparing a statement.");
 	}
