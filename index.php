@@ -89,7 +89,7 @@ if (isset($_GET["error"]))
 <!--/.login modal-->
 <!--registration modal-->
 <div class="modal fade" id="registrationModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" id="regDialog" role="document">
+  <div class="modal-dialog" role="document">
     <!--Content-->
     <div class="modal-content">
       <!--Header-->
@@ -97,33 +97,45 @@ if (isset($_GET["error"]))
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title w-100" id="myModalLabel">Registration</h4>
+        <h4 class="modal-title w-100" id="regModalLabel">User Details</h4>
       </div>
       <!--Body-->
       <div class="modal-body" id="regBody">
-		<div class="md-form">
-          <input type="text" id="username" class="form-control">
-          <label for="form2">Username</label>
-        </div>
+		<div id="regDiv1" class="regDivs">
+			<div class="md-form">
+			  <input type="text" id="username" class="form-control">
+			  <label for="form2">Username</label>
+			</div>
 
-        <div class="md-form">
-          <input type="email" id="email" class="form-control">
-          <label for="form4">Email</label>
-        </div>
+			<div class="md-form">
+			  <input type="email" id="email" class="form-control">
+			  <label for="form4">Email</label>
+			</div>
 
-        <div class="md-form">
-          <input type="password" id="password" class="form-control">
-          <label for="form4">Password</label>
-        </div>
+			<div class="md-form">
+			  <input type="password" id="password" class="form-control">
+			  <label for="form4">Password</label>
+			</div>
 
-        <div class="md-form">
-          <input type="password" id="passwordConfirm" class="form-control">
-          <label for="form4">Confirm Password</label>
-        </div>
+			<div class="md-form">
+			  <input type="password" id="passwordConfirm" class="form-control">
+			  <label for="form4">Confirm Password</label>
+			</div>
+		</div>
+		
+		<div id="regDiv2" class="regDivs">
+			<input id="addressInput" class="controls" type="text" placeholder="Search...">
+			<div id="inputMap"></div>
+		</div>
+		
+		<div id="regDiv3" class="regDivs">
+			<h1>Nothing Here</h1>
+		</div>
+
       </div>
       <!--Footer-->
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-secondary" id="regCancel" data-dismiss="modal">Cancel</button>
         <button type="button" id="nextBtn" class="btn btn-primary">Next</button>
         <button type="button" class="btn btn-primary" id="registerBtn">Submit</button>
       </div>
