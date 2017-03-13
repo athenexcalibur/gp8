@@ -10,18 +10,6 @@
   <meta name="apple-touch-fullscreen" content="yes">
   <link rel="stylesheet" type="text/css" href="snap/snap.css" />
 
-<!DOCTYPE html>
-<head>
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!--snap stuff-->
-  <meta http-equiv="x-ua-compatible" content="IE=edge" />
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-touch-fullscreen" content="yes">
-  <link rel="stylesheet" type="text/css" href="snap/snap.css" />
-
   <!-- fontawesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 
@@ -37,10 +25,11 @@
   <!-- My Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/inbox.css">
 
 </head>
 
-<body onload="fillThreads()">
+<body onload="testData()">
   <div class="snap-drawers">
     <div class="snap-drawer snap-drawer-right">
       <div>
@@ -102,14 +91,7 @@
 		$.get("php/messages.php", function(data)
 		{
 			var threadsdiv = document.getElementById("allthreads");
-			var html = '<div class="card"><div class="card-block"><div class="col-sm-3"><img src="avatar/test.png"/><p class="threadname">'
-					+ "FoodieDave"
-					+ '</p></div><div class="col-sm-9"><div class="card"><div class="card-block"><p class = "messagepreview">'
-					+ "hello its foodiedave"
-					+ '<p class = "messagetime">'
-					+ "12:34"
-					+ '</p></div></div></div>'
-					;
+			var html = "";
 			console.log(data);
 			var threads = JSON.parse(data);
 			if(threads.length == 0)
@@ -120,6 +102,16 @@
 			{
 				for(thread in threads)
 				{
+					html += '<div class="card" onclick="openMessage('
+					+ thread["fromname"]
+					+ ')"><div class="card-block"><div class="col-sm-3"><img src="avatar/test.png"/><p class="threadname">'
+					+ thread["fromname"]
+					+ '</p></div><div class="col-sm-9"><div class="card card-block"><p class="messagepreview">'
+					+ thread["text"]
+					+ '<p class = "messagetime">'
+					+ thread["time"]
+					+ '</p></div></div>';
+				
 					html += '<div class="card"><div class="card-block"><h2>'
 					+ thread["fromname"]
 					+ '</h2></div></div>';
@@ -127,6 +119,26 @@
 			}
 			threadsdiv.innerHTML = html;
 		});
+		}
+		
+		function openMessage(threadname)
+		{
+			console.log(threadname);
+			document.location.href = "messagethread.php?threadname=" + threadname;
+		}
+		
+		function testData()
+		{
+			var threadsdiv = document.getElementById("allthreads");
+			var html = '<div class="card" onclick="openMessage(\'FoodieDave\')"><div class="card-block"><div class="col-sm-3"><img src="avatar/test.png"/><p class="threadname">'
+					+ "FoodieDave"
+					+ '</p></div><div class="col-sm-9"><div class="card"><div class="card-block"><p class = "messagepreview">'
+					+ "hello its foodiedave"
+					+ '<p class = "messagetime">'
+					+ "12:34"
+					+ '</p></div></div></div>'
+					;
+			threadsdiv.innerHTML = html;
 		}
 		
   </script>
