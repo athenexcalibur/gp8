@@ -24,11 +24,12 @@
 
   <!-- My Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="css/messages.css">
 
 </head>
 
-<body onload="testMessages()">
+<body onload="fillMessages()">
   <div class="snap-drawers">
     <div class="snap-drawer snap-drawer-right">
       <div>
