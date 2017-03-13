@@ -28,11 +28,14 @@ if (isset($_GET["error"]))
 
   <!-- Bootstrap Core Stylesheet -->
   <link rel="stylesheet" href="bootstrap-material-design/css/bootstrap.min.css">
+  <!--Bootstap-Select Stylesheet-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
   <!-- Material-Design core stylesheet -->
   <link rel="stylesheet" href="bootstrap-material-design/css/mdb.min.css">
 
   <!-- My Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/index.css">
 </head>
 
@@ -129,7 +132,25 @@ if (isset($_GET["error"]))
 		</div>
 		
 		<div id="regDiv3" class="regDivs">
-			<h1>Nothing Here</h1>
+		    <div class="form-group">
+		      <h4>Dietary Preferences</h4>
+		      <select id="dietary" class="selectpicker" multiple>
+		       <option value="halal">Halal</option>
+		       <option value="kosher">Kosher</option>
+		       <option value="vegeterian">Vegeterian</option>
+		       <option value="other">Other</option>
+		      </select>
+		    </div>
+		    <div class="form-group">
+		      <h4>Allergies</h4>
+		      <select id="allergens" class="selectpicker" multiple>
+		       <option value="nuts">Nuts</option>
+		       <option value="gluten">Gluten</option>
+		       <option value="soy">Soy</option>
+		       <option value="lactose">Lactose</option>
+		       <option value="other">Other</option>
+		      </select>
+		    </div>
 		</div>
 
       </div>
@@ -256,13 +277,17 @@ if (isset($_GET["error"]))
 <script src="js/login.js"></script>
 
 <script src="js/enterLocation.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIMtO0_uKM_0og7IjdV7nBDjH4dtUmVoY&libraries=places" async defer></script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript">
+    //setup sidebar
     var snapper = new Snap({
         element: document.getElementById('content')
     });
+    //setup userAllergens selector
+    $('.selectpicker').selectpicker();
 </script>
 <!--/.Scripts-->
 </body>
