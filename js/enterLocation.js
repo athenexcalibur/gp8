@@ -45,6 +45,7 @@ function initMap()
 	google.maps.event.addListener(map, 'click', function(e) 
 	{
         marker.setPosition(e.latLng);
+		window.currentlatLng = e.latLng;
 	});
 	
 	google.maps.event.trigger(map, "resize");

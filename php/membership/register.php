@@ -69,13 +69,16 @@ if (isset($_POST["email"], $_POST["username"], $_POST["password"]))
         exit;
     }
  
- 
+
     if (empty($errorMessage)) 
     {
         $password = hash("sha256", $_POST["password"]);
-        if ($insertstmt = $dbconnection->prepare("INSERT INTO UsersTable (username, email, password) VALUES (?, ?, ?)"))
+		
+		$flags = isset($_POST["flags"]) ? intval($_POST["flags"]) : 0;
+		$location = isset($_POST["location"]) ? $_POST["location"] : NULL;
+        if ($insertstmt = $dbconnection->prepare("INSERT INTO UsersTable (username, email, password, flags, location) VALUES (?, ?, ?, ?, ?)"))
         {
-            $insertstmt->bind_param("sss", $username, $email, $password);
+            $insertstmt->bind_param("sssis", $username, $email, $password, $flags, $location);
             if (!$insertstmt->execute()) $errorMessage .= "Could not create a new user";
             else
             {
