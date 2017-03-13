@@ -1,3 +1,14 @@
+<?php 
+require_once "php/user.php";
+require_once "php/database.php";
+
+if (!loginCheck())
+{
+    header("Location: ../index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <head>
 
@@ -81,12 +92,12 @@
 	    <div class="card-block">
 
 	      <h3>Hello</h3>
-	      <h2>USERNAME</h2>
+	      <h2><?php echo($_SESSION["user"]->getUserName()); ?></h2>
 	      <div id="ratings-div">
-		<h1>4.3/5</h1>
+		<h1><?php echo($_SESSION["user"]->getUserName()); ?>/5</h1>
 	      </div>
 	      <div id="details-div">
-		<div id="score">Your score is X!</div>
+		<div id="score">Your score is <?php echo($_SESSION["user"]->getScore()); ?>!</div>
 		<div id="listed-items">You have listed X items!</div>
 		<div id="received-items">You have recieved X items!</div>
 	      </div>

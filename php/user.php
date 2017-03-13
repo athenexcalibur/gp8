@@ -128,7 +128,37 @@ class User
 
         return null;
     }
+	
+	public function reload()
+	{
+		$dbconnection = Database::getConnection();
+        if ($stmt = $dbconnection->prepare
+        (
+            "SELECT username, password
+             CAST(flags as unsigned integer),
+             location, rating, score, email
+             FROM UsersTable
+             WHERE id = ?
+             LIMIT 1"))
+        {
+            $stmt->bind_param("i", $this->userid);
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($username, $dbPassword, $this->flags, $this->location, $this->rating, $this->score, $this->email);
+            $stmt->fetch();
 
+            $this->userid = intval(preg_replace("/[^0-9]+/", "", $this->userid));
+            $this->username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
+            $this->loginstring = hash("sha512", $dbPassword . $_SERVER["HTTP_USER_AGENT"]);
+		}
+        else throw new Exception("There was an error preparing a statement.");
+	}
+
+	public function getScore()
+    {
+        return $this->username;
+    }
+	
     public function getUserName()
     {
         return $this->username;

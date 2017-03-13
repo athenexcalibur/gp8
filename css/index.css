@@ -41,8 +41,24 @@ main {
     margin-bottom: 50px;
 }
 
+.modal{
+    z-index: 20;   
+}
+.modal-backdrop{
+    z-index: 10;        
+}​
+
 #ItemCarousel .card .card-block {
     padding-top: 3px;
     padding-bottom: 1px;
 }
 
+#inputMap
+{
+    height: 400px;
+}
+
+#regDiv2, #regDiv3
+{
+	display: none;
+}

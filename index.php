@@ -33,8 +33,7 @@ if (isset($_GET["error"]))
   <link rel="stylesheet" href="bootstrap-material-design/css/mdb.min.css">
 
   <!-- My Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
@@ -98,33 +97,45 @@ if (isset($_GET["error"]))
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title w-100" id="myModalLabel">Registration</h4>
+        <h4 class="modal-title w-100" id="regModalLabel">User Details</h4>
       </div>
       <!--Body-->
-      <div class="modal-body">
-		<div class="md-form">
-          <input type="text" id="username" class="form-control">
-          <label for="form2">Username</label>
-        </div>
+      <div class="modal-body" id="regBody">
+		<div id="regDiv1" class="regDivs">
+			<div class="md-form">
+			  <input type="text" id="username" class="form-control">
+			  <label for="form2">Username</label>
+			</div>
 
-        <div class="md-form">
-          <input type="email" id="email" class="form-control">
-          <label for="form4">Email</label>
-        </div>
+			<div class="md-form">
+			  <input type="email" id="email" class="form-control">
+			  <label for="form4">Email</label>
+			</div>
 
-        <div class="md-form">
-          <input type="password" id="password" class="form-control">
-          <label for="form4">Password</label>
-        </div>
+			<div class="md-form">
+			  <input type="password" id="password" class="form-control">
+			  <label for="form4">Password</label>
+			</div>
 
-        <div class="md-form">
-          <input type="password" id="passwordConfirm" class="form-control">
-          <label for="form4">Confirm Password</label>
-        </div>
+			<div class="md-form">
+			  <input type="password" id="passwordConfirm" class="form-control">
+			  <label for="form4">Confirm Password</label>
+			</div>
+		</div>
+		
+		<div id="regDiv2" class="regDivs">
+			<input id="addressInput" class="controls" type="text" placeholder="Search...">
+			<div id="inputMap"></div>
+		</div>
+		
+		<div id="regDiv3" class="regDivs">
+			<h1>Nothing Here</h1>
+		</div>
+
       </div>
       <!--Footer-->
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-secondary" id="regCancel" data-dismiss="modal">Cancel</button>
         <button type="button" id="nextBtn" class="btn btn-primary">Next</button>
         <button type="button" class="btn btn-primary" id="registerBtn">Submit</button>
       </div>
@@ -243,6 +254,9 @@ if (isset($_GET["error"]))
 <script src="bootstrap-material-design/js/mdb.min.js"></script>
 <script src="js/cards.js"></script>
 <script src="js/login.js"></script>
+
+<script src="js/enterLocation.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIMtO0_uKM_0og7IjdV7nBDjH4dtUmVoY&libraries=places" async defer></script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript">

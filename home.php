@@ -119,7 +119,7 @@ cSessionStart();
         <div id="sidebar-wrapper">
            <ul class="sidebar-nav">
               <li><a href="#">Home</a> </li>
-               <li><a href="changeDetails.php">Account</a> </li>
+               <li><a href="php/membership/changeDetails.php">Account</a> </li>
                <li><a href="#">Cart</a></li>
                <li><a href="#">New Listing</a> </li>
                <li><a href="php/membership/logout.php">Logout</a> </li>
