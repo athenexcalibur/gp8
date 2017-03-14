@@ -1,3 +1,12 @@
+<?php
+require_once "php/user.php";
+cSessionStart();
+if (!loginCheck())
+{
+    header("Location: ./index.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <head>
 
@@ -47,7 +56,7 @@
     <header>
       <!-- navbar -->
       <nav class="navbar navbar-dark navbar-fixed-top elegant-color-dark">
-	  <a href="inbox.html" id="ot" class="nav-link"><i class="material-icons">arrow_back</i></a>
+	  <a href="inbox.php" id="ot" class="nav-link"><i class="material-icons">arrow_back</i></a>
         <a href="#" id="open-left" class="navbar-brand">LOGO</a>
         <ul class="nav navbar-nav pull-right">
           <!--<li class="nav-item">-->
@@ -73,8 +82,7 @@
 				<p class="threadname" id="threadname">
   
 				  <?php
-					$threadname = $_GET["threadname"];
-					echo $threadname;
+					if (isset($_GET["threadname"])) echo $_GET["threadname"];
 				  ?>
   
 				</p>
@@ -91,7 +99,7 @@
 			</div>
 			</div>
 			<div class="col-sm-1">
-				<button type="button" onclick="sendMessage()" class="btn btn-primary">SEND</button>
+				<button type="button" id="sendMsg" class="btn btn-primary">SEND</button>
 			</div>
 	</div>
 
@@ -110,77 +118,7 @@
   <script src="bootstrap-material-design/js/mdb.min.js"></script>
   <script src="js/cards.js"></script>
   
-   <script type="text/javascript">
-   function sendMessage()
-   {
-	   var message = document.getElementById("message").value;
-	   console.log(message);
-	   var touser = document.getElementById("threadname").innerHTML;
-	   var url = "php/messages.php?toUser=" + touser + "&message=" + message;
-	   $.post(url);
-	   document.getElementById("message").value = "";
-	   fillMessages();
-   }
-   
-   function fillMessages()
-   {
-	   var otheruser = document.getElementById("threadname").innerHTML;
-	   var url = "php/messages.php?othername=" + otheruser;
-	   $.get(url, function(data)
-	   {
-		   var messages = JSON.parse(data);
-		   var allBoxes = "";
-		   for (var i = 0; i < messages.length; i++)
-		   {
-			   var message = messages[i];
-			   allBoxes += '<div class="message';
-			   if(message["toname"] == otheruser)
-			   {
-				   allBoxes+= 'Sent';
-			   }
-			   else
-			   {
-				   allBoxes+= 'Recieved';
-			   }
-			    
-			   allBoxes += ' card card-block">'
-			   + '<p>'
-			   + message["text"]
-			   + '</p></div>'
-		   }
-		   document.getElementById("messages").innerHTML = allBoxes;
-	   });
-	   
-   }
-   
-   function testMessages()
-   {
-	   var otheruser = document.getElementById("threadname").innerHTML;
-
-		   var messages = [{text : "hi foodiedave", toname : otheruser},{text : "its me foodiedave"}];
-		   var allBoxes = "";
-		   for (var i = 0; i < messages.length; i++)
-		   {
-			   var message = messages[i];
-			   allBoxes += '<div class="message';
-			   if(message["toname"] == otheruser)
-			   {
-				   allBoxes+= 'Sent';
-			   }
-			   else
-			   {
-				   allBoxes+= 'Recieved';
-			   }
-			    
-			   allBoxes += ' card card-block">'
-			   + '<p>'
-			   + message["text"]
-			   + '</p></div>'
-		   }
-		   document.getElementById("messages").innerHTML = allBoxes;
-   }
-		
-  </script>
+   <script type="text/javascript" src="js/messages/messagethread.js"></script>
 
   <script type="text/javascript" src="snap/snap.min.js"></script>
   <script type="text/javascript">

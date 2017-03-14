@@ -27,35 +27,7 @@ function cSessionStart()
 
 function loginCheck()
 {
-    if (!(isset($_SESSION) && isset($_SESSION["user"])) && cSessionStart() !== true) return false;
-
-    $dbconnection = Database::getConnection();
-    if (isset($_SESSION["user"]))
-    {
-        $user = $_SESSION["user"];
-        $userid = $user->getUserID();
-        $loginString = $user->getLoginString();
-        $userBrowser = $_SERVER["HTTP_USER_AGENT"];
-
-        if ($stmt = $dbconnection->prepare("SELECT password 
-                                      FROM UsersTable
-                                      WHERE id = ? LIMIT 1"))
-        {
-            $stmt->bind_param('i', $userid);
-            $stmt->execute();
-            $stmt->store_result();
-
-            if ($stmt->num_rows == 1)
-            {
-                $stmt->bind_result($password);
-                $stmt->fetch();
-                $loginCheck = hash("sha512", $password . $userBrowser);
-
-                if ($loginCheck === $loginString) return true;
-            }
-        }
-    }
-    return false;
+    return (isset($_SESSION) && isset($_SESSION["user"])) ? true : false;
 }
 
 function areCompatible($fromFlags, $toFlags)
@@ -63,12 +35,16 @@ function areCompatible($fromFlags, $toFlags)
     return ($fromFlags & ~$toFlags == 0) ? true : false; //php
 }
 
+if (isset($_GET["id"]))
+{
+    if (loginCheck()) echo $_SESSION["user"]->idToName($_GET["id"]);
+}
+
 class User
 {
     private $username;
     private $userid;
     private $email;
-    private $loginstring;
     private $flags;
     private $score;
     private $rating;
@@ -98,7 +74,6 @@ class User
             {
                 $this->userid = intval(preg_replace("/[^0-9]+/", "", $userID));
                 $this->username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
-                $this->loginstring = hash("sha512", $dbPassword . $_SERVER["HTTP_USER_AGENT"]);
                 $this->email = $email;
                 if(!is_null($this->location)) $this->location = htmlspecialchars($this->location);
             }
@@ -149,7 +124,6 @@ class User
 
             $this->userid = intval(preg_replace("/[^0-9]+/", "", $this->userid));
             $this->username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
-            $this->loginstring = hash("sha512", $dbPassword . $_SERVER["HTTP_USER_AGENT"]);
 		}
         else throw new Exception("There was an error preparing a statement.");
 	}
@@ -166,11 +140,6 @@ class User
     public function setUserName($username)
     {
         $this->username = htmlspecialchars($username);
-    }
-
-    public function getLoginString()
-    {
-        return $this->loginstring;
     }
 
     public function getEmail()

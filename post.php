@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . "/php/database.php");
 require_once(__DIR__ . "/php/user.php");
+cSessionStart();
 if (!loginCheck())
 {
     header("Location: index.php");
@@ -49,7 +50,9 @@ if (isset($_POST["title"]))
     }
 
     $stmt = $dbconnection->prepare("INSERT INTO PostsTable (title, description, expiry, flags) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", $_POST["title"], $_POST["description"], date('Y-m-d', strtotime($_POST["expiry"])), $flags);
+    $title = $_POST["title"];
+    $descrip =  $_POST["description"];
+    $stmt->bind_param("sssi", $title, $descrip, date('m-d-Y', strtotime($_POST["expiry"])), $flags);
     if ($stmt->execute())
     {
         if ($stmt->affected_rows === 1) echo("Your item has been posted");

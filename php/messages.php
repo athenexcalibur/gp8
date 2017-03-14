@@ -1,7 +1,7 @@
 <?php
 require_once "user.php";
 require_once "database.php";
-
+cSessionStart();
 if (!loginCheck())
 {
     header("Location: ../index.php");
@@ -21,8 +21,7 @@ if (isset($_POST["toUser"]))
     $stmt->bind_param("iss", $userid, $_POST["toUser"], $_POST["message"]);
     if ($stmt->execute())
     {
-        if ($stmt->affected_rows === 1) echo("Message sent!");
-        else echo("No message sent!");
+        if (!$stmt->affected_rows === 1) echo("No message sent!");
     }
     else echo("Could not execute statement!");
 }
@@ -35,12 +34,11 @@ else if(isset($_GET["othername"])) //get list of messages with one person
     $stmt->bind_result($otherid);
     $stmt->execute();
     $stmt->fetch();
+    $stmt->store_result();
     $stmt->close();
     $stmt = $dbConnection->prepare("SELECT fromid, toid, text, messagetime FROM MessagesTable 
                                   WHERE fromid = ? AND toid = ? OR fromid = ? AND toid = ?
                                   ORDER BY messageTime DESC");
-    $error = $stmt->error;
-    $othererror = $dbConnection->error;
     $stmt->bind_param("iiii", $otherid, $userid, $userid, $otherid);
     $stmt->bind_result($fromid, $toid, $text, $time);
 

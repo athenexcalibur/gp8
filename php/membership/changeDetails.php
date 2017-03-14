@@ -1,7 +1,7 @@
 <?php
 require_once "../user.php";
 require_once "../database.php";
-
+cSessionStart();
 if (!loginCheck())
 {
     header("Location: ../../index.php");
