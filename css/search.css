@@ -2,3 +2,16 @@
     margin-top: 10em;
     margin-bottom:2em;
 }
+
+.search-container .input-group-addon{
+  cursor: pointer;
+}
+
+#refineBtn {
+  float: right;
+}
+
+.search-options-container{
+  padding: 15px;
+  border: 2px solid black;
+}
