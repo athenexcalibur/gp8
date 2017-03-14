@@ -5,3 +5,20 @@ main {
 .snap-content {
   background-color: #fff;
 }
+
+.snap-drawers .nav-link {
+  color: #FFF;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 15px;
+}
+
+.snap-content>.mask {
+  background-color: #000;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 30;
+  opacity:0.7;
+  display: none;
+}
