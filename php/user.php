@@ -60,7 +60,7 @@ function loginCheck()
 
 function areCompatible($fromFlags, $toFlags)
 {
-    return $fromFlags & $toFlags == $fromFlags;
+    return ($fromFlags & ~$toFlags == 0) ? true : false; //php
 }
 
 class User

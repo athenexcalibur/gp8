@@ -1,6 +1,12 @@
 <?php
-require_once(__DIR__ . "database.php");
-require_once(__DIR__ . "user.php");
+require_once(__DIR__ . "/database.php");
+require_once(__DIR__ . "/user.php");
+
+if (!loginCheck())
+{
+    header("Location: ../index.php");
+    exit;
+}
 
 $dbconnection = Database::getConnection();
 
@@ -9,13 +15,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
     $keywords = isset($_GET["keywords"]) ? explode(" ", $_GET["keywords"]) : array();
     $location = isset($_GET["location"]) ? $_GET["location"] : "";
     $flags = isset($_GET["flags"]) ? intval($_GET["flags"]) : 0;
-    $description = isset($_GET["description"]) ? $_GET["description"] : "";
-
+	
     $location = mysqli_real_escape_string($dbconnection, $location);
     $description = mysqli_real_escape_string($dbconnection, $description);
 
     $sql = "SELECT title,description,location,flags,posttime,expiry FROM PostsTable";
-    if (sizeof($keywords != 0))
+    if (sizeof($keywords) != 0)
     {
         $filtered = mysqli_real_escape_string($dbconnection, $keywords[0]);
         $sql .= " WHERE description LIKE %" . $filtered . "% OR title LIKE %" . $filtered . "%";
@@ -25,14 +30,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
             $sql .= " OR description LIKE %" . $filtered . "% OR title LIKE %" . $filtered . "%";
         }
     }
-
     $result = $dbconnection->query($sql);
 
     $out = array();
     $uflags = $_SESSION["user"]->getFlags();
-    while ($row = mysqli_fetch_array($result))
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
     {
-        if (areCompatible($uflags, intval($row["flags"]))) $out[] = $row;
+        if (areCompatible($uflags, intval($row["flags"])) == 0) $out[] = $row;
     }
     echo json_encode($out);
 }
