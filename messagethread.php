@@ -40,19 +40,43 @@ if (!loginCheck())
 
 <body onload="fillMessages()">
   <div class="snap-drawers">
-    <div class="snap-drawer snap-drawer-right">
-      <div>
-        <ul>
-          <li>Orders</li>
-          <li>Listings</li>
-          <li>Messages</li>
-          <li>Notifications</li>
-          <li>Account</li>
-        </ul>
-      </div>
+    <div class="snap-drawer snap-drawer-right elegant-color-dark">
+	<ul class="nav flex-column">
+	  <div class="view overlay hm-white-slight">
+	    <li class="nav-item">
+	      <a class="nav-link" href="#">Orders</a>
+	      <div class="mask"></div>
+	    </li>
+	  </div>
+	  <div class="view overlay hm-white-slight">
+	    <li class="nav-item">
+	      <a class="nav-link" href="#">Listings</a>
+	      <div class="mask"></div>
+	    </li>
+	  </div>
+	  <div class="view overlay hm-white-slight">
+	    <li class="nav-item">
+	    <a class="nav-link" href="#">Messages</a>
+	      <div class="mask"></div>
+	    </li>
+	  </div>
+	  <div class="view overlay hm-white-slight">
+	    <li class="nav-item">
+	    <a class="nav-link" href="#">Notifications</a>
+	      <div class="mask"></div>
+	    </li>
+	  </div>
+	  <div class="view overlay hm-white-slight">
+	    <li class="nav-item">
+	    <a class="nav-link" href="#">Account</a>
+	      <div class="mask"></div>
+	    </li>
+	  </div>
+	</ul>
     </div>
   </div>
   <div id="content" class="snap-content">
+      <div class="mask"></div>
     <header>
       <!-- navbar -->
       <nav class="navbar navbar-dark navbar-fixed-top elegant-color-dark">
@@ -121,10 +145,6 @@ if (!loginCheck())
    <script type="text/javascript" src="js/messages/messagethread.js"></script>
 
   <script type="text/javascript" src="snap/snap.min.js"></script>
-  <script type="text/javascript">
-var snapper = new Snap({
-  element: document.getElementById('content')
-});
-  </script>
+  <script type="text/javascript" src="js/sidebar.js"></script>
   <!--/.Scripts-->
 </body>

@@ -41,16 +41,39 @@ if (isset($_GET["error"]))
 
 <body>
 <div class="snap-drawers">
-  <div class="snap-drawer snap-drawer-right">
-    <div>
-      <ul>
-        <li>Orders</li>
-        <li>Listings</li>
-        <li>Messages</li>
-        <li>Notifications</li>
-        <li>Account</li>
+  <div class="snap-drawer snap-drawer-right elegant-color-dark">
+      <ul class="nav flex-column">
+	<div class="view overlay hm-white-slight">
+	  <li class="nav-item">
+	    <a class="nav-link" href="#">Orders</a>
+	    <div class="mask"></div>
+	  </li>
+	</div>
+	<div class="view overlay hm-white-slight">
+	  <li class="nav-item">
+	    <a class="nav-link" href="#">Listings</a>
+	    <div class="mask"></div>
+	  </li>
+	</div>
+	<div class="view overlay hm-white-slight">
+	  <li class="nav-item">
+	  <a class="nav-link" href="#">Messages</a>
+	    <div class="mask"></div>
+	  </li>
+	</div>
+	<div class="view overlay hm-white-slight">
+	  <li class="nav-item">
+	  <a class="nav-link" href="#">Notifications</a>
+	    <div class="mask"></div>
+	  </li>
+	</div>
+	<div class="view overlay hm-white-slight">
+	  <li class="nav-item">
+	  <a class="nav-link" href="#">Account</a>
+	    <div class="mask"></div>
+	  </li>
+	</div>
       </ul>
-    </div>
   </div>
 </div>
 
@@ -167,10 +190,11 @@ if (isset($_GET["error"]))
 <!--/.login modal-->
 
 <div id="content" class="snap-content">
+  <div class="mask"></div>
   <header>
     <!-- navbar -->
     <nav class="navbar navbar-dark navbar-fixed-top elegant-color-dark">
-      <a href="#" id="open-left" class="navbar-brand">LOGO</a>
+      <a href="#" class="navbar-brand">LOGO</a>
       <ul class="nav navbar-nav pull-right">
         <!--<li class="nav-item">-->
         <!--<a class="nav-link">Login</a>-->
@@ -281,11 +305,8 @@ if (isset($_GET["error"]))
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIMtO0_uKM_0og7IjdV7nBDjH4dtUmVoY&libraries=places" async defer></script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
+<script type="text/javascript" src="js/sidebar.js"></script>
 <script type="text/javascript">
-    //setup sidebar
-    var snapper = new Snap({
-        element: document.getElementById('content')
-    });
     //setup userAllergens selector
     $('.selectpicker').selectpicker();
 </script>
