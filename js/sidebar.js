@@ -13,7 +13,7 @@ $("#open-right").click(function() {
     }
 });
 //fade out main page content on sidebar open
-snapper.on("animating", function(){
+snapper.on("animated", function(){
     if(snapper.state().state=="closed")
 	$(".snap-content>.mask").fadeOut();
     else
