@@ -200,7 +200,6 @@ if (!loginCheck())
   <script src="bootstrap-material-design/js/tether.min.js"></script>
   <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
   <script src="bootstrap-material-design/js/mdb.min.js"></script>
-  <script src="js/cards.js"></script>
   <script src="js/searchbar.js"></script>
   <script src="js/orders.js"></script>
 
