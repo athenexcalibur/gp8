@@ -73,8 +73,12 @@ if (isset($_POST["email"], $_POST["username"], $_POST["password"]))
     if (empty($errorMessage)) 
     {
         $password = hash("sha256", $_POST["password"]);
-		
-		$flags = isset($_POST["flags"]) ? intval($_POST["flags"]) : 0;
+
+        $flags = 0;
+		if (isset($_POST["flags"]))
+        {
+            foreach ($_POST["flags"] as $flag) $flags |= constant($flag);
+        }
 		$location = isset($_POST["location"]) ? $_POST["location"] : NULL;
         if ($insertstmt = $dbconnection->prepare("INSERT INTO UsersTable (username, email, password, flags, location) VALUES (?, ?, ?, ?, ?)"))
         {

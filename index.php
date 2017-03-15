@@ -158,20 +158,19 @@ if (isset($_GET["error"]))
 		    <div class="form-group">
 		      <h4>Dietary Preferences</h4>
 		      <select id="dietary" class="selectpicker" multiple>
-		       <option value="halal">Halal</option>
-		       <option value="kosher">Kosher</option>
-		       <option value="vegeterian">Vegeterian</option>
-		       <option value="other">Other</option>
+		       <option value="HALAL">Halal</option>
+		       <option value="KOSHER">Kosher</option>
+		       <option value="VEGETARIAN">Vegeterian</option>
+		       <option value="VEGAN">Vegan</option>
 		      </select>
 		    </div>
 		    <div class="form-group">
 		      <h4>Allergies</h4>
 		      <select id="allergens" class="selectpicker" multiple>
-		       <option value="nuts">Nuts</option>
-		       <option value="gluten">Gluten</option>
-		       <option value="soy">Soy</option>
-		       <option value="lactose">Lactose</option>
-		       <option value="other">Other</option>
+		       <option value="NUTS">Nuts</option>
+		       <option value="GLUTEN">Gluten</option>
+		       <option value="SOY">Soy</option>
+		       <option value="LACTOSE">Lactose</option>
 		      </select>
 		    </div>
 		</div>

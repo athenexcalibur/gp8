@@ -55,3 +55,8 @@ main {
 {
 	display: none;
 }
+
+#registerBtn
+{
+    display:none;
+}

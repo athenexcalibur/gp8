@@ -8,6 +8,14 @@ define("DBSERVER", "localhost");
 define("DBUSERNAME", "root");
 define("DBPASSWORD", "root");
 
+define("VEGAN", 1);
+define("VEGETATIAN", 2);
+define("PEANUT", 4);
+define("SOY", 8);
+define("GLUTEN", 16);
+define("LACTOSE", 32);
+define("HALAL", 64);
+define("KOSHER", 128);
 
 class Database
 {

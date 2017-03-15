@@ -4,7 +4,9 @@ $("#registerBtn").on("click", function()
 	{
         email: $("#email").val(),
         username: $("#username").val(),
-        password: $("#password").val()
+        password: $("#password").val(),
+        location: window.currentlatLng.lat() + ',' + window.currentlatLng.lng(),
+        flags: createFlags()
     }, function(data)
     {
         console.log(data);
@@ -16,13 +18,31 @@ $("#registerBtn").on("click", function()
     //todo switch to login modal
 });
 
-$("#nextBtn").click(function(){
+function createFlags()
+{
+    var selected = [];
+    $("#diatary").find(":selected").each(function()
+    {
+        selected.push($(this).val());
+    });
+
+    $("#allergens").find(":selected").each(function()
+    {
+        selected.push($(this).val());
+    });
+
+    return selected;
+}
+
+$("#nextBtn").click(function()
+{
     if ($("#regDiv1").css("display") !== "none")
 	{
         $("#regDiv1").fadeOut(function()
 		{
 			$("#regModalLabel").html("Location");
 			$("#regDiv2").fadeIn(initMap());
+            $("#nextBtn").prop("disabled", true);
 		});
 	}
 	else
@@ -30,7 +50,8 @@ $("#nextBtn").click(function(){
 		$("#regDiv2").fadeOut(function()
 		{
 			$("#regModalLabel").html("Allergens");
-			$("#nextBtn").hide();
+            $("#registerBtn").show();
+            $("#nextBtn").hide();
 			$("#regDiv3").fadeIn();
 		});
 	}
@@ -42,6 +63,7 @@ $("#regCancel").on("click", function()
 	$("#regModalLabel").html("User Details");
 	$("#regDiv1").show();
 	$("#nextBtn").show();
+    $("#registerBtn").hide();
 	//todo fix map falling over when cancelling and restarting
 });
 

@@ -1,8 +1,10 @@
+"use strict";
+
 //todo hook up listing page
-function createCard(post)
+function createCard(post, current)
 {
     var otheruser = $.get("php/user.php", {id: post.userid});
-    return '\
+    var html =  '\
         <div class="card order-card">\
         <div class="row">\
         <div class="col-xs-3">\
@@ -25,9 +27,15 @@ function createCard(post)
         <div class="details-link">\
         <a class="card-link" href="messagethead.php?threadname=' + otheruser + '">View conversation</a>\
         </div></div></div></div>\
-        <div class = "buttons">\
-        <button type="button" class="btn btn-success" onclick="submitrating(' + post.id + ')">RECIEVED</button>\
-        <button type="button" class="btn btn-danger">CANCEL</button></div></div>';
+        <div class = "buttons">'
+
+    if (current)
+    {
+        html += '<button type="button" class="btn btn-success" onclick="submitrating(' + post.id + ')">RECIEVED</button>\
+                 <button type="button" class="btn btn-danger">CANCEL</button></div></div>';
+    }
+
+    return html;
 }
 
 
@@ -37,7 +45,7 @@ function fillOrders()
     {
         var ret = JSON.parse(data);
         console.log(ret);
-        var currentOrders = ret.stillUp;
+        var currentOrders = ret.waitingForYou;
 
         for (var i = 0; i < currentOrders.length; i++)
         {
@@ -45,7 +53,18 @@ function fillOrders()
             var card = $(document.createElement('div'));
             card.html(createCard(currentOrders[i]));
             card.attr('data-id', currentOrders[i].id);
-            $(".order-cards").append(card);
+            $(".order-cards").append(card, true);
+        }
+
+        var history = ret.bothDone;
+
+        for (var i = 0; i < history.length; i++)
+        {
+
+            var card = $(document.createElement('div'));
+            card.html(createCard(history[i]));
+            card.attr('data-id', history[i].id);
+            $(".past-order-cards").append(card, false);
         }
     });
 }

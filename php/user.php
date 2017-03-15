@@ -1,15 +1,6 @@
 <?php
 require_once "database.php";
 
-define("VEGAN", 1);
-define("VEGETATIAN", 2);
-define("PEANUT", 4);
-define("SOY", 8);
-define("GLUTEN", 16);
-define("LACTOSE", 32);
-define("HALAL", 64);
-define("KOSHER", 128);
-
 function cSessionStart()
 {
     if(session_id() !== '') return true;
@@ -163,7 +154,7 @@ class User
     }
     public function setLocation($newLoc)
     {
-        if (preg_match("/-?[0-9]{2}.[0-9]{7},-?[0-9]{2}.[0-9]{7}/i", $newLoc)) $this->location = $newLoc;
+        $this->location = $newLoc;
     }
 
     public function checkFlag($flag)
