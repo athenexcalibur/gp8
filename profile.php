@@ -1,10 +1,10 @@
 <?php 
 require_once "php/user.php";
 require_once "php/database.php";
-
+cSessionStart();
 if (!loginCheck())
 {
-    header("Location: ../index.php");
+    header("Location: index.php");
     exit;
 }
 ?>
@@ -118,7 +118,7 @@ if (!loginCheck())
 	      <h3>Hello</h3>
 	      <h2><?php echo($_SESSION["user"]->getUserName()); ?></h2>
 	      <div id="ratings-div">
-		<h1><?php echo($_SESSION["user"]->getUserName()); ?>/5</h1>
+		<h1><?php echo($_SESSION["user"]->getRating()); ?>/5</h1>
 	      </div>
 	      <div id="details-div">
 		<div id="score">Your score is <?php echo($_SESSION["user"]->getScore()); ?>!</div>

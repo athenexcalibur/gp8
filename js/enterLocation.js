@@ -49,7 +49,6 @@ function initMap()
     {
         marker.setPosition(e.latLng);
         window.currentlatLng = e.latLng;
-        console.log(window.currentlatLng);
         $("#nextBtn").prop("disabled", false);
     });
 

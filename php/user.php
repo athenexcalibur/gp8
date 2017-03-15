@@ -4,21 +4,15 @@ require_once "database.php";
 function cSessionStart()
 {
     if(session_id() !== '') return true;
-    if (ini_set("session.use_only_cookies", 1) === FALSE) return false;
-    $cookieParams = session_get_cookie_params();
-    session_set_cookie_params($cookieParams["lifetime"],
-        $cookieParams["path"],
-        $cookieParams["domain"],
-        false,true);
-
     session_start();
-    session_regenerate_id(true);
     return true;
 }
 
 function loginCheck()
 {
-    return (isset($_SESSION) && isset($_SESSION["user"])) ? true : false;
+    if (isset($_SESSION) && isset($_SESSION["user"])) return true;
+    session_destroy();
+    return false;
 }
 
 function areCompatible($fromFlags, $toFlags)
@@ -121,7 +115,12 @@ class User
 
 	public function getScore()
     {
-        return $this->username;
+        return $this->score;
+    }
+
+    public function getRating()
+    {
+        return $this->rating;
     }
 	
     public function getUserName()

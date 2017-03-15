@@ -44,7 +44,7 @@ if (!loginCheck())
 	<ul class="nav flex-column">
 	  <div class="view overlay hm-white-slight">
 	    <li class="nav-item">
-	      <a class="nav-link" href="#">Orders</a>
+	      <a class="nav-link" href="orders.php">Orders</a>
 	      <div class="mask"></div>
 	    </li>
 	  </div>
@@ -56,7 +56,7 @@ if (!loginCheck())
 	  </div>
 	  <div class="view overlay hm-white-slight">
 	    <li class="nav-item">
-	    <a class="nav-link" href="#">Messages</a>
+	    <a class="nav-link" href="inbox.php">Messages</a>
 	      <div class="mask"></div>
 	    </li>
 	  </div>
@@ -68,7 +68,7 @@ if (!loginCheck())
 	  </div>
 	  <div class="view overlay hm-white-slight">
 	    <li class="nav-item">
-	    <a class="nav-link" href="#">Account</a>
+	    <a class="nav-link" href="profile.php">Profile</a>
 	      <div class="mask"></div>
 	    </li>
 	  </div>

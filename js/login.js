@@ -10,7 +10,7 @@ $("#registerBtn").on("click", function()
     }, function(data)
     {
         console.log(data);
-		//location.reload(true);
+		location.reload(true);
     }).fail(function(response)
     {
         alert('Error: ' + response.responseText);
