@@ -39,7 +39,7 @@ if (!loginCheck())
 
 </head>
 
-<body onload="fillAllOrders()">
+<body>
 <div class="snap-drawers">
   <div class="snap-drawer snap-drawer-right elegant-color-dark">
       <ul class="nav flex-column">

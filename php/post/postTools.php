@@ -1,6 +1,6 @@
 <?php
-require_once "user.php";
-require_once "database.php";
+require_once(__DIR__ . "/../database.php");
+require_once(__DIR__ . "/../user.php");
 cSessionStart();
 if (!loginCheck())
 {
@@ -77,7 +77,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
     $stillGoing = array();
     if ($result = $dbConnection->query("SELECT * FROM PostsTable WHERE userid=" . $userid))
     {
-        while ($row = $result->fetch_assoc()) $stillGoing[] = $row; //todo find out why userid is 0
+        while ($row = $result->fetch_assoc()) $stillGoing[] = $row;
     }
 
     //get the rest

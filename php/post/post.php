@@ -92,10 +92,11 @@ else if (isset($_POST["title"]))
         foreach ($_POST["flags"] as $value) $flags |= constant($value);
     }
 
-    $stmt = $dbconnection->prepare("INSERT INTO PostsTable (title, description, expiry, flags) VALUES (?, ?, ?, ?)");
+    $stmt = $dbconnection->prepare("INSERT INTO PostsTable (title, description, expiry, flags, userid) VALUES (?, ?, ?, ?, ?)");
     $title = $_POST["title"];
     $descrip =  $_POST["description"];
-    $stmt->bind_param("sssi", $title, $descrip, date('m-d-Y', strtotime($_POST["expiry"])), $flags);
+    $userid = $_SESSION["user"]->getUserID();
+    $stmt->bind_param("sssii", $title, $descrip, date('m/d/Y', strtotime($_POST["expiry"])), $flags, $userid);
     if ($stmt->execute())
     {
         if ($stmt->affected_rows === 1) echo("Your item has been posted");
