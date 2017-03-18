@@ -101,7 +101,8 @@ else if (isset($_POST["title"]))
     $title = $_POST["title"];
     $descrip =  $_POST["description"];
     $userid = $_SESSION["user"]->getUserID();
-    $date = date('m/d/Y', strtotime($_POST["expiry"]));
+    $date = date('Y-m-d', strtotime($_POST["expiry"]));
+    echo $date;
     $stmt->bind_param("sssii", $title, $descrip, $date, $flags, $userid);
     if ($stmt->execute())
     {
