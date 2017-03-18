@@ -46,6 +46,10 @@ main {
     padding-bottom: 1px;
 }
 
+.item-card .card-title{
+  padding-left: 0.5em;
+}
+
 #inputMap
 {
     height: 400px;
