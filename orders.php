@@ -204,11 +204,7 @@ if (!loginCheck())
   <script src="js/orders.js"></script>
 
   <script type="text/javascript" src="snap/snap.min.js"></script>
-  <script type="text/javascript">
-      var snapper = new Snap({
-          element: document.getElementById('content')
-      });
-  </script>
+  <script type="text/javascript" src="js/sidebar.js"> </script>
   <!--/.Scripts-->
 
 </body>
