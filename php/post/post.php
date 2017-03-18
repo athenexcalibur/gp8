@@ -31,6 +31,11 @@ Upload Image: <input type="image" name="food_image" id="upload_image"><br><br>
 <input type="submit" value="Upload Image" name="submit"><br<br>
 <button type="submit">Post</button>
 </form>
+<input id="addressInput" class="controls" type="text" placeholder="Search...">
+<div id="inputMap" style="width: 500px; height: 500px;"></div>
+<script src="../../bootstrap-material-design/js/jquery-3.1.1.min.js"></script>
+<script src="../../js/enterLocation.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIMtO0_uKM_0og7IjdV7nBDjH4dtUmVoY&callback=initMap&libraries=places" async defer></script>
 
 <?php
 /*
@@ -96,7 +101,8 @@ else if (isset($_POST["title"]))
     $title = $_POST["title"];
     $descrip =  $_POST["description"];
     $userid = $_SESSION["user"]->getUserID();
-    $stmt->bind_param("sssii", $title, $descrip, date('m/d/Y', strtotime($_POST["expiry"])), $flags, $userid);
+    $date = date('m/d/Y', strtotime($_POST["expiry"]));
+    $stmt->bind_param("sssii", $title, $descrip, $date, $flags, $userid);
     if ($stmt->execute())
     {
         if ($stmt->affected_rows === 1) echo("Your item has been posted");

@@ -1,5 +1,6 @@
 <?php
 require_once "database.php";
+require_once "location.php";
 
 function cSessionStart()
 {
@@ -50,7 +51,7 @@ class User
             $stmt->bind_param("s", $email);
             $stmt->execute();
             $stmt->store_result();
-            $stmt->bind_result($userID, $username, $dbPassword, $this->flags, $this->location, $this->rating, $this->score);
+            $stmt->bind_result($userID, $username, $dbPassword, $this->flags, $llStr, $this->rating, $this->score);
             $stmt->fetch();
 
             $hash = hash("sha256", $password);
@@ -60,7 +61,7 @@ class User
                 $this->userid = intval(preg_replace("/[^0-9]+/", "", $userID));
                 $this->username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
                 $this->email = $email;
-                if(!is_null($this->location)) $this->location = htmlspecialchars($this->location);
+                if(!is_null($llStr)) $this->location = new location($llStr);
             }
             else throw new Exception("Invalid email or password, please try again.");
         } else throw new Exception("There was an error preparing a statement.");
@@ -104,11 +105,12 @@ class User
             $stmt->bind_param("i", $this->userid);
             $stmt->execute();
             $stmt->store_result();
-            $stmt->bind_result($username, $dbPassword, $this->flags, $this->location, $this->rating, $this->score, $this->email);
+            $stmt->bind_result($username, $dbPassword, $this->flags, $llStr, $this->rating, $this->score, $this->email);
             $stmt->fetch();
 
             $this->userid = intval(preg_replace("/[^0-9]+/", "", $this->userid));
             $this->username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
+            if(!is_null($llStr)) $this->location = new location($llStr);
 		}
         else throw new Exception("There was an error preparing a statement.");
 	}
@@ -153,12 +155,13 @@ class User
     }
     public function setLocation($newLoc)
     {
-        $this->location = $newLoc;
+        if (is_null($this->location)) $this->location = new location($newLoc);
+        else $this->location->setLatLong($newLoc);
     }
 
     public function checkFlag($flag)
     {
-        return $this->flags & $flag;
+        return ($this->flags & $flag == 0) ? false : true;
     }
 
     public function setFlag($flag)

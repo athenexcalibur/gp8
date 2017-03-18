@@ -49,6 +49,7 @@ main {
 #inputMap
 {
     height: 400px;
+    overflow:visible;
 }
 
 #regDiv2, #regDiv3

@@ -13,6 +13,8 @@ function initMap()
             mapTypeId: 'roadmap'
         });
 
+    window.map = map;
+
     marker = new google.maps.Marker({map: map});
 
     var input = document.getElementById("addressInput");

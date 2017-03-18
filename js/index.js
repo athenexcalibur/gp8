@@ -1,3 +1,6 @@
+$(document).on("load", initMap());
+
+//login stuff ----
 $("#registerBtn").on("click", function()
 {
     $.post("php/membership/register.php",
@@ -41,7 +44,7 @@ $("#nextBtn").click(function()
         $("#regDiv1").fadeOut(function()
 		{
 			$("#regModalLabel").html("Location");
-			$("#regDiv2").fadeIn(initMap());
+			$("#regDiv2").fadeIn(google.maps.event.trigger(window.map, "resize"));
             $("#nextBtn").prop("disabled", true);
 		});
 	}
@@ -64,7 +67,6 @@ $("#regCancel").on("click", function()
 	$("#regDiv1").show();
 	$("#nextBtn").show();
     $("#registerBtn").hide();
-	//todo fix map falling over when cancelling and restarting
 });
 
 $("#loginBtn").on("click", function()
@@ -80,6 +82,27 @@ $("#loginBtn").on("click", function()
     {
         alert('Error: ' + response.responseText);
     });
-
 });
 
+/* validation
+$(document).ready(function ()
+{
+    //disable submission button untill passwords match and email matches regex
+    $("#registerbutton").prop("disabled", true);
+    $("#regstrationModal").on("input", function()
+    {
+        var pass1 = $("#password").val();
+        var pass2 = $("#checkpass").val();
+        var email = $("#email").val();
+
+        if (pass1 && pass1.length >= 6 && pass1 === pass2)// && email.match(emailRE))
+        {
+            $("#registerBtn").prop("disabled", false);
+        }
+        else
+        {
+            $("#registerBtn").prop("disabled", true);
+        }
+    });
+});
+*/

@@ -297,11 +297,12 @@ if (isset($_GET["error"]))
 <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
 <script src="bootstrap-material-design/js/mdb.min.js"></script>
 <script src="js/cards.js"></script>
-<script src="js/login.js"></script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIMtO0_uKM_0og7IjdV7nBDjH4dtUmVoY&libraries=places"></script>
 <script src="js/enterLocation.js"></script>
+<script src="js/index.js"></script>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIMtO0_uKM_0og7IjdV7nBDjH4dtUmVoY&libraries=places" async defer></script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>

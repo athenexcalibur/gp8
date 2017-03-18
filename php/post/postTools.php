@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . "/../database.php");
 require_once(__DIR__ . "/../user.php");
+require_once(__DIR__ . "/../location.php");
 cSessionStart();
 if (!loginCheck())
 {
@@ -59,7 +60,7 @@ if(isset($_POST["postID"]) && isset($_POST["rating"]))
         else echo "No rating recieved.";
 		echo "It worked!"; //todo
 	}
-	else die ($dbConnection->mysql_error);
+	else die ($dbConnection->error);
 }
 
 /*
@@ -88,7 +89,12 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
     {
         while ($row = $result->fetch_assoc())
         {
-            if(intval($row["recepientDone"]) === 1) $bothDone[] = $row;
+            if (isset($row["location"]) && ($loc = $_SESSION["user"]->getLocation()) !== "unset")
+            {
+                $row["distance"] = $loc->distanceFrom(new location($row["location"]));
+            } //ugh
+
+            if (intval($row["recepientDone"]) === 1) $bothDone[] = $row;
             else if (intval($row["recepientID"]) === $userid) $waitingForYou[] = $row;
             else $waitingForRecepient = $row;
         }
