@@ -1,4 +1,4 @@
-$(document).on("load", initMap());
+
 
 //login stuff ----
 $("#registerBtn").on("click", function()
@@ -44,8 +44,9 @@ $("#nextBtn").click(function()
         $("#regDiv1").fadeOut(function()
 		{
 			$("#regModalLabel").html("Location");
-			$("#regDiv2").fadeIn(google.maps.event.trigger(window.map, "resize"));
             $("#nextBtn").prop("disabled", true);
+            $("#regDiv2").fadeIn();
+            reInitMap();
 		});
 	}
 	else
@@ -66,7 +67,9 @@ $("#regCancel").on("click", function()
 	$("#regModalLabel").html("User Details");
 	$("#regDiv1").show();
 	$("#nextBtn").show();
+    $("#nextBtn").prop("disabled", false);
     $("#registerBtn").hide();
+    reInitMap();
 });
 
 $("#loginBtn").on("click", function()

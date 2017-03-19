@@ -56,3 +56,8 @@ function initMap()
 
     google.maps.event.trigger(map, "resize");
 }
+
+function reInitMap()
+{
+    google.maps.event.trigger(window.map, "resize");
+}
