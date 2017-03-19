@@ -24,7 +24,7 @@ $("#registerBtn").on("click", function()
 function createFlags()
 {
     var selected = [];
-    $("#diatary").find(":selected").each(function()
+    $("#dietary").find(":selected").each(function()
     {
         selected.push($(this).val());
     });

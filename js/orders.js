@@ -4,27 +4,36 @@ $(document).ready(fillOrders());
 
 function fillOrders()
 {
-    var html = "";
     var url = "php/post/postTools.php";
     $.get(url, function (data)
     {
         var history = JSON.parse(data);
-        var stillUp = history["stillUp"];
-        for (var i = 0; i < stillUp.length; i++)
+        var stillUp = history["waitingForYou"];
+
+        if (stillUp.length === 0) document.getElementById("currentorders").innerHTML = "No orders are waiting for you!";
+        else
         {
-            var order = stillUp[i];
-            html += newOrderCard(order);
+            var html = "";
+            for (var i = 0; i < stillUp.length; i++)
+            {
+                var order = stillUp[i];
+                html += newOrderCard(order);
+            }
+            document.getElementById("currentorders").innerHTML = html;
         }
-        document.getElementById("currentorders").innerHTML = html;
 
         var html = "";
         var bothDone = history["bothDone"];
-        for (var i = 0; i < bothDone.length; i++)
+        if (bothDone.length === 0) document.getElementById("pastorders").innerHTML = "You've not yet recieved any items. You can change this using the search page.";
+        else
         {
-            var order = bothDone[i];
-            html += newPastOrderCard(order);
+            for (var i = 0; i < bothDone.length; i++)
+            {
+                var order = bothDone[i];
+                html += newPastOrderCard(order);
+            }
+            document.getElementById("pastorders").innerHTML = html;
         }
-        document.getElementById("pastorders").innerHTML = html;
     });
 }
 
@@ -86,9 +95,7 @@ function newOrderCard(order)
     var orderID = order["id"];
     var html =
         ' <div class="card order-card">'
-
         + '  <div class="row">'
-
         + '   <div class="col-xs-3">'
         + '          <div class="card-block">'
         + '           <div class="view overlay hm-white-slight z-depth-1">'

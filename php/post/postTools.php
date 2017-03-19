@@ -89,6 +89,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
     {
         while ($row = $result->fetch_assoc())
         {
+            $row["posterName"] = $_SESSION["user"]->idToName(intval($row["userid"]));
             if (isset($row["location"]) && ($loc = $_SESSION["user"]->getLocation()) !== "unset")
             {
                 $row["distance"] = $loc->distanceFrom(new location($row["location"]));
