@@ -160,7 +160,7 @@ class User
 
     public function checkFlag($flag)
     {
-        return ($this->flags & $flag == 0) ? false : true;
+        return ($this->flags & $flag) != 0;
     }
 
     public function setFlag($flag)

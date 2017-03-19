@@ -19,14 +19,14 @@ Description: <input type="text" id="description"><br><br>
 Flags (Check all that apply):
 <br>
 <div id="allergyDiv">
-Vegan? <input type="checkbox" name="flags[]" value="VEGAN" <?php echo ($_SESSION["user"]->checkFlag(VEGAN) ? "checked" : "");?>>
-Vegetarian? <input type="checkbox" name="flags[]" value="VEGETARIAN" <?php echo ($_SESSION["user"]->checkFlag(VEGETATIAN) ? "checked" : "");?>><br/>
-Peanuts? <input type="checkbox" name="flags[]" value="PEANUT" <?php echo ($_SESSION["user"]->checkFlag(PEANUT) ? "checked" : "");?>>
-Soy? <input type="checkbox" name="flags[]" value="SOY" <?php echo ($_SESSION["user"]->checkFlag(SOY) ? "checked" : "");?>><br/>
-Gluten? <input type="checkbox" name="flags[]" value="GLUTEN" <?php echo ($_SESSION["user"]->checkFlag(GLUTEN) ? "checked" : "");?>>
-Lactose? <input type="checkbox" name="flags[]" value="LACTOSE" <?php echo ($_SESSION["user"]->checkFlag(LACTOSE) ? "checked" : "");?>><br/>
-Halal? <input type="checkbox" name="flags[]" value="HALAL" <?php echo ($_SESSION["user"]->checkFlag(HALAL) ? "checked" : "");?>>
-Kosher? <input type="checkbox" name="flags[]" value="KOSHER" <?php echo ($_SESSION["user"]->checkFlag(KOSHER) ? "checked" : "");?>><br/>
+Vegan? <input type="checkbox" name="flags[]" value="VEGAN" <?php if ($_SESSION["user"]->checkFlag(VEGAN)) { echo("checked"); }?>><br/>
+Vegetarian? <input type="checkbox" name="flags[]" value="VEGETARIAN" <?php if ($_SESSION["user"]->checkFlag(VEGETATIAN)) { echo("checked"); }?>><br/>
+Peanuts? <input type="checkbox" name="flags[]" value="PEANUT" <?php if ($_SESSION["user"]->checkFlag(PEANUT)) { echo("checked"); }?>><br/>
+Soy? <input type="checkbox" name="flags[]" value="SOY" <?php if ($_SESSION["user"]->checkFlag(SOY)) { echo("checked"); }?>><br/>
+Gluten? <input type="checkbox" name="flags[]" value="GLUTEN" <?php if ($_SESSION["user"]->checkFlag(GLUTEN)) { echo("checked"); }?>><br/>
+Lactose? <input type="checkbox" name="flags[]" value="LACTOSE" <?php if ($_SESSION["user"]->checkFlag(LACTOSE)) { echo("checked"); }?>><br/>
+Halal? <input type="checkbox" name="flags[]" value="HALAL" <?php if ($_SESSION["user"]->checkFlag(HALAL)) { echo("checked"); }?>><br/>
+Kosher? <input type="checkbox" name="flags[]" value="KOSHER" <?php if ($_SESSION["user"]->checkFlag(KOSHER)) { echo("checked"); }?>><br/>
 </div>
 <br>
 <br>
