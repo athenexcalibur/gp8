@@ -17,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
     $flags = isset($_GET["flags"]) ? intval($_GET["flags"]) : 0;
 	
     $location = mysqli_real_escape_string($dbconnection, $location);
-    $description = mysqli_real_escape_string($dbconnection, $description);
 
     $sql = "SELECT title,description,location,flags,posttime,expiry FROM PostsTable";
     if (sizeof($keywords) != 0)
@@ -36,7 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
     $uflags = $_SESSION["user"]->getFlags();
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
     {
-        if (areCompatible($uflags, intval($row["flags"])) == 0) $out[] = $row;
+        $uLoc = $_SESSION["user"]->getLocation();
+        if (areCompatible($uflags, intval($row["flags"])) == 0)
+        {
+            $row["distance"] = $uLoc->distanceFrom(new location($row["location"]));
+            $out[] = $row;
+        }
     }
     echo json_encode($out);
 }

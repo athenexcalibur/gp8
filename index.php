@@ -1,11 +1,6 @@
 <?php
 include_once "php/user.php";
 cSessionStart();
-
-if (isset($_GET["error"]))
-{
-    //todo error modal
-}
 ?>
 
 <!DOCTYPE html>
@@ -239,52 +234,74 @@ if (isset($_GET["error"]))
   <!--/.background image -->
 
   <main>
-    <!--Item-Carousel-->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-          <div id="ItemCarousel" class="carousel slide" data-ride="carousel">
-            <!--Indicators-->
-            <ol class="carousel-indicators">
-              <li data-target="#ItemCarousel" data-slide-to="0" class="active"></li>
-              <li data-target="#ItemCarousel" data-slide-to="1"></li>
-              <li data-target="#ItemCarousel" data-slide-to="2"></li>
-            </ol>
-            <!--/.Indicators-->
-
-            <!--Slides Wrapper-->
-            <div class="carousel-inner " role="listbox">
-              <div class="carousel-item active">
-                <div class="row">
-                  <div class="col-xs-4 item-card"> </div>
-                  <div class="col-xs-4 item-card"> </div>
-                  <div class="col-xs-4 item-card"> </div>
+    <?php
+    if (loginCheck())
+    {
+        echo('
+            <!--Item-Carousel-->
+            <div class="container">
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <div id="ItemCarousel" class="carousel slide" data-ride="carousel">
+                    <!--Indicators-->
+                    <ol class="carousel-indicators">
+                      <li data-target="#ItemCarousel" data-slide-to="0" class="active"></li>
+                      <li data-target="#ItemCarousel" data-slide-to="1"></li>
+                      <li data-target="#ItemCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <!--/.Indicators-->
+        
+                    <!--Slides Wrapper-->
+                    <div class="carousel-inner " role="listbox">
+                      <div class="carousel-item active">
+                        <div class="row">
+                          <div class="col-xs-4 item-card"> </div>
+                          <div class="col-xs-4 item-card"> </div>
+                          <div class="col-xs-4 item-card"> </div>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="row">
+                          <div class="col-xs-4 item-card"> </div>
+                          <div class="col-xs-4 item-card"> </div>
+                          <div class="col-xs-4 item-card"> </div>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="row">
+                          <div class="col-xs-4 item-card"> </div>
+                          <div class="col-xs-4 item-card"> </div>
+                          <div class="col-xs-4 item-card"> </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--/.Slides Wrapper-->
+                  </div>
                 </div>
-              </div>
-              <div class="carousel-item">
-                <div class="row">
-                  <div class="col-xs-4 item-card"> </div>
-                  <div class="col-xs-4 item-card"> </div>
-                  <div class="col-xs-4 item-card"> </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="row">
-                  <div class="col-xs-4 item-card"> </div>
-                  <div class="col-xs-4 item-card"> </div>
-                  <div class="col-xs-4 item-card"> </div>
-                </div>
+                <div class="col-md-1"></div>
               </div>
             </div>
-            <!--/.Slides Wrapper-->
-          </div>
-        </div>
-        <div class="col-md-1"></div>
-      </div>
-    </div>
-    <!--/.Item-Carousel-->
+            <!--/.Item-Carousel-->
+        ');
+    }
+    else
+    {
+        echo ("maybe mission statement goes here or sth"); //todo
+    }
+    ?>
   </main>
+    <?php
+    if (isset($_GET["error"]))
+    {
+        echo
+        (
+            "<div class='alert alert-danger alert-dismissable fade in'>
+                <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+            . $_GET["error"] . "</div>"
+        );
+    }
+    ?>
 
   <footer>
 

@@ -150,8 +150,7 @@ class User
 
     public function getLocation()
     {
-        if (is_null($this->location)) return "unset";
-        else return $this->location;
+        return $this->location;
     }
     public function setLocation($newLoc)
     {

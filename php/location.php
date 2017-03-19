@@ -20,7 +20,9 @@ class location
         $dLong = $other->getLongRadians() - $this->getLongRadians();
 
         $a = pow(sin($dLat/2), 2) + cos($this->getLatRadians()) * cos($other->getLatRadians()) * pow(sin($dLong/2), 2);
-        return location::$radius * atan2(sqrt($a), sqrt(1-$a));
+        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+        $d = location::$radius * $c;
+        return $d;
     }
 
     public function getLatRadians()
@@ -50,7 +52,7 @@ class location
 
     public function setLatLong($latLng)
     {
-        $arr = explode(',', $latLng);
+        $arr = explode(',', preg_replace("/[^0-9,.-]/", "", $latLng));
         $this->latRadians = floatval($arr[0]) * location::$conv;
         $this->longRadians = floatval($arr[1]) * location::$conv;
         $this->latLong = $latLng;
