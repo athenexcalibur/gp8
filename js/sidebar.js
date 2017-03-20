@@ -21,3 +21,9 @@ snapper.on("animated", function(){
 });
 //cool wave effect on item click
 Waves.attach('.snap-drawers .nav-link', ['waves-effect']);
+
+//make links clickable
+$(".snap-drawers .nav-item").click(function () {
+    link = $(this).find(".nav-link").attr("href");
+    window.location.href = link;
+});

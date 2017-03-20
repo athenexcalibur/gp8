@@ -101,7 +101,7 @@ if (!loginCheck())
         <div id="ordersWrapper" class="container">
 
             <div id="header">
-                <h2>Your Orders</h2>
+                <h2>Your Listings</h2>
             </div>
             <div class="row">
                 <nav class="nav">

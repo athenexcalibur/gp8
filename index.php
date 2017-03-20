@@ -41,19 +41,19 @@ cSessionStart();
         <ul class="nav flex-column">
             <div class="view overlay hm-white-slight">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Orders</a>
+                    <a class="nav-link" href="orders.php">Orders</a>
                     <div class="mask"></div>
                 </li>
             </div>
             <div class="view overlay hm-white-slight">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Listings</a>
+                    <a class="nav-link" href="listings.php">Listings</a>
                     <div class="mask"></div>
                 </li>
             </div>
             <div class="view overlay hm-white-slight">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Messages</a>
+                    <a class="nav-link" href="inbox.php">Messages</a>
                     <div class="mask"></div>
                 </li>
             </div>
@@ -65,7 +65,7 @@ cSessionStart();
             </div>
             <div class="view overlay hm-white-slight">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Account</a>
+                    <a class="nav-link" href="profile.php">Account</a>
                     <div class="mask"></div>
                 </li>
             </div>
@@ -192,7 +192,7 @@ cSessionStart();
     <header>
         <!-- navbar -->
         <nav class="navbar navbar-dark navbar-fixed-top elegant-color-dark">
-            <a href="#" class="navbar-brand">LOGO</a>
+            <a href="/" class="navbar-brand">LOGO</a>
             <ul class="nav navbar-nav pull-right">
                 <!--<li class="nav-item">-->
                 <!--<a class="nav-link">Login</a>-->
@@ -313,7 +313,13 @@ cSessionStart();
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>
-<script type="text/javascript">
+<?php
+    if (!loginCheck())
+    {
+      echo ' <script>snapper.disable()</script>';
+    }
+?>
+    <script type="text/javascript">
     //setup userAllergens selector
     $('.selectpicker').selectpicker();
 </script>
