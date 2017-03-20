@@ -12,7 +12,7 @@ function cSessionStart()
 function loginCheck()
 {
     if (isset($_SESSION) && isset($_SESSION["user"])) return true;
-    session_destroy();
+    if (session_id() !== '') session_destroy();
     return false;
 }
 
