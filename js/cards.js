@@ -3,6 +3,7 @@ $(document).ready(function ()
     $.get("php/search.php", function (data)
     {
         var posts = JSON.parse(data);
+	console.log(data);
         posts.sort(function(a,b){return a.distance - b.distance});
         $.get("ajax/card.html", function (data)
         {
@@ -15,13 +16,14 @@ $(document).ready(function ()
                     name = name ? posts[i]["title"] : "Untitled";
                     tmp.find("#title").html(name);
 
-                    var distance = posts[i].distance? posts[i].distance.toFixed(1) + " miles away" : "";
+                    var distance = posts[i].distance? posts[i].distance.toFixed(1) + " miles away" : "&#x221e; miles away";
                     tmp.find("#distance").html(distance);
                     //todo decription and time
                 }
                 else
                 {
                     tmp.find("#title").html("EOF");
+		    tmp.find("#distance").html("&#x221e; miles away");
                 }
                 $(obj).html(tmp.clone());
                 $(obj).attr("id", i.toString());
