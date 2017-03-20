@@ -14,7 +14,10 @@ $(document).ready(function ()
                     name = posts[i]["title"];
                     name = name ? posts[i]["title"] : "Untitled";
                     tmp.find("#title").html(name);
-                    tmp.find("#distance").html(posts[i]["distance"].toFixed(1) + " miles away");
+
+                    var distance = posts[i].distance? posts[i].distance.toFixed(1) + " miles away" : "";
+                    tmp.find("#distance").html(distance);
+                    //todo decription and time
                 }
                 else
                 {
