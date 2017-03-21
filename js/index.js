@@ -12,7 +12,6 @@ $("#registerBtn").on("click", function()
         flags: createFlags()
     }, function(data)
     {
-        console.log(data);
 		location.reload(true);
     }).fail(function(response)
     {

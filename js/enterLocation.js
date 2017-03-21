@@ -7,11 +7,11 @@ var marker;
 function initMap()
 {
     var map = new google.maps.Map(document.getElementById("inputMap"),
-        {
-            center: {lat: 53.303287539568494, lng: -1.478261947631836},
-            zoom: 8,
-            mapTypeId: 'roadmap'
-        });
+    {
+        center: {lat: 53.303287539568494, lng: -1.478261947631836},
+        zoom: 8,
+        mapTypeId: 'roadmap'
+    });
 
     window.map = map;
 

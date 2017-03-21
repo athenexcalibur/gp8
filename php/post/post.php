@@ -50,13 +50,13 @@ Upload Image: <input type="image" name="food_image" id="upload_image"><br><br>
         });
 
         $.post("post.php",
-            {
-                title: $("#title").val(),
-                description: $("#description").val(),
-                flags: checked,
-                location: window.currentlatLng.toString(),
-                expiry: $("#expiry").val()
-            });
+        {
+            title: $("#title").val(),
+            description: $("#description").val(),
+            flags: checked,
+            location: window.currentlatLng.toString(),
+            expiry: $("#expiry").val()
+        });
     });
 </script>
 
@@ -135,14 +135,4 @@ else if (isset($_POST["title"]))
     }
     else echo("Post failed");
 }
-
-/*TODO paste this into listing page
-$postID = intval($_GET["id"]);
-$stmt = $dbconnection->prepare("SELECT title, description, location, flags, userid, posttime, expiry FROM PostsTable WHERE id=? LIMIT 1");
-$stmt->bind_param("i", $postID);
-$stmt->bind_result($title, $description, $location, $flags, $hisID, $time, $expiry);
-$stmt->execute();
-$stmt->store_result();
-$stmt->fetch();
-$otherName = $_SESSION["user"]->idToName($hisID); */
 ?>

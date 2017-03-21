@@ -3,7 +3,6 @@ $(document).ready(function ()
     $.get("php/search.php", function (data)
     {
         var posts = JSON.parse(data);
-	console.log(data);
         posts.sort(function(a,b){return a.distance - b.distance});
         $.get("ajax/card.html", function (data)
         {
@@ -16,8 +15,9 @@ $(document).ready(function ()
                     name = name ? posts[i]["title"] : "Untitled";
                     tmp.find("#title").html(name);
 
-                    var distance = posts[i].distance? posts[i].distance.toFixed(1) + " miles away" : " ";
+                    var distance = posts[i].distance? posts[i].distance.toFixed(1) + " miles away" : "";
                     tmp.find("#distance").html(distance);
+                    tmp.find("#link").attr("href", "listing.php?id=" + posts[i].id);
                     //todo decription and time
                 }
                 else

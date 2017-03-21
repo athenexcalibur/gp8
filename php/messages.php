@@ -49,8 +49,8 @@ else if(isset($_GET["othername"])) //get list of messages with one person
         while ($stmt->fetch())
         {
             $row = array();
-            $row["fromname"] = $_SESSION["user"]->idToName($fromid);
-            $row["toname"] = $_SESSION["user"]->idToName($toid);
+            $row["fromname"] = $_SESSION["info"]->idToName($fromid);
+            $row["toname"] = $_SESSION["info"]->idToName($toid);
             $row["text"] = $text;
             $row["time"] = $time;
             $messages[] = $row;
@@ -84,7 +84,7 @@ else //no other user specified, return all users and the first message
             $toid = $second;
 
             $row = array();
-            $row["fromname"] = $fromid === $userid ? $_SESSION["user"]->idToName($toid) : $_SESSION["user"]->idToName($fromid);
+            $row["fromname"] = $fromid === $userid ? $_SESSION["info"]->idToName($toid) : $_SESSION["info"]->idToName($fromid);
 
             $stmt2 = $dbConnection->prepare("SELECT text, UNIX_TIMESTAMP(messagetime) AS time FROM MessagesTable 
                                   WHERE fromid = ? AND toid = ? OR toid = ? AND fromid = ?

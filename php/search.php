@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
 	
     $location = mysqli_real_escape_string($dbconnection, $location);
 
-    $sql = "SELECT title,description,location,flags,posttime,expiry FROM PostsTable";
+    $sql = "SELECT title,description,location,flags,posttime,expiry,id FROM PostsTable";
     if (sizeof($keywords) != 0)
     {
         $filtered = mysqli_real_escape_string($dbconnection, $keywords[0]);
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
         $uLoc = $_SESSION["user"]->getLocation();
         if (areCompatible($uflags, intval($row["flags"])) == 0)
         {
-            $row["distance"] = $uLoc->distanceFrom(new location($row["location"]));
+            $row["distance"] = $uLoc->distanceFrom(new Location($row["location"]));
             $out[] = $row;
         }
     }

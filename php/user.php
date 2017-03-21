@@ -23,7 +23,59 @@ function areCompatible($fromFlags, $toFlags)
 
 if (isset($_GET["id"]))
 {
-    if (loginCheck()) echo $_SESSION["user"]->idToName($_GET["id"]);
+    if (loginCheck()) echo $_SESSION["info"]->idToName($_GET["id"]);
+}
+
+class UserInfo
+{
+    public $allergens = array(1 => "Vegan", 2 => "Vegetarian", 4 => "Peanut", 8 => "Soy", 16 => "Gluten", 32 => "Lactose", 64 => "Halal", 128 => "Kosher");
+
+    public function idToName($userid)
+    {
+        $userid = intval($userid);
+        $dbconnection = Database::getConnection();
+
+        $stmt = $dbconnection->prepare("SELECT username FROM UsersTable WHERE id = ?");
+        $stmt->bind_param("i", $userid);
+
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows == 1)
+        {
+            $stmt->bind_result($name);
+            $stmt->fetch();
+            return $name;
+        }
+        return null;
+    }
+
+
+    //returns name, score, rating (and id)
+    public function getBasicInfo($userid)
+    {
+        $userid = intval($userid);
+        $dbconnection = Database::getConnection();
+
+        $stmt = $dbconnection->prepare("SELECT username, score, rating FROM UsersTable WHERE id = ?");
+        $stmt->bind_param("i", $userid);
+
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows == 1)
+        {
+            $stmt->bind_result($name, $score, $rating);
+            $stmt->fetch();
+            $ret = array();
+            $ret["name"] = $name;
+            $ret["score"] = $score;
+            $ret["rating"] = $rating;
+            $ret["id"] = $userid;
+            return $ret;
+        }
+        return null;
+    }
 }
 
 class User
@@ -61,34 +113,13 @@ class User
                 $this->userid = intval(preg_replace("/[^0-9]+/", "", $userID));
                 $this->username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
                 $this->email = $email;
-                if(!is_null($llStr)) $this->location = new location($llStr);
+                if(!is_null($llStr)) $this->location = new Location($llStr);
             }
             else throw new Exception("Invalid email or password, please try again.");
         } else throw new Exception("There was an error preparing a statement.");
     }
 
-    public function idToName($userid)
-    {
-        $userid = intval($userid);
-        if ($userid === $this->userid) return $this->username;
 
-        $dbconnection = Database::getConnection();
-
-        $stmt = $dbconnection->prepare("SELECT username FROM UsersTable WHERE id = ?");
-        $stmt->bind_param("i", $userid);
-
-        $stmt->execute();
-        $stmt->store_result();
-
-        if ($stmt->num_rows == 1)
-        {
-            $stmt->bind_result($name);
-            $stmt->fetch();
-            return $name;
-        }
-
-        return null;
-    }
 	
 	public function reload()
 	{
@@ -110,7 +141,7 @@ class User
 
             $this->userid = intval(preg_replace("/[^0-9]+/", "", $this->userid));
             $this->username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
-            if(!is_null($llStr)) $this->location = new location($llStr);
+            if(!is_null($llStr)) $this->location = new Location($llStr);
 		}
         else throw new Exception("There was an error preparing a statement.");
 	}
@@ -154,7 +185,7 @@ class User
     }
     public function setLocation($newLoc)
     {
-        if (is_null($this->location)) $this->location = new location($newLoc);
+        if (is_null($this->location)) $this->location = new Location($newLoc);
         else $this->location->setLatLong($newLoc);
     }
 

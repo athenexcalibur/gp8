@@ -13,6 +13,7 @@ if (isset($_POST["email"], $_POST["password"]))
     try
     {
         $_SESSION["user"] = new User($email, $_POST["password"]);
+        $_SESSION["info"] = new UserInfo();
         header("Location: ../../index.php");
         exit;
     }

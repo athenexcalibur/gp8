@@ -1,3 +1,25 @@
+<?php
+require_once "php/user.php";
+require_once "php/database.php";
+cSessionStart();
+if (!loginCheck())
+{
+    header("Location: index.php");
+    exit;
+}
+
+$dbconnection = Database::getConnection();
+$postID = intval($_GET["id"]);
+$stmt = $dbconnection->prepare("SELECT title, description, location, flags, userid, posttime, expiry FROM PostsTable WHERE id=? LIMIT 1");
+$stmt->bind_param("i", $postID);
+$stmt->bind_result($title, $description, $location, $flags, $posterID, $time, $expiry); //todo show on map
+$stmt->execute();
+$stmt->store_result();
+$stmt->fetch();
+$posterInfo = $_SESSION["info"]->getBasicInfo($posterID);
+$distance = $_SESSION["user"]->getLocation()->distanceFrom(new Location($location));
+$distance = round($distance, 1);
+?>
 
 <!DOCTYPE html>
 <head>
@@ -51,7 +73,7 @@
             </div>
             <div class="view overlay hm-white-slight">
                 <li class="nav-item">
-                    <a class="nav-link" href="listings.php">Listings</a>
+                    <a class="nav-link" href="mylistings.php">Listings</a>
                     <div class="mask"></div>
                 </li>
             </div>
@@ -99,12 +121,12 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-block">
-            <h1 id="item-name">Baked Beans</h1>
+            <h1 id="item-name"><?php echo $title ?></h1>
             <div class = "col-md-2">
               <img src="img/vege-card.jpg" alt="example" width = "140" height = "140" class="img-rounded">
             </div>
             <div class = "col-md-10">
-              <h5 id="item-address">0.5 miles away</h5>
+              <h5 id="item-address"><?php echo $distance ?> miles away</h5>
               <!--Account info-->
               <div class = "container">
                 <div class = "card">
@@ -113,12 +135,12 @@
                       <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i></a>
                     </div>
                     <div class = "col-md-6">
-                      <p id = "name"> FoodieDave</p>
+                      <p id = "name"><?php echo $posterInfo["name"] ?></p>
                       <div class = "col-md-4">
-                        <p id = "score"> 3.9 </p>
+                        <p id = "rating"><?php echo $posterInfo["rating"]?></p>
                       </div>
                       <div class = "col-md-8">
-                        <p id = "score"> 1059 </p>
+                        <p id = "score"><?php echo $posterInfo["score"]?></p>
                       </div>
                     </div>
                   </div>
@@ -129,14 +151,22 @@
               <table>
                 <tr>
                   <td>Use BY</td>
-                  <td id = "Productdate"> 20/12/18</td>
+                  <td id = "expiry"><?php echo $expiry?></td>
                 </tr>
                 <tr>
                   <td>Allergens</td>
-                  <td id = "Allegen1"> Fish</td>
+                    <?php
+                    foreach ($_SESSION["info"]->allergens as $i => $name)
+                    {
+                        if (($i & $flags) != 0)
+                        {
+                            echo "<td id='allergen'>" . $name . "</td>";
+                        }
+                    }
+                    ?>
                 </tr>
               </table>
-              <p id="notes"> "Top qual beans from tescos - about to go off an I'm sick of them and so's my wife which is why im giving them away"</p>
+              <p id="notes"> "<?php echo $description?>"</p>
               <button type="Get_button">Get IT</button>
             </div>
           </div>
