@@ -108,3 +108,14 @@ $(document).ready(function ()
     });
 });
 */
+
+//Make form submittable with enter key
+//NOTE: couldn't get it to work with regDiv3 (i.e. dietary requirements)
+//because the select tag switches the focus
+//could add submittable class to the select tags but it seems a little messy
+$(".submittable").keyup(function (event) {
+    if (event.keyCode == 13) {
+        triggerBtn = $(this).attr("trigger-btn");
+	$(triggerBtn).trigger("click");
+    }
+});

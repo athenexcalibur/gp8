@@ -86,7 +86,7 @@ cSessionStart();
                 <h4 class="modal-title w-100" id="myModalLabel">Login</h4>
             </div>
             <!--Body-->
-            <div class="modal-body">
+            <div class="modal-body submittable" trigger-btn="#loginBtn" tabindex="0">
                 <div class="md-form">
                     <i class="fa fa-envelope prefix"></i>
                     <input type="text" id="uemail" class="form-control">
@@ -126,7 +126,7 @@ cSessionStart();
             </div>
             <!--Body-->
             <div class="modal-body" id="regBody">
-                <div id="regDiv1" class="regDivs">
+                <div id="regDiv1" class="submittable" trigger-btn="#nextBtn" tabindex="0">
                     <div class="md-form">
                         <input type="text" id="username" class="form-control">
                         <label for="form2">Username</label>
@@ -148,7 +148,7 @@ cSessionStart();
                     </div>
                 </div>
 
-                <div id="regDiv2" class="regDivs">
+                <div id="regDiv2" class="submittable" trigger-btn="#nextBtn" tabindex="0">
                     <input id="addressInput" class="controls" type="text" placeholder="Search...">
                     <div id="inputMap"></div>
                 </div>
