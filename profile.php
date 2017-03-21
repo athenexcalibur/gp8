@@ -47,7 +47,6 @@ if (!loginCheck())
 
   <!-- My Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/profile.css">
 
 </head>
 

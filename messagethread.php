@@ -33,7 +33,6 @@ if (!loginCheck())
 
   <!-- My Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="css/messages.css">
 
 </head>
