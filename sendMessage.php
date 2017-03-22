@@ -1,4 +1,8 @@
 <?php
+
+//This is not supposed to work
+//todo edit/delete page where some of the below will be pasted into
+
 require_once "php/user.php";
 
 cSessionStart();
@@ -6,7 +10,10 @@ if (!loginCheck())
 {
     header("Location: index.php");
     exit;
-}?>
+}
+
+echo ("<script>window.pid = " . $_GET["id"]);
+?>
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" id="messageform">
         Username: <input type="text" name="usersearch" id="usersearch" required/><br/>
@@ -22,10 +29,9 @@ if (!loginCheck())
         {
             $("#usersearch").autocomplete
             ({
-                source: "php/userAutocomplete.php",
+                source: "php/post/interestedComplete.php?pid=" + window.pid,
                 minLength: 1
             });
-
         });
     </script>
 

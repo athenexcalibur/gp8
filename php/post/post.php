@@ -5,7 +5,7 @@ cSessionStart();
 if (!loginCheck())
 {
     header("Location: index.php");
-    exit;
+    exit();
 }
 //following html is only temporary
 ?>

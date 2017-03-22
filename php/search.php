@@ -18,17 +18,19 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
 	
     $location = mysqli_real_escape_string($dbconnection, $location);
 
-    $sql = "SELECT title,description,location,flags,posttime,expiry,id FROM PostsTable";
+    $sql = "SELECT title,description,location,flags,posttime,expiry,id FROM PostsTable WHERE";
     if (sizeof($keywords) != 0)
     {
         $filtered = mysqli_real_escape_string($dbconnection, $keywords[0]);
-        $sql .= " WHERE description LIKE %" . $filtered . "% OR title LIKE %" . $filtered . "%";
+        $sql .= "(description LIKE %" . $filtered . "% OR title LIKE %" . $filtered . "%";
         for ($i = 1; $i < sizeof($keywords); $i++)
         {
             $filtered = mysqli_real_escape_string($dbconnection, $keywords[$i]);
             $sql .= " OR description LIKE %" . $filtered . "% OR title LIKE %" . $filtered . "%";
         }
+        $sql .= ") AND";
     }
+    $sql .= " visible=1";
     $result = $dbconnection->query($sql);
 
     $out = array();

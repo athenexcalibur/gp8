@@ -75,6 +75,7 @@ class Database
             flags TINYINT default 0,
             userid INT NOT NULL,
             posttime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            visible BOOL DEFAULT 1,
             expiry DATE
         )";
         if (!$createDBConnection->query($query)) die("Failed to create posts table:" . $createDBConnection->error);
@@ -85,12 +86,22 @@ class Database
             id INT UNSIGNED PRIMARY KEY,
             title VARCHAR(32) NOT NULL,
             posterID INT NOT NULL,
+            posterDone BOOL DEFAULT 0,
 			recepientID INT NOT NULL,
 			recipientDone BOOL DEFAULT 0,
             fintime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             expiry DATE
         )";
         if (!$createDBConnection->query($query)) die("Failed to create finished posts table:" . $createDBConnection->error);
+
+        $query =
+        "CREATE TABLE IF NOT EXISTS InterestedTable
+        (
+            postID INT,
+            userID INT,
+            PRIMARY KEY (postID, userID)
+        )";
+        if (!$createDBConnection->query($query)) die("Failed to create interested table:" . $createDBConnection->error);
 
         $query ="
         CREATE TABLE IF NOT EXISTS MessagesTable

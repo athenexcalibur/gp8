@@ -14,11 +14,13 @@ parse_str(file_get_contents('php://input'), $_POST);
 $dbConnection = Database::getConnection();
 
 /*
- * If the poster is finalizing "otherID" must be set
- * In all cases "postID" and "rating" must be set
+ * If the poster is finalizing "rating" must be set
+ * If he is reserving it for someone "otherID" must be set
+ * In all cases "postID" must be set
  */
-
-if(isset($_POST["postID"]) && isset($_POST["rating"]))
+//todo add option to cancel reservations
+//todo test this (not even tested once but needs frontend stuff)
+if(isset($_POST["postID"]))
 {
 	$userid = intval($_SESSION["user"]->getUserID());
 
@@ -26,47 +28,42 @@ if(isset($_POST["postID"]) && isset($_POST["rating"]))
 	$stmt->bind_param("i", intval($_POST["postID"]));
 	$stmt->bind_result($posterid);
 	$stmt->execute();
-	
-	if ($stmt->affected_rows != 1) recipientFinalise(intval($_POST["postID"]));
-	
+	if ($stmt->affected_rows != 1) //post is removed from poststable when poster reserves it
+    {
+        finalise(intval($_POST["postID"]));
+        exit();
+    }
 	$stmt->fetch();
 	
 	if ($userid !== $posterid)
 	{
 		$stmt->close();
-		die("Only the poster can begin to finalize this post!");
+		die("Only the poster can deal with this post!");
 	}
-	
-	$stmt = $dbConnection->prepare("SELECT title, description, expiry FROM PostsTable WHERE id=?");
-	$stmt->bind_param("i", intval($_POST["postID"]));
-	$stmt->bind_result($title, $description, $expiry);
-	$stmt = $dbConnection->prepare("INSERT INTO FinishedPostsTable (id, title, description, posterID, recipientID, expiry) VALUES (?, ?, ?, ?, ?, ?)");
-	$stmt->bind_param("issiis", intval($_POST["postID"]), $title, $description, $userid, intval($_POST["otherID"]), $expiry);
-	$stmt->execute();
-	
-	if ($stmt->affected_rows === 1)
-	{
-		$dbConnection->multi_query("DELETE FROM PostsTable WHERE id=" . intval(isset($_POST["postID"])
-		 . "; UPDATE UsersTable SET score=score+10 WHERE id=". intval($userid)));
 
-		if(isset($_POST["rating"]))
-        {
-            $result = $dbConnection->query("SELECT number, rating FROM UsersTable WHERE id=" . intval($_POST["otherID"]));
-            $result = $result->fetch_assoc();
+    if (isset($_POST["otherID"]))
+    {
+        $stmt = $dbConnection->prepare("SELECT title, description, expiry FROM PostsTable WHERE id=?");
+        $stmt->bind_param("i", intval($_POST["postID"]));
+        $stmt->bind_result($title, $description, $expiry);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->fetch();
 
-            $newrating = (floatval($result["rating"]) * $result["number"] + min(0, max($_POST["rating"], 5))) / ($result["number"] + 1);
-            $dbConnection->query("UPDATE UsersTable SET number=number+1, rating=" . $newrating . " WHERE id=" . intval($_POST["otherID"]));
-        }
-        else echo "No rating recieved.";
-		echo "It worked!"; //todo
-	}
-	else die ($dbConnection->error);
+        $stmt = $dbConnection->prepare("UPDATE PostsTable SET visible=0 WHERE id=?");
+        $stmt->bind_param("i", intval($_POST["postID"]));
+        $stmt->execute();
+
+        $stmt = $dbConnection->prepare("INSERT INTO FinishedPostsTable (id, title, description, posterID, recipientID, expiry) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("issiis", intval($_POST["postID"]), $title, $description, $userid, intval($_POST["otherID"]), $expiry);
+        $stmt->execute();
+    }
 }
 
 /*
- * stillUp - array of posts that are still listed
- * waitingForRecepient - posts that you (the poster) have finalized but not the other guy
- * waitingForYou - posts you have not finalized as the recepient
+ * stillUp - array of your posts that are still listed
+ * reserved - posts you have reserved for someone but neither have finalized (cancel here)
+ * waitingForYou - posts you have not finalized (rated the other guy)
  * bothDone - finished posts
  */
 else if ($_SERVER["REQUEST_METHOD"] == "GET")
@@ -82,55 +79,69 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
     }
 
     //get the rest
-    $waitingForRecepient = array();
+    $reserved = array();
     $waitingForYou = array();
     $bothDone = array();
     if ($result = $dbConnection->query("SELECT * FROM FinishedPostsTable WHERE posterID=" . $userid . " OR recepientID=" . $userid))
     {
-        while ($row = $result->fetch_assoc())
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
         {
             $row["posterName"] = $_SESSION["info"]->idToName(intval($row["userid"]));
-            if (isset($row["location"]) && ($loc = $_SESSION["user"]->getLocation()) !== "unset")
+            if (isset($row["location"]) && ($loc = $_SESSION["user"]->getLocation()))
             {
                 $row["distance"] = $loc->distanceFrom(new Location($row["location"]));
             } //ugh
 
-            if (intval($row["recepientDone"]) === 1) $bothDone[] = $row;
-            else if (intval($row["recepientID"]) === $userid) $waitingForYou[] = $row;
-            else $waitingForRecepient = $row;
+            $rdone = intval($row["recepientDone"]);
+            $rid = intval($row["recepientID"]);
+            $pdone = intval($row["posterDone"]);
+            $pid = intval($row["posterID"]);
+            if ($rdone && $pdone) $bothDone[] = $row;
+            else if (!$rdone && !$pdone) $reserved[] = $row;
+            else if ((!$rdone && $userid == $rid) ||(!$pdone && $userid == $pid)) $waitingForYou[] = $row;
         }
     }
 
-    $fin = array("stillUp" => $stillGoing, "waitingForRecepient"=>$waitingForRecepient, "waitingForYou"=>$waitingForYou, "bothDone"=>$bothDone);
+    $fin = array("stillUp" => $stillGoing, "waitingForYou"=>$waitingForYou, "bothDone"=>$bothDone, "reserved"=>$reserved);
     echo json_encode($fin);
 }
 
-function recipientFinalise($postID)
+
+function finalise($postID)
 {
     global $dbConnection;
     $userid = $_SESSION["user"]->getUserID();
-    $stmt = $dbConnection->prepare("SELECT recepientID, recepientDone, posterID FROM FinishedPostsTable WHERE id=?");
+    $stmt = $dbConnection->prepare("SELECT recepientID, recepientDone, posterID, posterDone FROM FinishedPostsTable WHERE id=?");
     $stmt->bind_param("i", intval($postID));
-    $stmt->bind_result($recepID, $recepDone, $posterID);
+    $stmt->bind_result($recepID, $recepDone, $posterID, $posterDone);
     $stmt->fetch();
-    if ($recepID !== $userid) die("Wrong user ID.");
-    if ($recepDone) die("Post already finalized.");
-
-    $dbConnection->query("UPDATE FinishedPostsTable SET recepientDone=1 WHERE id=" . intval($postID));
-    $dbConnection->query("UPDATE UsersTable SET score=score+1 WHERE id=". intval($userid));
-
-    if (is_numeric($_POST["rating"]))
+    if ($recepID == $userid)
     {
-        $stmt = $dbConnection->prepare("SELECT number, rating FROM UserdTable WHERE id=?");
-        $stmt->bind_param("i", $posterID);
-        $stmt->bind_result($number, $rating);
-        $stmt->execute();
-        $stmt->fetch();
-
-        $newrating = (($rating + floatval($_POST["rating"])) / ($number + 1));
-        $dbConnection->query("UPDATE UsersTable SET number=number+1, rating=" . floatval($newrating) . " WHERE id=" . intval($posterID));
+        if ($recepDone) die("Post already finalized.");
+        $dbConnection->query("UPDATE FinishedPostsTable SET recepientDone=1 WHERE id=" . intval($postID));
+        $dbConnection->query("UPDATE UsersTable SET score=score+1 WHERE id=". intval($userid));
+        $otherid = $posterID;
+        $otherb = $posterDone;
     }
+    else if ($posterID == $userid)
+    {
+        if ($posterDone) die("Post already finalized.");
+        $dbConnection->query("UPDATE FinishedPostsTable SET posterDone=1 WHERE id=" . intval($postID));
+        $dbConnection->query("UPDATE UsersTable SET score=score+5 WHERE id=". intval($userid));
+        $otherid = $recepID;
+        $otherb = $recepDone;
+    }
+    else die("Wrong user ID.");
 
+    $stmt = $dbConnection->prepare("SELECT number, rating FROM UsersTable WHERE id=?");
+    $stmt->bind_param("i", $otherid);
+    $stmt->bind_result($number, $rating);
+    $stmt->execute();
+    $stmt->fetch();
+
+    $newrating = (($rating + floatval($_POST["rating"])) / ($number + 1));
+    $dbConnection->query("UPDATE UsersTable SET number=number+1, rating=" . floatval($newrating) . " WHERE id=" . intval($otherid));
+
+    if ($otherb) $dbConnection->query("DELETE FROM InterestedTable WHERE postID=" .intval($postID));
 }
-
 ?>
