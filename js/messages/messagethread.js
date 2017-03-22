@@ -36,7 +36,7 @@ function fillMessages()
         for (var i = messages.length - 1; i >= 0; i--)
         {
 	    var message = messages[i];
-	    if(message.fromname === otheruser){
+	    if(message.toname === otheruser){
 		content = inPrototype.clone();
 		content.css("display", "block")
 		content.find(".card-text").html(message.text);
