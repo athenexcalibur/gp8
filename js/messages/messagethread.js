@@ -36,16 +36,19 @@ function fillMessages()
         for (var i = messages.length - 1; i >= 0; i--)
         {
 	    var message = messages[i];
+	    console.log(message);
 	    if(message.toname === otheruser){
 		content = inPrototype.clone();
 		content.css("display", "block")
-		content.find(".card-text").html(message.text);
+		content.find(".card-text.msg").html(message.text);
+		content.find(".time-stamp").html(message.time);
 		$("#messageDiv").append(content);
 	    }
 	    else {
 		content = outPrototype.clone();
 		content.css("display", "block")
-		content.find(".card-text").html(message.text);
+		content.find(".card-text.msg").html(message.text);
+		content.find(".time-stamp").html(message.time);
 		$("#messageDiv").append(content);
 	    }
 

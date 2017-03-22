@@ -9,13 +9,22 @@
   border-radius: 15px;
 }
 
+.message-card .time-stamp {
+  border-top: none;
+}
+
+.message-in {
+  border-bottom-left-radius: 2px;
+  margin-right: 20px;
+}
+
 .message-out {
   border-bottom-right-radius: 2px;
   margin-left: 20px;
 }
-.message-in {
-  border-bottom-left-radius: 2px;
-  margin-right: 20px;
+
+.message-out .time-stamp {
+  text-align: right;
 }
 
 .threadinfo img{

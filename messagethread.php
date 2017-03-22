@@ -111,32 +111,35 @@ if (!loginCheck())
       </div>
     </div>
 
-      <div id="messageDiv" class="container-fluid">
-	<div class="row in-prototype">
-	  <div class="col-sm-5"></div>
-	  <div class="col-sm-7 ">
-	    <div class="card z-depth-0 card-primary message-card message-out">
-	      <div class="card-block">
-		<p class="card-text white-text">hi
-Traditional heading elements are designed to work best in the meat of your page
-content. When you need a heading to stand out, consider using a display
-heading—a larger, slightly more opinionated heading style.  </p>
-	      </div>
+    <div id="messageDiv" class="container-fluid">
+      <div class="row in-prototype">
+	<div class="col-sm-5"></div>
+	<div class="col-sm-7 ">
+	  <div class="card z-depth-0 card-primary message-card message-out">
+	    <div class="card-block">
+	      <p class="card-text msg white-text"></p>
 	    </div>
-	  </div>
-	</div>
-	<div class="row out-prototype">
-	  <div class="col-sm-7">
-	    <div class="card z-depth-0 grey lighten-2 message-card message-in">
-	      <div class="card-block">
-		<p class="card-text">hi</p>
-	      </div>
+	    <div class="card-footer text-muted time-stamp">
+	      2 days ago
 	    </div>
-	  </div>
-	  <div class="col-sm-5">
 	  </div>
 	</div>
       </div>
+      <div class="row out-prototype">
+	<div class="col-sm-7">
+	  <div class="card z-depth-0 card-primary grey lighten-2 message-card message-in">
+	    <div class="card-block">
+	      <p class="card-text msg"></p>
+	    </div>
+	    <div class="card-footer text-muted time-stamp">
+	      2 days ago
+	    </div>
+	  </div>
+	</div>
+	<div class="col-sm-5">
+	</div>
+      </div>
+    </div>
     </main>
 
   </div>
