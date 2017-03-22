@@ -110,8 +110,7 @@ if (!loginCheck())
 	</div>
       </div>
     </div>
-
-    <div id="messageDiv" class="container-fluid">
+      <!--protoype for recieved messages-->
       <div class="row in-prototype">
 	<div class="col-sm-5"></div>
 	<div class="col-sm-7 ">
@@ -125,6 +124,8 @@ if (!loginCheck())
 	  </div>
 	</div>
       </div>
+      <!--./protoype for recieved messages-->
+      <!--./protoype for sent messages-->
       <div class="row out-prototype">
 	<div class="col-sm-7">
 	  <div class="card z-depth-0 card-primary grey lighten-2 message-card message-in">
@@ -139,22 +140,24 @@ if (!loginCheck())
 	<div class="col-sm-5">
 	</div>
       </div>
-    </div>
+      <!--./protoype for sent messages-->
+
+    <!-- message container: filled with prototypes modified by messagethread.js-->
+    <div id="messageDiv" class="container-fluid"></div>
+
     </main>
 
   </div>
   <!--./snap-content-->
 
     <footer>
-      <!--important ids: sendMsg, message-->
       <nav class="navbar navbar-fixed-bottom navbar-light bg-faded type-box">
 	<div class="container-fluid">
 	  <div class="row align-items-end">
 	    <div class="col-xs-12">
 	      <div class="input-group custom-input-group">
-		<textarea type="text" class="md-textarea custom-textarea"></textarea>
-		<a href="#" class="input-group-addon btn btn-primary btn-lg
-		  custom-btn">Send</a>
+		<textarea id="message" class="md-textarea custom-textarea" type="text"></textarea>
+		<a id="sendMsg" class="input-group-addon btn btn-primary btn-lg		  custom-btn" href="#">Send</a>
 	      </div>
 	  </div>
 	</div>

@@ -2,10 +2,15 @@ $(document).ready(function () {
     fillMessages();
     threadName = findGetParameter("threadname");
     $("#threadname").html(threadName);
-    //shift card up
-    h = $("nav.navbar").css("height");
-    console.log(h);
+
+    //line up threadinfo card with navbar)
+    h = $("nav.navbar-fixed-top").css("height");
     $("main").css("padding-top", h);
+    //line up final message with message input div 
+    h = $("nav.navbar-fixed-bottom").css("height");
+    $("main").css("padding-bottom", h);
+    //scroll down to last message
+    $(".snap-content").animate({ scrollTop: $(".snap-content").height()*2 }, 1000);
 });
 
 $("#sendMsg").on("click", function()
@@ -18,7 +23,10 @@ $("#sendMsg").on("click", function()
     {
         console.log(data); //todo delete this
         $("#message").val("");
+	//TODO Probably meed to find a better solution than reloading the
+	//entire message div
         fillMessages();
+	$(".snap-content").animate({ scrollTop: $(".snap-content").height()*2 }, 1000);
     });
 });
 
@@ -26,9 +34,15 @@ function fillMessages()
 {
     var otheruser = window.otheruser = window.location.search.substr(12);
     var url = "php/messages.php?othername=" + otheruser;
+    $("#messageDiv").empty();
     $.get(url, function(data)
     {
         var messages = data;
+	if (messages.length == 0) {
+	    $("#messageDiv").append('<p class="text-muted text-fluid mx-auto" style="text-align: center">no messages</p>');
+	    return;
+	}
+
 	var inPrototype = $(".in-prototype");
 	var outPrototype = $(".out-prototype");
 	console.log(inPrototype);
