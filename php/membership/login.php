@@ -15,12 +15,12 @@ if (isset($_POST["email"], $_POST["password"]))
         $_SESSION["user"] = new User($email, $_POST["password"]);
         $_SESSION["info"] = new UserInfo();
         header("Location: ../../index.php");
-        exit;
+        exit();
     }
     catch (Exception $e)
     {
         header("Location: ../../index.php?error=" . $e->getMessage());
-        exit;
+        exit();
     }
 } 
 else header("Location: ../../index.php?error=" . urlencode("Invalid request."));

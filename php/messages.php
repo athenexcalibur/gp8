@@ -5,7 +5,7 @@ cSessionStart();
 if (!loginCheck())
 {
     header("Location: ../index.php");
-    exit;
+    exit();
 }
 
 $dbConnection = Database::getConnection();
@@ -101,7 +101,7 @@ else //no other user specified, return all users and the first message
 
         header("Content-Type: application/json");
         echo json_encode($messages);
-        exit;
+        exit();
     }
 
     else header("Location: ../index.php?error=" . urlencode("Error preparing message list statement!"));

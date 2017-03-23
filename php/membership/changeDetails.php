@@ -1,14 +1,15 @@
 <?php
+//todo hook this up to something
+
 require_once "../user.php";
 require_once "../database.php";
 cSessionStart();
 if (!loginCheck())
 {
     header("Location: ../../index.php");
-    exit;
-}?>
+    exit();
+}
 
-<?php
 $_POST = array(); //workaround for broken PHPstorm
 parse_str(file_get_contents('php://input'), $_POST);
 
@@ -38,19 +39,5 @@ if($_SESSION["REQUEST_METHOD"] === "POST")
     }
     else echo("Couldn't prepare the update query!");
 }
-
-/*
- *     Email: <input type="text" id="email" name="email" value = "<?php echo htmlspecialchars($_SESSION["user"]->getEmail());?>" required> <br/>
-    Username: <input type="text" id="username" name="username" value = "<?php echo htmlspecialchars($_SESSION["user"]->getUserName());?>" required> <br/>
-    Vegan? <input type="checkbox" name="flags[]" value="VEGAN" <?php echo ($_SESSION["user"]->checkFlag(VEGAN) ? "checked" : "");?>>
-    Vegetarian? <input type="checkbox" name="flags[]" value="VEGETARIAN" <?php echo ($_SESSION["user"]->checkFlag(VEGETATIAN) ? "checked" : "");?>><br/>
-    Peanuts? <input type="checkbox" name="flags[]" value="PEANUT" <?php echo ($_SESSION["user"]->checkFlag(PEANUT) ? "checked" : "");?>>
-    Soy? <input type="checkbox" name="flags[]" value="SOY" <?php echo ($_SESSION["user"]->checkFlag(SOY) ? "checked" : "");?>><br/>
-    Gluten? <input type="checkbox" name="flags[]" value="GLUTEN" <?php echo ($_SESSION["user"]->checkFlag(GLUTEN) ? "checked" : "");?>>
-    Lactose? <input type="checkbox" name="flags[]" value="LACTOSE" <?php echo ($_SESSION["user"]->checkFlag(LACTOSE) ? "checked" : "");?>><br/>
-    Halal? <input type="checkbox" name="flags[]" value="HALAL" <?php echo ($_SESSION["user"]->checkFlag(HALAL) ? "checked" : "");?>>
-    Kosher? <input type="checkbox" name="flags[]" value="KOSHER" <?php echo ($_SESSION["user"]->checkFlag(KOSHER) ? "checked" : "");?>><br/>
-    <input type="submit"/>
- */
 ?>
 

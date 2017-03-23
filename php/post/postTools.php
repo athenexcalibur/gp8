@@ -6,7 +6,7 @@ cSessionStart();
 if (!loginCheck())
 {
     header("Location: ../index.php");
-    exit;
+    exit();
 }
 
 $_POST = array(); //workaround for broken PHPstorm

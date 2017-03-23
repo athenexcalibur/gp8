@@ -15,7 +15,7 @@ if (isset($_POST["email"], $_POST["username"], $_POST["password"]))
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
     {
         header("Location: ../../index.php?error=" . urlencode("The email address you entered is not valid!"));
-        exit;
+        exit();
     }
 
     $username = mysqli_real_escape_string($dbconnection, $username);
@@ -35,14 +35,14 @@ if (isset($_POST["email"], $_POST["username"], $_POST["password"]))
             $errorMessage = "A user with this email address already exists!";
             $stmt->close();
             header("Location: ../../index.php?error=" . urlencode($errorMessage));
-            exit;
+            exit();
         }
     } 
     else 
     {
         $errorMessage = "Database error!";
         header("Location: ../../index.php?error=" . urlencode($errorMessage));
-        exit;
+        exit();
     }
 
     $prepstmt = "SELECT id FROM UsersTable WHERE username = ? LIMIT 1";
@@ -59,14 +59,14 @@ if (isset($_POST["email"], $_POST["username"], $_POST["password"]))
             $errorMessage = "A user with this username already exists!";
             $stmt->close();
             header("Location: ../../index.php?error=" . urlencode($errorMessage));
-            exit;
+            exit();
         }
     }
     else 
     {
         $errorMessage = "Database error!";
         header("Location: ../../index.php?error=" . urlencode($errorMessage));
-        exit;
+        exit();
     }
  
 
@@ -87,12 +87,12 @@ if (isset($_POST["email"], $_POST["username"], $_POST["password"]))
             else
             {
                 header("Location: ../../index.php?success=1");
-                exit;
+                exit();
             }
         }
     }
 }
 if (!$errorMessage) $errorMessage = "Unknown error";
 header("Location: ../../index.php?error=" . urlencode($errorMessage));
-exit;
+exit();
 ?>

@@ -1,15 +1,15 @@
 <?php
 
-define("DBSERVER", "mysql.dur.ac.uk");
+/*define("DBSERVER", "mysql.dur.ac.uk");
 define("DBUSERNAME", "dcs8s08");
-define("DBPASSWORD", "swansea2");
+define("DBPASSWORD", "swansea2");*/
 
-/*define("DBSERVER", "localhost");
+define("DBSERVER", "localhost");
 define("DBUSERNAME", "root");
-define("DBPASSWORD", "root");*/
+define("DBPASSWORD", "root");
 
 define("VEGAN", 1);
-define("VEGETATIAN", 2);
+define("VEGETARIAN", 2);
 define("PEANUT", 4);
 define("SOY", 8);
 define("GLUTEN", 16);

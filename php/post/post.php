@@ -20,7 +20,7 @@ Flags (Check all that apply):
 <br>
 <div id="allergyDiv">
 Vegan? <input type="checkbox" name="flags[]" value="VEGAN" <?php if ($_SESSION["user"]->checkFlag(VEGAN)) { echo("checked"); }?>><br/>
-Vegetarian? <input type="checkbox" name="flags[]" value="VEGETARIAN" <?php if ($_SESSION["user"]->checkFlag(VEGETATIAN)) { echo("checked"); }?>><br/>
+Vegetarian? <input type="checkbox" name="flags[]" value="VEGETARIAN" <?php if ($_SESSION["user"]->checkFlag(VEGETARIAN)) { echo("checked"); }?>><br/>
 Peanuts? <input type="checkbox" name="flags[]" value="PEANUT" <?php if ($_SESSION["user"]->checkFlag(PEANUT)) { echo("checked"); }?>><br/>
 Soy? <input type="checkbox" name="flags[]" value="SOY" <?php if ($_SESSION["user"]->checkFlag(SOY)) { echo("checked"); }?>><br/>
 Gluten? <input type="checkbox" name="flags[]" value="GLUTEN" <?php if ($_SESSION["user"]->checkFlag(GLUTEN)) { echo("checked"); }?>><br/>

@@ -24,7 +24,7 @@ $(document).ready(function ()
                 else
                 {
                     tmp.find("#title").html("--");
-		    tmp.find("#distance").html("");
+		            tmp.find("#distance").html("");
                 }
                 $(obj).html(tmp.clone());
                 $(obj).attr("id", i.toString());

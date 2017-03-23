@@ -4,7 +4,7 @@ cSessionStart();
 if (!loginCheck())
 {
     header("Location: ./index.php");
-    exit;
+    exit();
 }
 ?>
 <!DOCTYPE html>

@@ -5,7 +5,7 @@ cSessionStart();
 if (!loginCheck())
 {
     header("Location: post/mostRecent.php");
-    exit;
+    exit();
 }
 
 $dbconnection = Database::getConnection();
@@ -14,43 +14,46 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
 {
     $keywords = isset($_GET["keywords"]) ? explode(" ", $_GET["keywords"]) : array();
     $location = isset($_GET["location"]) ? $_GET["location"] : "";
-    $flags = isset($_GET["flags"]) ? intval($_GET["flags"]) : 0;
+    $flags = 0;
+
+    $flags = 0;
+    if (is_array($_GET["flags"]))
+    {
+        foreach ($_GET["flags"] as $value) $flags |= constant($value);
+    }
 	
     $location = mysqli_real_escape_string($dbconnection, $location);
 
-    $sql = "SELECT title,description,location,flags,posttime,expiry,id FROM PostsTable WHERE";
-    if (sizeof($keywords) != 0)
+    $sql = "SELECT title,description,location,flags,posttime,expiry,id,userid FROM PostsTable WHERE";
+    if (sizeof($keywords) != 0 && $keywords[0] != "")
     {
         $filtered = mysqli_real_escape_string($dbconnection, $keywords[0]);
         $sql .= "(description LIKE %" . $filtered . "% OR title LIKE %" . $filtered . "%";
         for ($i = 1; $i < sizeof($keywords); $i++)
         {
             $filtered = mysqli_real_escape_string($dbconnection, $keywords[$i]);
+            if ($filtered == "") continue;
             $sql .= " OR description LIKE %" . $filtered . "% OR title LIKE %" . $filtered . "%";
         }
         $sql .= ") AND";
     }
     $sql .= " visible=1";
-	//echo $sql;
     $result = $dbconnection->query($sql);
-	
-	// something's goin' wrong with this, let's see what's that!!!! 
-	if (!$result) {
-    printf("Error: %s\n", mysqli_error($dbconnection));
-    exit();
-}
-	
+
     $out = array();
     $uflags = $_SESSION["user"]->getFlags();
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-		
-			
     {
-		
         $uLoc = $_SESSION["user"]->getLocation();
         if (areCompatible($uflags, intval($row["flags"])) == 0)
         {
             $row["distance"] = $uLoc->distanceFrom(new Location($row["location"]));
+            $posterInfo = $_SESSION["info"]->getBasicInfo($row["userid"]);
+            foreach ($posterInfo as $k=>$v)
+            {
+                $str = "poster" . $k;
+                $row[$str] = $v;
+            }
             $out[] = $row;
         }
     }
