@@ -19,10 +19,11 @@ $(document).ready(function ()
                     tmp.find("#distance").html(distance);
                     tmp.find("#link").attr("href", "listing.php?id=" + posts[i].id);
                     //todo decription and time
+					//todo -- change images!!
                 }
                 else
                 {
-                    tmp.find("#title").html("EOF");
+                    tmp.find("#title").html("--");
 		    tmp.find("#distance").html("");
                 }
                 $(obj).html(tmp.clone());
