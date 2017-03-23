@@ -31,12 +31,22 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
         $sql .= ") AND";
     }
     $sql .= " visible=1";
+	//echo $sql;
     $result = $dbconnection->query($sql);
-
+	
+	// something's goin' wrong with this, let's see what's that!!!! 
+	if (!$result) {
+    printf("Error: %s\n", mysqli_error($dbconnection));
+    exit();
+}
+	
     $out = array();
     $uflags = $_SESSION["user"]->getFlags();
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+		
+			
     {
+		
         $uLoc = $_SESSION["user"]->getLocation();
         if (areCompatible($uflags, intval($row["flags"])) == 0)
         {
@@ -44,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
             $out[] = $row;
         }
     }
+	
     echo json_encode($out);
 }
 ?>
