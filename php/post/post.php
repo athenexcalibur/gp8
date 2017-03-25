@@ -85,10 +85,11 @@ if (isset($_POST["id"]))
     {
         if (isset($_POST["delete"]))
         {
-            if (!$dbconnection->query("DELETE FROM POSTSTABLE WHERE id = " . $postID))
+            if (!$dbconnection->query("DELETE FROM PostsTable WHERE id = " . $postID))
             {
                 echo ($dbconnection->error);
             }
+            exit();
         }
         else
         {

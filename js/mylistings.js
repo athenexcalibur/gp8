@@ -8,9 +8,9 @@ function fillOrders()
     $.get(url, function (data)
     {
         var history = JSON.parse(data);
-        var stillUp = history["waitingForYou"];
+        var stillUp = history["stillUp"];
 
-        if (stillUp.length === 0) document.getElementById("currentorders").innerHTML = "No orders are waiting for you!";
+        if (stillUp.length === 0) document.getElementById("currentorders").innerHTML = "You have no current listings!";
         else
         {
             var html = "";
@@ -102,7 +102,41 @@ function newOrderCard(order)
         + '             <img src="img/vege-card.jpg"'
         + '                 class="img-responsive"'
         + '                alt="">'
-        + '          <a href="#">'
+        + '        <a href=listing.php?id=' + order.id +'>'
+        + '           <div class="mask waves-effect"></div>'
+        + '       </a>'
+        + '         </div>'
+        + '          </div>'
+        + '		</div>'
+        + '       <div class="col-xs-9">'
+        + '	  <div class="card-block">'
+        + '	  <div class="row">'
+        + '		<div class="col-xs-6">'
+        + '	    <h3 class="foodname card-title">' + order["title"] + '</h3>'
+        + '		</div>'
+        + '		</div>'
+        + '	  </div>'
+        + '	</div>'
+        + '      </div>'
+        + '	</div>';
+
+    return html;
+}
+
+/* TODO other history page
+function newOrderCard(order)
+{
+    var orderID = order["id"];
+    var html =
+        ' <div class="card order-card">'
+        + '  <div class="row">'
+        + '   <div class="col-xs-3">'
+        + '          <div class="card-block">'
+        + '           <div class="view overlay hm-white-slight z-depth-1">'
+        + '             <img src="img/vege-card.jpg"'
+        + '                 class="img-responsive"'
+        + '                alt="">'
+        + '        <a href=listing.php?id="' + order.id +'">'
         + '           <div class="mask waves-effect"></div>'
         + '       </a>'
         + '         </div>'
@@ -138,7 +172,7 @@ function newOrderCard(order)
         + '	</div>';
 
     return html;
-}
+}*/
 
 $('#recievedModal').on('show.bs.modal', function (event)
 {

@@ -13,7 +13,6 @@ class location
         $this->setLatLong($latLng);
     }
 
-    //todo test this
     public function distanceFrom($other)
     {
         $dLat = $other->getLatRadians() - $this->getLatRadians();
