@@ -131,7 +131,11 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
               <!--Account info-->
               <div class = "container">
                   <?php
-                  if ($isPoster) echo "<button class='btn' id='delBtn' data-pid='" . $postID . "'>Delete</button>";
+                  if ($isPoster)
+                  {
+                      echo ("<button class='btn' id='delBtn' data-pid=" . $postID . ">Delete</button>
+                             <a class='btn' id='editBtn' href='php/post/post.php?editing=" . $postID . "'>Edit or reserve</a>");
+                  }
                   else echo
                   ('
                     <div class = "card">

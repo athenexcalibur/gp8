@@ -4,6 +4,12 @@ $.ajaxSetup({cache: false});
 
 var marker;
 
+function strToLatLng(l)
+{
+    var latlng = l.replace(/[^0-9,.-]/g, "").split(",");
+    return new google.maps.LatLng(parseFloat(latlng[0]), parseFloat(latlng[1]));
+}
+
 function initMap()
 {
     var map = new google.maps.Map(document.getElementById("inputMap"),
@@ -16,6 +22,12 @@ function initMap()
     window.map = map;
 
     marker = new google.maps.Marker({map: map});
+    if (window.currentlatLng)
+    {
+        var ll = strToLatLng(window.currentlatLng);
+        marker.setPosition(ll);
+        map.panTo(ll); //todo write this properly (haha)
+    }
 
     var input = document.getElementById("addressInput");
     var searchBox = new google.maps.places.SearchBox(input);

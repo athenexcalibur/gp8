@@ -12,12 +12,14 @@ $("#registerBtn").on("click", function()
         flags: createFlags()
     }, function(data)
     {
-		location.reload(true);
+        window.currentlatLng = undefined;
+
+        $("#registrationModal").modal("hide");
+        $("#loginModal").modal("show"); //todo test this
     }).fail(function(response)
     {
         alert('Error: ' + response.responseText);
     });
-    //todo switch to login modal
 });
 
 function createFlags()

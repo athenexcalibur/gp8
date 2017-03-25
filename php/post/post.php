@@ -7,30 +7,70 @@ if (!loginCheck())
     header("Location: index.php");
     exit();
 }
-//following html is only temporary
+
+$user = $_SESSION["user"];
+$allergens = array();
+if (isset($_GET["editing"]))
+{
+    $dbconnection = Database::getConnection();
+    $postID = intval($_GET["editing"]);
+    $stmt = $dbconnection->prepare("SELECT title, description, location, flags, userid, posttime, expiry FROM PostsTable WHERE id=? LIMIT 1");
+    $stmt->bind_param("i", $postID);
+    $stmt->bind_result($title, $description, $location, $flags, $posterID, $time, $expiry);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->fetch();
+    if ($_SESSION["user"]->getUserID() !== $posterID) die("Wrong user ID.");
+
+    for ($i = 1; $i <= 128; $i *= 2)
+    {
+        if (($flags & $i) != 0) $allergens[$i] = true;
+    }
+
+    echo ("<script>window.currentlatLng ='" . $location . "'; window.editing=" . $_GET["editing"] . "</script>");
+}
+
+else
+{
+    for ($i = 1; $i <= 128; $i *= 2)
+    {
+        if ($user->checkFlag($i)) $allergens[$i] = true;
+    }
+
+    echo ("<script>window.currentlatLng ='" . $user->getLocation()->getLatLong() . "'</script>");
+    /*
+    $vegan = ($_SESSION["user"]->checkFlag(VEGAN));
+    $vege = ($_SESSION["user"]->checkFlag(VEGETARIAN));
+    $peanut = ($_SESSION["user"]->checkFlag(PEANUT));
+    $soy = ($_SESSION["user"]->checkFlag(SOY));
+    $gluten = ($_SESSION["user"]->checkFlag(GLUTEN));
+    $lactose = ($_SESSION["user"]->checkFlag(LACTOSE));
+    $halal =  ($_SESSION["user"]->checkFlag(HALAL));
+    $kosher = ($_SESSION["user"]->checkFlag(KOSHER));*/
+}
 ?>
 
 
 <h3>Post a new item</h3>
 <p>
 <p>
-Title: <input type="text" id="title"><br><br>
-Description: <input type="text" id="description"><br><br>
+Title: <input type="text" id="title" <?php if(isset($title)) echo ("value='" . $title . "'");?>><br><br>
+Description: <input type="text" id="description" <?php if(isset($description)) echo ("value='" . $description . "'");?>><br><br>
 Flags (Check all that apply):
 <br>
 <div id="allergyDiv">
-Vegan? <input type="checkbox" name="flags[]" value="VEGAN" <?php if ($_SESSION["user"]->checkFlag(VEGAN)) { echo("checked"); }?>><br/>
-Vegetarian? <input type="checkbox" name="flags[]" value="VEGETARIAN" <?php if ($_SESSION["user"]->checkFlag(VEGETARIAN)) { echo("checked"); }?>><br/>
-Peanuts? <input type="checkbox" name="flags[]" value="PEANUT" <?php if ($_SESSION["user"]->checkFlag(PEANUT)) { echo("checked"); }?>><br/>
-Soy? <input type="checkbox" name="flags[]" value="SOY" <?php if ($_SESSION["user"]->checkFlag(SOY)) { echo("checked"); }?>><br/>
-Gluten? <input type="checkbox" name="flags[]" value="GLUTEN" <?php if ($_SESSION["user"]->checkFlag(GLUTEN)) { echo("checked"); }?>><br/>
-Lactose? <input type="checkbox" name="flags[]" value="LACTOSE" <?php if ($_SESSION["user"]->checkFlag(LACTOSE)) { echo("checked"); }?>><br/>
-Halal? <input type="checkbox" name="flags[]" value="HALAL" <?php if ($_SESSION["user"]->checkFlag(HALAL)) { echo("checked"); }?>><br/>
-Kosher? <input type="checkbox" name="flags[]" value="KOSHER" <?php if ($_SESSION["user"]->checkFlag(KOSHER)) { echo("checked"); }?>><br/>
+Vegan? <input type="checkbox" value="VEGAN" <?php if ($allergens[VEGAN]) { echo("checked"); }?>><br/>
+Vegetarian? <input type="checkbox" value="VEGETARIAN" <?php if ($allergens[VEGETARIAN]) { echo("checked"); }?>><br/>
+Peanuts? <input type="checkbox" value="PEANUT" <?php if ($allergens[PEANUT]) { echo("checked"); }?>><br/>
+Soy? <input type="checkbox" value="SOY" <?php if ($allergens[SOY]) { echo("checked"); }?>><br/>
+Gluten? <input type="checkbox" value="GLUTEN" <?php if ($allergens[GLUTEN]) { echo("checked"); }?>><br/>
+Lactose? <input type="checkbox" value="LACTOSE" <?php if ($allergens[LACTOSE]) { echo("checked"); }?>><br/>
+Halal? <input type="checkbox" value="HALAL" <?php if ($allergens[HALAL]) { echo("checked"); }?>><br/>
+Kosher? <input type="checkbox" value="KOSHER" <?php if ($allergens[KOSHER]) { echo("checked"); }?>><br/>
 </div>
 <br>
 <br>
-Expiry date: <input type="date" id="expiry"><br><br>
+Expiry date: <input type="date" id="expiry" <?php if(isset($expiry)) echo ("value='" . $expiry . "'");?>><br><br>
 Upload Image: <input type="image" name="food_image" id="upload_image"><br><br>
 <input type="submit" value="Upload Image" name="submit"><br<br>
 <button type="submit" id="tSubmit">Post</button>
@@ -49,14 +89,18 @@ Upload Image: <input type="image" name="food_image" id="upload_image"><br><br>
             checked.push($(this).attr("value"));
         });
 
-        $.post("post.php",
+        var data =
         {
             title: $("#title").val(),
             description: $("#description").val(),
             flags: checked,
             location: window.currentlatLng.toString(),
             expiry: $("#expiry").val()
-        });
+        };
+
+        if (window.editing) data.id = window.editing;
+        $.post("post.php", data);
+        window.currentlatLng = undefined;
     });
 </script>
 
@@ -126,7 +170,7 @@ else if (isset($_POST["title"]))
     $descrip =  $_POST["description"];
     $userid = $_SESSION["user"]->getUserID();
     $loc = $_POST["location"];
-    $date = date('Y-m-d', strtotime($_POST["expiry"]));
+    $date = date('m-d-Y', strtotime($_POST["expiry"]));
     echo $date;
     $stmt->bind_param("sssiis", $title, $descrip, $date, $flags, $userid, $loc);
     if ($stmt->execute())
