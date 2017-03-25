@@ -19,6 +19,7 @@ $stmt->fetch();
 $posterInfo = $_SESSION["info"]->getBasicInfo($posterID);
 $distance = $_SESSION["user"]->getLocation()->distanceFrom(new Location($location));
 $distance = round($distance, 1);
+$isPoster = ($_SESSION["user"]->getUserID() == $posterID);
 ?>
 
 <!DOCTYPE html>
@@ -129,23 +130,29 @@ $distance = round($distance, 1);
               <h5 id="item-address"><?php echo $distance ?> miles away</h5>
               <!--Account info-->
               <div class = "container">
-                <div class = "card">
-                  <div class = "card-block">
-                    <div class = "col-md-6">
-                      <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i></a>
-                    </div>
-                    <div class = "col-md-6">
-                      <p id = "name"><?php echo $posterInfo["name"] ?></p>
-                      <div class = "col-md-4">
-                        <p id = "rating"><?php echo $posterInfo["rating"]?></p>
+                  <?php
+                  if ($isPoster) echo "<button class='btn' id='delBtn' data-pid='" . $postID . "'>Delete</button>";
+                  else echo
+                  ('
+                    <div class = "card">
+                      <div class = "card-block">
+                        <div class = "col-md-6">
+                          <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i></a>
+                        </div>
+                        <div class = "col-md-6">
+                          <p id = "name">' . $posterInfo["name"] . '</p>
+                          <div class = "col-md-4">
+                            <p id = "rating">' . $posterInfo["rating"] .'</p>
+                          </div>
+                          <div class = "col-md-8">
+                            <p id = "score">' . $posterInfo["score"] . '</p>
+                          </div>
+                        </div>
                       </div>
-                      <div class = "col-md-8">
-                        <p id = "score"><?php echo $posterInfo["score"]?></p>
-                      </div>
+                        <a href="messagethread.php?othername=' . $posterInfo["name"] . '"class="btn">Message poster</a>
                     </div>
-                  </div>
-                </div>
-              </div>
+                  </div>');
+              ?>
             </div>
             <div class = "col-md-10">
               <table>
@@ -167,7 +174,6 @@ $distance = round($distance, 1);
                 </tr>
               </table>
               <p id="notes"> "<?php echo $description?>"</p>
-              <button type="Get_button">Get IT</button>
             </div>
           </div>
         </div>
@@ -183,10 +189,7 @@ $distance = round($distance, 1);
 <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
 <script src="bootstrap-material-design/js/mdb.min.js"></script>
 <script src="js/cards.js"></script>
+<script src="js/listing.js"></script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>
-</body>
-
-
-</html>

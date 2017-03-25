@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
     $flags = 0;
 
     $flags = 0;
-    if (is_array($_GET["flags"]))
+    if (isset($_GET["flags"]) && is_array($_GET["flags"]))
     {
         foreach ($_GET["flags"] as $value) $flags |= constant($value);
     }

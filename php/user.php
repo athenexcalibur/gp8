@@ -50,6 +50,25 @@ class UserInfo
         return null;
     }
 
+    public function nameToID($username)
+    {
+        $dbconnection = Database::getConnection();
+
+        $stmt = $dbconnection->prepare("SELECT id FROM UsersTable WHERE username = ?");
+        $stmt->bind_param("s", $username);
+
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows == 1)
+        {
+            $stmt->bind_result($id);
+            $stmt->fetch();
+            return $id;
+        }
+        return null;
+    }
+
 
     //returns name, score, rating (and id)
     public function getBasicInfo($userid)
