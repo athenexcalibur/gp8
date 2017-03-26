@@ -4,7 +4,7 @@ require_once(__DIR__ . "/../user.php");
 cSessionStart();
 if (!loginCheck())
 {
-    header("Location: ../../index.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -50,59 +50,170 @@ else
 }
 ?>
 
+<!DOCTYPE html>
+<head>
 
-<h3>Post a new item</h3>
-<p>
-<p>
-Title: <input type="text" id="title" <?php if(isset($title)) echo ("value='" . $title . "'");?>><br><br>
-Description: <input type="text" id="description" <?php if(isset($description)) echo ("value='" . $description . "'");?>><br><br>
-Flags (Check all that apply):
-<br>
-<div id="allergyDiv">
-Vegan? <input type="checkbox" value="VEGAN" <?php if ($allergens[VEGAN]) { echo("checked"); }?>><br/>
-Vegetarian? <input type="checkbox" value="VEGETARIAN" <?php if ($allergens[VEGETARIAN]) { echo("checked"); }?>><br/>
-Peanuts? <input type="checkbox" value="PEANUT" <?php if ($allergens[PEANUT]) { echo("checked"); }?>><br/>
-Soy? <input type="checkbox" value="SOY" <?php if ($allergens[SOY]) { echo("checked"); }?>><br/>
-Gluten? <input type="checkbox" value="GLUTEN" <?php if ($allergens[GLUTEN]) { echo("checked"); }?>><br/>
-Lactose? <input type="checkbox" value="LACTOSE" <?php if ($allergens[LACTOSE]) { echo("checked"); }?>><br/>
-Halal? <input type="checkbox" value="HALAL" <?php if ($allergens[HALAL]) { echo("checked"); }?>><br/>
-Kosher? <input type="checkbox" value="KOSHER" <?php if ($allergens[KOSHER]) { echo("checked"); }?>><br/>
-</div>
-<br>
-<br>
-Expiry date: <input type="date" id="expiry" <?php if(isset($expiry)) echo ("value='" . $expiry . "'");?>><br><br>
-Upload Image: <input type="image" name="food_image" id="upload_image"><br><br>
-<input type="submit" value="Upload Image" name="submit"><br<br>
-<button type="submit" id="tSubmit">Post</button>
-<input id="addressInput" class="controls" type="text" placeholder="Search...">
-<div id="inputMap" style="width: 500px; height: 500px;"></div>
-<script src="../../bootstrap-material-design/js/jquery-3.1.1.min.js"></script>
-<script src="../../js/enterLocation.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIMtO0_uKM_0og7IjdV7nBDjH4dtUmVoY&callback=initMap&libraries=places" async defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script>
-    $("#tSubmit").on("click", function()
-    {
-        var checked = [];
-        $("#allergyDiv").find("input:checked").each(function()
+    <!--snap stuff-->
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <link rel="stylesheet" type="text/css" href="../../snap/snap.css"/>
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+    <!-- Material-Design icon library -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Bootstrap Core Stylesheet -->
+    <link rel="stylesheet" href="../../bootstrap-material-design/css/bootstrap.min.css">
+
+    <!-- Material-Design core stylesheet -->
+    <link rel="stylesheet" href="../../bootstrap-material-design/css/mdb.min.css">
+
+    <!-- My Stylesheet -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/search.css">
+
+</head>
+
+<body>
+<div class="snap-drawers">
+    <div class="snap-drawer snap-drawer-right elegant-color-dark">
+        <ul class="nav flex-column">
+           <div class="view overlay hm-white-slight">
+               <li class="nav-item">
+                    <a class="nav-link" href="orders.php">Orders</a>
+                    <div class="mask"></div>
+               </li>
+               </div>
+                <div class="view overlay hm-white-slight">
+                    <li class="nav-item">
+                        <a class="nav-link" href="mylistings.php">Listings</a>
+                        <div class="mask"></div>
+                    </li>
+                </div>
+                <div class="view overlay hm-white-slight">
+                    <li class="nav-item">
+                        <a class="nav-link" href="inbox.php">Messages</a>
+                        <div class="mask"></div>
+                    </li>
+                </div>
+                <div class="view overlay hm-white-slight">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Notifications</a>
+                        <div class="mask"></div>
+                    </li>
+                </div>
+                <div class="view overlay hm-white-slight">
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.php">Account</a>
+                        <div class="mask"></div>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+<div id="content" class="snap-content">
+    <div class="mask"></div>
+    <header>
+        <!-- navbar -->
+        <nav class="navbar navbar-dark navbar-fixed-top elegant-color-dark">
+            <a href="/" id="open-left" class="navbar-brand">LOGO</a>
+            <ul class="nav navbar-nav pull-right">
+                <!--<li class="nav-item">-->
+                <!--<a class="nav-link">Login</a>-->
+                <!--</li>-->
+                <li class="nav-item">
+                    <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i></a>
+                </li>
+            </ul>
+        </nav>
+        <!--/.navbar -->
+    </header>
+
+    <main>
+
+    <div class = "container">
+    <h3>Post a new item</h3>
+    <div class = "row">
+
+    <div class = "col-md-6">
+    <p>
+    <p>
+        Title: <input type="text" id="title" <?php if(isset($title)) echo ("value='" . $title . "'");?>><br><br>
+        Description: <input type="text" id="description" <?php if(isset($description)) echo ("value='" . $description . "'");?>><br><br>
+        Flags (Check all that apply):
+        <br>
+    <div id="allergyDiv">
+        Vegan? <input type="checkbox" value="VEGAN" <?php if ($allergens[VEGAN]) { echo("checked"); }?>><br/>
+        Vegetarian? <input type="checkbox" value="VEGETARIAN" <?php if ($allergens[VEGETARIAN]) { echo("checked"); }?>><br/>
+        Peanuts? <input type="checkbox" value="PEANUT" <?php if ($allergens[PEANUT]) { echo("checked"); }?>><br/>
+        Soy? <input type="checkbox" value="SOY" <?php if ($allergens[SOY]) { echo("checked"); }?>><br/>
+        Gluten? <input type="checkbox" value="GLUTEN" <?php if ($allergens[GLUTEN]) { echo("checked"); }?>><br/>
+        Lactose? <input type="checkbox" value="LACTOSE" <?php if ($allergens[LACTOSE]) { echo("checked"); }?>><br/>
+        Halal? <input type="checkbox" value="HALAL" <?php if ($allergens[HALAL]) { echo("checked"); }?>><br/>
+        Kosher? <input type="checkbox" value="KOSHER" <?php if ($allergens[KOSHER]) { echo("checked"); }?>><br/>
+    </div>
+    <br>
+    <br>
+    Expiry date: <input type="date" id="expiry" <?php if(isset($expiry)) echo ("value='" . $expiry . "'");?>><br><br>
+    Upload Image: <input type="image" name="food_image" id="upload_image ">
+    <input type="submit" value="Upload Image" name="submit"><br><br>
+    </div>
+
+    <div class="col-md-6">
+    <input id="addressInput" class="controls" type="text" placeholder="Search...">
+    <div id="inputMap" style="width: 500px; height: 500px;"></div>
+    <script src="../../bootstrap-material-design/js/jquery-3.1.1.min.js"></script>
+    <script src="../../js/enterLocation.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIMtO0_uKM_0og7IjdV7nBDjH4dtUmVoY&callback=initMap&libraries=places" async defer></script>
+
+    <script>
+        $("#tSubmit").on("click", function()
         {
-            checked.push($(this).attr("value"));
+            var checked = [];
+            $("#allergyDiv").find("input:checked").each(function()
+            {
+                checked.push($(this).attr("value"));
+            });
+
+            var data =
+            {
+                title: $("#title").val(),
+                description: $("#description").val(),
+                flags: checked,
+                location: window.currentlatLng.toString(),
+                expiry: $("#expiry").val()
+            };
+
+            if (window.editing) data.id = window.editing;
+            $.post("post.php", data);
+            window.currentlatLng = undefined;
         });
+    </script>
+    </div>
+    </div>
+        <button type="submit" id="tSubmit">Post</button>
+        </div>
+</main>
 
-        var data =
-        {
-            title: $("#title").val(),
-            description: $("#description").val(),
-            flags: checked,
-            location: window.currentlatLng.toString(),
-            expiry: $("#expiry").val()
-        };
+    <footer></footer>
+</div>
 
-        if (window.editing) data.id = window.editing;
-        $.post("post.php", data);
-        window.currentlatLng = undefined;
-    });
-</script>
+<!--Scripts-->
+<script src="bootstrap-material-design/js/jquery-3.1.1.min.js"></script>
+<script src="bootstrap-material-design/js/tether.min.js"></script>
+<script src="bootstrap-material-design/js/bootstrap.min.js"></script>
+<script src="bootstrap-material-design/js/mdb.min.js"></script>
+<script src="js/search.js"></script>
+
+<script type="text/javascript" src="snap/snap.min.js"></script>
+<script type="text/javascript" src="js/sidebar.js"></script>
+<!--/.Scripts-->
 
 <?php
 /*
@@ -181,3 +292,6 @@ else if (isset($_POST["title"]))
     else echo("Post failed");
 }
 ?>
+
+</body>
+
