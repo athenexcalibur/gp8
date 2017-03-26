@@ -4,7 +4,7 @@ require_once(__DIR__ . "/../user.php");
 cSessionStart();
 if (!loginCheck())
 {
-    header("Location: index.php");
+    header("Location: ../../index.php");
     exit();
 }
 
