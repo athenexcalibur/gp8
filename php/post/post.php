@@ -149,14 +149,14 @@ else
         Flags (Check all that apply):
         <br>
     <div id="allergyDiv">
-        Vegan? <input type="checkbox" value="VEGAN" <?php if ($allergens[VEGAN]) { echo("checked"); }?>><br/>
-        Vegetarian? <input type="checkbox" value="VEGETARIAN" <?php if ($allergens[VEGETARIAN]) { echo("checked"); }?>><br/>
-        Peanuts? <input type="checkbox" value="PEANUT" <?php if ($allergens[PEANUT]) { echo("checked"); }?>><br/>
-        Soy? <input type="checkbox" value="SOY" <?php if ($allergens[SOY]) { echo("checked"); }?>><br/>
-        Gluten? <input type="checkbox" value="GLUTEN" <?php if ($allergens[GLUTEN]) { echo("checked"); }?>><br/>
-        Lactose? <input type="checkbox" value="LACTOSE" <?php if ($allergens[LACTOSE]) { echo("checked"); }?>><br/>
-        Halal? <input type="checkbox" value="HALAL" <?php if ($allergens[HALAL]) { echo("checked"); }?>><br/>
-        Kosher? <input type="checkbox" value="KOSHER" <?php if ($allergens[KOSHER]) { echo("checked"); }?>><br/>
+        <input type="checkbox" value="VEGAN" <?php if ($allergens[VEGAN]) { echo("checked"); }?>> Vegan <br/>
+        <input type="checkbox" value="VEGETARIAN" <?php if ($allergens[VEGETARIAN]) { echo("checked"); }?>> Vegetarian <br/>
+        <input type="checkbox" value="PEANUT" <?php if ($allergens[PEANUT]) { echo("checked"); }?>> Peanuts <br/>
+        <input type="checkbox" value="SOY" <?php if ($allergens[SOY]) { echo("checked"); }?>> Soy <br/>
+        <input type="checkbox" value="GLUTEN" <?php if ($allergens[GLUTEN]) { echo("checked"); }?>> Gluten <br/>
+        <input type="checkbox" value="LACTOSE" <?php if ($allergens[LACTOSE]) { echo("checked"); }?>> Lactose <br/>
+        <input type="checkbox" value="HALAL" <?php if ($allergens[HALAL]) { echo("checked"); }?>> Halal <br/>
+        <input type="checkbox" value="KOSHER" <?php if ($allergens[KOSHER]) { echo("checked"); }?>> Kosher <br/>
     </div>
     <br>
     <br>
