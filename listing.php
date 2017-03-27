@@ -134,7 +134,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
                   if ($isPoster)
                   {
                       echo ("<button class='btn' id='delBtn' data-pid=" . $postID . ">Delete</button>
-                             <a class='btn' id='editBtn' href='php/post/post.php?editing=" . $postID . "'>Edit or reserve</a>");
+                             <a class='btn' id='editBtn' href='post.php?editing=" . $postID . "'>Edit or reserve</a>");
                   }
                   else echo
                   ('

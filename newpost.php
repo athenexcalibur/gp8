@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__ . "/../database.php");
-require_once(__DIR__ . "/../user.php");
+require_once(__DIR__ . "/php/database.php");
+require_once(__DIR__ . "/php/user.php");
 cSessionStart();
 if (!loginCheck())
 {
@@ -22,20 +22,14 @@ if (isset($_GET["editing"]))
     $stmt->fetch();
     if ($_SESSION["user"]->getUserID() !== $posterID) die("Wrong user ID.");
 
-    for ($i = 1; $i <= 128; $i *= 2)
-    {
-        if (($flags & $i) != 0) $allergens[$i] = true;
-    }
+    for ($i = 1; $i <= 128; $i *= 2) $allergens[$i] = ($flags & $i);
 
     echo ("<script>window.currentlatLng ='" . $location . "'; window.editing=" . $_GET["editing"] . "</script>");
 }
 
 else
 {
-    for ($i = 1; $i <= 128; $i *= 2)
-    {
-        if ($user->checkFlag($i)) $allergens[$i] = true;
-    }
+    for ($i = 1; $i <= 128; $i *= 2) $allergens[$i] = $user->checkFlag($i);
 
     echo ("<script>window.currentlatLng ='" . $user->getLocation()->getLatLong() . "'</script>");
     /*
@@ -56,27 +50,30 @@ else
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="dates/bootstrap-material-datetimepicker.css" />
+
     <!--snap stuff-->
     <meta http-equiv="x-ua-compatible" content="IE=edge"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
-    <link rel="stylesheet" type="text/css" href="../../snap/snap.css"/>
+    <link rel="stylesheet" type="text/css" href="snap/snap.css"/>
 
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!-- Material-Design icon library -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Bootstrap Core Stylesheet -->
-    <link rel="stylesheet" href="../../bootstrap-material-design/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-material-design/css/bootstrap.min.css">
 
     <!-- Material-Design core stylesheet -->
-    <link rel="stylesheet" href="../../bootstrap-material-design/css/mdb.min.css">
+    <link rel="stylesheet" href="bootstrap-material-design/css/mdb.min.css">
 
     <!-- My Stylesheet -->
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/search.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/search.css">
 
 </head>
 
@@ -160,7 +157,10 @@ else
     </div>
     <br>
     <br>
-    Expiry date: <input type="date" id="expiry" <?php if(isset($expiry)) echo ("value='" . $expiry . "'");?>><br><br>
+    Expiry Date:
+    <input type="text" id="date" class="form-control floating-label">
+
+
     Upload Image: <input type="image" name="food_image" id="upload_image ">
     <input type="submit" value="Upload Image" name="submit"><br><br>
     </div>
@@ -168,33 +168,9 @@ else
     <div class="col-md-6">
     <input id="addressInput" class="controls" type="text" placeholder="Search...">
     <div id="inputMap" style="width: 500px; height: 500px;"></div>
-    <script src="../../bootstrap-material-design/js/jquery-3.1.1.min.js"></script>
-    <script src="../../js/enterLocation.js"></script>
+    <script src="bootstrap-material-design/js/jquery-3.1.1.min.js"></script>
+    <script src="js/enterLocation.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIMtO0_uKM_0og7IjdV7nBDjH4dtUmVoY&callback=initMap&libraries=places" async defer></script>
-
-    <script>
-        $("#tSubmit").on("click", function()
-        {
-            var checked = [];
-            $("#allergyDiv").find("input:checked").each(function()
-            {
-                checked.push($(this).attr("value"));
-            });
-
-            var data =
-            {
-                title: $("#title").val(),
-                description: $("#description").val(),
-                flags: checked,
-                location: window.currentlatLng.toString(),
-                expiry: $("#expiry").val()
-            };
-
-            if (window.editing) data.id = window.editing;
-            $.post("post.php", data);
-            window.currentlatLng = undefined;
-        });
-    </script>
     </div>
     </div>
         <button type="submit" id="tSubmit">Post</button>
@@ -209,7 +185,36 @@ else
 <script src="bootstrap-material-design/js/tether.min.js"></script>
 <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
 <script src="bootstrap-material-design/js/mdb.min.js"></script>
+<script src="dates/moments.js"></script>
+<script src="dates/bootstrap-material-datetimepicker.js"></script>
 <script src="js/search.js"></script>
+
+<script>
+    //todo make expiry field load into date
+    $("#date").bootstrapMaterialDatePicker({format:"DD/MM/YYYY", weekStart : 0, time: false,  minDate : new Date()});
+
+    $("#tSubmit").on("click", function()
+    {
+        var checked = [];
+        $("#allergyDiv").find("input:checked").each(function()
+        {
+            checked.push($(this).attr("value"));
+        });
+
+        var data =
+            {
+                title: $("#title").val(),
+                description: $("#description").val(),
+                flags: checked,
+                location: window.currentlatLng.toString(),
+                expiry: $("#date").val()
+            };
+
+        if (window.editing) data.id = window.editing;
+        $.post("newpost.php", data);
+        window.currentlatLng = undefined;
+    });
+</script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>
@@ -226,7 +231,6 @@ $_POST = array();
 parse_str(file_get_contents('php://input'), $_POST);
 
 $dbconnection = Database::getConnection();
-//todo test this (updating/deleting)
 if (isset($_POST["id"]))
 {
     $postID = intval($_POST["id"]);
@@ -281,8 +285,8 @@ else if (isset($_POST["title"]))
     $descrip =  $_POST["description"];
     $userid = $_SESSION["user"]->getUserID();
     $loc = $_POST["location"];
-    $date = date('m-d-Y', strtotime($_POST["expiry"]));
-    echo $date;
+    $date = str_replace('/', '-', $_POST["expiry"]);
+    $date = date('Y-m-d', strtotime($date));
     $stmt->bind_param("sssiis", $title, $descrip, $date, $flags, $userid, $loc);
     if ($stmt->execute())
     {

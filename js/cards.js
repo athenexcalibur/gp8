@@ -14,8 +14,7 @@ $(document).ready(function ()
                     name = posts[i]["title"];
                     name = name ? posts[i]["title"] : "Untitled";
                     tmp.find("#title").html(name);
-
-                    var distance = posts[i].distance? posts[i].distance.toFixed(1) + " miles away" : "";
+                    var distance = posts[i].hasOwnProperty('distance')? posts[i].distance.toFixed(1) + " miles away" : "";
                     tmp.find("#distance").html(distance);
                     tmp.find("#link").attr("href", "listing.php?id=" + posts[i].id);
                     //todo decription and time
