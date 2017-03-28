@@ -5,12 +5,24 @@
     cursor:pointer;
 }
 
-.messagetime
-{
-	
+.card .thread-img {
+  float: left;
 }
 
-.messagepreview
-{
-	
+.thread-img img {
+  border-radius: 5px;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.thread-prototype {
+  display: none;
+}
+
+.card a {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
