@@ -28,12 +28,13 @@ if(isset($_POST["postID"]))
 	$stmt->bind_param("i", intval($_POST["postID"]));
 	$stmt->bind_result($posterid);
 	$stmt->execute();
+	$stmt->store_result();
 	if ($stmt->affected_rows != 1) //post is removed from poststable when poster reserves it
     {
         finalise(intval($_POST["postID"]));
         exit();
     }
-	$stmt->fetch();
+    $stmt->fetch();
 	
 	if ($userid !== $posterid)
 	{
@@ -41,30 +42,32 @@ if(isset($_POST["postID"]))
 		die("Only the poster can deal with this post!");
 	}
 
-    if (isset($_POST["otherID"]))
+    if (isset($_POST["otherUser"]))
     {
-        $stmt = $dbConnection->prepare("SELECT title, description, expiry FROM PostsTable WHERE id=?");
+        $stmt = $dbConnection->prepare("SELECT title, expiry FROM PostsTable WHERE id=?");
         $stmt->bind_param("i", intval($_POST["postID"]));
-        $stmt->bind_result($title, $description, $expiry);
+        $stmt->bind_result($title, $expiry);
         $stmt->execute();
         $stmt->store_result();
         $stmt->fetch();
+
+        $otherID = $_SESSION["info"]->nameToID($_POST["otherUser"]);
+        $stmt = $dbConnection->prepare("INSERT INTO FinishedPostsTable (id, title, posterID, recipientID, expiry) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("isiis", intval($_POST["postID"]), $title, $userid, intval($otherID), $expiry);
+        $stmt->execute();
 
         $stmt = $dbConnection->prepare("UPDATE PostsTable SET visible=0 WHERE id=?");
         $stmt->bind_param("i", intval($_POST["postID"]));
         $stmt->execute();
 
-        $stmt = $dbConnection->prepare("INSERT INTO FinishedPostsTable (id, title, description, posterID, recipientID, expiry) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("issiis", intval($_POST["postID"]), $title, $description, $userid, intval($_POST["otherID"]), $expiry);
-        $stmt->execute();
     }
 }
 
-/*
+/* -
  * stillUp - array of your posts that are still listed
+ * bothDone - finished posts
  * reserved - posts you have reserved for someone but neither have finalized (cancel here)
  * waitingForYou - posts you have not finalized (rated the other guy)
- * bothDone - finished posts
  */
 else if ($_SERVER["REQUEST_METHOD"] == "GET")
 {
@@ -73,7 +76,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
 
     //get posts still up
     $stillGoing = array();
-    if ($result = $dbConnection->query("SELECT * FROM PostsTable WHERE userid=" . $userid))
+    if ($result = $dbConnection->query("SELECT * FROM PostsTable WHERE visible=1 AND userid=" . $userid))
     {
         while ($row = $result->fetch_assoc()) $stillGoing[] = $row;
     }
@@ -121,7 +124,6 @@ function finalise($postID)
         $dbConnection->query("UPDATE FinishedPostsTable SET recepientDone=1 WHERE id=" . intval($postID));
         $dbConnection->query("UPDATE UsersTable SET score=score+1 WHERE id=". intval($userid));
         $otherid = $posterID;
-        $otherb = $posterDone;
     }
     else if ($posterID == $userid)
     {
@@ -129,7 +131,7 @@ function finalise($postID)
         $dbConnection->query("UPDATE FinishedPostsTable SET posterDone=1 WHERE id=" . intval($postID));
         $dbConnection->query("UPDATE UsersTable SET score=score+5 WHERE id=". intval($userid));
         $otherid = $recepID;
-        $otherb = $recepDone;
+        $dbConnection->query("DELETE FROM PostsTable WHERE id=" .intval($postID));
     }
     else die("Wrong user ID.");
 
@@ -141,7 +143,5 @@ function finalise($postID)
 
     $newrating = (($rating + floatval($_POST["rating"])) / ($number + 1));
     $dbConnection->query("UPDATE UsersTable SET number=number+1, rating=" . floatval($newrating) . " WHERE id=" . intval($otherid));
-
-    if ($otherb) $dbConnection->query("DELETE FROM InterestedTable WHERE postID=" .intval($postID));
 }
 ?>

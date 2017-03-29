@@ -1,6 +1,7 @@
 $(document).ready(function ()
 {
     fillMessages();
+    fillDropdown();
     threadName = findGetParameter("threadname");
     $("#threadname").html(threadName);
 
@@ -17,23 +18,23 @@ $(document).ready(function ()
 $("#sendMsg").on("click", function ()
 {
     $.post("php/messages.php",
-        {
-            toUser: window.otheruser,
-            message: $("#message").val()
-        }, function (data)
-        {
-            console.log(data); //todo delete this
-            $("#message").val("");
-            //TODO Probably meed to find a better solution than reloading the
-            //entire message div
-            fillMessages();
-            $(".snap-content").animate({scrollTop: $(".snap-content").height() * 2}, 1000);
-        });
+    {
+        toUser: window.otheruser,
+        message: $("#message").val()
+    }, function (data)
+    {
+        console.log(data); //todo delete this
+        $("#message").val("");
+        //TODO Probably meed to find a better solution than reloading the
+        //entire message div
+        fillMessages();
+        $(".snap-content").animate({scrollTop: $(".snap-content").height() * 2}, 1000);
+    });
 });
 
 function fillMessages()
 {
-    var otheruser = window.otheruser = window.location.search.substr(11);
+    var otheruser = window.otheruser = window.location.search.substr(12);
     var url = "php/messages.php?othername=" + otheruser;
     $("#messageDiv").empty();
     $.get(url, function (data)
@@ -56,7 +57,7 @@ function fillMessages()
             if (message.toname === otheruser)
             {
                 content = inPrototype.clone();
-                content.css("display", "block")
+                content.css("display", "block");
                 content.find(".card-text.msg").html(message.text);
                 content.find(".time-stamp").html(message.time);
                 $("#messageDiv").append(content);
@@ -64,16 +65,35 @@ function fillMessages()
             else
             {
                 content = outPrototype.clone();
-                content.css("display", "block")
+                content.css("display", "block");
                 content.find(".card-text.msg").html(message.text);
                 content.find(".time-stamp").html(message.time);
                 $("#messageDiv").append(content);
             }
-
         }
     });
 }
 
+function fillDropdown()
+{
+    $.get("php/post/postTools.php", function(data)
+    {
+        var stillUp = JSON.parse(data).stillUp;
+        console.log(stillUp);
+        var HTML = "";
+        for (var i = 0; i < stillUp.length; i++)
+        {
+            var current = stillUp[i];
+            HTML += "<a class='dropdown-item' href='#' onclick='reserveItem(" + current.id + ")'>'" + current.title + "' (" + current.posttime + ")</a>"
+        }
+        $("#dDropdownContainer").html(HTML);
+    })
+}
+
+function reserveItem(id)
+{
+    $.post("php/post/postTools.php", {postID: id, otherUser: window.otheruser});
+}
 
 function findGetParameter(parameterName)
 {

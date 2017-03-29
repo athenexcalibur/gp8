@@ -101,14 +101,22 @@ if (!loginCheck())
     <div class="threadinfo card">
       <div class="container-fluid">
 	<div class="row">
-	  <div class="col-xs-4">
+	  <div class="col-xs-1">
 	    <img src="avatar/test.png" alt="" height="80" width="80">
 	  </div>
-	  <div class="col-xs-6">
+	  <div class="col-xs-2">
 	    <div class="card-block">
-	      <h4 class="card-title" id=threadname>Curabitur gravida vestibulum imperdiet.</h4>
+	      <h4 class="card-title" id=threadname></h4>
 	    </div>
 	  </div>
+
+        <div class="dropdown col-xs-9">
+            <button class="btn btn-secondary dropdown-toggle pull-right" type="button" id="donateDropdown" data-toggle="dropdown">
+                Donate Item
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" id="dDropdownContainer">
+            </div>
+        </div>
 	</div>
       </div>
     </div>

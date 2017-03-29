@@ -57,7 +57,7 @@ class Database
             username VARCHAR(16) UNIQUE NOT NULL,
             email VARCHAR(64) UNIQUE NOT NULL,
             password VARCHAR(256) NOT NULL,
-            flags TINYINT default 0,
+            flags TINYINT UNSIGNED default 0,
             location VARCHAR(52) NOT NULL,
             rating FLOAT default 3,
             score INT default 0,
@@ -87,21 +87,12 @@ class Database
             title VARCHAR(32) NOT NULL,
             posterID INT NOT NULL,
             posterDone BOOL DEFAULT 0,
-			recepientID INT NOT NULL,
+			recipientID INT NOT NULL,
 			recipientDone BOOL DEFAULT 0,
             fintime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             expiry DATE
         )";
         if (!$createDBConnection->query($query)) die("Failed to create finished posts table:" . $createDBConnection->error);
-
-        $query =
-        "CREATE TABLE IF NOT EXISTS InterestedTable
-        (
-            postID INT,
-            userID INT,
-            PRIMARY KEY (postID, userID)
-        )";
-        if (!$createDBConnection->query($query)) die("Failed to create interested table:" . $createDBConnection->error);
 
         $query ="
         CREATE TABLE IF NOT EXISTS MessagesTable

@@ -15,7 +15,8 @@ $("#registerBtn").on("click", function()
         window.currentlatLng = undefined;
 
         $("#registrationModal").modal("hide");
-        $("#loginModal").modal("show"); //todo test this
+        $("#loginModal").modal("show");
+        resetReg();
     }).fail(function(response)
     {
         alert('Error: ' + response.responseText);
@@ -62,16 +63,18 @@ $("#nextBtn").click(function()
 	}
 });
 
-$("#regCancel").on("click", function()
+function resetReg()
 {
-	$(".regDivs").hide();
-	$("#regModalLabel").html("User Details");
-	$("#regDiv1").show();
-	$("#nextBtn").show();
+    $(".regDivs").hide();
+    $("#regModalLabel").html("User Details");
+    $("#regDiv1").show();
+    $("#nextBtn").show();
     $("#nextBtn").prop("disabled", false);
     $("#registerBtn").hide();
     reInitMap();
-});
+}
+
+$("#regCancel").on("click", resetReg);
 
 $("#loginBtn").on("click", function()
 {
