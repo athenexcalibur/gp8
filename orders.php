@@ -81,7 +81,9 @@ if (!loginCheck())
     <header>
         <!-- navbar -->
         <nav class="navbar navbar-dark navbar-fixed-top elegant-color-dark">
-            <a href="/" id="open-left" class="navbar-brand">LOGO</a>
+            <a href = "/">
+          <img src="img/Cupboard.png" alt="logo" style="width:100px;height:50px;">
+        </a>
             <ul class="nav navbar-nav pull-right">
                 <!--<li class="nav-item">-->
                 <!--<a class="nav-link">Login</a>-->

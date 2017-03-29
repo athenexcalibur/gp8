@@ -37,7 +37,7 @@ if (!loginCheck())
 
 </head>
 
-<body onload="fillThreads()">
+<body>
     <div class="snap-drawers">
 	<div class="snap-drawer snap-drawer-right elegant-color-dark">
 	    <ul class="nav flex-column">
@@ -79,7 +79,9 @@ if (!loginCheck())
     <header>
       <!-- navbar -->
       <nav class="navbar navbar-dark navbar-fixed-top elegant-color-dark">
-        <a href="/" id="open-left" class="navbar-brand">LOGO</a>
+        <a href = "/">
+          <img src="img/Cupboard.png" alt="logo" style="width:100px;height:50px;">
+        </a>
         <ul class="nav navbar-nav pull-right">
           <!--<li class="nav-item">-->
           <!--<a class="nav-link">Login</a>-->
@@ -94,13 +96,24 @@ if (!loginCheck())
 
 
     <main>
-
-    <div class="container" id="allthreads">
+    <div class="card thread-prototype">
+      <a href="messagethread.php?threadname="></a>
+      <div class="card-block thread-img">
+	<img src="avatar/test.png" alt="">
+      </div>
+      <div class="card-block">
+	<h4 class="card-title"></h5>
+	<p class="card-text text-muted message-text"></p>
+	<p class="card-text text-right text-muted message-time">yesterday</p>
+      </div>
+    </div>
+    <div class="container">
       <div class="row">
-        <div class="col-md-6">
-	  
-	  </div>
-	</div>
+        <h2>Inbox</h2>
+      </div>
+      <div class="row" id="threadCards">
+      </div>
+    </div>
 
     </main>
 
@@ -115,8 +128,6 @@ if (!loginCheck())
   <script src="bootstrap-material-design/js/tether.min.js"></script>
   <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
   <script src="bootstrap-material-design/js/mdb.min.js"></script>
-  <script src="js/cards.js"></script>
-
   <script type="text/javascript" src="js/messages/inbox.js"> </script>
 
   <script type="text/javascript" src="snap/snap.min.js"></script>
