@@ -202,13 +202,13 @@ else
         });
 
         var data =
-            {
-                title: $("#title").val(),
-                description: $("#description").val(),
-                flags: checked,
-                location: window.currentlatLng.toString(),
-                expiry: $("#date").val()
-            };
+        {
+            title: $("#title").val(),
+            description: $("#description").val(),
+            flags: checked,
+            location: window.currentlatLng.toString(),
+            expiry: $("#date").val()
+        };
 
         if (window.editing) data.id = window.editing;
         $.post("newpost.php", data);
