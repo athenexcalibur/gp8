@@ -24,17 +24,28 @@ if(isset($_POST["postID"]))
 {
 	$userid = intval($_SESSION["user"]->getUserID());
 
-	$stmt = $dbConnection->prepare("SELECT userid FROM PostsTable WHERE id=?");
+	$stmt = $dbConnection->prepare("SELECT userid, visible FROM PostsTable WHERE id=?");
 	$stmt->bind_param("i", intval($_POST["postID"]));
-	$stmt->bind_result($posterid);
+	$stmt->bind_result($posterid, $visible);
 	$stmt->execute();
 	$stmt->store_result();
-	if ($stmt->affected_rows != 1) //post is removed from poststable when poster reserves it
+	$stmt->fetch();
+
+	if (is_null($visible)) {
+	    $stmt = $dbConnection->prepare("SELECT posterID FROM FinishedPostsTable WHERE id=?");
+	    $stmt->bind_param("i", intval($_POST["postID"]));
+	    $stmt->bind_result($posterid);
+	    $stmt->execute();
+	    $stmt->store_result();
+	    $stmt->fetch();
+	    $visible = is_null($posterid) ? true : false;
+	}
+
+	if (!$visible) //post is removed from poststable when poster reserves it
     {
         finalise(intval($_POST["postID"]));
         exit();
     }
-    $stmt->fetch();
 	
 	if ($userid !== $posterid)
 	{
@@ -85,7 +96,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
     $reserved = array();
     $waitingForYou = array();
     $bothDone = array();
-    if ($result = $dbConnection->query("SELECT * FROM FinishedPostsTable WHERE posterID=" . $userid . " OR recepientID=" . $userid))
+    if ($result = $dbConnection->query("SELECT * FROM FinishedPostsTable WHERE posterID=" . $userid . " OR recipientID=" . $userid))
     {
         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
         {
@@ -95,8 +106,8 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
                 $row["distance"] = $loc->distanceFrom(new Location($row["location"]));
             } //ugh
 
-            $rdone = intval($row["recepientDone"]);
-            $rid = intval($row["recepientID"]);
+            $rdone = intval($row["recipientDone"]);
+            $rid = intval($row["recipientID"]);
             $pdone = intval($row["posterDone"]);
             $pid = intval($row["posterID"]);
             if ($rdone && $pdone) $bothDone[] = $row;
@@ -114,14 +125,16 @@ function finalise($postID)
 {
     global $dbConnection;
     $userid = $_SESSION["user"]->getUserID();
-    $stmt = $dbConnection->prepare("SELECT recepientID, recepientDone, posterID, posterDone FROM FinishedPostsTable WHERE id=?");
+    $stmt = $dbConnection->prepare("SELECT recipientID, recipientDone, posterID, posterDone FROM FinishedPostsTable WHERE id=?");
     $stmt->bind_param("i", intval($postID));
+    $stmt->execute();
     $stmt->bind_result($recepID, $recepDone, $posterID, $posterDone);
+    $stmt->store_result();
     $stmt->fetch();
     if ($recepID == $userid)
     {
         if ($recepDone) die("Post already finalized.");
-        $dbConnection->query("UPDATE FinishedPostsTable SET recepientDone=1 WHERE id=" . intval($postID));
+        $dbConnection->query("UPDATE FinishedPostsTable SET recipientDone=1 WHERE id=" . intval($postID));
         $dbConnection->query("UPDATE UsersTable SET score=score+1 WHERE id=". intval($userid));
         $otherid = $posterID;
     }
