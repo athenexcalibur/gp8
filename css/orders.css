@@ -1,0 +1,13 @@
+.order-img img {
+  height: 5em;
+  width: auto;
+}
+
+.card .order-img {
+  float: left;
+  padding-bottom: 0px;
+}
+
+.current-prototype, .history-prototype {
+  display: none;
+}
