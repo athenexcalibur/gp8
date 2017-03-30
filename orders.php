@@ -4,7 +4,7 @@ require_once "php/database.php";
 cSessionStart();
 if (!loginCheck())
 {
-    //header("Location: index.php");
+    //header("Location: index.php?error=" . urlencode("You must be logged in to do that."));
     //exit();
 }
 ?>

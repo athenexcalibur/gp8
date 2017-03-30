@@ -72,7 +72,7 @@ class Database
             title VARCHAR(32) NOT NULL,
             description VARCHAR(256),
             location VARCHAR(52),
-            flags TINYINT default 0,
+            flags TINYINT UNSIGNED default 0,
             userid INT NOT NULL,
             posttime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             visible BOOL DEFAULT 1,

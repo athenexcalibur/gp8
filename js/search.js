@@ -55,6 +55,7 @@ function populateSearchResults()
     }, function (data)
     {
         var posts = JSON.parse(data);
+        window.posts = posts;
         var resContainer = $("#results");
         if (posts.length > 0)
         {
@@ -69,6 +70,52 @@ function populateSearchResults()
         else resContainer.html("No results found.");
     });
 }
+
+function strToLatLng(l)
+{
+    var latlng = l.replace(/[^0-9,.-]/g, "").split(",");
+    return new google.maps.LatLng(parseFloat(latlng[0]), parseFloat(latlng[1]));
+}
+
+function createPopup(post)
+{
+    return post.title; //todo make this good
+}
+
+function initMap()
+{
+    var map = new google.maps.Map(document.getElementById("resultsMap"),
+    {
+        center: {lat: 53.303287539568494, lng: -1.478261947631836},
+        zoom: 8,
+        mapTypeId: 'roadmap'
+    });
+
+    window.map = map;
+
+    for(var i = 0; i < window.posts.length; i++)
+    {
+        var m = new google.maps.Marker
+        ({
+            position: strToLatLng(window.posts[i].location),
+            map: map
+        });
+
+        var infowindow = new google.maps.InfoWindow({content: createPopup(posts[i])});
+
+
+        google.maps.event.addListener(m, "click", function(){infowindow.open(map, this);});
+    }
+
+    google.maps.event.trigger(map, "resize");
+}
+
+
+
+$("#mapShow").on("click",function()
+{
+    initMap();
+});
 
 $(document).ready(function()
 {

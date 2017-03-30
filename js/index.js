@@ -1,5 +1,3 @@
-
-
 //login stuff ----
 $("#registerBtn").on("click", function()
 {
@@ -72,6 +70,8 @@ function resetReg()
     $("#nextBtn").prop("disabled", false);
     $("#registerBtn").hide();
     reInitMap();
+
+    //todo clear all fields (probably add some class to them)
 }
 
 $("#regCancel").on("click", resetReg);

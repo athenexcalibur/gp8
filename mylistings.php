@@ -4,7 +4,7 @@ require_once "php/database.php";
 cSessionStart();
 if (!loginCheck())
 {
-    header("Location: index.php");
+    header("Location: index.php?error=" . urlencode("You must be logged in to do that."));
     exit();
 }
 ?>
@@ -77,13 +77,13 @@ if (!loginCheck())
     </div>
 </div>
 <div id="content" class="snap-content">
-  <div class="mask"></div>
+    <div class="mask"></div>
     <header>
         <!-- navbar -->
         <nav class="navbar navbar-dark navbar-fixed-top elegant-color-dark">
-            <a href = "/">
-          <img src="img/Cupboard.png" alt="logo" style="width:100px;height:50px;">
-        </a>
+            <a href="/">
+                <img src="img/Cupboard.png" alt="logo" style="width:100px;height:50px;">
+            </a>
             <ul class="nav navbar-nav pull-right">
                 <!--<li class="nav-item">-->
                 <!--<a class="nav-link">Login</a>-->
@@ -98,8 +98,6 @@ if (!loginCheck())
 
 
     <main>
-
-
         <div id="ordersWrapper" class="container">
 
             <div id="header">
@@ -121,17 +119,14 @@ if (!loginCheck())
                     <div class="tab-pane active" id="current" role="tabpanel">
                         <div class="card order-cards" id="currentorders">
                         </div>
-					</div>
-					<div class="tab-pane" id="history" role="tabpanel">
-						<div class="card order-cards" id="pastorders">
-						</div>
-					</div>
-
-				</div>
-			</div>
+                    </div>
+                    <div class="tab-pane" id="history" role="tabpanel">
+                        <div class="card order-cards" id="pastorders">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
     </main>
 
 
@@ -181,31 +176,33 @@ if (!loginCheck())
             </div>
             <!--Body-->
             <div class="modal-body">
-               <div class="md-form">
-				<input type="text" id="cancelmessagetext" value = "I am sorry, I have to cancel this order: " class="form-control">
-				<label for="form1" class="">Message</label>
-			</div>
-			</div>
+                <div class="md-form">
+                    <input type="text" id="cancelmessagetext" value="I am sorry, I have to cancel this order: "
+                           class="form-control">
+                    <label for="form1" class="">Message</label>
+                </div>
+            </div>
             <!--Footer-->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-                <button type="button" class="btn btn-primary" id="modal_sendcancelmessage" data-dismiss="modal">SEND</button>
+                <button type="button" class="btn btn-primary" id="modal_sendcancelmessage" data-dismiss="modal">SEND
+                </button>
             </div>
         </div>
         <!--/.Content-->
     </div>
 </div>
 
-  <!--Scripts-->
-  <script src="bootstrap-material-design/js/jquery-3.1.1.min.js"></script>
-  <script src="bootstrap-material-design/js/tether.min.js"></script>
-  <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
-  <script src="bootstrap-material-design/js/mdb.min.js"></script>
-  <script src="js/search.js"></script>
-  <script src="js/mylistings.js"></script>
+<!--Scripts-->
+<script src="bootstrap-material-design/js/jquery-3.1.1.min.js"></script>
+<script src="bootstrap-material-design/js/tether.min.js"></script>
+<script src="bootstrap-material-design/js/bootstrap.min.js"></script>
+<script src="bootstrap-material-design/js/mdb.min.js"></script>
+<script src="js/search.js"></script>
+<script src="js/mylistings.js"></script>
 
-  <script type="text/javascript" src="snap/snap.min.js"></script>
-  <script type="text/javascript" src="js/sidebar.js"> </script>
-  <!--/.Scripts-->
+<script type="text/javascript" src="snap/snap.min.js"></script>
+<script type="text/javascript" src="js/sidebar.js"></script>
+<!--/.Scripts-->
 
 </body>

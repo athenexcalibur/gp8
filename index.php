@@ -284,20 +284,19 @@ cSessionStart();
         </div>
         <!--/.Item-Carousel-->
     </main>
-    <?php
-    if (isset($_GET["error"]))
-    {
-        echo
-        (
-            "<div class='alert alert-danger alert-dismissable fade in'>
-                <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
-            . $_GET["error"] . "</div>"
-        );
-    }
-    ?>
 
     <footer>
-
+        <?php
+        if (isset($_GET["error"]))
+        {
+            echo
+            (
+                "<div class='alert alert-danger alert-dismissable fade in footer navbar-fixed-bottom'>
+                <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+                . $_GET["error"] . "</div>"
+            );
+        }
+        ?>
     </footer>
 </div>
 

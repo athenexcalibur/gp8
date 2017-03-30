@@ -4,7 +4,7 @@ require_once(__DIR__ . "/php/user.php");
 cSessionStart();
 if (!loginCheck())
 {
-    header("Location: index.php");
+    header("Location: index.php?error=" . urlencode("You must be logged in to do that."));
     exit();
 }
 
@@ -161,7 +161,6 @@ else
     <br>
     Expiry Date:
     <input type="text" id="date" class="form-control floating-label">
-
 
     Upload Image: <input type="image" name="food_image" id="upload_image ">
     <input type="submit" value="Upload Image" name="submit"><br><br>

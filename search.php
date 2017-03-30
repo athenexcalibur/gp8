@@ -4,7 +4,7 @@ require_once "php/database.php";
 cSessionStart();
 if (!loginCheck())
 {
-    header("Location: index.php");
+    header("Location: index.php?error=" . urlencode("You must be logged in to do that."));
     exit();
 }
 ?>
@@ -192,8 +192,29 @@ if (!loginCheck())
             </div>
         </div>
 
-        <div class="container" id="results">
+        <div class="row">
+            <nav class="nav">
+                <ul class="nav nav-tabs justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#list" data-toggle="tab">List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="mapShow" class="nav-link" href="#map" data-toggle="tab">Map</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="list" role="tabpanel">
+                    <div class="container" id="results">
+                    </div>
+                </div>
+                <div class="tab-pane" id="map" role="tabpanel">
+                    <div id="resultsMap"></div>
+                </div>
+            </div>
         </div>
+
     </main>
 
 
@@ -208,6 +229,7 @@ if (!loginCheck())
 <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
 <script src="bootstrap-material-design/js/mdb.min.js"></script>
 <script src="js/search.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIMtO0_uKM_0og7IjdV7nBDjH4dtUmVoY&libraries=places" async defer></script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>
