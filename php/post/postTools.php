@@ -31,7 +31,8 @@ if(isset($_POST["postID"]))
 	$stmt->store_result();
 	$stmt->fetch();
 
-	if (is_null($visible)) {
+	if ($stmt->num_rows <= 0)
+	{
 	    $stmt = $dbConnection->prepare("SELECT posterID FROM FinishedPostsTable WHERE id=?");
 	    $stmt->bind_param("i", intval($_POST["postID"]));
 	    $stmt->bind_result($posterid);
@@ -52,6 +53,8 @@ if(isset($_POST["postID"]))
 		$stmt->close();
 		die("Only the poster can deal with this post!");
 	}
+
+	$wtf = $_POST;
 
     if (isset($_POST["otherUser"]))
     {

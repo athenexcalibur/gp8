@@ -99,7 +99,7 @@ function fillDropdown()
 
 function reserveItem(id)
 {
-    $.post("php/post/postTools.php", {postID: id, otherUser: window.otheruser});
+    $.post("php/post/postTools.php", {postID: id, otherUser: window.oname});
 }
 
 function findGetParameter(parameterName)

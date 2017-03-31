@@ -71,6 +71,12 @@ if (!loginCheck())
 			<div class="mask"></div>
 		    </li>
 		</div>
+        <div class="view overlay hm-white-slight">
+            <li class="nav-item">
+                <a class="nav-link" href="php/membership/logout.php">Logout</a>
+                <div class="mask"></div>
+            </li>
+        </div>
 	    </ul>
 	</div>
     </div>
@@ -98,7 +104,7 @@ if (!loginCheck())
     <main>
 
     <div class="card thread-prototype">
-      <a href="messagethread.php?threadname="></a>
+      <a href="messagethread.php?name="></a>
       <div class="card-block thread-img">
 	<img src="avatar/test.png" alt="">
       </div>

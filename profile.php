@@ -84,6 +84,12 @@ if (!loginCheck())
                     <div class="mask"></div>
                 </li>
             </div>
+            <div class="view overlay hm-white-slight">
+                <li class="nav-item">
+                    <a class="nav-link" href="php/membership/logout.php">Logout</a>
+                    <div class="mask"></div>
+                </li>
+            </div>
         </ul>
     </div>
 </div>
@@ -119,7 +125,7 @@ if (!loginCheck())
 	      <h3>Hello</h3>
 	      <h2><?php echo($_SESSION["user"]->getUserName()); ?></h2>
 	      <div id="ratings-div">
-		<h1><?php echo($_SESSION["user"]->getRating()); ?>/5</h1>
+		<h1>Rating: <?php echo($_SESSION["user"]->getRating()); ?>/5</h1>
 	      </div>
 	      <div id="details-div">
 		<div id="score">Your score is <?php echo($_SESSION["user"]->getScore()); ?>!</div>

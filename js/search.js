@@ -79,7 +79,7 @@ function strToLatLng(l)
 
 function createPopup(post)
 {
-    return post.title; //todo make this good
+    return "<h3>" +  post.title + "</h3><br/>" + post.description; //todo make this good
 }
 
 function initMap()
@@ -102,9 +102,10 @@ function initMap()
         });
 
         var infowindow = new google.maps.InfoWindow({content: createPopup(posts[i])});
-
-
-        google.maps.event.addListener(m, "click", function(){infowindow.open(map, this);});
+        var purl = "listing.php?id=" + posts[i].id;
+        google.maps.event.addListener(m, "click", function(){window.location.replace(purl)})
+        google.maps.event.addListener(m, "mouseover", function(){infowindow.open(map, this);});
+        google.maps.event.addListener(m, "mouseout", function(){infowindow.close()});
     }
 
     google.maps.event.trigger(map, "resize");
