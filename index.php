@@ -69,6 +69,12 @@ cSessionStart();
                     <div class="mask"></div>
                 </li>
             </div>
+            <div class="view overlay hm-white-slight">
+                <li class="nav-item">
+                    <a class="nav-link" href="php/membership/logout.php">Logout</a>
+                    <div class="mask"></div>
+                </li>
+            </div>
         </ul>
     </div>
 </div>
