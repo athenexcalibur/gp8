@@ -155,7 +155,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
                           </div>
                         </div>
                       </div>
-                        <a href="messagethread.php?othername=' . $posterInfo["name"] . '"class="btn">Message poster</a>
+                        <a href="messagethread.php?name=' . $posterInfo["name"] . '"class="btn">Message poster</a>
                     </div>
                   </div>');
               ?>

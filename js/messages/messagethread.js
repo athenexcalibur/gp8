@@ -2,7 +2,7 @@ $(document).ready(function ()
 {
     fillMessages();
     fillDropdown();
-    threadName = findGetParameter("threadname");
+    threadName = window.oname;
     $("#threadname").html(threadName);
 
     //line up threadinfo card with navbar)
@@ -19,7 +19,7 @@ $("#sendMsg").on("click", function ()
 {
     $.post("php/messages.php",
     {
-        toUser: window.otheruser,
+        toUser: window.oname,
         message: $("#message").val()
     }, function (data)
     {
@@ -34,7 +34,7 @@ $("#sendMsg").on("click", function ()
 
 function fillMessages()
 {
-    var otheruser = window.otheruser = window.location.search.substr(12);
+    var otheruser = window.oname;
     var url = "php/messages.php?othername=" + otheruser;
     $("#messageDiv").empty();
     $.get(url, function (data)
@@ -79,14 +79,21 @@ function fillDropdown()
     $.get("php/post/postTools.php", function(data)
     {
         var stillUp = JSON.parse(data).stillUp;
-        console.log(stillUp);
-        var HTML = "";
-        for (var i = 0; i < stillUp.length; i++)
+
+        if (stillUp.length == 0) $("#ddDiv").hide();
+
+        else
         {
-            var current = stillUp[i];
-            HTML += "<a class='dropdown-item' href='#' onclick='reserveItem(" + current.id + ")'>'" + current.title + "' (" + current.posttime + ")</a>"
+            $("#ddDiv").show();
+
+            var HTML = "";
+            for (var i = 0; i < stillUp.length; i++)
+            {
+                var current = stillUp[i];
+                HTML += "<a class='dropdown-item' href='#' onclick='reserveItem(" + current.id + ")'>'" + current.title + "' (" + current.posttime + ")</a>"
+            }
+            $("#dDropdownContainer").html(HTML);
         }
-        $("#dDropdownContainer").html(HTML);
     })
 }
 

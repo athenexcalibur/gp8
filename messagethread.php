@@ -3,7 +3,14 @@ require_once "php/user.php";
 cSessionStart();
 if (!loginCheck())
 {
-    header("Location: ./index.php");
+    header("Location: index.php?error=" . urlencode("You must be logged in to do that."));
+    exit();
+}
+
+
+if (!isset($_GET["name"]))
+{
+    header("Location: index.php?error=" . urlencode("No name set."));
     exit();
 }
 ?>
@@ -34,6 +41,8 @@ if (!loginCheck())
   <!-- My Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/messages.css">
+
+    <?php echo "<script>window.oname = '" . $_GET["name"] . "';</script>"; ?>
 
 </head>
 
@@ -110,7 +119,7 @@ if (!loginCheck())
 	    </div>
 	  </div>
 
-        <div class="dropdown col-xs-9">
+        <div class="dropdown col-xs-9" id="ddDiv">
             <button class="btn btn-secondary dropdown-toggle pull-right" type="button" id="donateDropdown" data-toggle="dropdown">
                 Donate Item
             </button>

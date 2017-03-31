@@ -78,7 +78,8 @@ if(isset($_POST["postID"]))
  * stillUp - array of your posts that are still listed
  * bothDone - finished posts
  * reserved - posts you have reserved for someone but neither have finalized (cancel here)
- * waitingForYou - posts you have not finalized (rated the other guy)
+ * orders - posts reserved for you that you haven't finalized
+ * needsConfirming - posts you have reserved that the other guy has confirmed
  */
 else if ($_SERVER["REQUEST_METHOD"] == "GET")
 {
@@ -94,7 +95,8 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
 
     //get the rest
     $reserved = array();
-    $waitingForYou = array();
+    $orders = array();
+    $needsConfirming = array();
     $bothDone = array();
     if ($result = $dbConnection->query("SELECT * FROM FinishedPostsTable WHERE posterID=" . $userid . " OR recipientID=" . $userid))
     {
@@ -112,11 +114,12 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
             $pid = intval($row["posterID"]);
             if ($rdone && $pdone) $bothDone[] = $row;
             else if (!$rdone && !$pdone) $reserved[] = $row;
-            else if ((!$rdone && $userid == $rid) ||(!$pdone && $userid == $pid)) $waitingForYou[] = $row;
+            else if (!$rdone && $userid == $rid) $orders[] = $row;
+            else if (!$pdone && $userid == $pid) $needsConfirming[] = $row; //defensive
         }
     }
 
-    $fin = array("stillUp" => $stillGoing, "waitingForYou"=>$waitingForYou, "bothDone"=>$bothDone, "reserved"=>$reserved);
+    $fin = array("stillUp" => $stillGoing, "orders"=>$orders, "needsConfirming"=> $needsConfirming, "bothDone"=>$bothDone, "reserved"=>$reserved);
     echo json_encode($fin);
 }
 

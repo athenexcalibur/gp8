@@ -96,13 +96,14 @@ if (!loginCheck())
 
 
     <main>
+
     <div class="card thread-prototype">
       <a href="messagethread.php?threadname="></a>
       <div class="card-block thread-img">
 	<img src="avatar/test.png" alt="">
       </div>
       <div class="card-block">
-	<h4 class="card-title"></h5>
+	<h4 class="card-title"></h4>
 	<p class="card-text text-muted message-text"></p>
 	<p class="card-text text-right text-muted message-time">yesterday</p>
       </div>
@@ -114,6 +115,7 @@ if (!loginCheck())
       <div class="row" id="threadCards">
       </div>
     </div>
+
 
     </main>
 
