@@ -32,7 +32,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
   <meta http-equiv="x-ua-compatible" content="IE=edge" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-touch-fullscreen" content="yes">
-  <link rel="stylesheet" type="text/css" href="snap/snap.css" />
+  <link rel="stylesheet" type="text/css" href="snap/snap.css"/>
 
   <!DOCTYPE html>
   <html lang="en">

@@ -18,7 +18,6 @@ $dbConnection = Database::getConnection();
  * If he is reserving it for someone "otherID" must be set
  * In all cases "postID" must be set
  */
-//todo add option to cancel reservations
 //todo test this (not even tested once but needs frontend stuff)
 if(isset($_POST["postID"]))
 {
@@ -42,6 +41,16 @@ if(isset($_POST["postID"]))
 	    $visible = is_null($posterid) ? true : false;
 	}
 
+    if(isset($_POST["cancel"]))
+    {
+        if ($userid !== $posterid) die("Only the poster can cancel this post!");
+        $dbConnection->query("UPDATE PostsTable SET visible=1 WHERE id=" . intval($_POST["postID"]));
+        if ($dbConnection->affected_rows <= 0) die("Couldn't find that post to restore!");
+        $dbConnection->query("DELETE FROM FinishedPostsTable WHERE id=" . intval($_POST["postID"]));
+        if ($dbConnection->affected_rows <= 0) die("Couldn't find that post to delete!");
+        exit();
+    }
+
 	if (!$visible) //post is removed from poststable when poster reserves it
     {
         finalise(intval($_POST["postID"]));
@@ -53,8 +62,6 @@ if(isset($_POST["postID"]))
 		$stmt->close();
 		die("Only the poster can deal with this post!");
 	}
-
-	$wtf = $_POST;
 
     if (isset($_POST["otherUser"]))
     {
@@ -105,7 +112,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
     {
         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
         {
-            $row["posterName"] = $_SESSION["info"]->idToName(intval($row["userid"]));
+            $row["posterName"] = $_SESSION["info"]->idToName(intval($row["posterID"]));
             if (isset($row["location"]) && ($loc = $_SESSION["user"]->getLocation()))
             {
                 $row["distance"] = $loc->distanceFrom(new Location($row["location"]));
@@ -153,6 +160,8 @@ function finalise($postID)
         $dbConnection->query("DELETE FROM PostsTable WHERE id=" .intval($postID));
     }
     else die("Wrong user ID.");
+
+    $_SESSION["user"]->reload();
 
     $stmt = $dbConnection->prepare("SELECT number, rating FROM UsersTable WHERE id=?");
     $stmt->bind_param("i", $otherid);

@@ -36,7 +36,7 @@ function getResultHTML(post)
 function sortByDistance(a,b){return a.distance - b.distance;}
 function sortByScore(a,b){return a.posterscore - b.posterscore;}
 function sortByRating(a,b){return a.posterrating - b.posterrating;}
-function sortByExpiry(a,b){return a.posterrating - b.posterrating; /*todo - dates don't work*/}
+function sortByExpiry(a,b){return a.expiry <= b.expiry;}
 function sortByMostRecent(a,b){return a.posttime <= b.posttime;}
 
 
@@ -64,6 +64,7 @@ function populateSearchResults()
             for (var i = 0; i < posts.length; i++)
             {
                 posts[i].posttime = parseDate(posts[i].posttime);
+                posts[i].expiry = parseDate(posts[i].expiry);
                 resContainer.append(getResultHTML(posts[i]));
             }
         }

@@ -18,7 +18,9 @@ function loginCheck()
 
 function areCompatible($fromFlags, $toFlags)
 {
-    return ($fromFlags & ~$toFlags == 0) ? true : false; //php
+    return !($fromFlags & ~$toFlags);
+    //if this breaks return the thing below
+    //return ($fromFlags & ~$toFlags == 0) ? true : false; //php
 }
 
 if (isset($_GET["id"]))
@@ -106,6 +108,7 @@ class User
     private $score;
     private $rating;
     private $location;
+    private $number;
 
     public function __construct($email, $password)
     {
@@ -114,7 +117,7 @@ class User
         (
             "SELECT id, username, password, 
              CAST(flags as unsigned integer),
-             location, rating, score
+             location, rating, score, number
              FROM UsersTable
              WHERE email = ?
              LIMIT 1"))
@@ -122,7 +125,7 @@ class User
             $stmt->bind_param("s", $email);
             $stmt->execute();
             $stmt->store_result();
-            $stmt->bind_result($userID, $username, $dbPassword, $this->flags, $llStr, $this->rating, $this->score);
+            $stmt->bind_result($userID, $username, $dbPassword, $this->flags, $llStr, $this->rating, $this->score, $this->number);
             $stmt->fetch();
 
             $hash = hash("sha256", $password);
@@ -137,8 +140,6 @@ class User
             else throw new Exception("Invalid email or password, please try again.");
         } else throw new Exception("There was an error preparing a statement.");
     }
-
-
 	
 	public function reload()
 	{
@@ -173,6 +174,11 @@ class User
     public function getRating()
     {
         return $this->rating;
+    }
+
+    public function getNumber()
+    {
+        return $this->number;
     }
 	
     public function getUserName()

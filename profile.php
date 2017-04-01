@@ -129,8 +129,8 @@ if (!loginCheck())
 	      </div>
 	      <div id="details-div">
 		<div id="score">Your score is <?php echo($_SESSION["user"]->getScore()); ?>!</div>
-		<div id="listed-items">You have listed X items!</div>
-		<div id="received-items">You have recieved X items!</div>
+		<div id="listed-items">You have X items currently listed!</div> <!--todo count currently listed items -->
+		<div id="exchanged-items">You have exchanged <?php echo $_SESSION["user"]->getNumber()?> items!</div>
 	      </div>
 
 	    </div>
@@ -140,20 +140,20 @@ if (!loginCheck())
 	  <div class="card">
 	    <div class="card-block">
 
-	      <div class="md-form">
+	      <div class="md-form"> <!--todo make this work -->
 		<i class="fa fa-pencil prefix"></i>
-		<input type="text" id="form3" class="form-control">
-		<label for="form8">Username</label>
+		<input type="text" id="fname" class="form-control" name="uname" value="<?php echo $_SESSION["user"]->getUserName()?>">
+		<label for="fname">Username</label>
 	      </div>
 	      <div class="md-form">
 		<i class="fa fa-pencil prefix"></i>
-		<input type="text" id="form3" class="form-control">
-		<label for="form8">Email</label>
+		<input type="text" id="femail" class="form-control" name="email" value="<?php echo $_SESSION["user"]->getEmail()?>">
+		<label for="femail">Email</label>
 	      </div>
 	      <div class="md-form">
 		<i class="fa fa-pencil prefix"></i>
-		<input type="text" id="form3" class="form-control">
-		<label for="form8">Password</label>
+		<input type="text" id="fpass" class="form-control" name="password">
+		<label for="fpass">Password</label>
 	      </div>
 	      <div class="md-form">
 		<i class="fa fa-pencil prefix"></i>
