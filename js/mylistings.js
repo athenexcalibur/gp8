@@ -1,40 +1,73 @@
 "use strict";
 
-$(document).ready(fillOrders());
+$(document).ready(function () {
+    if (window.location.href.includes("mylistings.php"))
+	fillListings();
+    else if (window.location.href.includes("orders.php"))
+	fillOrders();
+	
+});
+
+function fillListings()
+{
+    var url = "php/post/postTools.php";
+    $.get(url, function (data)
+	    {
+		var history = JSON.parse(data);
+		var stillUp = history["stillUp"];
+		addCards(stillUp,
+			"currentlistings",
+			newListingCard,
+			"You have no current listings!");
+
+		var bothDone = history["bothDone"];
+		addCards(bothDone,
+			"pastlistings",
+			newPastListingCard,
+			"You've not yet recieved any items. You can change this using the search page.");
+	    });
+}
 
 function fillOrders()
 {
     var url = "php/post/postTools.php";
     $.get(url, function (data)
+	    {
+		var history = JSON.parse(data);
+		console.log(history);
+
+		//fill current
+		$.each(history.orders, function (index, value) {
+		    var card = $(".current-prototype").clone();
+		    card.removeClass("current-prototype");
+		    card.find(".card-title").html(value.title);
+		    card.find(".btn").attr("data-orderid", value.id)
+		    $("#current").append(card);
+		});
+
+		//fill history
+		$.each(history.bothDone, function (index, value) {
+		    var card = $(".history-prototype").clone();
+		    card.removeClass("history-prototype");
+		    card.find(".card-title").html(value.title);
+		    card.find(".completion-time").html(value.fintime)
+		    $("#history").append(card);
+		});
+	    });
+}
+
+function addCards(infoArray, elementID, cardGenerator, exceptionMessage) {
+    if (infoArray.length === 0) document.getElementById(elementID).innerHTML = exceptionMessage;
+    else
     {
-        var history = JSON.parse(data);
-        var stillUp = history["stillUp"];
-
-        if (stillUp.length === 0) document.getElementById("currentorders").innerHTML = "You have no current listings!";
-        else
-        {
-            var html = "";
-            for (var i = 0; i < stillUp.length; i++)
-            {
-                var order = stillUp[i];
-                html += newOrderCard(order);
-            }
-            document.getElementById("currentorders").innerHTML = html;
-        }
-
-        var html = "";
-        var bothDone = history["bothDone"];
-        if (bothDone.length === 0) document.getElementById("pastorders").innerHTML = "You've not yet recieved any items. You can change this using the search page.";
-        else
-        {
-            for (var i = 0; i < bothDone.length; i++)
-            {
-                var order = bothDone[i];
-                html += newPastOrderCard(order);
-            }
-            document.getElementById("pastorders").innerHTML = html;
-        }
-    });
+	var html = "";
+	for (var i = 0; i < infoArray.length; i++)
+	{
+	    var order = infoArray[i];
+	    html += cardGenerator(order);
+	}
+	document.getElementById(elementID).innerHTML = html;
+    }
 }
 
 function submitrating(postID)
@@ -43,7 +76,7 @@ function submitrating(postID)
     console.log(rating);
     var url = "php/finalisePost.php?postID=" + postID + "&rating=" + rating;
     $.post(url);
-    fillOrders();
+    fillListings();
 }
 
 function sendCancelMessage(orderID)
@@ -52,7 +85,7 @@ function sendCancelMessage(orderID)
     console.log(message);
 }
 
-function newPastOrderCard(order)
+function newPastListingCard(order)
 {
     var html = ' <div class="row">'
         + '<div class="col-xs-3">'
@@ -90,7 +123,7 @@ function newPastOrderCard(order)
     return html;
 }
 
-function newOrderCard(order)
+function newListingCard(order)
 {
     var orderID = order["id"];
     var html =

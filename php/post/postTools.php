@@ -123,9 +123,9 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
             $pdone = intval($row["posterDone"]);
             $pid = intval($row["posterID"]);
             if ($rdone && $pdone) $bothDone[] = $row;
-            else if (!$rdone && !$pdone) $reserved[] = $row;
             else if (!$rdone && $userid == $rid) $orders[] = $row;
             else if (!$pdone && $userid == $pid) $needsConfirming[] = $row; //defensive
+            else if (!$rdone && !$pdone) $reserved[] = $row;
         }
     }
 

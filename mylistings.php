@@ -123,11 +123,11 @@ if (!loginCheck())
 
                 <div class="tab-content">
                     <div class="tab-pane active" id="current" role="tabpanel">
-                        <div class="card order-cards" id="currentorders">
+                        <div class="card order-cards" id="currentlistings">
                         </div>
                     </div>
                     <div class="tab-pane" id="history" role="tabpanel">
-                        <div class="card order-cards" id="pastorders">
+                        <div class="card order-cards" id="pastlistings">
                         </div>
                     </div>
                 </div>
