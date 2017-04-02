@@ -24,23 +24,14 @@ if (isset($_GET["editing"]))
 
     for ($i = 1; $i <= 128; $i *= 2) $allergens[$i] = ($flags & $i);
 
-    echo ("<script>window.currentlatLng ='" . $location . "'; window.editing=" . $_GET["editing"] . "</script>");
+    echo ("<script>window.currentlatLng ='" . $location . "'; window.editing=" . $_GET["editing"] . "; window.expiry=$expiry;</script>");
 }
 
 else
 {
     for ($i = 1; $i <= 128; $i *= 2) $allergens[$i] = $user->checkFlag($i);
 
-    echo ("<script>window.currentlatLng ='" . $user->getLocation()->getLatLong() . "'</script>");
-    /*
-    $vegan = ($_SESSION["user"]->checkFlag(VEGAN));
-    $vege = ($_SESSION["user"]->checkFlag(VEGETARIAN));
-    $peanut = ($_SESSION["user"]->checkFlag(PEANUT));
-    $soy = ($_SESSION["user"]->checkFlag(SOY));
-    $gluten = ($_SESSION["user"]->checkFlag(GLUTEN));
-    $lactose = ($_SESSION["user"]->checkFlag(LACTOSE));
-    $halal =  ($_SESSION["user"]->checkFlag(HALAL));
-    $kosher = ($_SESSION["user"]->checkFlag(KOSHER));*/
+    echo ("<script>window.currentlatLng ='" . $user->getLocation()->getLatLong() . "';</script>");
 }
 ?>
 
@@ -125,7 +116,7 @@ else
     <header>
         <!-- navbar -->
         <nav class="navbar navbar-dark navbar-fixed-top elegant-color-dark">
-            <a href = "/">
+            <a href = "index.php">
           <img src="img/Cupboard.png" alt="logo" style="width:100px;height:50px;">
         </a>
             <ul class="nav navbar-nav pull-right">

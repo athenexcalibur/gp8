@@ -94,7 +94,7 @@ if (!isset($_GET["name"]))
     <header>
       <!-- navbar -->
       <nav class="navbar navbar-dark navbar-fixed-top elegant-color-dark">
-	<a href = "/">
+	<a href = "index.php">
           <img src="img/Cupboard.png" alt="logo" style="width:100px;height:50px;">
         </a>
 	<ul class="nav navbar-nav pull-right">

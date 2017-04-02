@@ -115,8 +115,7 @@ class User
         $dbconnection = Database::getConnection();
         if ($stmt = $dbconnection->prepare
         (
-            "SELECT id, username, password, 
-             CAST(flags as unsigned integer),
+            "SELECT id, username, password, flags,
              location, rating, score, number
              FROM UsersTable
              WHERE email = ?
@@ -146,9 +145,8 @@ class User
 		$dbconnection = Database::getConnection();
         if ($stmt = $dbconnection->prepare
         (
-            "SELECT username, password
-             CAST(flags as unsigned integer),
-             location, rating, score, email
+            "SELECT username, password, flags,
+             location, rating, score, email, number
              FROM UsersTable
              WHERE id = ?
              LIMIT 1"))
@@ -156,7 +154,7 @@ class User
             $stmt->bind_param("i", $this->userid);
             $stmt->execute();
             $stmt->store_result();
-            $stmt->bind_result($username, $dbPassword, $this->flags, $llStr, $this->rating, $this->score, $this->email);
+            $stmt->bind_result($username, $dbPassword, $this->flags, $llStr, $this->rating, $this->score, $this->email, $this->number);
             $stmt->fetch();
 
             $this->userid = intval(preg_replace("/[^0-9]+/", "", $this->userid));

@@ -24,6 +24,17 @@ consider any "better" alternatives**
 
 ##Task List 
 
+Actual TODO:
+
+Search (templates are bad, map popups can be improved)
+
+Profile needs just a little touching up
+
+Listing page is  broken
+
+Or just ctrl+f 'todo' and 'TODO', they're everywhere
+
+Old TODO:
 
 
 * Refactoring the code:
@@ -35,27 +46,27 @@ consider any "better" alternatives**
     
 * 'Backend' features:
 
-    * [ ] Location
-    * [ ] Add email verification functionality
-    * [ ] Setup common access to database (We discussed putting it on AWS).
+    * [x] Location
+    * [ ] Add email verification functionality (haha)
+    * [x] Setup common access to database (We discussed putting it on AWS).
     * [ ] Link Search bar to database
-    * [ ] get relevant listings from database based on user location
-    * [ ] Design user ranking system (Not particularly urgent since its not a basic deliverable)
+    * [x] get relevant listings from database based on user location
+    * [ ] Design user ranking system (Not particularly urgent since its not a basic deliverable) (nope)
     * [x] Create account
     * [x] Log in to account
     * [x] Editing username, allergies etc
     * [x] Build Database (Duh!)
 
 * Dynamic/'Frontend' features:
-    * [ ] Displaying login errors somewhere (login errors are returned to index.php through the 'error' GET value)
-    * [ ] Styling for changeDetails.php
-    * [ ] Changing navbar when user logs in (i.e Change login icon to
+    * [x] Displaying login errors somewhere (login errors are returned to index.php through the 'error' GET value)
+    * [x] Styling for profile.php
+    * [x] Changing navbar when user logs in (i.e Change login icon to
         profile icon and dropdown list with links to profile page,
         add listing e.t.c)
     (see http://www.w3schools.com/php/php_form_validation.asp)
-    * [ ] Getting user location information so 'items near you feature'
+    * [x] Getting user location information so 'items near you feature'
     is relevant
-    * [ ] Redirecting users to login/create a new account if they try
+    * [x] Redirecting users to login/create a new account if they try
     to make a listing while not logged in/registered
     * [ ] Allow Social Sign-in : i.e link to Facebook/Google account
     * [x] Changing navbar when user logs in (right now it just says hi and logs them out onclick)
@@ -71,7 +82,7 @@ consider any "better" alternatives**
     * [x] stop sidebar from distorting web content (probably by 
     floating over it rather than shifting all the content to the
     side)
-    * [ ] keep sidebar fixed when you scroll through main-page content
+    * [x] keep sidebar fixed when you scroll through main-page content
     (this is also an issue on desktops)
     
 * Making Additional Pages/features (Will inevitably lead to 
