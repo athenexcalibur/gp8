@@ -6,14 +6,20 @@ $(document).ready(function() {
     });
 });
 
-function parseDate(string)
+function parseTime(string)
 {
-    //2017-03-25 06:05:12
     var arr = string.split(" ");
     var ymd = arr[0].split("-");
     var hms = arr[1].split(":");
     return new Date(ymd[0], ymd[1]-1, ymd[2], hms[0], hms[1]);
 }
+
+function parseDate(string)
+{
+    var arr = string.split("-");
+    return new Date(arr[0], arr[1]-1, arr[2]);
+}
+
 
 function getResultHTML(post)
 {
@@ -63,7 +69,7 @@ function populateSearchResults()
             posts.sort(populateSearchResults.sFun);
             for (var i = 0; i < posts.length; i++)
             {
-                posts[i].posttime = parseDate(posts[i].posttime);
+                posts[i].posttime = parseTime(posts[i].posttime);
                 posts[i].expiry = parseDate(posts[i].expiry);
                 resContainer.append(getResultHTML(posts[i]));
             }

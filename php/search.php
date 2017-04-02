@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
     {
         $uLoc = $_SESSION["user"]->getLocation();
-        if (areCompatible($uflags, intval($row["flags"])) == 0)
+        if (areCompatible($uflags, intval($row["flags"])))
         {
             $row["distance"] = $uLoc->distanceFrom(new Location($row["location"]));
             $posterInfo = $_SESSION["info"]->getBasicInfo($row["userid"]);
