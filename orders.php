@@ -133,8 +133,8 @@ if (!loginCheck())
 	      </div>
 	      <div class="card-block">
 		<h4 class="card-title">Food</h4>
-		<button type="button" class="btn btn-primary" data-orderid="">Recieve</button>
-		<button type="button" class="btn btn-danger" data-orderid="">Cancel</button>
+		<button type="button" class="btn btn-primary" data-orderid="" data-toggle="modal" data-target ="#recievedModal">Rate</button>
+		<button type="button" class="btn btn-danger" data-orderid="" data-toggle="modal" data-target ="#cancelmodal">Cancel</button>
 	      </div>
 	    </div>
           </div>
@@ -226,7 +226,6 @@ if (!loginCheck())
 <script src="bootstrap-material-design/js/tether.min.js"></script>
 <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
 <script src="bootstrap-material-design/js/mdb.min.js"></script>
-<script src="js/search.js"></script>
 <script src="js/mylistings.js"></script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>

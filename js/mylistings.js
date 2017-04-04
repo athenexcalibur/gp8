@@ -75,8 +75,8 @@ function submitrating(postID)
     var rating = $("input[name=rating]:checked").val();
     console.log(rating);
     var url = "php/finalisePost.php?postID=" + postID + "&rating=" + rating;
-    $.post(url);
-    fillListings();
+    //$.post(url);
+    //fillListings();
 }
 
 function sendCancelMessage(orderID)
@@ -156,65 +156,15 @@ function newListingCard(order)
     return html;
 }
 
-/* TODO other history page
-function newOrderCard(order)
-{
-    var orderID = order["id"];
-    var html =
-        ' <div class="card order-card">'
-        + '  <div class="row">'
-        + '   <div class="col-xs-3">'
-        + '          <div class="card-block">'
-        + '           <div class="view overlay hm-white-slight z-depth-1">'
-        + '             <img src="img/vege-card.jpg"'
-        + '                 class="img-responsive"'
-        + '                alt="">'
-        + '        <a href=listing.php?id="' + order.id +'">'
-        + '           <div class="mask waves-effect"></div>'
-        + '       </a>'
-        + '         </div>'
-        + '          </div>'
-        + '		</div>'
-        + '       <div class="col-xs-9">'
-        + '	  <div class="card-block">'
-        + '	  <div class="row">'
-        + '		<div class="col-xs-6">'
-        + '	    <h3 class="foodname card-title">' + order["title"] + '</h3>'
-        + '		</div>'
-        + '		<div class="col-xs-6">'
-        + '			<div class="col-xs-2">'
-        + '			<img src = "./avatar/test.png" />'
-        + '			</div>'
-        + '			<div class="col-xs-4">'
-        + '				<p class="seller">' + order["userid"] + '</p>'
-        + '			</div>'
-        + '		</div>'
-        + '		</div>'
-        + '	    <div class="details-link">'
-        + '	      <a class="card-link" href="inbox.html" onclick="viewCoversation(' + orderID + '")>View conversation</a>'
-        + '	    </div>'
-        + '	  </div>'
-        + '	</div>'
-
-        + '      </div>'
-
-        + '	  <div class = "buttons">'
-        + '		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#recievedModal" data-orderid ="' + orderID + '">RECIEVED</button>'
-        + '		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancelmodal" data-orderid ="' + orderID + '">CANCEL</button>'
-        + '	  </div>'
-        + '	</div>';
-
-    return html;
-}*/
-
 $('#recievedModal').on('show.bs.modal', function (event)
 {
     var button = $(event.relatedTarget); // Button that triggered the modal
     var orderID = button.data('orderid'); // Extract info from data-* attributes
     var modal = $(this);
-    //debug
     modal.find('#myModalLabel').text('Please rate item with id = ' + orderID);
-    modal.find('#modal_submitrating').click(submitrating(orderID));
+    modal.find('.btn-primary').click(function() {
+	submitrating(orderID)  
+    });
 });
 
 $('#cancelmodal').on('show.bs.modal', function (event)
@@ -230,5 +180,7 @@ $('#cancelmodal').on('show.bs.modal', function (event)
     var prevtext = cancelmessagetext.attr('value');
     cancelmessagetext.val(prevtext + itemname);
     console.log("cancelmodal showing");
-    modal.find('#modal_sendcancelmessage').click(sendCancelMessage(orderID));
+    modal.find('#modal_sendcancelmessage').click(function () {
+	sendCancelMessage(orderID);
+    });
 });
