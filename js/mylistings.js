@@ -47,7 +47,7 @@ function fillOrders()
 		    $("#current").append(card);
 		});
 
-		var fin = history.bothDone.concat(history.youveDone);
+		var fin = history.bothDone.concat(history.waitingForYou);
 		//fill history
 		$.each(fin, function (index, value) {
 		    var card = $(".history-prototype").clone();

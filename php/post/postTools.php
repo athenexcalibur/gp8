@@ -19,6 +19,7 @@ $dbConnection = Database::getConnection();
  * In all cases "postID" must be set
  */
 //todo test this (not even tested once but needs frontend stuff)
+//todo refactor (posterid is fetched multiple times etc)
 if(isset($_POST["postID"]))
 {
 	$userid = intval($_SESSION["user"]->getUserID());
@@ -43,7 +44,10 @@ if(isset($_POST["postID"]))
 
     if(isset($_POST["cancel"]))
     {
-        if ($userid !== $posterid) die("Only the poster can cancel this post!");
+        $stmt = $dbConnection->prepare("SELECT posterID, recipientID, posterDone, recipientDone FROM FinishedPostsTable WHERE id = ?");
+        $stmt->bind_param("i", $_POST["postID"]);
+        $stmt->bind_result($posterid, $recepid, $pdone, $rdone);
+        if ($pdone || $rdone || ($userid !== $posterid && $userid !== $recepid)) die("Can't cancel this post");
         $dbConnection->query("UPDATE PostsTable SET visible=1 WHERE id=" . intval($_POST["postID"]));
         if ($dbConnection->affected_rows <= 0) die("Couldn't find that post to restore!");
         $dbConnection->query("DELETE FROM FinishedPostsTable WHERE id=" . intval($_POST["postID"]));
@@ -107,9 +111,9 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
     //get the rest
     $reserved = array();
     $orders = array();
-    $needsConfirming = array();
+    $waitingForYou = array();
+    $waitingForThem = array();
     $bothDone = array();
-    $youveDone = array();
     if ($result = $dbConnection->query("SELECT * FROM FinishedPostsTable WHERE posterID=" . $userid . " OR recipientID=" . $userid))
     {
         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
@@ -125,14 +129,17 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
             $pdone = intval($row["posterDone"]);
             $pid = intval($row["posterID"]);
             if ($rdone && $pdone) $bothDone[] = $row;
-            else if (!$rdone && $userid == $rid) $orders[] = $row;
-            else if (!$pdone && $userid == $pid) $needsConfirming[] = $row;
-            else if (!$rdone && !$pdone) $reserved[] = $row;
-            else $youveDone[] = $row;
+            else if (!$pdone && !$rdone)
+            {
+                if ($userid == $pid) $reserved[] = $row;
+                else $orders[] = $row;
+            }
+            else if (!$rdone && $userid == $pid || !$pdone && $userid == $rid) $waitingForThem[] = $row;
+            else $waitingForYou[] = $row;
         }
     }
 
-    $fin = array("stillUp" => $stillGoing, "orders"=>$orders, "needsConfirming"=> $needsConfirming, "bothDone"=>$bothDone, "reserved"=>$reserved, "youveDone"=>$youveDone);
+    $fin = array("stillUp" => $stillGoing, "orders"=>$orders, "waitingForYou"=> $waitingForYou, "bothDone"=>$bothDone, "reserved"=>$reserved, "waitingForThem"=> $waitingForThem);
     echo json_encode($fin);
 }
 
