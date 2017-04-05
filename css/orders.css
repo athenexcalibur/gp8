@@ -11,3 +11,9 @@
 .current-prototype, .history-prototype {
   display: none;
 }
+
+#listings_stillUp .card a {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}

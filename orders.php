@@ -109,56 +109,71 @@ if (!loginCheck())
     <div id="ordersWrapper" class="container">
 
       <div id="header">
-        <h2>Your Orders</h2>
+	<h2>Your Orders</h2>
       </div>
       <div class="row">
-        <nav class="nav">
-          <ul class="nav nav-tabs justify-content-center">
-            <li class="nav-item">
-              <a class="nav-link active" href="#current" data-toggle="tab">Current</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#history" data-toggle="tab">History</a>
-            </li>
-          </ul>
-        </nav>
 
-        <div class="tab-content">
+	<!--nav-links-->
+	<div class="nav">
+	  <ul class="nav nav-pills">
+	    <li class="nav-item">
+	      <a class="nav-link active" href="#orders_current" data-toggle="pill">Current Orders</a>
+	    </li>
+	    <li class="nav-item dropdown">
+	      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Current Listings</a>
+	      <div class="dropdown-menu">
+		<a class="dropdown-item" href="#listings_stillUp" data-toggle="pill">Still Up</a>
+		<a class="dropdown-item" href="#listings_reserved" data-toggle="pill">Reserved</a>
+	      </div>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#orders_history" data-toggle="pill">Order History</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#listings_history" data-toggle="pill">Listing History</a>
+	    </li>
+	  </ul>
+	</div>
+	<!--./nav-links-->
 
-          <div class="tab-pane active" id="current" role="tabpanel">
+	<!--card-prototypes-->
 	    <div class="card current-prototype">
 	      <a href="#"></a>
 	      <div class="card-block order-img">
 		<img src="img/vege-card.jpg" alt="">
 	      </div>
 	      <div class="card-block">
-		<h4 class="card-title">Food</h4>
+		<h4 class="card-title">Food orders current</h4>
 		<button type="button" class="btn btn-primary" data-orderid="" data-toggle="modal" data-target ="#recievedModal">Rate</button>
 		<button type="button" class="btn btn-danger" data-orderid="" data-toggle="modal" data-target ="#cancelmodal">Cancel</button>
 	      </div>
 	    </div>
-          </div>
 
-          <div class="tab-pane" id="history" role="tabpanel">
 	    <div class="card history-prototype">
 	      <a href="#"></a>
 	      <div class="card-block order-img">
 		<img src="img/vege-card.jpg" alt="">
 	      </div>
 	      <div class="card-block">
-		<h4 class="card-title">Food</h4>
-		<p class="card-text text-muted completion-time">yesterday</p>
+		<h4 class="card-title">Food order history</h4>
+		<p class="card-text text-muted timestamp">yesterday</p>
 	      </div>
 	    </div>
-          </div>
+	<!--./card-prototypes-->
 
-        </div>
+	<!--tab-content-->
+	<div class="tab-content">
+	  <div class="tab-pane active" id="orders_current" role="tabpanel">Current Orders</div>
+	  <div class="tab-pane" id="orders_history" role="tabpanel">Order History</div>
+	  <div class="tab-pane" id="listings_stillUp" role="tabpanel">Still Up</div>
+	  <div class="tab-pane" id="listings_reserved" role="tabpanel">Reserved</div>
+	  <div class="tab-pane" id="listings_history" role="tabpanel"> Listing History</div>
+	</div>
       </div>
+      <!--./tab-content-->
+
     </div>
-
-
   </main>
-
 
   <footer>
 
@@ -226,7 +241,7 @@ if (!loginCheck())
 <script src="bootstrap-material-design/js/tether.min.js"></script>
 <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
 <script src="bootstrap-material-design/js/mdb.min.js"></script>
-<script src="js/mylistings.js"></script>
+//<script src="js/mylistings.js"></script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript" src="js/sidebar.js"> </script>
