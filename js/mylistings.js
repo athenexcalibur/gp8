@@ -31,6 +31,8 @@ function fillListings()
 function fillOrders()
 {
     var url = "php/post/postTools.php";
+    //$("#current").html("");
+    //$("#history").html("");
     $.get(url, function (data)
 	    {
 		var history = JSON.parse(data);
@@ -41,16 +43,17 @@ function fillOrders()
 		    var card = $(".current-prototype").clone();
 		    card.removeClass("current-prototype");
 		    card.find(".card-title").html(value.title);
-		    card.find(".btn").attr("data-orderid", value.id)
+		    card.find(".btn").attr("data-orderid", value.id);
 		    $("#current").append(card);
 		});
 
+		var fin = history.bothDone.concat(history.youveDone);
 		//fill history
-		$.each(history.bothDone, function (index, value) {
+		$.each(fin, function (index, value) {
 		    var card = $(".history-prototype").clone();
 		    card.removeClass("history-prototype");
 		    card.find(".card-title").html(value.title);
-		    card.find(".completion-time").html(value.fintime)
+		    card.find(".completion-time").html(value.fintime);
 		    $("#history").append(card);
 		});
 	    });
@@ -73,10 +76,11 @@ function addCards(infoArray, elementID, cardGenerator, exceptionMessage) {
 function submitrating(postID)
 {
     var rating = $("input[name=rating]:checked").val();
-    console.log(rating);
-    var url = "php/finalisePost.php?postID=" + postID + "&rating=" + rating;
-    //$.post(url);
-    //fillListings();
+    $.post("php/post/postTools.php", {postID: postID, rating: rating}, function(data)
+    {
+        console.log(data);
+    });
+    fillOrders();
 }
 
 function sendCancelMessage(orderID)

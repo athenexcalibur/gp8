@@ -1,11 +1,15 @@
 <?php
 require_once "php/user.php";
+require_once "php/database.php";
 cSessionStart();
 if (!loginCheck())
 {
     header("Location: ./index.php");
     exit();
 }
+
+//clear new message thing
+Database::getConnection()->query("UPDATE UsersTable SET newMsg=0 WHERE id=" . $_SESSION["user"]->getUserID());
 ?>
 <!DOCTYPE html>
 <head>

@@ -227,6 +227,18 @@ class User
         $this->flags = 0;
     }
 
+    public function hasNewMessages()
+    {
+        $dbconnection = Database::getConnection();
+        $stmt = $dbconnection->prepare("SELECT newMsg FROM UsersTable WHERE id=?");
+        $stmt->bind_param("i", $this->userid);
+        $stmt->bind_result($res);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->fetch();
+        return ($res == 1);
+    }
+
     public function getFlags()
     {
         return $this->flags;

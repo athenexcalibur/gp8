@@ -1,8 +1,5 @@
-console.log("Hi");
-
 $(document).ready(function () {
     $.get("php/messages.php", function (data) {
-	console.log(data); 
 	$.each(data, function (index, threadObj) {
 	    date = new Date(threadObj.time*1000);
 	    card = $(".thread-prototype").clone();

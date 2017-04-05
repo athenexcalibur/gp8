@@ -58,6 +58,7 @@ class Database
             email VARCHAR(64) UNIQUE NOT NULL,
             password VARCHAR(256) NOT NULL,
             flags TINYINT UNSIGNED default 0,
+            newMsg BOOL DEFAULT 0,
             location VARCHAR(52) NOT NULL,
             rating FLOAT default 3,
             score INT default 0,

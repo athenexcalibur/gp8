@@ -90,6 +90,7 @@ if(isset($_POST["postID"]))
  * reserved - posts you have reserved for someone but neither have finalized (cancel here)
  * orders - posts reserved for you that you haven't finalized
  * needsConfirming - posts you have reserved that the other guy has confirmed
+ * youveDone - you have rated the other guy, goes in your history
  */
 else if ($_SERVER["REQUEST_METHOD"] == "GET")
 {
@@ -108,6 +109,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
     $orders = array();
     $needsConfirming = array();
     $bothDone = array();
+    $youveDone = array();
     if ($result = $dbConnection->query("SELECT * FROM FinishedPostsTable WHERE posterID=" . $userid . " OR recipientID=" . $userid))
     {
         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
@@ -124,12 +126,13 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
             $pid = intval($row["posterID"]);
             if ($rdone && $pdone) $bothDone[] = $row;
             else if (!$rdone && $userid == $rid) $orders[] = $row;
-            else if (!$pdone && $userid == $pid) $needsConfirming[] = $row; //defensive
+            else if (!$pdone && $userid == $pid) $needsConfirming[] = $row;
             else if (!$rdone && !$pdone) $reserved[] = $row;
+            else $youveDone[] = $row;
         }
     }
 
-    $fin = array("stillUp" => $stillGoing, "orders"=>$orders, "needsConfirming"=> $needsConfirming, "bothDone"=>$bothDone, "reserved"=>$reserved);
+    $fin = array("stillUp" => $stillGoing, "orders"=>$orders, "needsConfirming"=> $needsConfirming, "bothDone"=>$bothDone, "reserved"=>$reserved, "youveDone"=>$youveDone);
     echo json_encode($fin);
 }
 

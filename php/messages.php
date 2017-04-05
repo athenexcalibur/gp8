@@ -17,11 +17,14 @@ if (isset($_POST["toUser"]))
 {
     $dbconnection = Database::getConnection();
     $userid = $_SESSION["user"]->getUserID();
-    $stmt = $dbconnection->prepare("INSERT INTO MessagesTable (fromid, toid, text) VALUES (?, (SELECT id FROM UsersTable WHERE username = ?), ?)");
-    $stmt->bind_param("iss", $userid, $_POST["toUser"], $_POST["message"]);
+    $otherid = $_SESSION["info"]->nameToID($_POST["toUser"]);
+    $stmt = $dbconnection->prepare("INSERT INTO MessagesTable (fromid, toid, text) VALUES (?, ?, ?)");
+    $stmt->bind_param("iis", $userid, $otherid, $_POST["message"]);
     if ($stmt->execute())
     {
         if (!$stmt->affected_rows === 1) echo("No message sent!");
+
+        $dbConnection->query("UPDATE UsersTable SET newMsg=1 WHERE id=" . $otherid);
     }
     else echo("Could not execute statement!");
 }
