@@ -53,12 +53,6 @@ Database::getConnection()->query("UPDATE UsersTable SET newMsg=0 WHERE id=" . $_
 		</div>
 		<div class="view overlay hm-white-slight">
 		    <li class="nav-item">
-			<a class="nav-link" href="mylistings.php">Listings</a>
-			<div class="mask"></div>
-		    </li>
-		</div>
-		<div class="view overlay hm-white-slight">
-		    <li class="nav-item">
 			<a class="nav-link" href="inbox.php">Messages</a>
 			<div class="mask"></div>
 		    </li>
