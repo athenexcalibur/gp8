@@ -1,75 +1,94 @@
 "use strict";
 
 $(document).ready(function () {
-    if (window.location.href.includes("mylistings.php"))
-	fillListings();
-    else if (window.location.href.includes("orders.php"))
-	fillOrders();
-	
+    /*
+     *if (window.location.href.includes("mylistings.php"))
+     *    fillListings();
+     *else if (window.location.href.includes("orders.php"))
+     *    fillOrders();
+     */
+
+    $('.nav-pills').on('shown.bs.tab', 'a', function(e) {
+        if (e.relatedTarget) {
+            $(e.relatedTarget).removeClass('active');
+        }
+    });    
+    fillTabs();
 });
 
-function fillListings()
-{
+function fillTabs() {
     var url = "php/post/postTools.php";
-    $.get(url, function (data)
-	    {
-		var history = JSON.parse(data);
-		var stillUp = history["stillUp"];
-		addCards(stillUp,
-			"currentlistings",
-			newListingCard,
-			"You have no current listings!");
-
-		var bothDone = history["bothDone"];
-		addCards(bothDone,
-			"pastlistings",
-			newPastListingCard,
-			"You've not yet recieved any items. You can change this using the search page.");
-	    });
-}
-
-function fillOrders()
-{
-    var url = "php/post/postTools.php";
-    //$("#current").html("");
-    //$("#history").html("");
-    $.get(url, function (data)
-	    {
-		var history = JSON.parse(data);
-		console.log(history);
-
-		//fill current
-		$.each(history.orders, function (index, value) {
-		    var card = $(".current-prototype").clone();
-		    card.removeClass("current-prototype");
-		    card.find(".card-title").html(value.title);
-		    card.find(".btn").attr("data-orderid", value.id);
-		    $("#current").append(card);
-		});
-
-		var fin = history.bothDone.concat(history.waitingForYou);
-		//fill history
-		$.each(fin, function (index, value) {
-		    var card = $(".history-prototype").clone();
-		    card.removeClass("history-prototype");
-		    card.find(".card-title").html(value.title);
-		    card.find(".completion-time").html(value.fintime);
-		    $("#history").append(card);
+    $.get(url, function (data) {
+	var history = JSON.parse(data);
+	console.log(history);
+	$.each(history, function (key, array) {
+	    $.each(array, function (index, obj) {
+		//Current Orders: orders && waitingForYou(recipientID = uid) 
+		//OrderHistory: bothDone(recipientID = uid) waitingForThem(recipientID = uid)
+		//Current Listings - Still Up: stillUp()
+		//Current Listings - Reserved: reserved && waitingForYou(posterID = uid)
+		//Listing History - bothDone(posterID = uid) && waitingForThem(posterID = uid)
+		$.get("php/userID.php", function (data) {
+		    var userID = data;
+		    console.log(userID);
+		    switch (key) {
+			case 'orders':
+			    addCard("#orders_current", "current", obj);
+			    break;
+			case 'stillUp':
+			    addCard("#listings_stillUp", "still-up", obj);
+			    break;
+			case 'reserved':
+			    addCard("#listings_reserved", "current", obj);
+			    break;
+			case 'waitingForYou':
+			    if (userID === obj.recipientID)
+				addCard("#orders_current", "current", obj);
+			    else
+				addCard("#listings_reserved", "current", obj);
+			    break;
+			case 'waitingForThem':
+			    if (userID === obj.recipientID)
+				addCard("#orders_history", "history", obj);
+			    else
+				addCard("#listings_history", "history", obj);
+			    break;
+			default: //BothDone
+			    if (userID === obj.recipientID)
+				addCard("#orders_history", "history", obj);
+			    else
+				addCard("#listings_history", "history", obj);
+		    }
 		});
 	    });
+	});
+    });
 }
 
-function addCards(infoArray, elementID, cardGenerator, exceptionMessage) {
-    if (infoArray.length === 0) document.getElementById(elementID).innerHTML = exceptionMessage;
-    else
-    {
-	var html = "";
-	for (var i = 0; i < infoArray.length; i++)
-	{
-	    var order = infoArray[i];
-	    html += cardGenerator(order);
-	}
-	document.getElementById(elementID).innerHTML = html;
+function addCard(tabID, protoype, obj){
+    var currentProto = $(".current-prototype").clone();
+    currentProto.removeClass("current-prototype"); 
+    var historyProto = $(".history-prototype").clone();
+    historyProto.removeClass("history-prototype"); 
+    if (protoype == "current") {
+	var card = currentProto.clone();
+	card.find(".card-title").html(obj.title); 
+	card.find(".btn").attr("data-orderid", obj.id); 
+	//console.log(card.html());
+	$(tabID).append(card);
+    } else if (protoype == "history") {
+	var card = historyProto.clone();
+	card.removeClass("history-protoype"); 
+	card.find(".card-title").html(obj.title); 
+	card.find(".timestamp").html(obj.fintime); //add timestamp
+	$(tabID).append(card);
+    } else if (protoype == "still-up") {
+	var card = historyProto.clone();
+	card.removeClass("history-protoype"); 
+	card.find(".card-title").html(obj.title); 
+	card.find(".timestamp").html(obj.posttime); //add timestamp
+	card.find("a").attr("href", "listing.php?=id=" + obj.id)
+	$(tabID).append(card);
     }
 }
 
@@ -87,77 +106,6 @@ function sendCancelMessage(orderID)
 {
     var message = document.getElementById("cancelmessagetext").value;
     console.log(message);
-}
-
-function newPastListingCard(order)
-{
-    var html = ' <div class="row">'
-        + '<div class="col-xs-3">'
-        + '      <div class="card-block">'
-        + '       <div class="view overlay hm-white-slight z-depth-1">'
-        + '          <img src="img/vege-card.jpg" class="img-responsive" alt="">'
-        + '        <a href="#">'
-        + '          <div class="mask waves-effect"></div>'
-        + '        </a>'
-        + '     </div>'
-        + '      </div>'
-        + '	</div>'
-
-        + '     <div class="col-xs-9">'
-        + '  <div class="card-block">'
-        + '  <div class="row">'
-        + '	<div class="col-xs-6">'
-        + '    <h3 id="foodname" class="card-title">' + order["title"] + '</h3>'
-        + '	</div>'
-        + '	<div class="col-xs-6">'
-        + '		<div class="col-xs-2">'
-        + '			<img src = "./avatar/test.png" />'
-        + '		</div>'
-        + '		<div class="col-xs-4">'
-        + '			<p class="seller">' + order["posterID"] + '</p>'
-        + '		</div>'
-        + '	</div>'
-        + '	</div>'
-        + '   <h6 class="text-muted">' + order["fintime"] + '</h6>'
-        //+'	<p class="rating">' + order["rating"] + ' stars</p>'
-        + '  </div>'
-        + ' </div>'
-        + '  </div>';
-
-    return html;
-}
-
-function newListingCard(order)
-{
-    var orderID = order["id"];
-    var html =
-        ' <div class="card order-card">'
-        + '  <div class="row">'
-        + '   <div class="col-xs-3">'
-        + '          <div class="card-block">'
-        + '           <div class="view overlay hm-white-slight z-depth-1">'
-        + '             <img src="img/vege-card.jpg"'
-        + '                 class="img-responsive"'
-        + '                alt="">'
-        + '        <a href=listing.php?id=' + order.id +'>'
-        + '           <div class="mask waves-effect"></div>'
-        + '       </a>'
-        + '         </div>'
-        + '          </div>'
-        + '		</div>'
-        + '       <div class="col-xs-9">'
-        + '	  <div class="card-block">'
-        + '	  <div class="row">'
-        + '		<div class="col-xs-6">'
-        + '	    <h3 class="foodname card-title">' + order["title"] + '</h3>'
-        + '		</div>'
-        + '		</div>'
-        + '	  </div>'
-        + '	</div>'
-        + '      </div>'
-        + '	</div>';
-
-    return html;
 }
 
 $('#recievedModal').on('show.bs.modal', function (event)

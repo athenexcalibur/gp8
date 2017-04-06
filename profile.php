@@ -64,13 +64,7 @@ $current = $res->num_rows;
         <ul class="nav flex-column">
             <div class="view overlay hm-white-slight">
                 <li class="nav-item">
-                    <a class="nav-link" href="orders.php">Orders</a>
-                    <div class="mask"></div>
-                </li>
-            </div>
-            <div class="view overlay hm-white-slight">
-                <li class="nav-item">
-                    <a class="nav-link" href="mylistings.php">Listings</a>
+                    <a class="nav-link" href="orders.php">Orders and Listings</a>
                     <div class="mask"></div>
                 </li>
             </div>
