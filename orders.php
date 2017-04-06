@@ -235,8 +235,7 @@ if (!loginCheck())
 <script src="bootstrap-material-design/js/tether.min.js"></script>
 <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
 <script src="bootstrap-material-design/js/mdb.min.js"></script>
-//<script src="js/mylistings.js"></script>
-  <script src="finaliseTest.js"></script>
+<script src="js/mylistings.js"></script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript" src="js/sidebar.js"> </script>
