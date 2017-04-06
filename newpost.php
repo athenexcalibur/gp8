@@ -153,8 +153,14 @@ else
     Expiry Date:
     <input type="text" id="date" class="form-control floating-label">
 
-    Upload Image: <input type="image" name="food_image" id="upload_image ">
-    <input type="submit" value="Upload Image" name="submit"><br><br>
+    Upload Image: <form id="photos" action="php/images.php" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <input type="file" name="photo" id="photo" accept="image/gif, image/jpeg, image/png" style="width: 200px">
+        <input type="hidden" id="postid" name="postid">
+        <input type="hidden" id="redirect" name="redirect">
+      </div>
+    </form>
+
     </div>
 
     <div class="col-md-6">
@@ -203,8 +209,25 @@ else
         };
 
         if (window.editing) data.id = window.editing;
-        $.post("newpost.php", data);
-        window.currentlatLng = undefined;
+
+        $.post("php/newitempost.php", data, function(data)
+        {
+          var res = JSON.parse(data);
+
+          if(res.hasOwnProperty("error"))
+          {
+            alert(res["error"]);
+          }
+          else
+          {
+            var postid = res["postid"];
+
+            document.getElementById("postid").value = postid;
+            document.getElementById("redirect").value = 1;
+            document.getElementById("photos").submit();
+            window.currentlatLng = undefined;
+          }
+        });
     });
 </script>
 
@@ -212,82 +235,4 @@ else
 <script type="text/javascript" src="js/sidebar.js"></script>
 <!--/.Scripts-->
 
-<?php
-/*
- * If 'id' is set, this file will either update that post or delete it (if 'delete' is set)
- * Otherwise it creates a new post.
- */
-
-
-$_POST = array();
-parse_str(file_get_contents('php://input'), $_POST);
-
-$dbconnection = Database::getConnection();
-if (isset($_POST["id"]))
-{
-    $postID = intval($_POST["id"]);
-    $stmt = $dbconnection->prepare("SELECT title, description, location, flags, userid, expiry FROM PostsTable WHERE id=? LIMIT 1");
-    $stmt->bind_param("i", $postID);
-    $stmt->bind_result($title, $description, $location, $flags, $userid, $expiry);
-    $stmt->execute();
-    $stmt->store_result();
-    $stmt->fetch();
-    if ($userid === $_SESSION["user"]->getUserID() && $stmt->num_rows == 1)
-    {
-        if (isset($_POST["delete"]))
-        {
-            if (!$dbconnection->query("DELETE FROM PostsTable WHERE id = " . $postID))
-            {
-                echo ($dbconnection->error);
-            }
-            exit();
-        }
-        else
-        {
-            $title = (isset($_POST["title"])) ? $_POST["title"] : $title;
-            $description = (isset($_POST["description"])) ? $_POST["description"] : $description;
-            $location = (isset($_POST["location"])) ? $_POST["location"] : $location;
-            $expiry = (isset($_POST["expiry"])) ? $_POST["expiry"] : $expiry;
-
-            if (is_array($_POST["flags"]))
-            {
-                $flags = 0;
-                foreach ($_POST["flags"] as $value) $flags |= constant($value);
-            }
-
-            $stmt = $dbconnection->prepare("UPDATE PostsTable SET title=?, description=?, location=?, posttime=now(), expiry=?, flags=? WHERE id=?");
-            $stmt->bind_param("ssssii", $title, $description, $location, $expiry, $flags, $postID);
-            if (!$stmt->execute()) echo $dbconnection->error;
-        }
-    }
-}
-
-else if (isset($_POST["title"]))
-{
-    $dbconnection = Database::getConnection();
-
-    $flags = 0;
-    if (is_array($_POST["flags"]))
-    {
-        foreach ($_POST["flags"] as $value) $flags |= constant($value);
-    }
-
-    $stmt = $dbconnection->prepare("INSERT INTO PostsTable (title, description, expiry, flags, userid, location) VALUES (?, ?, ?, ?, ?, ?)");
-    $title = $_POST["title"];
-    $descrip =  $_POST["description"];
-    $userid = $_SESSION["user"]->getUserID();
-    $loc = $_POST["location"];
-    $date = str_replace('/', '-', $_POST["expiry"]);
-    $date = date('Y-m-d', strtotime($date));
-    $stmt->bind_param("sssiis", $title, $descrip, $date, $flags, $userid, $loc);
-    if ($stmt->execute())
-    {
-        if ($stmt->affected_rows === 1) echo("Your item has been posted");
-        else echo("No post made");
-    }
-    else echo("Post failed");
-}
-?>
-
 </body>
-
