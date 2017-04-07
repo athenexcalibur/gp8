@@ -22,3 +22,8 @@ main {
   opacity:0.7;
   display: none;
 }
+
+.fa-circle
+{
+  color: lightgreen;
+}

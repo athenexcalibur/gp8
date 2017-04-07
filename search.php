@@ -44,13 +44,13 @@ if (!loginCheck())
         <ul class="nav flex-column">
             <div class="view overlay hm-white-slight">
                 <li class="nav-item">
-                    a class="nav-link" href="orders.php">Orders and Listings</a>
+                    <a class="nav-link" href="orders.php">Orders and Listings</a>
                     <div class="mask"></div>
                 </li>
             </div>
             <div class="view overlay hm-white-slight">
                 <li class="nav-item">
-                    <a class="nav-link" href="inbox.php">Messages</a>
+                    <a class="nav-link" href="inbox.php">Messages <?php if ($_SESSION["user"]->hasNewMessages()) echo ("<i class='fa fa-circle'></i>");?></a>
                     <div class="mask"></div>
                 </li>
             </div>
@@ -88,7 +88,7 @@ if (!loginCheck())
                 <!--<a class="nav-link">Login</a>-->
                 <!--</li>-->
                 <li class="nav-item">
-                    <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i></a>
+                    <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i> <?php if ($_SESSION["user"]->hasNewMessages()) echo ("<i class='fa fa-circle'></i>");?></a>
                 </li>
             </ul>
         </nav>

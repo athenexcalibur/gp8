@@ -69,9 +69,8 @@ function resetReg()
     $("#nextBtn").show();
     $("#nextBtn").prop("disabled", false);
     $("#registerBtn").hide();
+    $(".form-control").clear();
     reInitMap();
-
-    //todo clear all fields (probably add some class to them)
 }
 
 $("#regCancel").on("click", resetReg);
@@ -84,7 +83,7 @@ $("#loginBtn").on("click", function()
         password: $("#upass").val()
     }, function()
     {
-        location.reload(true);
+        window.location.replace("index.php");
     }).fail(function(response)
     {
         alert('Error: ' + response.responseText);

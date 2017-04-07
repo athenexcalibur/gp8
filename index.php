@@ -47,7 +47,7 @@ cSessionStart();
             </div>
             <div class="view overlay hm-white-slight">
                 <li class="nav-item">
-                    <a class="nav-link" href="inbox.php">Messages</a>
+                    <a class="nav-link" href="inbox.php">Messages  <?php if (loginCheck() && $_SESSION["user"]->hasNewMessages()) echo ("<i class='fa fa-circle'></i>");?></a>
                     <div class="mask"></div>
                 </li>
             </div>
@@ -203,10 +203,9 @@ cSessionStart();
                 <?php
                 if (loginCheck())
                 {
-                    echo '
-                    <li class="nav-item">
-                        <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i></a>
-                    </li>';
+                    echo '<li class="nav-item"><a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i>';
+                    if ($_SESSION["user"]->hasNewMessages()) echo ("<i class='fa fa-circle'></i>");
+                    echo '</a></li>';
                 } else
                 {
                     echo '
@@ -317,7 +316,7 @@ cSessionStart();
 <?php
     if (!loginCheck())
     {
-      echo ' <script>snapper.disable()</script>';
+      echo ' <script>snapper.disable();</script>';
     }
 ?>
     <script type="text/javascript">

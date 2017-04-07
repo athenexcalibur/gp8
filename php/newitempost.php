@@ -73,12 +73,11 @@ else if (isset($_POST["title"]))
     {
         if ($stmt->affected_rows === 1)
         {
-          //echo("Your item has been posted");
-          //success
-          $postid = $dbconnection->insert_id;
-      		echo json_encode(array("postid" => $postid));
-        }
-        else echo json_encode(array("error" => "No post made"));
+            //echo("Your item has been posted");
+            //success
+            $postid = $dbconnection->insert_id;
+            echo json_encode(array("postid" => $postid));
+        } else echo json_encode(array("error" => "No post made"));
     }
     else echo json_encode(array("error" => "Post failed"));
 }
