@@ -3,7 +3,9 @@
 
 function fixImgs()
 {
-  fix($(".itemimage"));
+  $.each($(".itemimage"), function(){
+    fix($(this));
+  });
 }
 
 function fixImg(card)
@@ -14,7 +16,6 @@ function fixImg(card)
 function fix(imgview)
 {
   var id = imgview.attr("data-itemid");
-  console.log("itemimage.js - id = " + id);
   $.get("./php/images.php", {postid: id}, function (data)
   {
     var imgSrc = "img/vege-card.jpg"

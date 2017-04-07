@@ -11,8 +11,6 @@ $(document).ready(function ()
             {
                 if (i < posts.length)
                 {
-                    $.getScript("js/itemimage.js", function()
-                    {
                       name = posts[i]["title"];
                       name = name ? posts[i]["title"] : "Untitled";
                       tmp.find("#title").html(name);
@@ -21,15 +19,6 @@ $(document).ready(function ()
                       tmp.find("#link").attr("href", "listing.php?id=" + posts[i].id);
 
                       tmp.find("#card_image").attr("data-itemid", posts[i].id);
-                      console.log(tmp.find(".itemimage").attr("data-itemid"));
-
-                      $.when(fixImg(tmp)).then(function() {
-                        console.log("adding");
-                        $(obj).html(tmp.clone());
-                        $(obj).attr("id", i.toString());
-                      });
-
-                    });
                     //todo decription and time
                 }
 
@@ -37,13 +26,12 @@ $(document).ready(function ()
                 {
                     tmp.find("#title").html("--");
 		                tmp.find("#distance").html("");
-
-                    $(obj).html(tmp.clone());
-                    $(obj).attr("id", i.toString());
                 }
-
-
+                $(obj).html(tmp.clone());
+                $(obj).attr("id", i.toString());
             });
-        });
+        }).done($.getScript("js/itemimage.js", function(){
+          fixImgs();
+        }));
     });
 });
