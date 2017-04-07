@@ -134,7 +134,7 @@ if (!loginCheck())
 	    <div class="card current-prototype">
 	      <a href="#"></a>
 	      <div class="card-block order-img">
-		<img src="img/vege-card.jpg" alt="">
+		        <img class = "itemimage" id="card_image"/>
 	      </div>
 	      <div class="card-block">
 		<h4 class="card-title">Food orders current</h4>
@@ -146,7 +146,7 @@ if (!loginCheck())
 	    <div class="card history-prototype">
 	      <a href="#"></a>
 	      <div class="card-block order-img">
-		<img src="img/vege-card.jpg" alt="">
+		<img class = "itemimage" id="card_image"/>
 	      </div>
 	      <div class="card-block">
 		<h4 class="card-title">Food order history</h4>
@@ -163,10 +163,17 @@ if (!loginCheck())
 	  <div class="tab-pane" id="listings_reserved" role="tabpanel">Reserved</div>
 	  <div class="tab-pane" id="listings_history" role="tabpanel"> Listing History</div>
 	</div>
+
+  <button type="button" class="btn btn-primary" onclick="location.href='newpost.php'">NEW LISTING</button>
+
       </div>
+
+
       <!--./tab-content-->
 
     </div>
+
+
   </main>
 
   <footer>

@@ -125,7 +125,8 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
         <div class="card">
           <div class="card-block">
             <h1 id="item-name"><?php echo $title ?></h1>
-            <div class = "col-md-2 itemimage" width = "140" height = "140" data-itemid = <?php echo $_GET["id"]; ?>>
+            <div class = "col-md-2">
+              <img width = "140" height = "140" class = "itemimage" data-itemid = <?php echo $_GET["id"]; ?> />
            </div>
             <div class = "col-md-10">
               <h5 id="item-address"><?php echo $distance ?> miles away</h5>
@@ -196,6 +197,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
 <script src="js/cards.js"></script>
 <script src="js/listing.js"></script>
 <script src="js/itemimage.js"></script>
+<script type="text/javascript">fixImgs();</script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>
