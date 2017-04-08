@@ -60,6 +60,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
 
     <!-- My Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/listing.css">
   </head>
 
 <body>
@@ -108,9 +109,6 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
           <img src="img/Cupboard.png" alt="logo" style="width:100px;height:50px;">
         </a>
       <ul class="nav navbar-nav pull-right">
-        <!--<li class="nav-item">-->
-        <!--<a class="nav-link">Login</a>-->
-        <!--</li>-->
         <li class="nav-item">
           <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i> <?php if ($_SESSION["user"]->hasNewMessages()) echo ("<i class='fa fa-circle'></i>");?></a>
         </li>
@@ -119,73 +117,108 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
     <!--/.navbar -->
   </header>
   <main>
+  <div class="container">
+    <div class="card">
+      <div class="card-block">
+	<div class="card-title">
+	  <h1><?php echo $title ?></h1>
+	</div>
+	<div class="card-subtitle"><?php echo $distance ?> miles away</div>
+      </div>
+      <div class="row">
 
-    <div class="main-container">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-block">
-            <h1 id="item-name"><?php echo $title ?></h1>
-            <div class = "col-md-2">
-              <img width = "140" height = "140" class = "itemimage" data-itemid = <?php echo $_GET["id"]; ?> />
-           </div>
-            <div class = "col-md-10">
-              <h5 id="item-address"><?php echo $distance ?> miles away</h5>
-              <!--Account info-->
-              <div class = "container">
-                  <?php
-                  if ($isPoster)
-                  {
-                      echo ("<button class='btn' id='delBtn' data-pid=" . $postID . ">Delete</button>
-                             <a class='btn' id='editBtn' href='post.php?editing=" . $postID . "'>Edit or reserve</a>");
-                  }
-                  else echo
-                  ('
-                    <div class = "card">
-                      <div class = "card-block">
-                        <div class = "col-md-6">
-                          <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i></a>
-                        </div>
-                        <div class = "col-md-6">
-                          <p id = "name">' . $posterInfo["name"] . '</p>
-                          <div class = "col-md-4">
-                            <p id = "rating">' . $posterInfo["rating"] .'</p>
-                          </div>
-                          <div class = "col-md-8">
-                            <p id = "score">' . $posterInfo["score"] . '</p>
-                          </div>
-                        </div>
-                      </div>
-                        <a href="messagethread.php?name=' . $posterInfo["name"] . '" class="btn btn-primary">Message poster</a>
-                    </div>
-                  </div>');
-              ?>
-            </div>
-            <div class = "col-md-10">
-              <table>
-                <tr>
-                  <td>Use BY</td>
-                  <td id = "expiry"><?php echo $expiry?></td>
-                </tr>
-                <tr>
-                  <td>Allergens</td>
-                    <?php
+	<div class="col-md-4">
+	  <div class="card-block card-image">
+	    <div class="view overlay hm-white-slight z-depth-1">
+	      <img class="itemimage" id="card_image" data-itemid=<?php echo
+	      $_GET["id"]; ?>\>
+	      <a id="link" href="#">
+		<div class="mask waves-effect"></div>
+	      </a>
+	    </div>
+	  </div>
+	</div>
+
+	<?php
+	      if ($isPoster)
+	      {
+		  echo('
+		    <div class="col-md-8">
+		      <div class="card-block">
+			<div class="card light-blue lighten-5">
+			  <div class="card-block">
+			    <div class="card-title">
+			      <h4>Options</h4>
+			    </div>
+			    <a href="post.php?editing= ' . $postID . '"><button type="button" class="btn btn-primary">Edit Post</button> </a>
+			    <button type="button" class="btn btn-danger" id="delBtn" data-pid=' . $postID . '>Delete Post</button>
+			  </div>
+			</div>
+		      </div>
+		    </div>
+		');
+	      } else echo
+	      ('
+		<div class="col-md-8">
+		  <div class="card-block user-info">
+		    <div class="card light-blue lighten-5">
+		      <i class="material-icons account-icon">account_circle</i>
+		      <div class="card-block">
+			<div class="card-title">
+			  <h4>'.$posterInfo["name"].'</h4>
+			</div>
+			<div class="card-text">rating: ' . $posterInfo["rating"] .' points: ' . $posterInfo["score"] . '</div>
+			<a href="messagethread.php?name=' . $posterInfo["name"] . '">
+			  <button type="button" class="btn btn-primary">Message Poster</button>
+			</a>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	      ');
+
+	?>
+	
+      </div>
+      <div class="row">
+	<div class="col-md-6">
+	  <div class="card-block">
+	    <blockquote class="blockquote bq-primary">
+	      <p class="bq-title">Description</p>
+	      <p><?php echo $description?></p>
+	    </blockquote>
+	  </div>
+	</div>
+	<div class="col-md-6">
+	  <div class="card-block">
+	    <blockquote class="blockquote bq-success">
+	      <p class="bq-title">Other Information</p>
+	      <dl class="row">
+		<dt class="col-xs-4">Expiry</dt>
+		<dd class="col-xs-8"><?php echo $expiry?></dd>
+		<dt class="col-xs-4">Dietary</dt>
+		  <?php
+		    $first = true;
                     foreach ($_SESSION["info"]->allergens as $i => $name)
                     {
-                        if (($i & $flags) != 0)
-                        {
-                            echo "<td id='allergen'>" . $name . "</td>";
-                        }
+			if (($i & $flags) != 0)
+			{
+			    if ($first) {
+				$first = false;
+				echo '<dd class="col-xs-8">' . $name . '</dd>';
+			    } else {
+				echo '<dd class="col-xs-8 offset-xs-4">' . $name . '</dd>';
+			    }
+			}
                     }
-                    ?>
-                </tr>
-              </table>
-              <p id="notes"> "<?php echo $description?>"</p>
-            </div>
-          </div>
-        </div>
+		  ?>
+	      </dl>
+	    </blockquote>
+	  </div>
+	</div>
       </div>
     </div>
-
+  </div>
   </main>
 </div>
 </body>
