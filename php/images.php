@@ -8,10 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
 
 	if (isset($_REQUEST["postid"]))
 	{
-        $postid = $_REQUEST["postid"];
+		$postid = $_REQUEST["postid"];
 
 		$dir = $root . $postid;
-		 $dir_contents = scandir($dir);
+		$dir_contents = scandir($dir);
 		$array = array();
 
 		//$realpath = realpath($dir);
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
 			{
 				$array[] = $absroot . $postid . '/' . $file;
 			}
-        }
+		}
 
 		echo json_encode($array, 64);
 		//echo $array;
@@ -38,7 +38,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST')
 	if (isset($_POST["postid"]))
 	{
 		$postid = $_REQUEST["postid"];
-				postImages($postid, isset($_POST["redirect"]));
+		postImages($postid, $_POST["new"]);
 	}
 	else
 	{
@@ -49,21 +49,20 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST')
 function postImages($postid, $new)
 {
 	$root = "../itemphotos/";
-
-	$dir = $root . "" . $postid;
+	$dir = $root . $postid;
 	if($new)
 	{
 		if(file_exists($dir))
 		{
 			rmdir($dir);
 		}
-		mkdir($dir, 0700, true);
+		mkdir($dir);
 	}
 	else
 	{
 		if(!file_exists($dir))
 		{
-			mkdir($dir, 0700, true);
+			mkdir($dir);
 		}
 	}
 
@@ -77,14 +76,14 @@ function postImages($postid, $new)
 			move_uploaded_file($_FILES['photo']['tmp_name'], $newname);
 		}
 	}
-echo '<script> window.location.href="../listing.php?id=' . $postid . '"; </script>';
+	echo '<script> window.location.href="../listing.php?id=' . $postid . '"; </script>';
 }
 
 
 function console_log( $data ){
-  echo '<script>';
-  echo 'console.log('. json_encode( $data ) .')';
-  echo '</script>';
+	echo '<script>';
+	echo 'console.log('. json_encode( $data ) .')';
+	echo '</script>';
 }
 
 ?>

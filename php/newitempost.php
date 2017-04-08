@@ -27,7 +27,7 @@ if (isset($_POST["id"]))
         {
             if (!$dbconnection->query("DELETE FROM PostsTable WHERE id = " . $postID))
             {
-                echo ($dbconnection->error);
+                echo json_encode(array("error" => $dbconnection->error));
             }
             exit();
         }
@@ -46,7 +46,11 @@ if (isset($_POST["id"]))
 
             $stmt = $dbconnection->prepare("UPDATE PostsTable SET title=?, description=?, location=?, posttime=now(), expiry=?, flags=? WHERE id=?");
             $stmt->bind_param("ssssii", $title, $description, $location, $expiry, $flags, $postID);
-            if (!$stmt->execute()) echo $dbconnection->error;
+            if (!$stmt->execute()) echo json_encode(array("error" => $dbconnection->error));
+            else
+            {
+              echo json_encode(array("postid" => $postID));
+            }
         }
     }
 }

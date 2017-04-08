@@ -30,7 +30,6 @@ function fillTabs() {
         //Listing History - bothDone(posterID = uid) && waitingForThem(posterID = uid)
         $.get("php/userID.php", function (data) {
           var userID = data;
-          console.log(userID);
           switch (key) {
             case 'orders':
             addCard("#orders_current", "current", obj);
@@ -94,7 +93,6 @@ function addCard(tabID, protoype, obj){
   $.getScript("js/itemimage.js", function()
   {
     card.find(".itemimage").attr("data-itemid", obj.id);
-    console.log(card.find(".itemimage").attr("data-itemid"));
 
     fixImg(card);
   });

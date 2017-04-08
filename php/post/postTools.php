@@ -44,8 +44,12 @@ if(isset($_POST["postID"]))
 
     if(isset($_POST["cancel"]))
     {
+        mysqli_report(MYSQLI_REPORT_ALL);
+        //TODO find out why this line isnt working
+        //it says it doesnt like recipientID or posterDone, it says they arent legit columns but they are??? idek man
         $stmt = $dbConnection->prepare("SELECT posterID, recipientID, posterDone, recipientDone FROM FinishedPostsTable WHERE id = ?");
-        $stmt->bind_param("i", $_POST["postID"]);
+
+        $stmt->bind_param("i", intval($_POST["postID"]));
         $stmt->bind_result($posterid, $recepid, $pdone, $rdone);
         if ($pdone || $rdone || ($userid !== $posterid && $userid !== $recepid)) die("Can't cancel this post");
         $dbConnection->query("UPDATE PostsTable SET visible=1 WHERE id=" . intval($_POST["postID"]));
@@ -60,7 +64,7 @@ if(isset($_POST["postID"]))
         finalise(intval($_POST["postID"]));
         exit();
     }
-	
+
 	if ($userid !== $posterid)
 	{
 		$stmt->close();
@@ -84,7 +88,6 @@ if(isset($_POST["postID"]))
         $stmt = $dbConnection->prepare("UPDATE PostsTable SET visible=0 WHERE id=?");
         $stmt->bind_param("i", intval($_POST["postID"]));
         $stmt->execute();
-
     }
 }
 
