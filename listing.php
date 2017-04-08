@@ -150,7 +150,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
 			    <div class="card-title">
 			      <h4>Options</h4>
 			    </div>
-			    <a href="post.php?editing= ' . $postID . '"><button type="button" class="btn btn-primary">Edit Post</button> </a>
+			    <a href="newpost.php?editing= ' . $postID . '"><button type="button" class="btn btn-primary">Edit Post</button> </a>
 			    <button type="button" class="btn btn-danger" id="delBtn" data-pid=' . $postID . '>Delete Post</button>
 			  </div>
 			</div>
