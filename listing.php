@@ -189,6 +189,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
                   </blockquote>
                 </div>
               </div>
+
               <div class="col-md-6">
                 <div class="card-block">
                   <blockquote class="blockquote bq-success">
@@ -216,6 +217,16 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
                   </blockquote>
                 </div>
               </div>
+
+		<div class="col-md-6">
+                <div class="card-block">
+                  <blockquote class="blockquote bq-primary">
+                    <p class="bq-title">Cupboard Recommendation</p>
+                    <p><?php echo "recommendation by Cupboard"?></p>
+                  </blockquote>
+                </div>
+              </div>
+	       
             </div>
           </div>
         </div>
