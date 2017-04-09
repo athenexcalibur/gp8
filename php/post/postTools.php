@@ -88,7 +88,7 @@ if(isset($_POST["postID"]))
     }
 }
 
-/* -
+/*
  * stillUp - array of your posts that are still listed
  * bothDone - finished posts
  * reserved - posts you have reserved for someone but neither have finalized (cancel here)

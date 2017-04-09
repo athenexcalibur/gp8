@@ -18,6 +18,7 @@ $(document).ready(function () {
 
 function fillTabs() {
   var url = "php/post/postTools.php";
+  $(".tab-pane").html("");
   $.get(url, function (data) {
     var history = JSON.parse(data);
     console.log(history);
@@ -107,13 +108,7 @@ function submitrating(postID)
   {
     console.log(data);
   });
-  fillOrders();
-}
-
-function sendCancelMessage(orderID)
-{
-  var message = document.getElementById("cancelmessagetext").value;
-  console.log(message);
+  fillTabs();
 }
 
 $('#recievedModal').on('show.bs.modal', function (event)
@@ -127,20 +122,8 @@ $('#recievedModal').on('show.bs.modal', function (event)
   });
 });
 
-$('#cancelmodal').on('show.bs.modal', function (event)
+$("#cancelBtn").on("click", function()
 {
-  var button = $(event.relatedTarget); // Button that triggered the modal
-  var orderID = button.data('orderid'); // Extract info from data-* attributes
-  var seller = "FoodieDave"; //todo make into the correct seller (use itemid)
-  var itemname = "Beanz"; //todo make into the correct item name (use itemid)
-  var modal = $(this);
-  //debug
-  modal.find("#myModalLabel").text("To " + seller);
-  var cancelmessagetext = modal.find("#cancelmessagetext");
-  var prevtext = cancelmessagetext.attr('value');
-  cancelmessagetext.val(prevtext + itemname);
-  console.log("cancelmodal showing");
-  modal.find('#modal_sendcancelmessage').click(function () {
-    sendCancelMessage(orderID);
-  });
+  $.post("php/post/postTools.php", {postID: $(this).data(id), cancel: true}, function(data){console.log(data);});
+  fillTabs();
 });
