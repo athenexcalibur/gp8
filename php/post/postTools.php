@@ -44,14 +44,33 @@ if(isset($_POST["postID"]))
 
     if(isset($_POST["cancel"]))
     {
+        mysqli_report(MYSQLI_REPORT_ALL);
         $stmt = $dbConnection->prepare("SELECT posterID, recipientID, posterDone, recipientDone FROM FinishedPostsTable WHERE id = ?");
-        $stmt->bind_param("i", $_POST["postID"]);
+
+        $stmt->bind_param("i", intval($_POST["postID"]));
         $stmt->bind_result($posterid, $recepid, $pdone, $rdone);
+        $stmt->execute();
+        $stmt->fetch();
+        $stmt->store_result();
+        $stmt->close();
         if ($pdone || $rdone || ($userid !== $posterid && $userid !== $recepid)) die("Can't cancel this post");
         $dbConnection->query("UPDATE PostsTable SET visible=1 WHERE id=" . intval($_POST["postID"]));
-        if ($dbConnection->affected_rows <= 0) die("Couldn't find that post to restore!");
         $dbConnection->query("DELETE FROM FinishedPostsTable WHERE id=" . intval($_POST["postID"]));
-        if ($dbConnection->affected_rows <= 0) die("Couldn't find that post to delete!");
+        exit();
+    }
+
+    else if(isset($_POST["delete"]))
+    {
+        $stmt = $dbConnection->prepare("SELECT userid, visible FROM PostsTable WHERE id=?");
+        $stmt->bind_param("i", $_POST["postID"]);
+        $stmt->bind_result($pid, $isVisible);
+        $stmt->execute();
+        $stmt->fetch();
+        $stmt->store_result();
+        $stmt->close();
+        if ($isVisible == 0) die("Please cancel this post first!");
+        if ($pid != $userid) die("That isn't yours!");
+        $dbConnection->query("DELETE FROM PostsTable WHERE id=" . intval($_POST["postID"]));
         exit();
     }
 
@@ -60,7 +79,7 @@ if(isset($_POST["postID"]))
         finalise(intval($_POST["postID"]));
         exit();
     }
-	
+
 	if ($userid !== $posterid)
 	{
 		$stmt->close();
@@ -84,7 +103,6 @@ if(isset($_POST["postID"]))
         $stmt = $dbConnection->prepare("UPDATE PostsTable SET visible=0 WHERE id=?");
         $stmt->bind_param("i", intval($_POST["postID"]));
         $stmt->execute();
-
     }
 }
 

@@ -157,7 +157,7 @@ else
       <div class="form-group">
         <input type="file" name="photo" id="photo" accept="image/gif, image/jpeg, image/png" style="width: 200px">
         <input type="hidden" id="postid" name="postid">
-        <input type="hidden" id="redirect" name="redirect">
+        <input type="hidden" id="new" name="new">
       </div>
     </form>
 
@@ -223,7 +223,8 @@ else
             var postid = res["postid"];
 
             document.getElementById("postid").value = postid;
-            document.getElementById("redirect").value = 1;
+            document.getElementById("new").value = window.editing ? 0 : 1;
+            console.log(document.getElementById("new").value);
             document.getElementById("photos").submit();
             window.currentlatLng = undefined;
           }

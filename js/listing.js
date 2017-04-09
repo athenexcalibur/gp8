@@ -1,6 +1,10 @@
-$("#delBtn").on("click", function()
+$("#deleteBtn").on("click", function()
 {
-    $.post("post.php",
-        {id: $(this).data("pid"), delete: true},
-    function(data){window.location.href="index.php";});
+  $.post("php/post/postTools.php",
+  {postID: $(this).data("pid"), delete: true} ,
+  function(data){
+    console.log(data);
+    window.location.href="orders.php";
+  }
+  );
 });

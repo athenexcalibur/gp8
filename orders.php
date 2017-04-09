@@ -132,19 +132,18 @@ if (!loginCheck())
 
 	<!--card-prototypes-->
 	    <div class="card current-prototype">
-	      <a href="#"></a>
 	      <div class="card-block order-img">
 		        <img class = "itemimage" id="card_image"/>
 	      </div>
 	      <div class="card-block">
-		<h4 class="card-title">Food orders current</h4>
+              <h4> <a href="#" class="card-title">Food orders current </a></h4>
+              <p class="text-info currentmsg">The poster has rated this exchange.</p>
 		<button type="button" class="btn btn-primary" data-orderid="" data-toggle="modal" data-target ="#recievedModal">Rate</button>
-		<button type="button" class="btn btn-danger" data-orderid="" id="cancelBtn">Cancel</button>
+		<button type="button" class="btn btn-danger cancelButton" data-orderid="">Cancel</button>
 	      </div>
 	    </div>
 
 	    <div class="card history-prototype">
-	      <a href="#"></a>
 	      <div class="card-block order-img">
 		<img class = "itemimage" id="card_image"/>
 	      </div>

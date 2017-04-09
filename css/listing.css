@@ -1,0 +1,10 @@
+.card .account-icon {
+  font-size: 5em;
+  float: left;
+  padding: 10px;
+  padding-right: 15px;
+}
+
+.user-info .btn {
+  margin-left: 0;
+}
