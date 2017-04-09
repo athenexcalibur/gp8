@@ -1,4 +1,5 @@
 <?php
+require_once "database.php";
 
 //A list of stopwords - feel free to add any!!
 
@@ -211,37 +212,46 @@ function getKeywords($title,$description){
 
 /**************************************************/
 
-$postkeys = getKeywords("Chicken Tikka","chicken chicken chicken"); //keywords for current post
-
 //match keywords to past one month post keywords
-function match($pastpost){
+function match($title, $description, $date){
 	$matches = array();
 	global $postkeys;
 
+	$dbconnection = Database::getConnection();
+	$sql = "SELECT title, description FROM PostsTable WHERE date>= add_months(TRUNC(SYSDATE) + 1, -1)";
+	$result = $dbconnection->query($sql);
+
 	$pp = filter_stops($pastpost);
+	$postkeys = getKeywords($title,$description);
 
 	foreach($postkeys as $k){
-		$n = 0;
+		$n = 0;	
+		if($result->num_rows > 0){
+		while($r = $result->fetch_assoc()){
+		$pp = getKeywords($r["title"],$r["description"]);
 		foreach($pp as $p){
 		  if(strcasecmp(strtolower($k),strtolower($p))==0)
-			{$n = $n+1;}	
-		}
+			{$n = $n+1;}		
 		$m = array($k,$n); //each keyword and its associated no. of matches  
-		array_push($matches,$m);		      
+		array_push($matches,$m);
+	}
+	}
+	}		      
 	}
 	return $matches; //returns an array of matching keywords and no. of matches
 }
 
 //offer recommendations based on past postings
-function recommend($pastpost){
-	$recs = match($pastpost);
+function recommend($title, $description,$date){
+	$recs = match($title, $description, $date);
 	print_r($recs);
 	foreach ($recs as $m){
-	  if($m[1]>=2){echo "You've had enough of ".$m[0]."!";}	
+	  if($m[1]>=2){$rcmnd = "You have posted similar item quite a few times recently. You can probably cut down purchase of this item to reduce wastage.";}	
+	  else{$rcmnd = "No recommendations for this post.";}	
 	}
+   return $rcmnd;
 }
 
-recommend("Chicken");
 
 
 ?>
