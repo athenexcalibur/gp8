@@ -102,11 +102,11 @@ if (!loginCheck())
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <form class="z-depth-1">
+                    <form class="z-depth-1" action="javascript:populateSearchResults();">
                         <div class="input-group md-form">
                             <span id="showFilters" class="input-group-addon waves-effect"><i class="material-icons">menu</i></span>
                             <input class="form-control" type="text" id="searchBox" placeholder="Search">
-                            <span class="input-group-addon waves-effect"><i class="material-icons">search</i></span>
+                            <span id="searchBtn" class="input-group-addon waves-effect"><i class="material-icons">search</i></span>
                         </div>
                     </form>
                     <div class="search-options-container card light-blue
