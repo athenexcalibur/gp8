@@ -4,6 +4,14 @@ $(document).ready(function() {
     $("#showFilters").click(function(){
 	$(".search-options-container").slideToggle();
     });
+    var searchText = findGetParameter("searchText");
+    var callingPage = document.referrer;
+    if(searchText != "null" && callingPage != "null"){
+	if (callingPage.includes("index.php")) {
+	    $("#searchBox").val(urldecode(searchText));
+	    populateSearchResults();
+	}
+    }
 });
 
 function parseTime(string)
@@ -161,3 +169,20 @@ $(document).ready(function()
     sortBy.on("input", populateSearchResults);
     populateSearchResults();
 });
+
+function findGetParameter(parameterName)
+{
+    var result = null,
+        tmp = [];
+    var items = location.search.substr(1).split("&");
+    for (var index = 0; index < items.length; index++)
+    {
+        tmp = items[index].split("=");
+        if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+    }
+    return result;
+}
+
+function urldecode(url) {
+  return decodeURIComponent(url.replace(/\+/g, ' '));
+}

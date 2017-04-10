@@ -226,8 +226,8 @@ cSessionStart();
             <!--Search Bar-->
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <form>
-                    <input class="form-control" type="text" placeholder="Search">
+                <form action="search.php">
+                    <input class="form-control" name="searchText" type="text" placeholder="Search">
                 </form>
             </div>
             <div class="col-md-2"></div>
