@@ -16,8 +16,15 @@ $(document).ready(function () {
   fillTabs();
 });
 
+$(document).on("click", ".cancelButton", function()
+{
+    $.post("php/post/postTools.php", {postID: $(this).data('orderid'), cancel: true}, function(data){console.log(data);});
+    fillTabs();
+});
+
 function fillTabs() {
   var url = "php/post/postTools.php";
+  $(".tab-pane").html("");
   $.get(url, function (data) {
     var history = JSON.parse(data);
     console.log(history);
@@ -42,7 +49,7 @@ function fillTabs() {
             break;
             case 'waitingForYou':
             if (userID === obj.recipientID)
-            addCard("#orders_current", "current", obj);
+            addCard("#orders_current", "current", obj, true);
             else
             addCard("#listings_reserved", "current", obj);
             break;
@@ -64,7 +71,7 @@ function fillTabs() {
   });
 }
 
-function addCard(tabID, protoype, obj){
+function addCard(tabID, protoype, obj, msg){
   var currentProto = $(".current-prototype").clone();
   currentProto.removeClass("current-prototype");
   var historyProto = $(".history-prototype").clone();
@@ -74,6 +81,18 @@ function addCard(tabID, protoype, obj){
     card = currentProto.clone();
     card.find(".card-title").html(obj.title);
     card.find(".btn").attr("data-orderid", obj.id);
+
+    if (msg)
+    {
+        card.find(".currentmsg").show();
+        card.find(".cancelButton").hide();
+    }
+    else
+    {
+          card.find(".currentmsg").hide();
+          card.find(".cancelButton").show();
+    }
+    card.find("a").attr("href", "listing.php?id=" + obj.id);
     //console.log(card.html());
   } else if (protoype == "history") {
     card = historyProto.clone();
@@ -85,7 +104,7 @@ function addCard(tabID, protoype, obj){
     card.removeClass("history-protoype");
     card.find(".card-title").html(obj.title);
     card.find(".timestamp").html(obj.posttime); //add timestamp
-    card.find("a").attr("href", "listing.php?id=" + obj.id)
+    card.find("a").attr("href", "listing.php?id=" + obj.id);
   }
 
   $(tabID).append(card);
@@ -93,7 +112,6 @@ function addCard(tabID, protoype, obj){
   $.getScript("js/itemimage.js", function()
   {
     card.find(".itemimage").attr("data-itemid", obj.id);
-
     fixImg(card);
   });
 }
@@ -105,13 +123,7 @@ function submitrating(postID)
   {
     console.log(data);
   });
-  fillOrders();
-}
-
-function sendCancelMessage(orderID)
-{
-  var message = document.getElementById("cancelmessagetext").value;
-  console.log(message);
+  fillTabs();
 }
 
 $('#recievedModal').on('show.bs.modal', function (event)
@@ -122,23 +134,5 @@ $('#recievedModal').on('show.bs.modal', function (event)
   modal.find('#myModalLabel').text('Please rate item with id = ' + orderID);
   modal.find('.btn-primary').click(function() {
     submitrating(orderID)
-  });
-});
-
-$('#cancelmodal').on('show.bs.modal', function (event)
-{
-  var button = $(event.relatedTarget); // Button that triggered the modal
-  var orderID = button.data('orderid'); // Extract info from data-* attributes
-  var seller = "FoodieDave"; //todo make into the correct seller (use itemid)
-  var itemname = "Beanz"; //todo make into the correct item name (use itemid)
-  var modal = $(this);
-  //debug
-  modal.find("#myModalLabel").text("To " + seller);
-  var cancelmessagetext = modal.find("#cancelmessagetext");
-  var prevtext = cancelmessagetext.attr('value');
-  cancelmessagetext.val(prevtext + itemname);
-  console.log("cancelmodal showing");
-  modal.find('#modal_sendcancelmessage').click(function () {
-    sendCancelMessage(orderID);
   });
 });

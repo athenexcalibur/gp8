@@ -10,12 +10,19 @@ if (!loginCheck())
 
 $dbconnection = Database::getConnection();
 $postID = intval($_GET["id"]);
-$stmt = $dbconnection->prepare("SELECT title, description, location, flags, userid, posttime, expiry FROM PostsTable WHERE id=? LIMIT 1");
+$stmt = $dbconnection->prepare("SELECT title, description, location, flags, userid, posttime, expiry, visible FROM PostsTable WHERE id=? LIMIT 1");
 $stmt->bind_param("i", $postID);
-$stmt->bind_result($title, $description, $location, $flags, $posterID, $time, $expiry); //todo show on map
+$stmt->bind_result($title, $description, $location, $flags, $posterID, $time, $expiry, $visible); //todo show on map
 $stmt->execute();
 $stmt->store_result();
 $stmt->fetch();
+
+if ($stmt->num_rows <= 0)
+{
+    header("Location: index.php?error=" . urlencode("Could not find that post."));
+    exit();
+}
+
 $posterInfo = $_SESSION["info"]->getBasicInfo($posterID);
 $distance = $_SESSION["user"]->getLocation()->distanceFrom(new Location($location));
 $distance = round($distance, 1);
@@ -142,6 +149,8 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
               <?php
               if ($isPoster)
               {
+                if ($visible)
+                {
                 echo('
                 <div class="col-md-8">
                 <div class="card-block">
@@ -151,8 +160,20 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
                 <h4>Options</h4>
                 </div>
                 <a href="newpost.php?editing=' . $postID . '"><button type="button" class="btn btn-primary">Edit Post</button> </a>
-                <button type="button" class="btn btn-danger" id="delBtn" data-pid=' . $postID . '>Delete Post</button>
+                <button type="button" class="btn btn-danger" id="deleteBtn" data-pid=' . $postID . '>Delete Post</button>
                 </div>
+                </div>
+                </div>
+                </div>
+                ');
+                }
+                else echo('
+                <div class="col-md-8">
+                <div class="card-block">
+                <div class="card light-blue lighten-5">
+                <div class="card-block">
+                <div class="card-title">
+                <h2 class="text-info">You have reserved this item for someone. Please visit <a href="orders.php">your orders page</a> to cancel your reservation.</h2>
                 </div>
                 </div>
                 </div>
@@ -218,19 +239,14 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
                 </div>
               </div>
 
-		<!-- recommendations -->
-		    <?php
-		    if($isPoster){
-		    echo( 			
-                    '<div class="col-md-6">
-                            <div class="card-block">
-                              <blockquote class="blockquote bq-primary">
-                                <p class="bq-title">Cupboard Recommendation</p>
-                                <p></p>
-                              </blockquote>
-                            </div>
-                          </div>');}
-                    ?>
+		<div class="col-md-6">
+                <div class="card-block">
+                  <blockquote class="blockquote bq-primary">
+                    <p class="bq-title">Cupboard Recommendation</p>
+                    <p><?php echo "recommendation by Cupboard"?></p>
+                  </blockquote>
+                </div>
+              </div>
 	       
             </div>
           </div>
