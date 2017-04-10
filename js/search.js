@@ -12,6 +12,9 @@ $(document).ready(function() {
 	    populateSearchResults();
 	}
     }
+    $("#searchBtn").click(function() {
+        populateSearchResults();
+    });
 });
 
 function parseTime(string)
