@@ -185,7 +185,6 @@ else
 <script src="bootstrap-material-design/js/mdb.min.js"></script>
 <script src="dates/moments.js"></script>
 <script src="dates/bootstrap-material-datetimepicker.js"></script>
-<script src="js/search.js"></script>
 
 <script>
     //todo make expiry field load into date
