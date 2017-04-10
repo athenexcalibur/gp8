@@ -35,7 +35,7 @@ function parseDate(string)
 function getResultHTML(post)
 {
     var HTML = '<div class="card card-hoverable">' +
-		'<a href="listing.php?id="' + post.id + '></a>' +
+		'<a href="listing.php?id=' + post.id + '"></a>' +
 		'<div class="card-block order-img">' +
 		'<img class = "itemimage" id="card_image" src="img/vege-card.jpg"/>' +
 		'</div>' +
