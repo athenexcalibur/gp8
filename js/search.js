@@ -12,7 +12,7 @@ $(document).ready(function() {
 	    populateSearchResults();
 	}
     }
-    $("#searchBtn").click(function() {
+    $("#searchBtn, #refineBtn").click(function() {
         populateSearchResults();
     });
 });

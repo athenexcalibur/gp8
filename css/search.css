@@ -29,8 +29,13 @@
 
 .search-options-container{
   padding: 15px;
-  z-index: -1;
   display: none;
+  z-index: 1;
+}
+
+form.z-depth-1 {
+  position: relative;
+  z-index: 2;
 }
 
 #searchBox {

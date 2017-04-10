@@ -69,7 +69,7 @@ function resetReg()
     $("#nextBtn").show();
     $("#nextBtn").prop("disabled", false);
     $("#registerBtn").hide();
-    $(".form-control").clear();
+    $("#registrationModal .form-control").val("");
     reInitMap();
 }
 

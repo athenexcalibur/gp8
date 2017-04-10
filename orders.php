@@ -103,6 +103,7 @@ if (!loginCheck())
     <div id="ordersWrapper" class="container">
 
       <div id="header">
+  <button type="button" class="btn btn-primary" onclick="location.href='newpost.php'">NEW LISTING</button>
 	<h2>Your Orders</h2>
       </div>
       <div class="row">
@@ -163,7 +164,6 @@ if (!loginCheck())
 	  <div class="tab-pane" id="listings_history" role="tabpanel"> Listing History</div>
 	</div>
 
-  <button type="button" class="btn btn-primary" onclick="location.href='newpost.php'">NEW LISTING</button>
 
       </div>
 

@@ -64,7 +64,7 @@ else
 
     <!-- My Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/newpost.css">
 
 </head>
 

@@ -109,8 +109,7 @@ if (!loginCheck())
                             <span id="searchBtn" class="input-group-addon waves-effect"><i class="material-icons">search</i></span>
                         </div>
                     </form>
-                    <div class="search-options-container card light-blue
-		      lighten-4 z-depth-0">
+                    <div class="search-options-container card light-blue lighten-4 z-depth-0">
                         <div class="row">
                             <div class="col-md-6" class="allergyBoxes">
                                 <h4>Dietary Requirements</h4>
