@@ -100,20 +100,17 @@ if (!loginCheck())
 
         <div class="container search-container">
             <div class="row">
-                <div class="col-xs-2"></div>
-                <div class="col-xs-8">
-                    <form>
-                        <div class="input-group">
-                            <div id="showFilters" class="input-group-addon"><i class="material-icons">menu</i></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form class="z-depth-1">
+                        <div class="input-group md-form">
+                            <span id="showFilters" class="input-group-addon waves-effect"><i class="material-icons">menu</i></span>
                             <input class="form-control" type="text" id="searchBox" placeholder="Search">
-                            <div class="input-group-addon"><i class="material-icons">search</i></div>
+                            <span class="input-group-addon waves-effect"><i class="material-icons">search</i></span>
                         </div>
                     </form>
-
-                    <br>
-                    <br>
-
-                    <div class="search-options-container">
+                    <div class="search-options-container card light-blue
+		      lighten-4 z-depth-0">
                         <div class="row">
                             <div class="col-md-6" class="allergyBoxes">
                                 <h4>Dietary Requirements</h4>
@@ -170,50 +167,57 @@ if (!loginCheck())
                                 </div>
                             </div>
 
-                            <div class="dropdown" id="sortBy">
-                                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span id="selected">Distance</span><span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Distance</a></li>
-                                    <li><a href="#">Soonest Expiry</a></li>
-                                    <li><a href="#">Most Recent</a></li>
-                                    <li><a href="#">User Rating</a></li>
-                                    <li><a href="#">User Score</a></li>
-                                </ul>
-                            </div>
-
-                            <div id="refineBtn">
-                                <button type="button" class="btn btn-primary">Apply Filters</button>
-                            </div>
                         </div>
+			<div class="row">
+			  <div class="col-xs-6">
+			    <div class="dropdown" id="sortBy">
+			      <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
+				<span id="selected">Distance</span><span class="caret"></span></a>
+			      <ul class="dropdown-menu">
+				<li><a href="#">Distance</a></li>
+				<li><a href="#">Soonest Expiry</a></li>
+				<li><a href="#">Most Recent</a></li>
+				<li><a href="#">User Rating</a></li>
+				<li><a href="#">User Score</a></li>
+			      </ul>
+			    </div>
+			  </div>
+			  <div class="col-xs-6">
+			    <div id="refineBtn">
+			      <button type="button" class="btn btn-primary">Apply Filters</button>
+			    </div>
+			  </div>
+			</div>
                     </div>
                 </div>
-                <div class="col-xs-2"></div>
+                <div class="col-md-2"></div>
             </div>
         </div>
 
-        <div class="row">
-            <nav class="nav">
-                <ul class="nav nav-tabs justify-content-center">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#list" data-toggle="tab">List</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="mapShow" class="nav-link" href="#map" data-toggle="tab">Map</a>
-                    </li>
-                </ul>
-            </nav>
+	<div class="container">
+	  <div class="row">
+	    <nav class="nav">
+	      <ul class="nav nav-tabs justify-content-center">
+		<li class="nav-item">
+		  <a class="nav-link active" href="#list" data-toggle="tab">List</a>
+		</li>
+		<li class="nav-item">
+		  <a id="mapShow" class="nav-link" href="#map" data-toggle="tab">Map</a>
+		</li>
+	      </ul>
+	    </nav>
 
-            <div class="tab-content">
-                <div class="tab-pane active" id="list" role="tabpanel">
-                    <div class="container" id="results">
-                    </div>
-                </div>
-                <div class="tab-pane" id="map" role="tabpanel">
-                    <div id="resultsMap"></div>
-                </div>
-            </div>
-        </div>
+	    <div class="tab-content">
+	      <div class="tab-pane active" id="list" role="tabpanel">
+		<div class="" id="results">
+		</div>
+	      </div>
+	      <div class="tab-pane" id="map" role="tabpanel">
+		<div id="resultsMap"></div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
     </main>
 

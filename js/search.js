@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
     $("#showFilters").click(function(){
-	$(".search-options-container").toggle();
+	$(".search-options-container").slideToggle();
     });
 });
 
@@ -23,18 +23,18 @@ function parseDate(string)
 
 function getResultHTML(post)
 {
-    var HTML = '<div class="card hoverable">' +
-                '<h5 id="title" class="card-title">' + post.title + '</h5>' +
-                '<div class="card-image">' +
-                '<div class="view overlay hm-white-slight z-depth-1">' +
-                '<img src="img/vege-card.jpg" class="img-responsive" alt="">' +
-                '<a id="link" href="listing.php?id=' + post.id + '">' +
-                '<div class="mask waves-effect"></div>' +
-                '</a></div></div>' +
-                '<div id="distance" class="card-block text-xs-center">' +
-                (post.distance? post.distance.toFixed(1) + " miles away" : "") +
-                '</div></div>';
-                //todo expand this to add other info (decription, poster name/score/rating, time, expiry)
+    var HTML = '<div class="card card-hoverable">' +
+		'<a href="listing.php?id="' + post.id + '></a>' +
+		'<div class="card-block order-img">' +
+		'<img class = "itemimage" id="card_image" src="img/vege-card.jpg"/>' +
+		'</div>' +
+		'<div class="card-block">' +
+		'<h4 class="card-title">' + post.title + '</h4>' +
+		'<p class="card-text text-muted distance">' +
+		(post.distance? post.distance.toFixed(1) + " miles away" : "") +
+		'</p>' +
+		'</div> </div>';
+    //todo expand this to add other info (decription, poster name/score/rating, time, expiry)
 
     return HTML;
 }
