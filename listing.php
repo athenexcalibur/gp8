@@ -1,6 +1,7 @@
 <?php
 require_once "php/user.php";
 require_once "php/database.php";
+require_once "php/recommend.php";
 cSessionStart();
 if (!loginCheck())
 {
@@ -241,13 +242,18 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
 
 		<!-- Recommendations!! -->
 		
-		<?php if(isPoster){
+		<?php 
+
+		$r = recommend($title, $description, date("YYYY-MM-DD"));
+		if(isPoster){
 		echo('
 		<div class="col-md-6">
                 <div class="card-block">
                   <blockquote class="blockquote bq-primary">
                     <p class="bq-title">Cupboard Recommendation</p>
-                    <p><?php echo "recommendation by Cupboard"?></p>
+                    <br>');
+		print_r($r);
+		  echo('</p>
                   </blockquote>
                 </div>
               </div>');
