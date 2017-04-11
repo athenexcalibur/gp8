@@ -243,12 +243,16 @@ function match($title, $description, $date){
 
 //offer recommendations based on past postings
 function recommend($title, $description,$date){
+	$rcmnd="";
 	$recs = match($title, $description, $date);
-	print_r($recs);
-	foreach ($recs as $m){
-	  if($m[1]>=2){$rcmnd = "You have posted similar item quite a few times recently. You can probably cut down purchase of this item to reduce wastage.";}	
-	  else{$rcmnd = "No recommendations for this post.";}	
-	}
+	
+	if(!empty($recs)){
+	 foreach ($recs as $m){
+	  if($m[1]>=2){$rcmnd = $rcmnd."You have posted similar item quite a few times recently. You can probably cut down purchase of this item to reduce wastage.";}
+	   else{$rcmnd = $rcmnd."No recommendations for this post.";}		
+	}}
+	  else{$rcmnd = $rcmnd."No recommendations for this post.";}	
+	
    return $rcmnd;
 }
 
