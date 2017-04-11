@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
 {
     $keywords = isset($_GET["keywords"]) ? explode(" ", $_GET["keywords"]) : array();
     $location = isset($_GET["location"]) ? $_GET["location"] : "";
-    $flags = 0;
 
     $flags = 0;
     if (isset($_GET["flags"]) && is_array($_GET["flags"]))
@@ -41,11 +40,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
     $result = $dbconnection->query($sql);
 
     $out = array();
-    $uflags = $_SESSION["user"]->getFlags();
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
     {
         $uLoc = $_SESSION["user"]->getLocation();
-        if (areCompatible($uflags, intval($row["flags"])))
+        if (areCompatible($flags, intval($row["flags"])))
         {
             $row["distance"] = $uLoc->distanceFrom(new Location($row["location"]));
             $posterInfo = $_SESSION["info"]->getBasicInfo($row["userid"]);

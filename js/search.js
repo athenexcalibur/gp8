@@ -60,7 +60,7 @@ function sortByMostRecent(a,b){return a.posttime <= b.posttime;}
 function populateSearchResults()
 {
     var checked = [];
-    $(".allergyBoxes").find("input:checked").each(function()
+    $("input:checkbox[name=allergyCheck]:checked").each(function()
     {
         checked.push($(this).attr("value"));
     });

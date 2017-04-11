@@ -111,56 +111,56 @@ if (!loginCheck())
                     </form>
                     <div class="search-options-container card light-blue lighten-4 z-depth-0">
                         <div class="row">
-                            <div class="col-md-6" class="allergyBoxes">
+                            <div class="col-md-6">
                                 <h4>Dietary Requirements</h4>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="HALAL"
+                                        <input class="form-check-input" type="checkbox" value="HALAL" name="allergyCheck"
                                             <?php if ($_SESSION["user"]->checkFlag(HALAL)) { echo("checked"); }?>> Halal
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="KOSHER"
+                                        <input class="form-check-input" type="checkbox" value="KOSHER" name="allergyCheck"
                                             <?php if ($_SESSION["user"]->checkFlag(KOSHER)) { echo("checked"); }?>> Kosher
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox"  value="VEGETARIAN"
+                                        <input class="form-check-input" type="checkbox"  value="VEGETARIAN" name="allergyCheck"
                                             <?php if ($_SESSION["user"]->checkFlag(VEGETARIAN)) { echo("checked"); }?>> Vegeterian
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="VEGAN"
+                                        <input class="form-check-input" type="checkbox" value="VEGAN" name="allergyCheck"
                                             <?php if ($_SESSION["user"]->checkFlag(VEGAN)) { echo("checked"); }?>> Vegan
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-6" class="allergyBoxes">
+                            <div class="col-md-6">
                                 <h4>Allergies</h4>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="PEANUT"
+                                        <input class="form-check-input" type="checkbox" value="PEANUT" name="allergyCheck"
                                             <?php if ($_SESSION["user"]->checkFlag(PEANUT)) { echo("checked"); }?>> Peanuts
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="GLUTEN"
+                                        <input class="form-check-input" type="checkbox" value="GLUTEN" name="allergyCheck"
                                             <?php if ($_SESSION["user"]->checkFlag(GLUTEN)) { echo("checked"); }?>> Gluten
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="SOY"
+                                        <input class="form-check-input" type="checkbox" value="SOY" name="allergyCheck"
                                             <?php if ($_SESSION["user"]->checkFlag(SOY)) { echo("checked"); }?>> Soy
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="LACTOSE"
+                                        <input class="form-check-input" type="checkbox" value="LACTOSE" name="allergyCheck"
                                             <?php if ($_SESSION["user"]->checkFlag(LACTOSE)) { echo("checked"); }?>> Lactose
                                     </label>
                                 </div>
@@ -169,6 +169,7 @@ if (!loginCheck())
                         </div>
 			<div class="row">
 			  <div class="col-xs-6">
+                  <label for="sortBy">Sort by: </label>
 			    <div class="dropdown" id="sortBy">
 			      <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
 				<span id="selected">Distance</span><span class="caret"></span></a>
