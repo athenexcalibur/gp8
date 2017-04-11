@@ -239,6 +239,10 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
                 </div>
               </div>
 
+		<!-- Recommendations!! -->
+		
+		<?php if(isPoster){
+		echo('
 		<div class="col-md-6">
                 <div class="card-block">
                   <blockquote class="blockquote bq-primary">
@@ -246,7 +250,9 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
                     <p><?php echo "recommendation by Cupboard"?></p>
                   </blockquote>
                 </div>
-              </div>
+              </div>');
+		}
+		?>
 	       
             </div>
           </div>
