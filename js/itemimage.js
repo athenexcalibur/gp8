@@ -18,7 +18,7 @@ function fix(imgview)
   var id = imgview.attr("data-itemid");
   $.get("./php/images.php", {postid: id}, function (data)
   {
-    var imgSrc = "img/vege-card.jpg"
+    var imgSrc = "img/vege-card.jpg";
     try
     {
       var urls = JSON.parse(data);

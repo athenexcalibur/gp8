@@ -245,7 +245,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
 		<?php 
 
 		$r = recommend($title, $description, date("YYYY-MM-DD"));
-		if(isPoster){
+		if($isPoster){
 		echo('
 		<div class="col-md-6">
                 <div class="card-block">

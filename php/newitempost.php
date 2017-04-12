@@ -6,6 +6,7 @@
 
 require_once(__DIR__ . "/database.php");
 require_once(__DIR__ . "/user.php");
+require_once(__DIR__ . "/notifications/notifyUser.php");
 cSessionStart();
 
 $_POST = array();
@@ -77,9 +78,18 @@ else if (isset($_POST["title"]))
     {
         if ($stmt->affected_rows === 1)
         {
-            //echo("Your item has been posted");
-            //success
             $postid = $dbconnection->insert_id;
+
+            //notify everyone looking for stuff here
+            $everything = $dbconnection->query("SELECT * FROM ReservedTable");
+            while ($row = mysqli_fetch_array($everything, MYSQLI_ASSOC))
+            {
+                if (strpos($title, $row["word"]) != 0 || strpos($descrip, $row["word"]) != 0)
+                {
+                    notifyUser("A new post (link) contains your reserved word '" . $row["word"] . "'", $row["userid"]); //todo
+                }
+            }
+
             echo json_encode(array("postid" => $postid));
         } else echo json_encode(array("error" => "No post made"));
     }

@@ -182,80 +182,111 @@ $stopwords = array(
 
 
 //filter stop words from a string - returns an array of filtered words
-function filter_stops($words){
+function filter_stops($words)
+{
     global $stopwords;
     $f = array();
-    $ch = 0;
-    $wds = explode(" ",$words); //convert string to array
-    foreach($wds as $wrd) {
-	$wrd_lower = strtolower($wrd);
-	if(!isset($stopwords[$wrd_lower])) {
-		if(!in_array($wrd_lower,$f))
-		{array_push($f, $wrd_lower);}
-	}	    
-    } 
-    return($f);	
+    $wds = explode(" ", $words); //convert string to array
+    foreach ($wds as $wrd)
+    {
+        $wrd_lower = strtolower($wrd);
+        if (!isset($stopwords[$wrd_lower]))
+        {
+            if (!in_array($wrd_lower, $f))
+            {
+                array_push($f, $wrd_lower);
+            }
+        }
+    }
+    return ($f);
 }
 
 /**************************************************/
 //extract keywords from post title and description - returns array of combined keywords from title and description
 
-function getKeywords($title,$description){
-	
-	$key = array();
-	$t = filter_stops($title);
-	$d = filter_stops($description);
-	foreach($t as $k){if(!in_array(strtolower($k),$key)){array_push($key,strtolower($k));}}
-	foreach($d as $k){if(!in_array(strtolower($k),$key)){array_push($key,strtolower($k));}}
-	return($key);
-}	
+function getKeywords($title, $description)
+{
+
+    $key = array();
+    $t = filter_stops($title);
+    $d = filter_stops($description);
+    foreach ($t as $k)
+    {
+        if (!in_array(strtolower($k), $key))
+        {
+            array_push($key, strtolower($k));
+        }
+    }
+    foreach ($d as $k)
+    {
+        if (!in_array(strtolower($k), $key))
+        {
+            array_push($key, strtolower($k));
+        }
+    }
+    return ($key);
+}
 
 /**************************************************/
 
 //match keywords to past one month post keywords
-function match($title, $description, $date){
-	$matches = array();
-	global $postkeys;
+function match($title, $description, $date)
+{
+    $matches = array();
+    global $postkeys;
 
-	$dbconnection = Database::getConnection();
-	$sql = "SELECT title, description FROM PostsTable WHERE date>= add_months(TRUNC(SYSDATE) + 1, -1)";
-	$result = $dbconnection->query($sql);
+    $dbconnection = Database::getConnection();
+    $sql = "SELECT title, description FROM PostsTable WHERE posttime >= (NOW() - INTERVAL 1 MONTH)";
+    $result = $dbconnection->query($sql);
 
-	$pp = filter_stops($pastpost);
-	$postkeys = getKeywords($title,$description);
+    $postkeys = getKeywords($title, $description);
 
-	foreach($postkeys as $k){
-		$n = 0;	
-		if($result->num_rows > 0){
-		while($r = $result->fetch_assoc()){
-		$pp = getKeywords($r["title"],$r["description"]);
-		foreach($pp as $p){
-		  if(strcasecmp(strtolower($k),strtolower($p))==0)
-			{$n = $n+1;}		
-		$m = array($k,$n); //each keyword and its associated no. of matches  
-		array_push($matches,$m);
-	}
-	}
-	}		      
-	}
-	return $matches; //returns an array of matching keywords and no. of matches
+    foreach ($postkeys as $k)
+    {
+        $n = 0;
+        if ($result->num_rows > 0)
+        {
+            while ($r = $result->fetch_assoc())
+            {
+                $pp = getKeywords($r["title"], $r["description"]);
+                foreach ($pp as $p)
+                {
+                    if (strcasecmp(strtolower($k), strtolower($p)) == 0)
+                    {
+                        $n = $n + 1;
+                    }
+                    $m = array($k, $n); //each keyword and its associated no. of matches
+                    array_push($matches, $m);
+                }
+            }
+        }
+    }
+    return $matches; //returns an array of matching keywords and no. of matches
 }
 
 //offer recommendations based on past postings
-function recommend($title, $description,$date){
-	$rcmnd="";
-	$recs = match($title, $description, $date);
-	
-	if(!empty($recs)){
-	 foreach ($recs as $m){
-	  if($m[1]>=2){$rcmnd = $rcmnd."You have posted similar item quite a few times recently. You can probably cut down purchase of this item to reduce wastage.";}
-	   else{$rcmnd = $rcmnd."No recommendations for this post.";}		
-	}}
-	  else{$rcmnd = $rcmnd."No recommendations for this post.";}	
-	
-   return $rcmnd;
+function recommend($title, $description, $date)
+{
+    $rcmnd = "";
+    $recs = match($title, $description, $date);
+
+    if (!empty($recs))
+    {
+        foreach ($recs as $m)
+        {
+            if ($m[1] >= 2)
+            {
+                $rcmnd = $rcmnd . "You have posted similar item quite a few times recently. You can probably cut down purchase of this item to reduce wastage.";
+            } else
+            {
+                $rcmnd = $rcmnd . "No recommendations for this post.";
+            }
+        }
+    } else
+    {
+        $rcmnd = $rcmnd . "No recommendations for this post.";
+    }
+
+    return $rcmnd;
 }
-
-
-
 ?>

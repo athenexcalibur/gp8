@@ -2,6 +2,7 @@
 require_once(__DIR__ . "/../database.php");
 require_once(__DIR__ . "/../user.php");
 require_once(__DIR__ . "/../location.php");
+require_once(__DIR__ . "/../notifications/notifyUser.php");
 cSessionStart();
 if (!loginCheck())
 {
@@ -18,8 +19,6 @@ $dbConnection = Database::getConnection();
  * If he is reserving it for someone "otherID" must be set
  * In all cases "postID" must be set
  */
-//todo test this (not even tested once but needs frontend stuff)
-//todo refactor (posterid is fetched multiple times etc)
 if(isset($_POST["postID"]))
 {
 	$userid = intval($_SESSION["user"]->getUserID());
@@ -56,6 +55,9 @@ if(isset($_POST["postID"]))
         if ($pdone || $rdone || ($userid !== $posterid && $userid !== $recepid)) die("Can't cancel this post");
         $dbConnection->query("UPDATE PostsTable SET visible=1 WHERE id=" . intval($_POST["postID"]));
         $dbConnection->query("DELETE FROM FinishedPostsTable WHERE id=" . intval($_POST["postID"]));
+
+        $otherID = ($posterid == $userid) ? $recepid : $posterid;
+        notifyUser("Your reservation for (link) was cancelled by the other party.", $otherID); //todo
         exit();
     }
 
@@ -103,6 +105,8 @@ if(isset($_POST["postID"]))
         $stmt = $dbConnection->prepare("UPDATE PostsTable SET visible=0 WHERE id=?");
         $stmt->bind_param("i", intval($_POST["postID"]));
         $stmt->execute();
+
+        notifyUser("(link) has been reserved for you.", $otherID); //todo
     }
 }
 
