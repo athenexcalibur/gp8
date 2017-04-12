@@ -1,5 +1,6 @@
 <?php
 require_once (__DIR__ . "/../database.php");
+require_once (__DIR__ . "/../user.php");
 
 cSessionStart();
 if (!loginCheck())
@@ -25,12 +26,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
 {
     $cnx = Database::getConnection();
     $uid = $_SESSION["user"]->getUserID();
-    $stmt = $cnx->prepare("SELECT text FROM NotificationTable WHERE toid=?");
+    $stmt = $cnx->prepare("SELECT text, notificationtime FROM NotificationTable WHERE toid=?");
     $stmt->bind_param("i", $uid);
-    $stmt->bind_result($text);
+    $stmt->bind_result($text, $time);
     $stmt->execute();
     $ret = array();
-    while ($stmt->fetch()) $ret[] = $text;
+    if (isset($_GET["withTime"])) {
+	while ($stmt->fetch()) $ret[] = array("text" => $text, "time" =>$time);
+    } else {
+	while ($stmt->fetch()) $ret[] = $text;
+    }
     echo json_encode($ret);
 }
 ?>

@@ -15,12 +15,12 @@ if(isset($_POST["word"]))
     $userid = $_SESSION["user"]->getUserID();
     if (isset($_POST["delete"]))
     {
-        $cnx->query("DELETE FROM ReservedTable WHERE userid=" . intval($userid) . " AND word='" . mysqli_real_escape_string(strtoupper($_POST["word"])) . "')");
+        $cnx->query("DELETE FROM ReservedTable WHERE userid=" . intval($userid) . " AND word='" . mysqli_real_escape_string($cnx, strtoupper($_POST["word"])) . "'");
         exit();
     }
     else
     {
-        $cnx->query("INSERT INTO ReservedTable VALUES (" . intval($userid) . ", '" . mysqli_real_escape_string(strtoupper($_POST["word"])) . "')");
+        $cnx->query("INSERT INTO ReservedTable VALUES (" . intval($userid) . ", '" . mysqli_real_escape_string($cnx, strtoupper($_POST["word"])) . "')");
         exit();
     }
 }
