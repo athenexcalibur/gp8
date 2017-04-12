@@ -180,7 +180,6 @@ $stopwords = array(
     "yourselves" => 1
 );
 
-
 //filter stop words from a string - returns an array of filtered words
 function filter_stops($words)
 {
@@ -230,63 +229,37 @@ function getKeywords($title, $description)
 /**************************************************/
 
 //match keywords to past one month post keywords
-function match($title, $description, $date)
+function match($title, $description, $id)
 {
-    $matches = array();
-    global $postkeys;
-
     $dbconnection = Database::getConnection();
-    $sql = "SELECT title, description FROM PostsTable WHERE posttime >= (NOW() - INTERVAL 1 MONTH)";
+    $sql = "SELECT title, description, id FROM PostsTable WHERE posttime >= (NOW() - INTERVAL 1 MONTH)";
     $result = $dbconnection->query($sql);
 
     $postkeys = getKeywords($title, $description);
 
     foreach ($postkeys as $k)
     {
-        $n = 0;
         if ($result->num_rows > 0)
         {
             while ($r = $result->fetch_assoc())
             {
+                if ($r["id"] == $id) continue;
                 $pp = getKeywords($r["title"], $r["description"]);
                 foreach ($pp as $p)
                 {
-                    if (strcasecmp(strtolower($k), strtolower($p)) == 0)
-                    {
-                        $n = $n + 1;
-                    }
-                    $m = array($k, $n); //each keyword and its associated no. of matches
-                    array_push($matches, $m);
+                    if (strcasecmp($k, $p) == 0) return true;
                 }
             }
         }
     }
-    return $matches; //returns an array of matching keywords and no. of matches
+    return false;
 }
 
 //offer recommendations based on past postings
-function recommend($title, $description, $date)
+function recommend($title, $description, $id)
 {
-    $rcmnd = "";
-    $recs = match($title, $description, $date);
-
-    if (!empty($recs))
-    {
-        foreach ($recs as $m)
-        {
-            if ($m[1] >= 2)
-            {
-                $rcmnd = $rcmnd . "You have posted similar item quite a few times recently. You can probably cut down purchase of this item to reduce wastage.";
-            } else
-            {
-                $rcmnd = $rcmnd . "No recommendations for this post.";
-            }
-        }
-    } else
-    {
-        $rcmnd = $rcmnd . "No recommendations for this post.";
-    }
-
-    return $rcmnd;
+    if (match($title, $description, $id)) return ("You have posted similar items to this quite a few times recently.
+                                            You can probably cut down purchase of this item to reduce wastage.");
+    return ("No recommendations for this post.");
 }
 ?>

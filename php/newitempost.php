@@ -82,9 +82,11 @@ else if (isset($_POST["title"]))
 
             //notify everyone looking for stuff here
             $everything = $dbconnection->query("SELECT * FROM ReservedTable");
+            $titleU = strtoupper($title);
+            $descU = strtoupper($descrip);
             while ($row = mysqli_fetch_array($everything, MYSQLI_ASSOC))
             {
-                if (strpos($title, $row["word"]) != 0 || strpos($descrip, $row["word"]) != 0)
+                if (strpos($titleU, $row["word"]) != 0 || strpos($descU, $row["word"]) != 0)
                 {
                     notifyUser("A new post (link) contains your reserved word '" . $row["word"] . "'", $row["userid"]); //todo
                 }

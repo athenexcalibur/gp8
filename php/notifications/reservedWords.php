@@ -15,12 +15,12 @@ if(isset($_POST["word"]))
     $userid = $_SESSION["user"]->getUserID();
     if (isset($_POST["delete"]))
     {
-        $cnx->query("DELETE FROM ReservedTable WHERE userid=" . intval($userid) . " AND word='" . mysqli_real_escape_string($_POST["word"]) . "')");
+        $cnx->query("DELETE FROM ReservedTable WHERE userid=" . intval($userid) . " AND word='" . mysqli_real_escape_string(strtoupper($_POST["word"])) . "')");
         exit();
     }
     else
     {
-        $cnx->query("INSERT INTO ReservedTable VALUES (" . intval($userid) . ", '" . mysqli_real_escape_string($_POST["word"]) . "')");
+        $cnx->query("INSERT INTO ReservedTable VALUES (" . intval($userid) . ", '" . mysqli_real_escape_string(strtoupper($_POST["word"])) . "')");
         exit();
     }
 }
@@ -28,8 +28,9 @@ if(isset($_POST["word"]))
 else if ($_SERVER["REQUEST_METHOD"] == "GET")
 {
     $cnx = Database::getConnection();
+    $uid = $_SESSION["user"]->getUserID();
     $stmt = $cnx->prepare("SELECT word FROM ReservedTable WHERE userid=?");
-    $stmt->bind_param("i", $_SESSION["user"]->getUserID());
+    $stmt->bind_param("i", $uid);
     $stmt->bind_result($word);
     $stmt->execute();
     $ret = array();
