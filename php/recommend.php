@@ -229,25 +229,28 @@ function getKeywords($title, $description)
 /**************************************************/
 
 //match keywords to past one month post keywords
-function match($title, $description, $id)
+function match($title, $description)
 {
     $dbconnection = Database::getConnection();
-    $sql = "SELECT title, description, id FROM PostsTable WHERE posttime >= (NOW() - INTERVAL 1 MONTH)";
+    $sql = "SELECT title, description FROM PostsTable WHERE posttime >= (NOW() - INTERVAL 2 MONTH)";
     $result = $dbconnection->query($sql);
 
     $postkeys = getKeywords($title, $description);
-
-    foreach ($postkeys as $k)
+    $matches = array();
+    while ($r = $result->fetch_assoc())
     {
-        if ($result->num_rows > 0)
+        $pp = getKeywords($r["title"], $r["description"]);
+        foreach ($postkeys as $k)
         {
-            while ($r = $result->fetch_assoc())
+            foreach ($pp as $p)
             {
-                if ($r["id"] == $id) continue;
-                $pp = getKeywords($r["title"], $r["description"]);
-                foreach ($pp as $p)
+                if (strcasecmp($k, $p) == 0)
                 {
-                    if (strcasecmp($k, $p) == 0) return true;
+                    if (isset($matches[$p]))
+                    {
+                        if ($matches[$p] == 3) return $p;
+                        else $matches[$p] = $matches[$p] + 1;
+                    } else $matches[$p] = 1;
                 }
             }
         }
@@ -256,9 +259,9 @@ function match($title, $description, $id)
 }
 
 //offer recommendations based on past postings
-function recommend($title, $description, $id)
+function recommend($title, $description)
 {
-    if (match($title, $description, $id)) return ("You have posted similar items to this quite a few times recently.
+    if ($thing = match($title, $description)) return ("You have posted '" . $thing .  "' more than three times in the past two months.
                                             You can probably cut down purchase of this item to reduce wastage.");
     return ("No recommendations for this post.");
 }

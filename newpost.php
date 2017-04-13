@@ -159,6 +159,8 @@ else
         <input type="hidden" id="postid" name="postid">
         <input type="hidden" id="new" name="new">
       </div>
+
+            <img src="" id="preview">
     </form>
 
     </div>
@@ -229,6 +231,14 @@ else
           }
         });
     });
+
+    //thank you stackoverflow
+    document.getElementById("photo").onchange = function ()
+    {
+        var reader = new FileReader();
+        reader.onload = function (e) {document.getElementById("preview").src = e.target.result;};
+        reader.readAsDataURL(this.files[0]);
+    };
 </script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>

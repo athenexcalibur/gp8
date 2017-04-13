@@ -97,7 +97,7 @@ function strToLatLng(l)
 
 function createPopup(post)
 {
-    return "<h3>" +  post.title + "</h3><br/>" + post.description; //todo make this good
+    return "<h3>" +  post.title + "</h3><br/>" + post.description; //todo make this good (ie images and stuff)
 }
 
 function initMap()

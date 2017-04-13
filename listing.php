@@ -244,7 +244,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
 		
 		<?php 
 
-		$r = recommend($title, $description, $postID);
+		$r = recommend($title, $description);
 		if($isPoster){
 		echo('
 		<div class="col-md-6">

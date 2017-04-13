@@ -111,7 +111,7 @@ class Database
         (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         toid INT NOT NULL,
-        text VARCHAR(256) NOT NULL,
+        text VARCHAR(512) NOT NULL,
         notificationtime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )";
         if (!$createDBConnection->query($query)) die("Failed to create notification table:" . $createDBConnection->error);
