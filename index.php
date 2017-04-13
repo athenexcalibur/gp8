@@ -47,13 +47,13 @@ cSessionStart();
             </div>
             <div class="view overlay hm-white-slight">
                 <li class="nav-item">
-                    <a class="nav-link" href="inbox.php">Messages  <?php if (loginCheck() && $_SESSION["user"]->hasNewMessages()) echo ("<i class='fa fa-circle'></i>");?></a>
+                    <a class="nav-link" href="inbox.php">Messages <?php if (loginCheck() && $_SESSION["user"]->hasNewMessages()) echo ("<i class='fa fa-circle'></i>");?></a>
                     <div class="mask"></div>
                 </li>
             </div>
             <div class="view overlay hm-white-slight">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Notifications</a>
+                    <a class="nav-link" href="notifications.php">Notifications <?php if (loginCheck() && $_SESSION["user"]->hasNewNot()) echo ("<i class='fa fa-circle notCircle'></i>");?></a>
                     <div class="mask"></div>
                 </li>
             </div>
@@ -204,7 +204,8 @@ cSessionStart();
                 if (loginCheck())
                 {
                     echo '<li class="nav-item"><a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i>';
-                    if ($_SESSION["user"]->hasNewMessages()) echo ("<i class='fa fa-circle'></i>");
+                    if ($_SESSION["user"]->hasNewMessages()) echo ("<i class='fa fa-circle msgCircle'></i>");
+                    else if ($_SESSION["user"]->hasNewNot()) echo ("<i class='fa fa-circle notCircle'></i>");
                     echo '</a></li>';
                 } else
                 {

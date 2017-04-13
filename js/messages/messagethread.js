@@ -78,6 +78,7 @@ function fillDropdown()
 {
     $.get("php/post/postTools.php", function(data)
     {
+        console.log(data);
         var stillUp = JSON.parse(data).stillUp;
 
         if (stillUp.length == 0) $("#ddDiv").hide();

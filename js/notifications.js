@@ -1,6 +1,6 @@
 $(document).ready(function() {
     //fill notifications
-    $.get("php/notifications/notifyUser.php?withTime", function(data) {
+    $.get("php/notifications/notifyUser.php?withTime&notifs", function(data) {
 	var notifications = JSON.parse(data);
 	$.each(notifications, function(index, notification) {
 	    var card = $(".notification-prototype").clone();

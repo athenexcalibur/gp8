@@ -23,7 +23,12 @@ main {
   display: none;
 }
 
-.fa-circle
+.msgCircle
 {
   color: lightgreen;
+}
+
+.notCircle
+{
+  color: lightblue;
 }

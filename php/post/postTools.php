@@ -195,6 +195,7 @@ function finalise($postID)
 
     $_SESSION["user"]->reload();
 
+    //todo see why rating is not being updated
     $stmt = $dbConnection->prepare("SELECT number, rating FROM UsersTable WHERE id=?");
     $stmt->bind_param("i", $otherid);
     $stmt->bind_result($number, $rating);

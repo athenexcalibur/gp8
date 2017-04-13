@@ -23,7 +23,6 @@ if (isset($_POST["toUser"]))
     if ($stmt->execute())
     {
         if (!$stmt->affected_rows === 1) echo("No message sent!");
-
         $dbConnection->query("UPDATE UsersTable SET newMsg=1 WHERE id=" . $otherid);
     }
     else echo("Could not execute statement!");

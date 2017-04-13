@@ -1,5 +1,7 @@
 "use strict";
 
+//todo make it so that you don't have the option to cancel if the other person has rated your reservation
+
 $(document).ready(function () {
   /*
   *if (window.location.href.includes("mylistings.php"))
@@ -55,7 +57,7 @@ function fillTabs() {
             break;
             case 'waitingForThem':
             if (userID === obj.recipientID)
-            addCard("#orders_history", "history", obj);
+            addCard("#orders_history", "history", obj, true);
             else
             addCard("#listings_history", "history", obj);
             break;

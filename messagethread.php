@@ -64,7 +64,7 @@ if (!isset($_GET["name"]))
 	</div>
 	<div class="view overlay hm-white-slight">
 	  <li class="nav-item">
-	    <a class="nav-link" href="#">Notifications</a>
+          <a class="nav-link" href="notifications.php">Notifications <?php if ($_SESSION["user"]->hasNewNot()) echo ("<i class='fa fa-circle notCircle'></i>");?></a>
 	    <div class="mask"></div>
 	  </li>
 	</div>
@@ -96,8 +96,9 @@ if (!isset($_GET["name"]))
 	  <!--<a class="nav-link">Login</a>-->
 	  <!--</li>-->
 	  <li class="nav-item">
-	    <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i> <?php if ($_SESSION["user"]->hasNewMessages()) echo ("<i class='fa fa-circle'></i>");?></a>
-	  </li>
+          <a href="#" id="open-right" class="nav-link"><i class="material-icons">account_circle</i> <?php if ($_SESSION["user"]->hasNewMessages()) echo ("<i class='fa fa-circle msgCircle'></i>");
+              else if ($_SESSION["user"]->hasNewNot()) echo ("<i class='fa fa-circle notCircle'></i>");?></a>
+      </li>
 	</ul>
       </nav>
       <!--/.navbar -->
