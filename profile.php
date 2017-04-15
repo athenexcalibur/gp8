@@ -133,7 +133,6 @@ $current = $res->num_rows;
                             <div id="details-div">
                                 <div id="score">Your score is <?php echo($user->getScore()); ?>!</div>
                                 <div id="listed-items">You have <?php echo $current ?> items currently listed!</div>
-                                <!--todo count currently listed items -->
                                 <div id="exchanged-items">You have exchanged <?php echo $user->getNumber() ?> items!
                                 </div>
                             </div>
@@ -145,7 +144,7 @@ $current = $res->num_rows;
                     <div class="card">
                         <div class="card-block">
 
-                            <div class="md-form"> <!--todo make this work -->
+                            <div class="md-form">
                                 <i class="fa fa-pencil prefix"></i>
                                 <input type="text" id="fname" class="form-control"
                                        value="<?php echo $user->getUserName() ?>">

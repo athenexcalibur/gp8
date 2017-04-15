@@ -1,6 +1,4 @@
 <?php
-//todo hook this up to something
-
 require_once "../user.php";
 require_once "../database.php";
 cSessionStart();

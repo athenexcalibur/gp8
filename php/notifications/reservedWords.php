@@ -9,6 +9,11 @@ if (!loginCheck())
     exit();
 }
 
+$_POST = array(); //workaround for broken PHPstorm
+parse_str(file_get_contents('php://input'), $_POST);
+$dbConnection = Database::getConnection();
+
+
 if(isset($_POST["word"]))
 {
     $cnx = Database::getConnection();

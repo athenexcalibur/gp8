@@ -1,7 +1,4 @@
 "use strict";
-
-//todo make it so that you don't have the option to cancel if the other person has rated your reservation
-
 $(document).ready(function () {
   /*
   *if (window.location.href.includes("mylistings.php"))
@@ -51,13 +48,13 @@ function fillTabs() {
             break;
             case 'waitingForYou':
             if (userID === obj.recipientID)
-            addCard("#orders_current", "current", obj, true);
+            addCard("#orders_current", "current", obj);
             else
             addCard("#listings_reserved", "current", obj);
             break;
             case 'waitingForThem':
             if (userID === obj.recipientID)
-            addCard("#orders_history", "history", obj, true);
+            addCard("#orders_history", "history", obj);
             else
             addCard("#listings_history", "history", obj);
             break;
@@ -73,7 +70,7 @@ function fillTabs() {
   });
 }
 
-function addCard(tabID, protoype, obj, msg){
+function addCard(tabID, protoype, obj){
   var currentProto = $(".current-prototype").clone();
   currentProto.removeClass("current-prototype");
   var historyProto = $(".history-prototype").clone();
@@ -84,7 +81,7 @@ function addCard(tabID, protoype, obj, msg){
     card.find(".card-title").html(obj.title);
     card.find(".btn").attr("data-orderid", obj.id);
 
-    if (msg)
+    if (obj.recipientDone || obj.posterDone)
     {
         card.find(".currentmsg").show();
         card.find(".cancelButton").hide();
@@ -133,7 +130,7 @@ $('#recievedModal').on('show.bs.modal', function (event)
   var button = $(event.relatedTarget); // Button that triggered the modal
   var orderID = button.data('orderid'); // Extract info from data-* attributes
   var modal = $(this);
-  modal.find('#myModalLabel').text('Please rate item with id = ' + orderID);
+  modal.find('#myModalLabel').text('Please rate your experience');
   modal.find('.btn-primary').click(function() {
     submitrating(orderID)
   });

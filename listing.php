@@ -13,7 +13,7 @@ $dbconnection = Database::getConnection();
 $postID = intval($_GET["id"]);
 $stmt = $dbconnection->prepare("SELECT title, description, location, flags, userid, posttime, expiry, visible FROM PostsTable WHERE id=? LIMIT 1");
 $stmt->bind_param("i", $postID);
-$stmt->bind_result($title, $description, $location, $flags, $posterID, $time, $expiry, $visible); //todo show on map
+$stmt->bind_result($title, $description, $location, $flags, $posterID, $time, $expiry, $visible);
 $stmt->execute();
 $stmt->store_result();
 $stmt->fetch();
@@ -131,6 +131,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
             <div class="card-block">
               <div class="card-title">
                 <h1><?php echo $title ?></h1>
+                  <?php if (!$visible) echo ("<p class='text-info'>This item has been reserved</p>");?>
               </div>
               <div class="card-subtitle"><?php echo $distance ?> miles away</div>
             </div>

@@ -14,14 +14,13 @@ $(document).ready(function() {
     fillKeywords();
     //add keyword
     //TODO validate input
-    $("#addKeywordForm").submit(function (event) {
-	event.preventDefault();
-	var form = $(this).serialize();
-	$.post("php/notifications/reservedWords.php", form,
-		function (data) {
-		    fillKeywords();
-		});
-    });
+    $("#newKwdBtn").click(function()
+	{
+		$.post("php/notifications/reservedWords.php", {word: $("#wordInput").val()},
+			function (data) {
+				fillKeywords();
+			});
+	});
     //delete keyword
     $(document).on("click", '.list-group-item a', function(event) { 
 	event.preventDefault();
@@ -40,7 +39,7 @@ function fillKeywords() {
 	$.each(keywords, function (index, keyword) {
 	    var listItem = $(".keyword-prototype").clone();
 	    listItem.removeClass("keyword-prototype");
-	    listItem.find(".text").text(keyword);
+	    listItem.find(".text").text(keyword.toLowerCase());
 	    $("#keywords.list-group").append(listItem);
 	});
 	if (keywords.length == 0) {

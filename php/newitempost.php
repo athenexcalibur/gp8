@@ -88,7 +88,7 @@ else if (isset($_POST["title"]))
             {
                 if (strpos($titleU, $row["word"]) != 0 || strpos($descU, $row["word"]) != 0)
                 {
-                    notifyUser("A new post (link) contains your reserved word '" . $row["word"] . "'", $row["userid"]); //todo
+                    notifyUser("A new post (link) contains your reserved word '" . strtolower($row["word"]) . "'", $row["userid"]); //todo
                 }
             }
 

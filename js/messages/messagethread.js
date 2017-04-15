@@ -23,7 +23,6 @@ $("#sendMsg").on("click", function ()
         message: $("#message").val()
     }, function (data)
     {
-        console.log(data); //todo delete this
         $("#message").val("");
         //TODO Probably meed to find a better solution than reloading the
         //entire message div

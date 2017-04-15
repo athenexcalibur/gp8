@@ -26,7 +26,7 @@ function initMap()
     {
         var ll = strToLatLng(window.currentlatLng);
         marker.setPosition(ll);
-        map.panTo(ll); //todo write this properly (haha)
+        map.panTo(ll);
     }
 
     var input = document.getElementById("addressInput");

@@ -195,14 +195,17 @@ function finalise($postID)
 
     $_SESSION["user"]->reload();
 
-    //todo see why rating is not being updated
     $stmt = $dbConnection->prepare("SELECT number, rating FROM UsersTable WHERE id=?");
     $stmt->bind_param("i", $otherid);
     $stmt->bind_result($number, $rating);
     $stmt->execute();
+    $stmt->store_result();
     $stmt->fetch();
 
-    $newrating = (($rating + floatval($_POST["rating"])) / ($number + 1));
+    if ($number == 0) $newrating = $_POST["rating"];
+    else $newrating = (($rating * $number + floatval($_POST["rating"])) / ($number + 1));
     $dbConnection->query("UPDATE UsersTable SET number=number+1, rating=" . floatval($newrating) . " WHERE id=" . intval($otherid));
+    $uname = $_SESSION["user"]->getUserName();
+    notifyUser($uname . " rated your post (link) " . $_POST["rating"] . " stars.", $otherid); //todo
 }
 ?>

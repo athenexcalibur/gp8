@@ -148,11 +148,11 @@ Database::getConnection()->query("UPDATE UsersTable SET newNot=0 WHERE id=" . $u
 	      </form>
 	      <div class="md-form">
 		<i class="fa fa-pencil prefix"></i>
-		<input type="text" name="keyword" id="form2" class="form-control">
-		<label for="form2">Keyword</label>
+		<input type="text" id="wordInput" id="form2" class="form-control">
+		<label for="wordInput">Keyword</label>
 	      </div>
 	      <div class="md-form">
-		<button type="submit" class="btn btn-primary">Add</button>
+		<button id="newKwdBtn" class="btn btn-primary">Add</button>
 	      </div>
 	      </form>
 	    </div>
