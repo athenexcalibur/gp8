@@ -102,6 +102,7 @@ class Database
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         fromid INT NOT NULL,
         toid INT NOT NULL,
+        postid INT NOT NULL,
         text VARCHAR(256) NOT NULL,
         messagetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )";

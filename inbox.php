@@ -108,7 +108,7 @@ Database::getConnection()->query("UPDATE UsersTable SET newMsg=0 WHERE id=" . $_
 	<img src="avatar/test.png" alt="">
       </div>
       <div class="card-block">
-	<h4 class="card-title"></h4>
+	<h4 class="card-title"></h4><p class="text-info"></p>
 	<p class="card-text text-muted message-text"></p>
 	<p class="card-text text-right text-muted message-time">yesterday</p>
       </div>

@@ -192,7 +192,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
               <h4>'.$posterInfo["name"].'</h4>
               </div>
               <div class="card-text">rating: ' . $posterInfo["rating"] .' points: ' . $posterInfo["score"] . '</div>
-              <a href="messagethread.php?name=' . $posterInfo["name"] . '">
+              <a href="messagethread.php?name=' . $posterInfo["name"] . '&pid=' . $postID . '">
               <button type="button" class="btn btn-primary">Message Poster</button>
               </a>
               </div>

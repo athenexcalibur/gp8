@@ -81,7 +81,7 @@ function addCard(tabID, protoype, obj){
     card.find(".card-title").html(obj.title);
     card.find(".btn").attr("data-orderid", obj.id);
 
-    if (obj.recipientDone || obj.posterDone)
+    if (obj.recipientDone == "1" || obj.posterDone == "1")
     {
         card.find(".currentmsg").show();
         card.find(".cancelButton").hide();

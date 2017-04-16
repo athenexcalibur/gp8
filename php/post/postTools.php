@@ -6,7 +6,7 @@ require_once(__DIR__ . "/../notifications/notifyUser.php");
 cSessionStart();
 if (!loginCheck())
 {
-    header("Location: ../index.php");
+    header("Location: ../index.php?error=" . urlencode("You must be logged in to do that."));
     exit();
 }
 
@@ -150,6 +150,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "GET")
             $rid = intval($row["recipientID"]);
             $pdone = intval($row["posterDone"]);
             $pid = intval($row["posterID"]);
+
             if ($rdone && $pdone) $bothDone[] = $row;
             else if (!$pdone && !$rdone)
             {

@@ -1,14 +1,11 @@
 $(document).ready(function ()
 {
     fillMessages();
-    fillDropdown();
-    threadName = window.oname;
-    $("#threadname").html(threadName);
 
     //line up threadinfo card with navbar)
     h = $("nav.navbar-fixed-top").css("height");
     $("main").css("padding-top", h);
-    //line up final message with message input div 
+    //line up final message with message input div
     h = $("nav.navbar-fixed-bottom").css("height");
     $("main").css("padding-bottom", h);
     //scroll down to last message
@@ -20,6 +17,7 @@ $("#sendMsg").on("click", function ()
     $.post("php/messages.php",
     {
         toUser: window.oname,
+        pid: window.pid,
         message: $("#message").val()
     }, function (data)
     {
@@ -31,10 +29,11 @@ $("#sendMsg").on("click", function ()
     });
 });
 
+
 function fillMessages()
 {
     var otheruser = window.oname;
-    var url = "php/messages.php?othername=" + otheruser;
+    var url = "php/messages.php?othername=" + otheruser + "&pid=" + window.pid;
     $("#messageDiv").empty();
     $.get(url, function (data)
     {
@@ -73,35 +72,11 @@ function fillMessages()
     });
 }
 
-function fillDropdown()
+$("#donateBtn").on("click", function()
 {
-    $.get("php/post/postTools.php", function(data)
-    {
-        console.log(data);
-        var stillUp = JSON.parse(data).stillUp;
-
-        if (stillUp.length == 0) $("#ddDiv").hide();
-
-        else
-        {
-            $("#ddDiv").show();
-
-            var HTML = "";
-            for (var i = 0; i < stillUp.length; i++)
-            {
-                var current = stillUp[i];
-                HTML += "<a class='dropdown-item' href='#' onclick='reserveItem(" + current.id + ")'>'" + current.title + "' (" + current.posttime + ")</a>"
-            }
-            $("#dDropdownContainer").html(HTML);
-        }
-    })
-}
-
-function reserveItem(id)
-{
-    $.post("php/post/postTools.php", {postID: id, otherUser: window.oname});
-    fillDropdown();
-}
+    $.post("php/post/postTools.php", {postID: window.pid, otherUser: window.oname});
+    window.location.replace("orders.php");
+});
 
 function findGetParameter(parameterName)
 {

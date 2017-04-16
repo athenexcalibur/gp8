@@ -13,6 +13,24 @@ if (!isset($_GET["name"]))
     header("Location: index.php?error=" . urlencode("No name set."));
     exit();
 }
+
+if (!isset($_GET["pid"]))
+{
+    header("Location: index.php?error=" . urlencode("No post specified."));
+    exit();
+}
+
+
+$cnx = Database::getConnection();
+
+$result = $cnx->query("SELECT * From PostsTable WHERE id=" . intval($_GET["pid"]));
+if ($result->num_rows <= 0)
+{
+    header("Location: index.php?error=" . urlencode("Could not find that post."));
+    exit();
+}
+$post = mysqli_fetch_array($result, MYSQLI_ASSOC);
+$userid = $_SESSION["user"]->getUserID();
 ?>
 <!DOCTYPE html>
 <head>
@@ -42,7 +60,7 @@ if (!isset($_GET["name"]))
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/messages.css">
 
-    <?php echo "<script>window.oname = '" . $_GET["name"] . "';</script>"; ?>
+    <?php echo "<script>window.oname = '" . $_GET["name"] . "'; window.pid='" . $_GET["pid"] . "' </script>"; ?>
 
 </head>
 
@@ -116,19 +134,29 @@ if (!isset($_GET["name"]))
 	  </div>
 	  <div class="col-xs-2">
 	    <div class="card-block">
-	      <h4 class="card-title" id=threadname></h4>
+	      <h4 class="card-title" id=threadname> <?php echo $_GET["name"]; ?>  </h4>
+            <p class="text-info" id="postname">
+                Concerning <a href="listing.php?id=<?php echo $_GET["pid"];?>">
+                    <?php echo $post["title"]; ?>
+                </a>
+            </p>
 	    </div>
 	  </div>
-
-        <div class="dropdown col-xs-9" id="ddDiv">
-            <button class="btn btn-secondary dropdown-toggle pull-right" type="button" id="donateDropdown" data-toggle="dropdown">
-                Donate Item
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" id="dDropdownContainer">
-            </div>
+        <?php
+            if ($post["userid"] == $userid && $post["visible"]==1)
+            {
+                echo ('<button class="btn btn-secondary pull-right" type="button" id="donateBtn">
+                Donate Item</button>');
+            }
+        ?>
         </div>
 	</div>
       </div>
+
+        <!-- message container: filled with prototypes modified by messagethread.js-->
+        <div id="messageDiv" class="container-fluid"></div>
+
+    </main>
     </div>
       <!--protoype for recieved messages-->
       <div class="row in-prototype">
@@ -161,13 +189,6 @@ if (!isset($_GET["name"]))
 	</div>
       </div>
       <!--./protoype for sent messages-->
-
-    <!-- message container: filled with prototypes modified by messagethread.js-->
-    <div id="messageDiv" class="container-fluid"></div>
-
-    </main>
-
-  </div>
   <!--./snap-content-->
 
     <footer>

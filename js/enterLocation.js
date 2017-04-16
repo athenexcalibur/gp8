@@ -53,6 +53,7 @@ function initMap()
         }
 
         marker.setPosition(place.geometry.location);
+        window.currentlatLng = place.geometry.location;
 
         if (place.geometry.viewport) bounds.union(place.geometry.viewport);
         else bounds.extend(place.geometry.location);
