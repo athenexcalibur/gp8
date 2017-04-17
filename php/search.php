@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
         $sql .= ") AND";
     }
     $sql .= " visible=1";
+    $sql .= " AND userid != ". $_SESSION["user"]->getUserID();
     $result = $dbconnection->query($sql);
 
     $out = array();

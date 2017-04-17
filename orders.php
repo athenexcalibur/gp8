@@ -146,6 +146,7 @@ if (!loginCheck())
 	    </div>
 
 	    <div class="card history-prototype">
+	      <a href="#"></a>
 	      <div class="card-block order-img">
 		<img class = "itemimage" id="card_image"/>
 	      </div>

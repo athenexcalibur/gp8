@@ -36,6 +36,17 @@ cSessionStart();
 </head>
 
 <body>
+        <?php
+        if (isset($_GET["error"]))
+        {
+            echo
+            (
+                "<div class='alert alert-danger alert-dismissable fade in' role='alert'>
+                <a href='#' class='close' data-dismiss='alert' aria-label='Close'>&times;</a>"
+                . $_GET["error"] . "</div>"
+            );
+        }
+        ?>
 <div class="snap-drawers">
     <div class="snap-drawer snap-drawer-right elegant-color-dark">
         <ul class="nav flex-column">
@@ -188,6 +199,8 @@ cSessionStart();
 <!--/.login modal-->
 
 <div id="content" class="snap-content">
+
+
     <div class="mask"></div>
     <header>
         <!-- navbar -->
@@ -286,17 +299,6 @@ cSessionStart();
     </main>
 
     <footer>
-        <?php
-        if (isset($_GET["error"]))
-        {
-            echo
-            (
-                "<div class='alert alert-danger alert-dismissable fade in footer navbar-fixed-bottom'>
-                <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
-                . $_GET["error"] . "</div>"
-            );
-        }
-        ?>
     </footer>
 </div>
 

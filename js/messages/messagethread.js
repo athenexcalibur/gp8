@@ -52,6 +52,7 @@ function fillMessages()
         {
             var message = messages[i];
             console.log(message);
+	    message.text = message.text.replace("/\\/g", "");
             if (message.toname === otheruser)
             {
                 content = inPrototype.clone();
