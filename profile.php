@@ -28,6 +28,7 @@ $current = $res->num_rows;
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <link rel="stylesheet" type="text/css" href="snap/snap.css"/>
+    <link rel="stylesheet" type="text/css" href="css/profile.css"/>
 
     <!DOCTYPE html>
     <head>
@@ -95,6 +96,7 @@ $current = $res->num_rows;
         </ul>
     </div>
 </div>
+
 <div id="content" class="snap-content">
     <div class="mask"></div>
     <header>
@@ -122,57 +124,46 @@ $current = $res->num_rows;
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-block">
+		  <div class="card-columns">
 
-                            <h3>Hello</h3>
-                            <h2><?php echo($user->getUserName()); ?></h2>
-                            <div id="ratings-div">
-                                <h1>Rating: <?php echo($user->getRating()); ?>/5</h1>
-                            </div>
-                            <div id="details-div">
-                                <div id="score">Your score is <?php echo($user->getScore()); ?>!</div>
-                                <div id="listed-items">You have <?php echo $current ?> items currently listed!</div>
-                                <div id="exchanged-items">You have exchanged <?php echo $user->getNumber() ?> items!
-                                </div>
-                            </div>
+		    <div class="card">
+		      <div class="card-block">
+			<h3>Hello</h3>
+			<h2><?php echo($user->getUserName()); ?></h2>
+			<div id="ratings-div">
+			  <h1>Rating: <?php echo($user->getRating()); ?>/5</h1>
+			</div>
+			<div id="details-div">
+			  <div id="score">Your score is <?php echo($user->getScore()); ?>!</div>
+			  <div id="listed-items">You have <?php echo $current ?> items currently listed!</div>
+			  <!--todo count currently listed items -->
+			  <div id="exchanged-items">You have exchanged <?php echo $user->getNumber() ?> items!
+			  </div>
+			</div>
+		      </div>
+		    </div>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
                     <div class="card">
                         <div class="card-block">
 
                             <div class="md-form">
                                 <i class="fa fa-pencil prefix"></i>
-                                <input type="text" id="fname" class="form-control"
-                                       value="<?php echo $user->getUserName() ?>">
+                                <input type="text" id="fname" class="form-control" value="<?php echo $user->getUserName() ?>">
                                 <label for="fname">Username</label>
                             </div>
 
                             <div class="md-form">
                                 <i class="fa fa-pencil prefix"></i>
-                                <input type="text" id="femail" class="form-control"
-                                       value="<?php echo $user->getEmail() ?>">
+                                <input type="text" id="femail" class="form-control" value="<?php echo $user->getEmail() ?>">
                                 <label for="femail">Email</label>
                             </div>
-
-                            <div class="md-form">
+			    <div class="md-form">
                                 <i class="fa fa-pencil prefix"></i>
-                                <input type="text" id="fpass" class="form-control" placeholder="unchanged">
-                                <label for="fpass">New Password</label>
+                                <input type="text" id="" class="form-control"
+				value="change" data-toggle="modal"
+				data-target="#passwordModal">
+                                <label for="femail">Password</label>
                             </div>
-
-                            <div class="md-form">
-                                <i class="fa fa-pencil prefix"></i>
-                                <input type="text" id="cfpass" class="form-control">
-                                <label for="cfpass">Confirm New Password</label>
-                            </div>
-
-                            <label>Address</label>
-                            <input id="addressInput" class="controls" type="text" placeholder="Search...">
-                            <div id="inputMap" style="width=100%; height: 500px;"></div>
 
                             <label>Allergies and other needs</label>
                             <div id="allergyDiv">
@@ -211,19 +202,32 @@ $current = $res->num_rows;
                             </div>
                         </div>
 
-                        <div class="md-form">
-                            <i class="fa fa-pencil prefix"></i>
-                            <input type="password" id="chpass" class="form-control">
-                            <label for="chpass">Old Password</label>
-                        </div>
 
-                        <button class="btn" id="submit">Submit changes</button>
+                        <button class="btn btn-primary" id="submit">Submit changes</button>
 
                     </div>
+
+		  </div>
                 </div>
+		<div class="col-md-6">
+		  <div class="card">
+		    <div class="card-block">
+		      <div class="card-title">
+			<h3>Location</h3>
+		      </div>
+		    </div>
+		    <div class="card-block">
+		      <div class="md-form">
+			<label>Address</label>
+			<input id="addressInput" class="controls" type="text"
+			placeholder="Search..." readonly >
+		      </div>
+		      <div id="inputMap" style="width=100%; height: 500px;"></div>
+		    </div>
+		  </div>
+		</div>
             </div>
         </div>
-</div>
 
 </main>
 
@@ -232,6 +236,51 @@ $current = $res->num_rows;
 
 </footer>
 </div>
+
+<!--Change password modal-->
+<div class="modal fade" id="passwordModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">Change Password</h4>
+            </div>
+            <!--Body-->
+	    <div class="modal-body submittable" trigger-btn="#loginBtn" tabindex="0">
+
+	      <div class="md-form">
+		<i class="fa fa-pencil prefix"></i>
+		<input type="password" id="chpass" class="form-control">
+		<label for="chpass">Old Password</label>
+	      </div>
+
+	      <div class="md-form">
+		<i class="fa fa-pencil prefix"></i>
+		<input type="password" id="fpass" class="form-control">
+		<label for="fpass">New Password</label>
+	      </div>
+
+	      <div class="md-form">
+		<i class="fa fa-pencil prefix"></i>
+		<input type="password" id="cfpass" class="form-control">
+		<label for="cfpass">Confirm New Password</label>
+	      </div>
+
+	    </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"
+		  id="changePassBtn">Confirm</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--./Change password modal-->
 
 <!--Scripts-->
 <script src="bootstrap-material-design/js/jquery-3.1.1.min.js"></script>
@@ -271,6 +320,9 @@ $current = $res->num_rows;
 
  });
 
+$("#addressInput").focus(function () {
+  $(this).removeAttr("readonly");
+});
 </script>
 <!--/.Scripts-->
 </body>
