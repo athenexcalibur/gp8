@@ -17,18 +17,6 @@ $res = Database::getConnection()->query("SELECT * FROM PostsTable WHERE visible=
 $current = $res->num_rows;
 ?>
 
-<!DOCTYPE html>
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!--snap stuff-->
-    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-touch-fullscreen" content="yes">
-    <link rel="stylesheet" type="text/css" href="snap/snap.css"/>
-
     <!DOCTYPE html>
     <head>
 
