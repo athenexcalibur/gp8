@@ -4,6 +4,20 @@ var snapper = new Snap({
     disable: "left",
     transitionSpeed: 0.7
 });
+
+ var isDesktop = window.matchMedia("only screen and (min-width: 1024px)");
+ console.log(isDesktop.matches);
+
+var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints;
+
+if (isDesktop.matches && !isTouchDevice) {
+    //Conditional script here
+    snapper.settings({touchToDrag : false});
+    $(".snap-content>.mask").click(function () {
+        snapper.close();
+    });
+}
+
 //setup toggle button
 $("#open-right").click(function() {
     if( snapper.state().state=="right" ){
@@ -27,3 +41,4 @@ $(".snap-drawers .nav-item").click(function () {
     link = $(this).find(".nav-link").attr("href");
     window.location.href = link;
 });
+

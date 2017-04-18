@@ -88,10 +88,10 @@ function addCard(tabID, protoype, obj){
     }
     else
     {
-          card.find(".currentmsg").hide();
-          card.find(".cancelButton").show();
+	card.find(".currentmsg").hide();
+	card.find(".cancelButton").show();
+	card.find("a").attr("href", "listing.php?id=" + obj.id);
     }
-    card.find("a").attr("href", "listing.php?id=" + obj.id);
     //console.log(card.html());
   } else if (protoype == "history") {
     card = historyProto.clone();
