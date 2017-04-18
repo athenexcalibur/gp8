@@ -45,6 +45,15 @@ Database::getConnection()->query("UPDATE UsersTable SET newNot=0 WHERE id=" . $u
 <div class="snap-drawers">
   <div class="snap-drawer snap-drawer-right elegant-color-dark">
     <ul class="nav flex-column">
+	  <li class="nav-item">
+	    <h2 class="nav-title">User Dashboard</h2>
+	  </li>
+	  <div class="view overlay hm-white-slight">
+	      <li class="nav-item">
+		  <a class="nav-link" href="search.php">Item Catalogue</a>
+		  <div class="mask"></div>
+	      </li>
+	  </div>
       <div class="view overlay hm-white-slight">
         <li class="nav-item">
           <a class="nav-link" href="orders.php">Orders and Listings</a>

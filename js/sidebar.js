@@ -39,6 +39,9 @@ Waves.attach('.snap-drawers .nav-link', ['waves-effect']);
 //make links clickable
 $(".snap-drawers .nav-item").click(function () {
     link = $(this).find(".nav-link").attr("href");
-    window.location.href = link;
+    console.log(link);
+    if (link !== undefined) {
+	window.location.href = link;
+    }
 });
 

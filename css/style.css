@@ -6,7 +6,7 @@ main {
   background-color: #fff;
 }
 
-.snap-drawers .nav-link {
+.snap-drawers .nav-link, .snap-drawers .nav-title {
   color: #FFF;
   padding-top: 10px;
   padding-bottom: 10px;
