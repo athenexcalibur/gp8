@@ -1,3 +1,17 @@
+#card_image {
+  height: auto;
+  width: auto;
+  max-height: 250px;
+}
+
+#card_image_centre {
+  height: 250px;
+  width: auto;
+  display:table-cell;
+  vertical-align:middle;
+  text-align:center
+}
+
 .search-jumbotron {
     height: 20em;
     background: url("../img/bg-img-compressed.jpg")no-repeat center center fixed;
@@ -35,10 +49,10 @@ main {
 }
 
 .modal{
-    z-index: 20;   
+    z-index: 20;
 }
 .modal-backdrop{
-    z-index: 10;        
+    z-index: 10;
 }​
 
 #ItemCarousel .card .card-block {

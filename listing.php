@@ -139,9 +139,8 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
 
               <div class="col-md-4">
                 <div class="card-block card-image">
-                  <div class="view overlay hm-white-slight z-depth-1">
-                    <img class="itemimage" id="card_image" data-itemid=<?php echo
-                    $_GET["id"]; ?> >
+                  <div class="">
+                    <img class="itemimage view overlay hm-white-slight z-depth-1" id="card_image" data-itemid=<?php echo $_GET["id"]; ?> >
                   </div>
                 </div>
               </div>

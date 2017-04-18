@@ -3,7 +3,6 @@
 
 function fixImgs()
 {
-  console.log("id");
   $.each($(".itemimage"), function(){
     fix($(this));
   });
