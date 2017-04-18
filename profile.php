@@ -43,6 +43,7 @@ $current = $res->num_rows;
 
         <!-- My Stylesheet -->
         <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/profile.css"/>
 
     </head>
 
@@ -110,6 +111,7 @@ $current = $res->num_rows;
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
+		  <div class="card-colums">
                     <div class="card">
                         <div class="card-block">
 
@@ -127,88 +129,102 @@ $current = $res->num_rows;
 
                         </div>
                     </div>
+		    <div class="card">
+		      <div class="card-block">
+			<h3 class="card-title">
+			  Personal Details
+			</h3>
+		      </div>
+		      <div class="card-block">
+			<div class="md-form">
+			  <i class="fa fa-pencil prefix"></i>
+			  <input type="text" id="fname" class="form-control" value="<?php echo $user->getUserName() ?>">
+			   <label for="fname">Username</label>
+			</div>
+
+			<div class="md-form">
+			  <i class="fa fa-pencil prefix"></i>
+			  <input type="text" id="femail" class="form-control" value="<?php echo $user->getEmail() ?>">
+			  <label for="femail">Email</label>
+			</div>
+
+			<div class="md-form">
+			  <i class="fa fa-pencil prefix"></i>
+			  <input type="password" id="chpass" class="form-control"
+				 placeholder="change" data-toggle="collapse"
+				 data-target="#passwordCollapse"
+				 aria-expanded="false"
+				 aria-controls="passwordCollapse">
+			  <label for="chpass" >
+			    Password (Change)
+			  </label>
+			</div>
+
+			<div id="passwordCollapse" class="collapse">
+			  <div class="md-form">
+			    <i class="fa fa-pencil prefix"></i>
+			    <input type="password" id="cfpass" class="form-control">
+			    <label for="cfpass">Confirm New Password</label>
+			  </div>
+
+			  <div class="md-form">
+			    <i class="fa fa-pencil prefix"></i>
+			    <input type="password" id="fpass" class="form-control">
+			    <label for="fpass">New Password</label>
+			  </div>
+			</div>
+
+			<label>Allergies and other needs</label>
+			<div id="allergyDiv">
+			    <input type="checkbox" value="VEGAN" <?php if ($allergens[VEGAN])
+			    {
+				echo("checked");
+			    } ?>> Vegan <br/>
+			    <input type="checkbox" value="VEGETARIAN" <?php if ($allergens[VEGETARIAN])
+			    {
+				echo("checked");
+			    } ?>> Vegetarian <br/>
+			    <input type="checkbox" value="PEANUT" <?php if ($allergens[PEANUT])
+			    {
+				echo("checked");
+			    } ?>> Peanuts <br/>
+			    <input type="checkbox" value="SOY" <?php if ($allergens[SOY])
+			    {
+				echo("checked");
+			    } ?>> Soy <br/>
+			    <input type="checkbox" value="GLUTEN" <?php if ($allergens[GLUTEN])
+			    {
+				echo("checked");
+			    } ?>> Gluten <br/>
+			    <input type="checkbox" value="LACTOSE" <?php if ($allergens[LACTOSE])
+			    {
+				echo("checked");
+			    } ?>> Lactose <br/>
+			    <input type="checkbox" value="HALAL" <?php if ($allergens[HALAL])
+			    {
+				echo("checked");
+			    } ?>> Halal <br/>
+			    <input type="checkbox" value="KOSHER" <?php if ($allergens[KOSHER])
+			    {
+				echo("checked");
+			    } ?>> Kosher <br/>
+			</div>
+
+		    <button class="btn btn-primary" id="submit">Submit changes</button>
+
+		      </div>
+		    </div>
+		  </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-block">
-
-                            <div class="md-form">
-                                <i class="fa fa-pencil prefix"></i>
-                                <input type="text" id="fname" class="form-control"
-                                       value="<?php echo $user->getUserName() ?>">
-                                <label for="fname">Username</label>
-                            </div>
-
-                            <div class="md-form">
-                                <i class="fa fa-pencil prefix"></i>
-                                <input type="text" id="femail" class="form-control"
-                                       value="<?php echo $user->getEmail() ?>">
-                                <label for="femail">Email</label>
-                            </div>
-
-                            <div class="md-form">
-                                <i class="fa fa-pencil prefix"></i>
-                                <input type="password" id="fpass" class="form-control" placeholder="unchanged">
-                                <label for="fpass">New Password</label>
-                            </div>
-
-                            <div class="md-form">
-                                <i class="fa fa-pencil prefix"></i>
-                                <input type="password" id="cfpass" class="form-control">
-                                <label for="cfpass">Confirm New Password</label>
-                            </div>
-
-                            <label>Address</label>
-                            <input id="addressInput" class="controls" type="text" placeholder="Search...">
-                            <div id="inputMap" style="width=100%; height: 500px;"></div>
-
-                            <label>Allergies and other needs</label>
-                            <div id="allergyDiv">
-                                <input type="checkbox" value="VEGAN" <?php if ($allergens[VEGAN])
-                                {
-                                    echo("checked");
-                                } ?>> Vegan <br/>
-                                <input type="checkbox" value="VEGETARIAN" <?php if ($allergens[VEGETARIAN])
-                                {
-                                    echo("checked");
-                                } ?>> Vegetarian <br/>
-                                <input type="checkbox" value="PEANUT" <?php if ($allergens[PEANUT])
-                                {
-                                    echo("checked");
-                                } ?>> Peanuts <br/>
-                                <input type="checkbox" value="SOY" <?php if ($allergens[SOY])
-                                {
-                                    echo("checked");
-                                } ?>> Soy <br/>
-                                <input type="checkbox" value="GLUTEN" <?php if ($allergens[GLUTEN])
-                                {
-                                    echo("checked");
-                                } ?>> Gluten <br/>
-                                <input type="checkbox" value="LACTOSE" <?php if ($allergens[LACTOSE])
-                                {
-                                    echo("checked");
-                                } ?>> Lactose <br/>
-                                <input type="checkbox" value="HALAL" <?php if ($allergens[HALAL])
-                                {
-                                    echo("checked");
-                                } ?>> Halal <br/>
-                                <input type="checkbox" value="KOSHER" <?php if ($allergens[KOSHER])
-                                {
-                                    echo("checked");
-                                } ?>> Kosher <br/>
-                            </div>
-                        </div>
-
-                        <div class="md-form">
-                            <i class="fa fa-pencil prefix"></i>
-                            <input type="password" id="chpass" class="form-control">
-                            <label for="chpass">Old Password</label>
-                        </div>
-
-                        <button class="btn btn-primary" id="submit">Submit changes</button>
-
-                    </div>
-                </div>
+		  <div class="card">
+		    <div class="card-block">
+		      <h3 class="card-title">Location</h3>
+		      <label>Address</label>
+		      <input id="addressInput" class="controls" type="text" placeholder="Search...">
+		      <div id="inputMap" style="width=100%; height: 500px;"></div>
+		    </div>
+		  </div>
             </div>
         </div>
 </div>
