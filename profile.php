@@ -131,6 +131,12 @@ $current = $res->num_rows;
                     </div>
 		    <div class="card">
 		      <div class="card-block">
+		      <a class="help-icon" href="#" data-toggle="tooltip" 
+				      data-placement="bottom"
+				      title="Edit details as desired. Click
+				      'Submit changes' button to confirm change">
+			<i class="material-icons">help</i>
+		      </a>
 			<h3 class="card-title">
 			  Personal Details
 			</h3>
@@ -219,7 +225,16 @@ $current = $res->num_rows;
                 <div class="col-md-6">
 		  <div class="card">
 		    <div class="card-block">
+		      <a class="help-icon" href="#" data-toggle="tooltip" 
+				      data-placement="bottom"
+				      title="Place marker on new location (by
+				      clicking) to change your address. Click
+				      'Submit changes' button to confirm change">
+			<i class="material-icons">help</i>
+		      </a>
 		      <h3 class="card-title">Location</h3>
+		    </div>
+		    <div class="card-block">
 		      <label>Address</label>
 		      <input id="addressInput" class="controls" type="text" placeholder="Search...">
 		      <div id="inputMap" style="width=100%; height: 500px;"></div>
@@ -275,6 +290,9 @@ $current = $res->num_rows;
 
  });
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
 </script>
 <!--/.Scripts-->
 </body>
