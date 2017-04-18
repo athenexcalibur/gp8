@@ -44,8 +44,10 @@ form.z-depth-1 {
 
 #resultsMap
 {
-    width: 100%;
+    width: 93%;
     height: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .order-img img {
