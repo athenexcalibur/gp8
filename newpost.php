@@ -160,15 +160,17 @@ else
         <input type="hidden" id="postid" name="postid">
         <input type="hidden" id="new" name="new">
       </div>
-
-            <img src="" id="preview">
     </form>
 
     </div>
 
     <div class="col-md-6">
+        <div class="row"><img src="" id="preview"></div>
+        <div class="row">
+            <h3>Location</h3>
     <input id="addressInput" class="controls" type="text" placeholder="Search...">
     <div id="inputMap" style="width: 500px; height: 500px;"></div>
+        </div>
     <script src="bootstrap-material-design/js/jquery-3.1.1.min.js"></script>
     <script src="js/enterLocation.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIMtO0_uKM_0og7IjdV7nBDjH4dtUmVoY&callback=initMap&libraries=places" async defer></script>
@@ -236,6 +238,7 @@ else
     //thank you stackoverflow
     document.getElementById("photo").onchange = function ()
     {
+        $("#preview").show();
         var reader = new FileReader();
         reader.onload = function (e) {document.getElementById("preview").src = e.target.result;};
         reader.readAsDataURL(this.files[0]);
