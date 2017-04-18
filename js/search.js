@@ -37,7 +37,7 @@ function getResultHTML(post)
     var HTML = '<div class="card card-hoverable">' +
 		'<a href="listing.php?id=' + post.id + '"></a>' +
 		'<div class="card-block order-img">' +
-		'<img class = "itemimage" id="card_image" src="img/vege-card.jpg"/>' +
+		'<img class = "itemimage" id="card_image" data-itemid=' + post.id + '/>' +
 		'</div>' +
 		'<div class="card-block">' +
 		'<h4 class="card-title">' + post.title + '</h4>' +
@@ -59,34 +59,42 @@ function sortByMostRecent(a,b){return a.posttime <= b.posttime;}
 
 function populateSearchResults()
 {
-    var checked = [];
-    $("input:checkbox[name=allergyCheck]:checked").each(function()
-    {
-        checked.push($(this).attr("value"));
-    });
-
-    $.get("php/search.php",
-    {
-        keywords: $("#searchBox").val(),
-        flags: checked
-    }, function (data)
-    {
-        var posts = JSON.parse(data);
-        window.posts = posts;
-        var resContainer = $("#results");
-        if (posts.length > 0)
+    $.ajax({url: "js/itemimage.js",
+      dataType: "script",
+      success: function()
         {
-            resContainer.html("");
-            posts.sort(populateSearchResults.sFun);
-            for (var i = 0; i < posts.length; i++)
-            {
-                posts[i].posttime = parseTime(posts[i].posttime);
-                posts[i].expiry = parseDate(posts[i].expiry);
-                resContainer.append(getResultHTML(posts[i]));
-            }
-        }
-        else resContainer.html("No results found.");
-    });
+          var checked = [];
+          $("input:checkbox[name=allergyCheck]:checked").each(function()
+          {
+              checked.push($(this).attr("value"));
+          });
+
+          $.get("php/search.php",
+          {
+              keywords: $("#searchBox").val(),
+              flags: checked
+          }, function (data)
+          {
+              var posts = JSON.parse(data);
+              window.posts = posts;
+              var resContainer = $("#results");
+              if (posts.length > 0)
+              {
+                  resContainer.html("");
+                  posts.sort(populateSearchResults.sFun);
+                  for (var i = 0; i < posts.length; i++)
+                  {
+                      posts[i].posttime = parseTime(posts[i].posttime);
+                      posts[i].expiry = parseDate(posts[i].expiry);
+                      resContainer.append(getResultHTML(posts[i]));
+                  }
+              }
+              else resContainer.html("No results found.");
+              fixImgs();
+              console.log(resContainer.html());
+          });
+        },
+      });
 }
 
 function strToLatLng(l)

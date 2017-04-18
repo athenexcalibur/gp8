@@ -142,9 +142,6 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
                   <div class="view overlay hm-white-slight z-depth-1">
                     <img class="itemimage" id="card_image" data-itemid=<?php echo
                     $_GET["id"]; ?> >
-                    <a id="link" href="#">
-                      <div class="mask waves-effect"></div>
-                    </a>
                   </div>
                 </div>
               </div>
@@ -243,8 +240,8 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
               </div>
 
 		<!-- Recommendations!! -->
-		
-		<?php 
+
+		<?php
 
 		$r = recommend($title, $description);
 		if($isPoster){
@@ -261,7 +258,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
               </div>');
 		}
 		?>
-	       
+
             </div>
           </div>
         </div>
