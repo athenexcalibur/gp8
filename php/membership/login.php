@@ -6,6 +6,10 @@ $_POST = array(); //workaround for broken PHPstorm
 parse_str(file_get_contents('php://input'), $_POST);
 cSessionStart();
 
+header('Content-Type: application/json');
+
+$response = array();
+
 if (isset($_POST["email"], $_POST["password"]))
 {
     $email = mysqli_real_escape_string(Database::getConnection(), $_POST["email"]);
@@ -14,15 +18,17 @@ if (isset($_POST["email"], $_POST["password"]))
     {
         $_SESSION["user"] = new User($email, $_POST["password"]);
         $_SESSION["info"] = new UserInfo();
-        header("Location: ../../index.php");
+	$response["success"] = "Login Successful";
+	echo json_encode($response);
         exit();
     }
     catch (Exception $e)
     {
-        header("Location: ../../index.php?error=" . $e->getMessage());
+	$response["error"] = $e->getMessage();
+	echo json_encode($response);
         exit();
     }
 } 
-else header("Location: ../../index.php?error=" . urlencode("Invalid request."));
+else echo json_encode($response);
 
 ?>

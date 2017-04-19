@@ -137,7 +137,7 @@ class User
                 if(!is_null($llStr)) $this->location = new Location($llStr);
             }
             else throw new Exception("Invalid email or password, please try again.");
-        } else throw new Exception("There was an error preparing a statement.");
+        } else throw new Exception("There was a database error.");
     }
 	
 	public function reload()

@@ -36,6 +36,11 @@ cSessionStart();
 </head>
 
 <body>
+  <div id="notificationsDiv">
+    <div class='alert alert-dismissable fade in notification prototype' role='alert'>
+      <a href='#' class='close' data-dismiss='alert' aria-label='Close'>&times;</a>
+      <div class="text"></div>
+    </div>
         <?php
         if (isset($_GET["error"]))
         {
@@ -47,6 +52,7 @@ cSessionStart();
             );
         }
         ?>
+  </div>
 <div class="snap-drawers">
     <div class="snap-drawer snap-drawer-right elegant-color-dark">
         <ul class="nav flex-column">

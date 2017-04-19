@@ -80,9 +80,3 @@ main {
     display:none;
 }
 
-.alert.alert-danger {
-  position: absolute;
-  top: 80px;
-  right: 20px;
-  z-index: 5;
-}

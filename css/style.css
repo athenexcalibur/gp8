@@ -36,3 +36,15 @@ main {
 .help-icon {
   float: right;
 }
+
+#notificationsDiv {
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  z-index: 5;
+  max-width: 300px;
+}
+
+.prototype {
+  display: none;
+}

@@ -81,15 +81,37 @@ $("#loginBtn").on("click", function()
     {
         email: $("#uemail").val(),
         password: $("#upass").val()
-    }, function()
+    }, function(data)
     {
-        window.location.replace("index.php");
+	window.localStorage.setItem("loginResponse", JSON.stringify(data));
+	window.location.replace("index.php");
     }).fail(function(response)
     {
         alert('Error: ' + response.responseText);
     });
 });
 
+$(document).ready(function () {
+    var response =JSON.parse(localStorage.getItem("loginResponse"));
+    if (response !== null) {
+	if (response.success !== undefined) {
+	    addNotification(response.success, "alert-success")
+	    
+	} else if (response.error !== undefined) {
+	    addNotification("Login Failed" + ": " + response.error, "alert-danger")
+	}
+	localStorage.removeItem("loginResponse");
+    }
+    
+});
+
+function addNotification(notificationText, typeClass) {
+   notification = $("#notificationsDiv .notification.prototype").clone(); 
+   notification.removeClass("prototype");
+   notification.find(".text").text(notificationText);
+   notification.addClass(typeClass);
+   $("#notificationsDiv").append(notification);
+}
 /* validation
 $(document).ready(function ()
 {
