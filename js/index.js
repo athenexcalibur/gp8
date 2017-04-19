@@ -112,36 +112,84 @@ function addNotification(notificationText, typeClass) {
    notification.addClass(typeClass);
    $("#notificationsDiv").append(notification);
 }
-/* validation
-$(document).ready(function ()
-{
-    //disable submission button untill passwords match and email matches regex
-    $("#registerbutton").prop("disabled", true);
-    $("#regstrationModal").on("input", function()
-    {
-        var pass1 = $("#password").val();
-        var pass2 = $("#checkpass").val();
-        var email = $("#email").val();
 
-        if (pass1 && pass1.length >= 6 && pass1 === pass2)// && email.match(emailRE))
-        {
-            $("#registerBtn").prop("disabled", false);
-        }
-        else
-        {
-            $("#registerBtn").prop("disabled", true);
-        }
+$("#registrationBtn").click(function () {
+    //set "ready" attribute to false (set to true when form input is valid)
+    $("#regDiv1 input").each(function (index, obj) {
+        $(this).data("ready", false);
     });
+    $("#registrationModal .form-control-feedback").hide(); //hide validation text
+    $("#nextBtn, registerBtn").prop("disabled", true);
 });
-*/
 
-//Make form submittable with enter key
-//NOTE: couldn't get it to work with regDiv3 (i.e. dietary requirements)
-//because the select tag switches the focus
-//could add submittable class to the select tags but it seems a little messy
-$(".submittable").keyup(function (event) {
-    if (event.keyCode == 13) {
-        triggerBtn = $(this).attr("trigger-btn");
-	$(triggerBtn).trigger("click");
+
+$("#regDiv1 input").change(function() {
+   var inputId = $(this).attr("id"); 
+   var text = $(this).val()
+   var formDiv = $(this).parent();
+   var emailRE = /[\w\-\_]+\@[\w\-\_]+(\.\w{2,5})+/;
+   var usernameRE = /\w{3,}/;
+   switch (inputId) {
+       case 'username':
+	   if (!matchExact(usernameRE, text)) {
+	       $(this).data("ready", false);
+	       formDiv.addClass("has-danger");
+	       formDiv.find(".form-control-feedback").show();
+	   } else {
+	       $(this).data("ready", true);
+	       formDiv.removeClass("has-danger");
+	       formDiv.find(".form-control-feedback").hide();
+	   }
+	   break;
+       case 'email':
+	   if (!matchExact(emailRE, text)) {
+	       $(this).data("ready", false);
+	       formDiv.addClass("has-danger");
+	       formDiv.find(".form-control-feedback").show();
+	   } else {
+	       $(this).data("ready", true);
+	       formDiv.removeClass("has-danger");
+	       formDiv.find(".form-control-feedback").hide();
+	   }
+	   break;
+       case 'password':
+	   if (text.length < 6) {
+	       $(this).data("ready", false);
+	       formDiv.addClass("has-danger");
+	       formDiv.find(".form-control-feedback").show();
+	   } else {
+	       $(this).data("ready", true);
+	       formDiv.removeClass("has-danger");
+	       formDiv.find(".form-control-feedback").hide();
+	   }
+	   break;
+       case 'passwordConfirm':
+	   if (text !== $("#password").val()) {
+	       $(this).data("ready", false);
+	       formDiv.addClass("has-danger");
+	       formDiv.find(".form-control-feedback").show();
+	   } else {
+	       $(this).data("ready", true);
+	       formDiv.removeClass("has-danger");
+	       formDiv.find(".form-control-feedback").hide();
+	   }
+	       break;
+   }
+
+   var allReady = true;
+   $("#regDiv1 input").each(function (index, obj) {
+       allReady = $(this).data("ready") && allReady;
+   });
+   $("#nextBtn, registerBtn").prop("disabled", !allReady);
+});
+
+function matchExact(r, str) {
+   var match = str.match(r);
+   return match != null && str == match[0];
+}
+//enable submit on enter
+$("#regDiv1 input").keypress(function(event) {
+    if(!$("#nextBtn").prop("disabled") && event.keyCode == 13){
+	$("#nextBtn").click();
     }
 });

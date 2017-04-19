@@ -152,29 +152,42 @@ cSessionStart();
             </div>
             <!--Body-->
             <div class="modal-body" id="regBody">
-                <div id="regDiv1" class="submittable" trigger-btn="#nextBtn" tabindex="0">
+                <div id="regDiv1">
                     <div class="md-form">
                         <input type="text" id="username" class="form-control">
                         <label for="form2">Username</label>
+			<small class="form-control-feedback">
+			  usernames must be alphanumeric and at least 3
+			  characters long.
+			</small>
                     </div>
 
                     <div class="md-form">
                         <input type="email" id="email" class="form-control">
                         <label for="form4">Email</label>
+			<small class="form-control-feedback">
+			  emails must be of the form user@host.con
+			</small>
                     </div>
 
                     <div class="md-form">
                         <input type="password" id="password" class="form-control">
                         <label for="form4">Password</label>
+			<small class="form-control-feedback">
+			  passwords must be at least 6 characters long.
+			</small>
                     </div>
 
                     <div class="md-form">
                         <input type="password" id="passwordConfirm" class="form-control">
                         <label for="form4">Confirm Password</label>
+			<small class="form-control-feedback">
+			  passwords do not match
+			</small>
                     </div>
                 </div>
 
-                <div id="regDiv2" class="submittable" trigger-btn="#nextBtn" tabindex="0">
+                <div id="regDiv2" class="regDivs">
                     <input id="addressInput" class="controls" type="text" placeholder="Search...">
                     <div id="inputMap"></div>
                 </div>
