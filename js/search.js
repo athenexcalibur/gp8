@@ -7,7 +7,7 @@ $(document).ready(function() {
     var searchText = findGetParameter("searchText");
     var callingPage = document.referrer;
     if(searchText != "null" && callingPage != "null"){
-	if (callingPage.includes("index.php")) {
+	if (callingPage.includes("index.php") && searchText) {
 	    $("#searchBox").val(urldecode(searchText));
 	    populateSearchResults();
 	}
@@ -30,7 +30,6 @@ function parseDate(string)
     var arr = string.split("-");
     return new Date(arr[0], arr[1]-1, arr[2]);
 }
-
 
 function getResultHTML(post)
 {
@@ -93,14 +92,19 @@ function populateSearchResults()
               fixImgs();
               console.log(resContainer.html());
           });
-        },
+        }
       });
 }
 
 function strToLatLng(l)
 {
     var latlng = l.replace(/[^0-9,.-]/g, "").split(",");
-    return new google.maps.LatLng(parseFloat(latlng[0]), parseFloat(latlng[1]));
+
+    var la, lo;
+    la = Math.random() * 0.1 - 0.05;
+    lo = Math.random() * 0.1 - 0.05;
+
+    return new google.maps.LatLng(parseFloat(latlng[0]) + la, parseFloat(latlng[1]) + lo);
 }
 
 function createPopup(post)
@@ -108,6 +112,7 @@ function createPopup(post)
     return "<h3>" +  post.title + "</h3><br/>" + post.description; //todo make this good (ie images and stuff)
 }
 
+var infowindow;
 function initMap()
 {
     var map = new google.maps.Map(document.getElementById("resultsMap"),
@@ -126,11 +131,14 @@ function initMap()
             position: strToLatLng(window.posts[i].location),
             map: map
         });
+        m.index = i;
 
-        var infowindow = new google.maps.InfoWindow({content: createPopup(posts[i])});
-        var purl = "listing.php?id=" + posts[i].id;
-        google.maps.event.addListener(m, "click", function(){window.location.replace(purl)})
-        google.maps.event.addListener(m, "mouseover", function(){infowindow.open(map, this);});
+        google.maps.event.addListener(m, "click", function(){window.location.replace("listing.php?id=" + posts[this.index].id)});
+        google.maps.event.addListener(m, "mouseover", function()
+        {
+            infowindow = new google.maps.InfoWindow({content: createPopup(posts[this.index])});
+            infowindow.open(map, this);
+        });
         google.maps.event.addListener(m, "mouseout", function(){infowindow.close()});
     }
 
