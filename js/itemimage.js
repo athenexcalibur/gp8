@@ -13,6 +13,38 @@ function fixImg(card)
   fix(card.find(".itemimage"));
 }
 
+function addAllImgs()
+{
+  $.each($(".allitemimages"), function(){
+    addAllImg($(this));
+  });
+}
+
+function addAllImg(div)
+{
+  var id = div.attr("data-itemid");
+  $.get("php/images.php?postid=" + id, function(data)
+  {
+    try
+    {
+      var images = JSON.parse(data);
+      for(var i = 0; i < images.length; i++)
+      {
+        div.append("<img src='" + images[i] + "'>");
+      }
+
+      if(images.length == 0)
+      {
+        div.html("<img src='" +  "img/vege-card.jpg" + "'>");
+      }
+    }
+    catch(e)
+    {
+      div.html("<img src='" +  "img/vege-card.jpg" + "'>");
+    }
+  });
+}
+
 function fix(imgview)
 {
   var id = imgview.attr("data-itemid");

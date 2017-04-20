@@ -5,9 +5,33 @@
   background-color: #ff4444;
 }
 
-/*todo style this properly*/
 #preview
 {
+  height: 7em;
   width: 100%;
-  display: none;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+#preview img
+{
+  height:5em;
+  width: auto;
+  vertical-align: top;
+  display: inline;
+}
+
+#allphotos
+{
+  height: 12em;
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+#allphotos img
+{
+  margin: 5px;
+  height:10em;
+  width: auto;
+  vertical-align: top;
+  display: inline;
 }

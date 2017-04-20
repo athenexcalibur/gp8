@@ -148,8 +148,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
 
               <div class="col-md-4">
                 <div class="card-block card-image">
-                  <div class="">
-                    <img class="itemimage view overlay hm-white-slight z-depth-1" id="card_image" data-itemid=<?php echo $_GET["id"]; ?> >
+                  <div class="allitemimages view overlay hm-white-slight z-depth-1" data-itemid=<?php echo $_GET["id"]; ?>>
                   </div>
                 </div>
               </div>
@@ -281,7 +280,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
   <script src="js/cards.js"></script>
   <script src="js/listing.js"></script>
   <script src="js/itemimage.js"></script>
-  <script type="text/javascript">fixImgs();</script>
+  <script type="text/javascript">addAllImgs();</script>
 
   <script type="text/javascript" src="snap/snap.min.js"></script>
   <script type="text/javascript" src="js/sidebar.js"></script>

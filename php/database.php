@@ -1,8 +1,10 @@
 <?php
+
 /*
 define("DBSERVER", "mysql.dur.ac.uk");
 define("DBUSERNAME", "dcs8s08");
-define("DBPASSWORD", "swansea2");*/
+define("DBPASSWORD", "swansea2");
+*/
 
 define("DBSERVER", "localhost");
 define("DBUSERNAME", "root");

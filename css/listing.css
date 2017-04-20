@@ -1,7 +1,17 @@
-#card_image {
-  height: auto;
+.allitemimages {
+  height: 22em;
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.allitemimages img
+{
+  margin: 5px;
+  height:20em;
   width: auto;
-  max-height: 1000px;
+  vertical-align: top;
+  display: inline;
 }
 
 .card .account-icon {

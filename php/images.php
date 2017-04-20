@@ -66,16 +66,18 @@ function postImages($postid, $new)
 		}
 	}
 
-	if($_FILES['photo']['name'])
+	if (isset($_FILES['photo']))
 	{
-		if(!$_FILES['photo']['error'])
-		{
-			$newname = tempnam($dir, "photo_");
-			unlink($newname);
-			$newname = $newname. ".jpg";
-			move_uploaded_file($_FILES['photo']['tmp_name'], $newname);
-		}
+			$filesuploaded = $_FILES['photo'];
+			foreach($filesuploaded["tmp_name"] as $currentfile)
+			{
+				$newname = tempnam($dir, "photo_");
+				unlink($newname);
+				$newname = $newname. ".jpg";
+				move_uploaded_file($currentfile, $newname);
+			}
 	}
+
 	echo '<script> window.location.href="../listing.php?id=' . $postid . '"; </script>';
 }
 
