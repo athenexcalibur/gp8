@@ -1,37 +1,43 @@
 $(document).ready(function ()
 {
-    $.get("php/search.php", function (data)
+  $.get("php/search.php", function (data)
+  {
+    var posts = JSON.parse(data);
+    posts.sort(function(a,b){return a.distance - b.distance});
+    $.ajax({url: "js/itemimage.js",
+    dataType: "script",
+    success: function(){
+      fixImgs();
+    },
+    beforeSend: function()
     {
-        var posts = JSON.parse(data);
-        posts.sort(function(a,b){return a.distance - b.distance});
-        $.get("ajax/card.html", function (data)
+      $.get("ajax/card.html", function (data)
+      {
+        tmp = $("<out>").append(data);
+        $(".item-card").each(function (i, obj)
         {
-            tmp = $("<out>").append(data);
-            $(".item-card").each(function (i, obj)
-            {
-                if (i < posts.length)
-                {
-                      name = posts[i]["title"];
-                      name = name ? posts[i]["title"] : "Untitled";
-                      tmp.find("#title").html(name);
-                      var distance = posts[i].hasOwnProperty('distance')? posts[i].distance.toFixed(1) + " miles away" : "";
-                      tmp.find("#distance").html(distance);
-                      tmp.find("#link").attr("href", "listing.php?id=" + posts[i].id);
+          if (i < posts.length)
+          {
+            name = posts[i]["title"];
+            name = name ? posts[i]["title"] : "Untitled";
+            tmp.find("#title").html(name);
+            var distance = posts[i].hasOwnProperty('distance')? posts[i].distance.toFixed(1) + " miles away" : "";
+            tmp.find("#distance").html(distance);
+            tmp.find("#link").attr("href", "listing.php?id=" + posts[i].id);
 
-                      tmp.find("#card_image").attr("data-itemid", posts[i].id);
-                    //todo decription and time
-                }
+            tmp.find("#card_image").attr("data-itemid", posts[i].id);
+            //todo decription and time
+          }
 
-                else
-                {
-                    tmp.find("#title").html("--");
-		                tmp.find("#distance").html("");
-                }
-                $(obj).html(tmp.clone());
-                $(obj).attr("id", i.toString());
-            });
-        }).done($.getScript("js/itemimage.js", function(){
-          fixImgs();
-        }));
-    });
+          else
+          {
+            tmp.find("#title").html("--");
+            tmp.find("#distance").html("");
+          }
+          $(obj).html(tmp.clone());
+          $(obj).attr("id", i.toString());
+        });
+      });
+    }});
+  });
 });

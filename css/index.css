@@ -1,15 +1,14 @@
 #card_image {
   height: auto;
   width: auto;
-  max-height: 250px;
+  max-height: 10em;
+  margin: 0 auto;
+  display: block;
 }
 
 #card_image_centre {
-  height: 250px;
+  height: 10em;
   width: auto;
-  display:table-cell;
-  vertical-align:middle;
-  text-align:center
 }
 
 .search-jumbotron {
@@ -79,4 +78,3 @@ main {
 {
     display:none;
 }
-
