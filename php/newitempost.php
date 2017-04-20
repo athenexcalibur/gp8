@@ -86,9 +86,10 @@ else if (isset($_POST["title"]))
             $descU = strtoupper($descrip);
             while ($row = mysqli_fetch_array($everything, MYSQLI_ASSOC))
             {
-                if (strpos($titleU, $row["word"]) != 0 || strpos($descU, $row["word"]) != 0)
+                if ((strpos($titleU, $row["word"]) !== false || strpos($descU, $row["word"]) !== false) && intval($row["userid"]) != $userid)
                 {
-                    notifyUser("A new post (link) contains your reserved word '" . strtolower($row["word"]) . "'", $row["userid"]); //todo
+                    notifyUser("A <a href='" . WEBROOT . "/listing.php?id=" . $postid .
+                                            "'>new post</a> contains your reserved word '" . strtolower($row["word"]) . "'", $row["userid"]);
                 }
             }
 

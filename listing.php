@@ -98,7 +98,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
           </div>
           <div class="view overlay hm-white-slight">
             <li class="nav-item">
-                <a class="nav-link" href="notifications.php">Notifications <?php if ($_SESSION["user"]->hasNewNot()) echo ("<i class='fa fa-circle notCircle'></i>");?></a>
+                <a class="nav-link" href="notifications.php">Notifications and alerts <?php if ($_SESSION["user"]->hasNewNot()) echo ("<i class='fa fa-circle notCircle'></i>");?></a>
               <div class="mask"></div>
             </li>
           </div>
@@ -196,9 +196,9 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
               <div class="card-title">
               <h4>'.$posterInfo["name"].'</h4>
               </div>
-              <div class="card-text">rating: ' . $posterInfo["rating"] .' points: ' . $posterInfo["score"] . '</div>
+              <div class="card-text">Rating: <b>' . $posterInfo["rating"] .'/5</b><br/> Points: <b>' . $posterInfo["score"] . '</b></div>
               <a href="messagethread.php?name=' . $posterInfo["name"] . '&pid=' . $postID . '">
-              <button type="button" class="btn btn-primary">Message Poster</button>
+              <button type="button" class="btn btn-primary pull-right">Message Poster</button>
               </a>
               </div>
               </div>

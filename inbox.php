@@ -68,7 +68,7 @@ Database::getConnection()->query("UPDATE UsersTable SET newMsg=0 WHERE id=" . $_
 		</div>
 		<div class="view overlay hm-white-slight">
 		    <li class="nav-item">
-			<a class="nav-link" href="notifications.php">Notifications <?php if ($_SESSION["user"]->hasNewNot()) echo ("<i class='fa fa-circle notCircle'></i>");?></a>
+			<a class="nav-link" href="notifications.php">Notifications and alerts <?php if ($_SESSION["user"]->hasNewNot()) echo ("<i class='fa fa-circle notCircle'></i>");?></a>
 			<div class="mask"></div>
 		    </li>
 		</div>

@@ -57,7 +57,8 @@ if(isset($_POST["postID"]))
         $dbConnection->query("DELETE FROM FinishedPostsTable WHERE id=" . intval($_POST["postID"]));
 
         $otherID = ($posterid == $userid) ? $recepid : $posterid;
-        notifyUser("Your reservation for (link) was cancelled by the other party.", $otherID); //todo
+        notifyUser("Your reservation for <a href='" . WEBROOT . "/listing.php?id=" . intval($_POST["postID"]) .
+                                            "'>this post</a> was cancelled by the other party.", $otherID);
         exit();
     }
 
@@ -106,7 +107,7 @@ if(isset($_POST["postID"]))
         $stmt->bind_param("i", intval($_POST["postID"]));
         $stmt->execute();
 
-        notifyUser("(link) has been reserved for you.", $otherID); //todo
+        notifyUser("<a href='" . WEBROOT . "/listing.php?id=" . intval($_POST["postID"]) ,"'>A post</a> has been reserved for you.", $otherID);
     }
 }
 
@@ -190,7 +191,9 @@ function finalise($postID)
         $dbConnection->query("UPDATE FinishedPostsTable SET posterDone=1 WHERE id=" . intval($postID));
         $dbConnection->query("UPDATE UsersTable SET score=score+5 WHERE id=". intval($userid));
         $otherid = $recepID;
+        /*
         $dbConnection->query("DELETE FROM PostsTable WHERE id=" .intval($postID));
+        $dbConnection->query("DELETE FROM MessagesTable WHERE postid=" .intval($postID));*/
     }
     else die("Wrong user ID.");
 
@@ -207,6 +210,6 @@ function finalise($postID)
     else $newrating = (($rating * $number + floatval($_POST["rating"])) / ($number + 1));
     $dbConnection->query("UPDATE UsersTable SET number=number+1, rating=" . floatval($newrating) . " WHERE id=" . intval($otherid));
     $uname = $_SESSION["user"]->getUserName();
-    notifyUser($uname . " rated your post (link) " . $_POST["rating"] . " stars.", $otherid); //todo
+    notifyUser($uname . " rated you " . $_POST["rating"] . " stars.", $otherid);
 }
 ?>

@@ -73,13 +73,13 @@ cSessionStart();
             </div>
             <div class="view overlay hm-white-slight">
                 <li class="nav-item">
-                    <a class="nav-link" href="inbox.php">Messages <?php if (loginCheck() && $_SESSION["user"]->hasNewMessages()) echo ("<i class='fa fa-circle'></i>");?></a>
+                    <a class="nav-link" href="inbox.php">Messages <?php if (loginCheck() && $_SESSION["user"]->hasNewMessages()) echo ("<i class='fa fa-circle msgCircle'></i>");?></a>
                     <div class="mask"></div>
                 </li>
             </div>
             <div class="view overlay hm-white-slight">
                 <li class="nav-item">
-                    <a class="nav-link" href="notifications.php">Notifications <?php if (loginCheck() && $_SESSION["user"]->hasNewNot()) echo ("<i class='fa fa-circle notCircle'></i>");?></a>
+                    <a class="nav-link" href="notifications.php">Notifications and alerts <?php if (loginCheck() && $_SESSION["user"]->hasNewNot()) echo ("<i class='fa fa-circle notCircle'></i>");?></a>
                     <div class="mask"></div>
                 </li>
             </div>
