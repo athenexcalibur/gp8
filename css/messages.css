@@ -47,3 +47,7 @@ textarea.custom-textarea {
 .custom-input-group {
   border-spacing: 10px;
 }
+
+.avatar {
+  font-size: 3em;
+}

@@ -114,7 +114,8 @@ Database::getConnection()->query("UPDATE UsersTable SET newMsg=0 WHERE id=" . $_
     <div class="card thread-prototype">
       <a href="messagethread.php?name="></a>
       <div class="card-block thread-img">
-	<img src="avatar/test.png" alt="">
+	<i class="material-icons avatar">account_circle</i>
+	<!--<img src="avatar/test.png" alt="">-->
       </div>
       <div class="card-block">
 	<h4 class="card-title"></h4><p class="text-info"></p>

@@ -139,7 +139,8 @@ $userid = $_SESSION["user"]->getUserID();
       <div class="container-fluid">
 	<div class="row">
 	  <div class="col-xs-1">
-	    <img src="avatar/test.png" alt="" height="80" width="80">
+	    <!--<img src="avatar/test.png" alt="" height="80" width="80">-->
+	    <i class="material-icons avatar">account_circle</i>
 	  </div>
 	  <div class="col-xs-2">
 	    <div class="card-block">
