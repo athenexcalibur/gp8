@@ -16,6 +16,6 @@ $(document).ready(function () {
       card.removeClass("thread-prototype");
       $("#threadCards").append(card)
     });
-    if(data.length == 0) { $("#threadCards").append("You have no messages :'(") }
+    if(data.length == 0) { $("#threadCards").append("You have no messages <i class='em em-cry'></i>") }
   });
 });

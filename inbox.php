@@ -29,6 +29,9 @@ Database::getConnection()->query("UPDATE UsersTable SET newMsg=0 WHERE id=" . $_
   <!-- Material-Design icon library -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+  <!--EMOJIS-->
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+
   <!-- Bootstrap Core Stylesheet -->
   <link rel="stylesheet" href="bootstrap-material-design/css/bootstrap.min.css">
 

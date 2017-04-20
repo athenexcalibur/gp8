@@ -136,31 +136,25 @@ $userid = $_SESSION["user"]->getUserID();
     <main>
 
     <div class="threadinfo card">
-      <div class="container-fluid">
-	<div class="row">
-	  <div class="col-xs-1">
+	  <div class="card-block info-img pull-left">
 	    <!--<img src="avatar/test.png" alt="" height="80" width="80">-->
 	    <i class="material-icons avatar">account_circle</i>
 	  </div>
-	  <div class="col-xs-2">
 	    <div class="card-block">
 	      <h4 class="card-title" id=threadname> <?php echo $_GET["name"]; ?>  </h4>
-            <p class="text-info" id="postname">
-                Concerning <a href="listing.php?id=<?php echo $_GET["pid"];?>">
-                    <?php echo $post["title"]; ?>
-                </a>
-            </p>
+	      <span class="text-info" id="postname">
+		  Concerning <a href="listing.php?id=<?php echo $_GET["pid"];?>">
+		      <?php echo $post["title"]; ?>
+		  </a>
+	      </span>
+	      <?php
+		  if ($post["userid"] == $userid && $post["visible"]==1)
+		  {
+		      echo ('<button class="btn btn-secondary pull-right" type="button" id="donateBtn">
+		      Donate Item</button>');
+		  }
+	      ?>
 	    </div>
-	  </div>
-        <?php
-            if ($post["userid"] == $userid && $post["visible"]==1)
-            {
-                echo ('<button class="btn btn-secondary pull-right" type="button" id="donateBtn">
-                Donate Item</button>');
-            }
-        ?>
-        </div>
-	</div>
       </div>
 
         <!-- message container: filled with prototypes modified by messagethread.js-->
