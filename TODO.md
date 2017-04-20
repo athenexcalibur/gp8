@@ -75,7 +75,7 @@ Old TODO:
 * Website Design:
     * [ ] Design a color scheme/font scheme for the website (consistency in
     styling between pages)
-    * [ ] Design the logo for the website (Probably need to decide on a name
+    * [x] Design the logo for the website (Probably need to decide on a name
     first)
     
 * Improve mobile support compatibility:
