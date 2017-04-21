@@ -86,6 +86,7 @@ function populateSearchResults()
                       posts[i].posttime = parseTime(posts[i].posttime);
                       posts[i].expiry = parseDate(posts[i].expiry);
                       resContainer.append(getResultHTML(posts[i]));
+		      imageSources[posts[i].id] = addSource(posts[i]);
                   }
               }
               else resContainer.html("No results found.");
@@ -107,8 +108,9 @@ function strToLatLng(l)
     return new google.maps.LatLng(parseFloat(latlng[0]) + la, parseFloat(latlng[1]) + lo);
 }
 
-function createPopup(post)
-{
+var imageSources = new Object();
+
+function addSource(post) {
     var imgSrc = "img/vege-card.jpg";
     $.get("./php/images.php", {postid: post.id}, function (data)
     {
@@ -119,12 +121,24 @@ function createPopup(post)
             console.log(urls);
             var photo = urls[urls.length - 1];
             photo.replace('\\', '');
-            imgSrc = photo;
+	    if (photo.length > 0) {
+		imgSrc = photo;
+		imageSources[post.id] = imgSrc;
+	    }
         }
-        catch(e){console.log(e)}
+        catch(e){
+	    console.log(e);
+	    imgSrc = "img/vege-card.jpg";
+	    imageSources[post.id] = imgSrc;
+	}
     });
+}
+
+function createPopup(post)
+{
+    var imgSrc = imageSources[post.id];
     console.log("<h3>" +  post.title + "</h3><br/><img class='smallimg' src='" + imgSrc + "'><br/>" + post.description);
-    return "<h3>" +  post.title + "</h3><br/><img class='smallimg' src='" + imgSrc + "'><br/>" + post.description;
+    return "<h3>" +  post.title + "</h3><br/><img class='smallimg d-block mx-auto' src='" + imgSrc + "'><p class='text-xs-center'>" + post.description + "</p>";
 }
 
 var infowindow;
@@ -148,10 +162,10 @@ function initMap()
         });
         m.index = i;
 
-        google.maps.event.addListener(m, "click", function(){window.location.replace("listing.php?id=" + posts[this.index].id)});
+        google.maps.event.addListener(m, "click", function(){window.location.replace("listing.php?id=" + window.posts[this.index].id)});
         google.maps.event.addListener(m, "mouseover", function()
         {
-            infowindow = new google.maps.InfoWindow({content: createPopup(posts[this.index])});
+            infowindow = new google.maps.InfoWindow({content: createPopup(window.posts[this.index])});
             infowindow.open(map, this);
         });
         google.maps.event.addListener(m, "mouseout", function(){infowindow.close()});
