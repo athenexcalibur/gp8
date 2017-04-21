@@ -24,7 +24,7 @@ if (isset($_GET["editing"]))
 
   for ($i = 1; $i <= 128; $i *= 2) $allergens[$i] = ($flags & $i);
 
-  echo ("<script>window.currentlatLng ='" . $location . "'; window.editing=" . $_GET["editing"] . "; window.expiry=$expiry;</script>");
+  echo ("<script>window.currentlatLng ='" . $location . "'; window.editing=" . $_GET["editing"] . "; window.expiry='$expiry';</script>");
 }
 
 else
@@ -229,7 +229,13 @@ else
 
   <script>
   //todo make expiry field load into date
-  $("#date").bootstrapMaterialDatePicker({format:"DD/MM/YYYY", weekStart : 0, time: false,  minDate : new Date()});
+  $("#date").bootstrapMaterialDatePicker({format:"YYYY-MM-DD", weekStart : 0, time: false,  minDate : new Date()});
+    $(document).ready(function() {
+	var date = new Date(window.expiry);
+	if (window.expiry !== undefined) {
+	    $("#date").bootstrapMaterialDatePicker("setDate", date);
+	}
+    });
 
   $("#tSubmit").on("click", function()
   {
