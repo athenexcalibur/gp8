@@ -109,7 +109,22 @@ function strToLatLng(l)
 
 function createPopup(post)
 {
-    return "<h3>" +  post.title + "</h3><br/>" + post.description; //todo make this good (ie images and stuff)
+    var imgSrc = "img/vege-card.jpg";
+    $.get("./php/images.php", {postid: post.id}, function (data)
+    {
+        try
+        {
+            console.log(data);
+            var urls = JSON.parse(data);
+            console.log(urls);
+            var photo = urls[urls.length - 1];
+            photo.replace('\\', '');
+            imgSrc = photo;
+        }
+        catch(e){console.log(e)}
+    });
+    console.log("<h3>" +  post.title + "</h3><br/><img class='smallimg' src='" + imgSrc + "'><br/>" + post.description);
+    return "<h3>" +  post.title + "</h3><br/><img class='smallimg' src='" + imgSrc + "'><br/>" + post.description;
 }
 
 var infowindow;

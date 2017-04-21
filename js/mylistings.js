@@ -6,6 +6,11 @@ $(document).ready(function () {
   *else if (window.location.href.includes("orders.php"))
   *    fillOrders();
   */
+    var notification = localStorage.getItem("notification");
+    if (notification !== null) {
+        addNotification(notification, "alert-success");
+	localStorage.removeItem("notification");
+    }
 
   $('.nav-pills').on('shown.bs.tab', 'a', function(e) {
     if (e.relatedTarget) {
@@ -19,6 +24,7 @@ $(document).on("click", ".cancelButton", function()
 {
     $.post("php/post/postTools.php", {postID: $(this).data('orderid'), cancel: true}, function(data){console.log(data);});
     fillTabs();
+    addNotification("Order Cancelled. The item is now visible to public and can be managed in the 'Still Up' tab under 'Current Listings'", "alert-success");
 });
 
 function fillTabs() {

@@ -38,6 +38,8 @@ if (isset($_POST["id"]))
             $description = (isset($_POST["description"])) ? $_POST["description"] : $description;
             $location = (isset($_POST["location"])) ? $_POST["location"] : $location;
             $expiry = (isset($_POST["expiry"])) ? $_POST["expiry"] : $expiry;
+            $date = str_replace('/', '-', $expiry);
+            $date = date('Y-m-d', strtotime($date));
 
             if (is_array($_POST["flags"]))
             {
@@ -46,7 +48,7 @@ if (isset($_POST["id"]))
             }
 
             $stmt = $dbconnection->prepare("UPDATE PostsTable SET title=?, description=?, location=?, posttime=now(), expiry=?, flags=? WHERE id=?");
-            $stmt->bind_param("ssssii", $title, $description, $location, $expiry, $flags, $postID);
+            $stmt->bind_param("ssssii", $title, $description, $location, $date, $flags, $postID);
             if (!$stmt->execute()) echo json_encode(array("error" => $dbconnection->error));
             else
             {

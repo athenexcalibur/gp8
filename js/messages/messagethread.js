@@ -76,6 +76,7 @@ function fillMessages()
 $("#donateBtn").on("click", function()
 {
     $.post("php/post/postTools.php", {postID: window.pid, otherUser: window.oname});
+    window.localStorage.setItem("notification", "Item successfully donated. You can manage the donation in the 'Reserved' tab under 'Current Listings'");
     window.location.replace("orders.php");
 });
 

@@ -48,6 +48,12 @@ $current = $res->num_rows;
     </head>
 
 <body>
+  <div id="notificationsDiv">
+    <div class='alert alert-dismissable fade in notification prototype' role='alert'>
+      <a href='#' class='close' data-dismiss='alert' aria-label='Close'>&times;</a>
+      <div class="text"></div>
+    </div>
+  </div>
 <div class="snap-drawers">
     <div class="snap-drawer snap-drawer-right elegant-color-dark">
         <ul class="nav flex-column">
@@ -150,28 +156,41 @@ $current = $res->num_rows;
 			  Personal Details
 			</h3>
 		      </div>
-		      <div class="card-block">
+		      <div id="editDetails" class="card-block">
 			<div class="md-form">
 			  <i class="fa fa-pencil prefix"></i>
 			  <input type="text" id="fname" class="form-control" value="<?php echo $user->getUserName() ?>">
-			   <label for="fname">Username</label>
+			  <label for="fname">Username</label>
+			  <small class="form-control-feedback">
+			    usernames must be alphanumeric and at least 3
+			    characters long.
+			  </small>
 			</div>
 
 			<div class="md-form">
 			  <i class="fa fa-pencil prefix"></i>
 			  <input type="text" id="femail" class="form-control" value="<?php echo $user->getEmail() ?>">
 			  <label for="femail">Email</label>
+			  <small class="form-control-feedback">
+			    emails must be of the form user@host.con
+			  </small>
 			</div>
 
 			<div class="md-form">
-			  <i class="fa fa-pencil prefix"></i>
-			  <input type="password" id="chpass" class="form-control"
-				 placeholder="change" data-toggle="collapse"
+			  <span class="prefix">
+			    <a href="#"
+				 data-toggle="collapse"
 				 data-target="#passwordCollapse"
 				 aria-expanded="false"
 				 aria-controls="passwordCollapse">
+			      <small style="font-size: 10px">change</small>
+			      <i class="material-icons">arrow_drop_down</i>
+			    </a>
+			  </span>
+			  <input type="password" id="chpass"
+			  class="form-control" placeholder="unchanged" >
 			  <label for="chpass" >
-			    Password (Change)
+			    Current Password
 			  </label>
 			</div>
 
@@ -179,13 +198,19 @@ $current = $res->num_rows;
 			  <div class="md-form">
 			    <i class="fa fa-pencil prefix"></i>
 			    <input type="password" id="cfpass" class="form-control">
-			    <label for="cfpass">Confirm New Password</label>
+			    <label for="cfpass">New Password</label>
+			    <small class="form-control-feedback">
+			      passwords must be at least 6 characters long.
+			    </small>
 			  </div>
 
 			  <div class="md-form">
 			    <i class="fa fa-pencil prefix"></i>
 			    <input type="password" id="fpass" class="form-control">
-			    <label for="fpass">New Password</label>
+			    <label for="fpass">Confirm New Password</label>
+			    <small class="form-control-feedback">
+			      passwords do not match
+			    </small>
 			  </div>
 			</div>
 
@@ -273,79 +298,12 @@ $current = $res->num_rows;
 <script type="text/javascript" src="snap/snap.min.js"></script>
 <script type="text/javascript" src="js/sidebar.js"></script>
 
+<script type="text/javascript" src="js/popUps.js"></script>
+<script type="text/javascript" src="js/profile.js"></script>
 <script>
- $("#submit").click(function()
- {
-     if($("#fpass").val() != $("#cfpass").val()) return; //todo error stuff and validation
-
-     var checked = [];
-     $("#allergyDiv").find("input:checked").each(function()
-     {
-         checked.push($(this).attr("value"));
-     });
-
-     $.post("profile.php",
-     {
-         uname: $("#fname").val(),
-         email: $("#femail").val(),
-         flags: checked,
-         location: window.currentlatLng.toString(),
-         pass: $("#fpass").val(),
-         cpass: $("#chpass").val()
-     });
-
-     window.currentlatLng = undefined;
-     window.location.reload();
-
- });
-
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 });
 </script>
 <!--/.Scripts-->
 </body>
-
-<?php
-
-$_POST = array(); //workaround for broken PHPstorm
-parse_str(file_get_contents('php://input'), $_POST);
-$dbConnection = Database::getConnection();
-
-if (isset($_POST["uname"]))
-{
-    $cnx = Database::getConnection();
-
-    $hash = hash("sha256", $_POST["cpass"]);
-    $id = $_SESSION["user"]->getUserID();
-
-    $stmt = $cnx->prepare("SELECT password FROM UsersTable WHERE id=?");
-    $stmt->bind_param("i", $id);
-    $stmt->bind_result($dbPassword);
-    $stmt->execute();
-    $stmt->store_result();
-    $stmt->fetch();
-
-    if (!($stmt->num_rows == 1 && $hash === $dbPassword)) die("Wrong password.");
-
-    $flags = 0;
-    if (isset($_POST["flags"]))
-    {
-        foreach ($_POST["flags"] as $flag) $flags |= constant($flag);
-    }
-    $location = isset($_POST["location"]) ? $_POST["location"] : NULL;
-
-    if ($stmt = $cnx->prepare("UPDATE UsersTable SET username=?, email=?, password=?, flags=?, location=? WHERE id=?"))
-    {
-        $pass = (!isset($_POST["pass"]) || strlen($_POST["pass"]) <= 0) ? $dbPassword : hash("sha256", $_POST["pass"]);
-        $stmt->bind_param("sssisi", $_POST["uname"], $_POST["email"], $pass, $flags, $location, $id);
-        $stmt->execute();
-        $_SESSION["user"]->reload();
-    }
-
-}
-
-?>
-
-
-

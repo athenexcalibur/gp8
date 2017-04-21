@@ -105,14 +105,6 @@ $(document).ready(function () {
     
 });
 
-function addNotification(notificationText, typeClass) {
-   notification = $("#notificationsDiv .notification.prototype").clone(); 
-   notification.removeClass("prototype");
-   notification.find(".text").text(notificationText);
-   notification.addClass(typeClass);
-   $("#notificationsDiv").append(notification);
-}
-
 $("#registrationBtn").click(function () {
     //set "ready" attribute to false (set to true when form input is valid)
     $("#regDiv1 input").each(function (index, obj) {
@@ -125,7 +117,7 @@ $("#registrationBtn").click(function () {
 
 $("#regDiv1 input").change(function() {
    var inputId = $(this).attr("id"); 
-   var text = $(this).val()
+   var text = $(this).val();
    var formDiv = $(this).parent();
    var emailRE = /[\w\-\_]+\@[\w\-\_]+(\.\w{2,5})+/;
    var usernameRE = /\w{3,}/;

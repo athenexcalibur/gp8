@@ -2,15 +2,54 @@
   height: auto;
   width: auto;
   max-height: 10em;
-  margin: 0 auto;
+  margin: auto;
   display: block;
 }
 
-#card_image_centre {
+.card-image {
   height: 10em;
-  width: auto;
+  width: 100%;
+}
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+  .card-image {
+    height: 4em;
+    width: 100%;
+  }
+
 }
 
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+  .card-image {
+    height: 8em;
+    width: 100%;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  .card-image {
+    height: 10em;
+    width: 100%;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+  .card-image {
+    height: 12em;
+    width: 100%;
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+  .card-image {
+    height: 14em;
+    width: 100%;
+  }
+}
 .search-jumbotron {
     height: 20em;
     background: url("../img/bg-img-compressed.jpg")no-repeat center center fixed;
@@ -61,6 +100,15 @@ main {
 
 .item-card .card-title{
   padding-left: 0.5em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 480px) {
+    .item-card #distance{
+	display: none;
+    }
 }
 
 #inputMap
