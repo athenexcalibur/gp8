@@ -203,11 +203,11 @@ $allergens = array();
       checked.push($(this).attr("value"));
     });
 
+    // on submission, make a call to the barcode api to look up the product
     $.get("https://pod.opendatasoft.com/api/records/1.0/search/?dataset=pod_gtin&q=" + $("#barcode").val(), function(itemdata)
     {
-      //console.log(itemdata);
       var itemfields = itemdata["records"][0]["fields"];
-      console.log(itemfields);
+      // itemfields has lots of data - we only need itemfields.gtin_nm for the product name and temfields.gtin_img for the product image url
 
       var data =
       {
@@ -231,16 +231,16 @@ $allergens = array();
         else
         {
           var postid = res["postid"];
-          var url = "php/imagefromurl.php?postid=" + postid + "&url=" + encodeURIComponent(itemfields.gtin_img);
-          console.log(url);
-          $.post(url, function(res){console.log(res)});
+          // use the postid of the newly created item (return from the post) to post to imagefromurl.php, to add the image url to the listing
+          $.post("php/imagefromurl.php?postid=" + postid + "&url=" + encodeURIComponent(itemfields.gtin_img));
+          // async redirect to the new listing
           window.location.href = "listing.php?id=" + postid;
         }
       });
     });
   });
 
-  //thank you stackoverflow
+  //when the user uploads photo(s), update the preview div to show them
   document.getElementById("photo").onchange = function ()
   {
     $("#preview").html("");
@@ -256,6 +256,7 @@ $allergens = array();
     }
   };
 
+  // on loading, load and show the images for the current listing
   $.get("php/images.php?postid=" + window.editing, function(data){
     var images = JSON.parse(data);
     for(var i = 0; i < images.length; i++)
