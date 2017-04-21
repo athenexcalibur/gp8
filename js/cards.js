@@ -21,7 +21,7 @@ $(document).ready(function ()
             name = posts[i]["title"];
             name = name ? posts[i]["title"] : "Untitled";
             tmp.find("#title").html(name);
-            var distance = posts[i].hasOwnProperty('distance')? posts[i].distance.toFixed(1) + " miles away" : "";
+            var distance = posts[i].hasOwnProperty('distance')? posts[i].distance.toFixed(1) + " miles away" : "--";
             tmp.find("#distance").html(distance);
             tmp.find("#link").attr("href", "listing.php?id=" + posts[i].id);
 
@@ -32,9 +32,10 @@ $(document).ready(function ()
           else
           {
             tmp.find("#title").html("--");
-            tmp.find("#distance").html("");
+            tmp.find("#distance").html("--");
+            tmp.find("#card_image").attr("data-itemid","");
           }
-          $(obj).html(tmp.clone());
+          $(obj).html(tmp.html());
           $(obj).attr("id", i.toString());
         });
       });
