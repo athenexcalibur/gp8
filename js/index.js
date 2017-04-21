@@ -117,7 +117,7 @@ $("#registrationBtn").click(function () {
 
 $("#regDiv1 input").change(function() {
    var inputId = $(this).attr("id"); 
-   var text = $(this).val()
+   var text = $(this).val();
    var formDiv = $(this).parent();
    var emailRE = /[\w\-\_]+\@[\w\-\_]+(\.\w{2,5})+/;
    var usernameRE = /\w{3,}/;
