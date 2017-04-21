@@ -4,6 +4,7 @@ $("#deleteBtn").on("click", function()
   {postID: $(this).data("pid"), delete: true} ,
   function(data){
     console.log(data);
+    localStorage.setItem("notification", "Item Deleted");
     window.location.href="orders.php";
   }
   );

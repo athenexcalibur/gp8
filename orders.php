@@ -40,6 +40,12 @@ if (!loginCheck())
 </head>
 
 <body>
+  <div id="notificationsDiv">
+    <div class='alert alert-dismissable fade in notification prototype' role='alert'>
+      <a href='#' class='close' data-dismiss='alert' aria-label='Close'>&times;</a>
+      <div class="text"></div>
+    </div>
+  </div>
 <div class="snap-drawers">
   <div class="snap-drawer snap-drawer-right elegant-color-dark">
     <ul class="nav flex-column">
@@ -227,6 +233,7 @@ if (!loginCheck())
 <script src="bootstrap-material-design/js/tether.min.js"></script>
 <script src="bootstrap-material-design/js/bootstrap.min.js"></script>
 <script src="bootstrap-material-design/js/mdb.min.js"></script>
+<script src="js/popUps.js"></script>
 <script src="js/mylistings.js"></script>
 
 <script type="text/javascript" src="snap/snap.min.js"></script>

@@ -105,14 +105,6 @@ $(document).ready(function () {
     
 });
 
-function addNotification(notificationText, typeClass) {
-   notification = $("#notificationsDiv .notification.prototype").clone(); 
-   notification.removeClass("prototype");
-   notification.find(".text").text(notificationText);
-   notification.addClass(typeClass);
-   $("#notificationsDiv").append(notification);
-}
-
 $("#registrationBtn").click(function () {
     //set "ready" attribute to false (set to true when form input is valid)
     $("#regDiv1 input").each(function (index, obj) {

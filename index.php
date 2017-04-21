@@ -355,6 +355,7 @@ cSessionStart();
     $('.selectpicker').selectpicker();
 </script>
 <script src="js/enterLocation.js"></script>
+<script src="js/popUps.js"></script>
 <script src="js/index.js"></script>
 <!--/.Scripts-->
 </body>
