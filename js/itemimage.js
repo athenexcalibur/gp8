@@ -28,19 +28,20 @@ function addAllImg(div)
     try
     {
       var images = JSON.parse(data);
-      for(var i = 0; i < images.length; i++)
+      div.append("<div class ='carousel-item active'><div class='view hm-grey-slight'><img src='" + images[0] + "' alt='IMAGE'></div></div>");
+      for(var i = 1; i < images.length; i++)
       {
-        div.append("<img src='" + images[i] + "'>");
+        div.append("<div class ='carousel-item'><div class='view hm-grey-slight'><img src='" + images[i] + "' alt='IMAGE'></div></div>");
       }
 
       if(images.length == 0)
       {
-        div.html("<img src='" +  "img/vege-card.jpg" + "'>");
+	  div.html("<div class ='carousel-item active'><div class='view hm-grey-slight'><img src='" +  "img/vege-card.jpg" + "' alt='IMAGE'></div></div>");
       }
     }
     catch(e)
     {
-      div.html("<img src='" +  "img/vege-card.jpg" + "'>");
+      div.html("<div class ='carousel-item active'><div class='view hm-grey-slight'><img src='" +  "img/vege-card.jpg" + "' alt='IMAGE'></div></div>");
     }
   });
 }

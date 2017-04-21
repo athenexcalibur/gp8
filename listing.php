@@ -146,12 +146,25 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
             </div>
             <div class="row">
 
-              <div class="col-md-4">
-                <div class="card-block card-image">
-                  <div class="allitemimages" data-itemid=<?php echo $_GET["id"]; ?>>
-                  </div>
-                </div>
-              </div>
+	      <div class="col-md-6 image-box">
+		<div class="card-block">
+		  <div id= "imgCarousel" class="carousel slide carousel-fade z-depth-1" data-ride="carousel">
+		    <a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
+		      <span class="carousel-control-prev-icon" aria-hidden="true">
+			<i class="material-icons">keyboard_arrow_left</i>
+		      </span>
+		      <span class="sr-only">Previous</span>
+		    </a>
+		    <a class="carousel-control-next" href="#imgCarousel" role="button" data-slide="next">
+		      <span class="carousel-control-next-icon" aria-hidden="true">
+			<i class="material-icons">keyboard_arrow_right</i>
+		      </span>
+		      <span class="sr-only">Next</span>
+		    </a>
+		    <div class="carousel-inner allitemimages" role="listbox" data-itemid=<?php echo $_GET["id"]; ?>> </div>
+		  </div>
+		</div>
+	      </div>
 
               <?php
               if ($isPoster)
@@ -159,7 +172,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
                 if ($visible)
                 {
                 echo('
-                <div class="col-md-8">
+                <div class="col-md-6 blue-box">
                 <div class="card-block">
                 <div class="card light-blue lighten-5">
                 <div class="card-block">
@@ -175,7 +188,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
                 ');
                 }
                 else echo('
-                <div class="col-md-8">
+                <div class="col-md-6 blue-box">
                 <div class="card-block">
                 <div class="card light-blue lighten-5">
                 <div class="card-block">
@@ -187,7 +200,7 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
                 ');
               } else echo
               ('
-              <div class="col-md-8">
+              <div class="col-md-6 blue-box">
               <div class="card-block user-info">
               <div class="card light-blue lighten-5">
               <i class="material-icons account-icon">account_circle</i>
@@ -280,7 +293,14 @@ $isPoster = ($_SESSION["user"]->getUserID() == $posterID);
   <script src="js/cards.js"></script>
   <script src="js/listing.js"></script>
   <script src="js/itemimage.js"></script>
-  <script type="text/javascript">addAllImgs();</script>
+  <script type="text/javascript">
+addAllImgs();
+$("document").ready(function() {
+  //$("#imgCarousel img").addClass("img-fluid");
+  //$("#imgCarousel img").addClass("z-depth-2");
+  //$("#imgCarousel .view").append('<div class="mask"></div>');
+});
+  </script>
 
   <script type="text/javascript" src="snap/snap.min.js"></script>
   <script type="text/javascript" src="js/sidebar.js"></script>
