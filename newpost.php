@@ -147,12 +147,12 @@ else
                 <div class="card-title"><h4>Item Details</h4></div>
                 <div class="md-form">
                   <input type="text" id="title" <?php if(isset($title)) echo ("value='" . $title . "'");?>>
-                  <label for="uemail">Title</label>
+                  <label for="title">Title</label>
                 </div>
 
                 <div class="md-form">
                   <input type="text" id="description" <?php if(isset($description)) echo ("value='" . $description . "'");?>>
-                  <label for="uemail">Description</label>
+                  <label for="description">Description</label>
                 </div>
 
                 <div class="md-form">
@@ -171,7 +171,7 @@ else
 
                 <div class="md-form">
                   <input type="text" id="date" class="form-control floating-label">
-                  <label for="uemail">Expiry Date</label>
+                  <label for="date">Expiry Date (YYYY-MM-DD)</label>
                 </div>
 
                 <div>
