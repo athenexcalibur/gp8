@@ -120,6 +120,8 @@ if (!loginCheck())
 
       <div id="header">
   <button type="button" class="btn btn-primary" onclick="location.href='newpost.php'">NEW LISTING</button>
+  <button type="button" class="btn btn-primary" onclick="location.href='barcode.php'">SCAN BARCODE</button>
+
 	<h2>Your Orders</h2>
       </div>
       <div class="row">
