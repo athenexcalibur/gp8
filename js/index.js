@@ -21,6 +21,11 @@ $("#registerBtn").on("click", function()
     });
 });
 
+$(document).ready(function()
+{
+	initMap();
+});
+
 function createFlags()
 {
     var selected = [];
@@ -68,6 +73,7 @@ function resetReg()
     $("#regDiv1").show();
     $("#nextBtn").show();
     $("#nextBtn").prop("disabled", false);
+	window.currentlatLng = undefined;
     $("#registerBtn").hide();
     $("#registrationModal .form-control").val("");
     reInitMap();
@@ -115,7 +121,7 @@ $("#registrationBtn").click(function () {
 });
 
 
-$("#regDiv1 input").change(function() {
+$("#regDiv1 input").on("input", function() {
    var inputId = $(this).attr("id"); 
    var text = $(this).val();
    var formDiv = $(this).parent();

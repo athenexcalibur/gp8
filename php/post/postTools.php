@@ -102,12 +102,12 @@ if(isset($_POST["postID"]))
         $stmt = $dbConnection->prepare("INSERT INTO FinishedPostsTable (id, title, posterID, recipientID, expiry) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("isiis", intval($_POST["postID"]), $title, $userid, intval($otherID), $expiry);
         $stmt->execute();
+		
+		notifyUser("<a href='" . WEBROOT . "/listing.php?id=" . intval($_POST["postID"]) ,"'>A post</a> has been reserved for you.", $otherID);
 
         $stmt = $dbConnection->prepare("UPDATE PostsTable SET visible=0 WHERE id=?");
         $stmt->bind_param("i", intval($_POST["postID"]));
         $stmt->execute();
-
-        notifyUser("<a href='" . WEBROOT . "/listing.php?id=" . intval($_POST["postID"]) ,"'>A post</a> has been reserved for you.", $otherID);
     }
 }
 

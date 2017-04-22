@@ -81,14 +81,14 @@ function postImages($postid, $new)
 		{
 			deleteDirectory($dir);
 		}
-		mkdir($dir);
+		mkdir($dir, 0777, true);
 	}
 	// if not a new listing (adding more images to an existing listing), only create the folder if it doesnt exist
 	else
 	{
 		if(!file_exists($dir))
 		{
-			mkdir($dir);
+			mkdir($dir, 0777, true);
 		}
 	}
 

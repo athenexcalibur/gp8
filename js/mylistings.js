@@ -1,3 +1,5 @@
+$.ajaxSetup ({ cache: false });
+
 "use strict";
 $(document).ready(function () {
   /*
@@ -128,7 +130,7 @@ function submitrating(postID)
   {
     console.log(data);
   });
-  fillTabs();
+  location.reload(); //ie
 }
 
 $('#recievedModal').on('show.bs.modal', function (event)
