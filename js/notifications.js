@@ -3,7 +3,6 @@ $(document).ready(function() {
     $.get("php/notifications/notifyUser.php?withTime&notifs", function(data) {
 	var notifications = JSON.parse(data);
 	$.each(notifications, function(index, notification) {
-		console.log(notification);
 	    var card = $(".notification-prototype").clone();
 	    card.removeClass("notification-prototype");
 	    card.find(".notification").html(notification.text);

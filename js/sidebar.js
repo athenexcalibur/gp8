@@ -6,7 +6,6 @@ var snapper = new Snap({
 });
 
  var isDesktop = window.matchMedia("only screen and (min-width: 760px)");
- console.log(isDesktop.matches);
 
 var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints;
 
