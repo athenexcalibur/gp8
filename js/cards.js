@@ -37,7 +37,7 @@ $(document).ready(function()
             tmp.find("#title").html("--");
             tmp.find("#distance").html("--");
             // use default image
-            tmp.find("#card_image").attr("data-itemid","");
+            tmp.find("#itemimg").attr("src","img/vege-card.jpg");
           }
           $(obj).html(tmp.html());
           $(obj).attr("id", i.toString());
