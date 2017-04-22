@@ -55,10 +55,11 @@ function parseDate(string)
 
 function getResultHTML(post)
 {
+    var backupImg = "'img/vege-card.jpg'";
     var HTML = '<div class="card card-hoverable">' +
         '<a href="listing.php?id=' + post.id + '"></a>' +
         '<div class="card-block order-img">' +
-        '<img class = "itemimage" id="card_image" data-itemid=' + post.id + '/>' +
+        '<img src="itemphotos/' + post.id + '/0.jpg" onerror="this.src = ' + backupImg + '">' +
         '</div>' +
         '<div class="card-block">' +
         '<h4 class="card-title">' + post.title + '</h4>' +
@@ -112,6 +113,7 @@ function populateSearchResults()
             }, function (data)
             {
                 var posts = JSON.parse(data);
+                console.log(posts);
                 window.posts = posts;
                 var resContainer = $("#results");
                 if (posts.length > 0)
@@ -123,10 +125,10 @@ function populateSearchResults()
                         posts[i].posttime = parseTime(posts[i].posttime);
                         posts[i].expiry = parseDate(posts[i].expiry);
                         html += getResultHTML(posts[i]);
-                        imageSources[posts[i].id] = addSource(posts[i]);
+                        //imageSources[posts[i].id] = addSource(posts[i]);
                     }
                     resContainer.html(html);
-                    fixImgs();
+                    //fixImgs();
                 }
                 else resContainer.html("No results found.");
             });
@@ -174,7 +176,9 @@ function populateMap()
 function createPopup(post)
 {
     var imgSrc = imageSources[post.id];
-    return "<h3>" + post.title + "</h3><br/><img class='smallimg d-block mx-auto' src='" + imgSrc + "'><br/><h5 class='text-center'>" + post.description + "</h5>";
+    var backupImg = "'img/vege-card.jpg'";
+    return "<h3>" + post.title + "</h3><br/><img class='smallimg d-block mx-auto' src='itemphotos/" + post.id + "/0.jpg' onerror='this.src = " + backupImg + ">"
+        + "<br/><h5 class='text-center'>" + post.description + "</h5>";
 }
 
 $('#mapShow').on('shown.bs.tab', populateMap);
@@ -192,6 +196,7 @@ function strToLatLng(l)
 
 var imageSources = new Object();
 
+/*
 function addSource(post)
 {
     var imgSrc = "img/vege-card.jpg";
@@ -214,7 +219,7 @@ function addSource(post)
             imageSources[post.id] = imgSrc;
         }
     });
-}
+}*/
 
 $(document).ready(function ()
 {

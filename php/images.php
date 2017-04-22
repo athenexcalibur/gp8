@@ -20,11 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
 		foreach ($dir_contents as $file)
 		{
 			$fileinfo = pathinfo($file);
-			// if the file is a jpg, add it to the list
-			if($fileinfo['extension'] === 'jpg')
-			{
-				$array[] = $absroot . $postid . '/' . $file;
-			}
+            if (substr($file, -1) != '.') $array[] = $absroot . $postid . '/' . $file;
 		}
 
 		echo json_encode($array, 64);
@@ -49,6 +45,29 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST')
 	}
 }
 
+function deleteDirectory($dir) {
+    if (!file_exists($dir)) {
+        return true;
+    }
+
+    if (!is_dir($dir)) {
+        return unlink($dir);
+    }
+
+    foreach (scandir($dir) as $item) {
+        if ($item == '.' || $item == '..') {
+            continue;
+        }
+
+        if (!deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)) {
+            return false;
+        }
+
+    }
+
+    return rmdir($dir);
+}
+
 function postImages($postid, $new)
 {
 	//path to post's images
@@ -60,7 +79,7 @@ function postImages($postid, $new)
 	{
 		if(file_exists($dir))
 		{
-			rmdir($dir);
+			deleteDirectory($dir);
 		}
 		mkdir($dir);
 	}
@@ -78,15 +97,14 @@ function postImages($postid, $new)
 	{
 			$filesuploaded = $_FILES['photo'];
 			// iterate through all the files uploaded
-			foreach($filesuploaded["tmp_name"] as $currentfile)
+			for ($i = 0; $i < count($filesuploaded['tmp_name']); $i++)
 			{
-				// make a new file with a random, unique name to store the image in
-				$newname = tempnam($dir, "photo_");
+                $currentfile = $filesuploaded['tmp_name'][$i];
+				$path = $dir . "/" . $i . ".jpg";
 				// delete the file if it already exists
-				unlink($newname);
-				$newname = $newname. ".jpg";
+				unlink($path);
 				// copy the image from the temporary file to the local file
-				move_uploaded_file($currentfile, $newname);
+				move_uploaded_file($currentfile, $path);
 			}
 	}
 

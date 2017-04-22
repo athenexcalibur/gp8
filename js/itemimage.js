@@ -34,6 +34,7 @@ function addAllImg(div)
     try
     {
       var images = JSON.parse(data);
+      console.log(images);
       div.append("<div class ='carousel-item active'><div class='view hm-grey-slight'><img src='" + images[0] + "' alt='IMAGE'></div></div>");
       for(var i = 1; i < images.length; i++)
       {
