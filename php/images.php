@@ -77,23 +77,17 @@ function postImages($postid, $new)
 	//if a new listing, create image folder - if the folder already exists then delete it to clear out the old images and recreate it
 	if($new)
 	{
-		if(file_exists($dir))
-		{
-			deleteDirectory($dir);
-		}
+		if(file_exists($dir)) deleteDirectory($dir);
 		mkdir($dir, 0777, true);
 	}
 	// if not a new listing (adding more images to an existing listing), only create the folder if it doesnt exist
-	else
+	else if(!file_exists($dir))
 	{
-		if(!file_exists($dir))
-		{
-			mkdir($dir, 0777, true);
-		}
-	}
+		mkdir($dir, 0777, true);
+    }
 
 	// check photos are available
-	if (isset($_FILES['photo']))
+	if (isset($_FILES['photo']) && $_FILES["photo"]["name"][0] !== "")
 	{
 			$filesuploaded = $_FILES['photo'];
 			// iterate through all the files uploaded
