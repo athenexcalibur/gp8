@@ -190,6 +190,7 @@ cSessionStart();
                 <div id="regDiv2" class="regDivs">
                     <input id="addressInput" class="controls" type="text" placeholder="Search...">
                     <div id="inputMap"></div>
+                    <p class="text-md-center">Please click/search to set your location.</p>
                 </div>
 
                 <div id="regDiv3" class="regDivs">

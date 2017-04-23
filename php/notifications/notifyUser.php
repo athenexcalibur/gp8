@@ -15,13 +15,12 @@ function notifyUser($notification, $userid)
     $stmt = $cnx->prepare("INSERT INTO NotificationTable(toid, text) VALUES (?,?)");
     $stmt->bind_param("is", $userid, $notification);
     $stmt->execute();
-
     $cnx->query("UPDATE UsersTable SET newNot=1 WHERE id=" . $userid);
 
     //check if we have more than 20 notifications - delete oldest one
-    $res = $cnx->prepare("SELECT * FROM NotificationTable WHERE toid=" . intval($userid));
-    if ($res->num_rows > 20) $cnx->prepare("DELETE FROM NotificationTable WHERE notificationtime IS NOT NULL 
-                                            ORDER BY notificationtime DESC LIMIT 1");
+    $res = $cnx->query("SELECT * FROM NotificationTable WHERE toid=" . intval($userid));
+    if ($res->num_rows > 20) $cnx->query("DELETE FROM NotificationTable WHERE notificationtime IS NOT NULL AND toid=" . intval($userid) .
+                                            "ORDER BY notificationtime ASC LIMIT 1");
 }
 
 if (isset($_GET["notifs"]))
