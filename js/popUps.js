@@ -4,5 +4,9 @@ function addNotification(notificationText, typeClass) {
    notification.find(".text").text(notificationText);
    notification.addClass(typeClass);
    $("#notificationsDiv").append(notification);
+   window.setTimeout(function() {
+       notification.alert().alert("close");
+   }, 
+   5000);
 }
 
