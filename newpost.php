@@ -229,11 +229,13 @@ else
 
   <script>
   //todo make expiry field load into date
-  $("#date").bootstrapMaterialDatePicker({format:"YYYY-MM-DD", weekStart : 0, time: false,  minDate : new Date(), currentDate : new Date()});
     $(document).ready(function() {
+      $("#date").bootstrapMaterialDatePicker({format:"YYYY-MM-DD", weekStart : 0, time: false,  minDate : new Date()});
 	var date = new Date(window.expiry);
 	if (window.expiry !== undefined) {
 	    $("#date").bootstrapMaterialDatePicker("setDate", date);
+	} else {
+	    $("#date").bootstrapMaterialDatePicker("setDate", new Date);
 	}
     });
 
